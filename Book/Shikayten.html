@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shikayten</title>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHRSH68L3T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MHRSH68L3T');
+</script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+
+    .container img {
+      width: auto;
+      height: 100vh;
+      object-fit: contain;
+      scroll-snap-align: start;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+
+    /* Bottom Section Styling */
+    .bottom-bar {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      padding: 0 20px;
+    }
+
+    .download-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .download-btn img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .scroll-percentage {
+      font-size: 20px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Images Container -->
+  <div class="container" id="imageContainer">
+    <!-- Images -->
+    <img src="images/1.jpg" alt="Image 1">
+    <img src="images/2.jpg" alt="Image 2">
+    <img src="images/3.jpg" alt="Image 3">
+    <img src="images/4.jpg" alt="Image 4">
+    <img src="images/5.jpg" alt="Image 5">
+    <img src="images/6.jpg" alt="Image 6">
+    <img src="images/7.jpg" alt="Image 7">
+    <img src="images/8.jpg" alt="Image 8">
+    <img src="images/9.jpg" alt="Image 9">
+    <img src="images/10.jpg" alt="Image 10">
+    <img src="images/11.jpg" alt="Image 11">
+    <img src="images/12.jpg" alt="Image 12">
+    <img src="images/13.jpg" alt="Image 13">
+    <img src="images/14.jpg" alt="Image 14">
+    <img src="images/15.jpg" alt="Image 15">
+    <img src="images/16.jpg" alt="Image 16">
+    <img src="images/17.jpg" alt="Image 17">
+    <img src="images/18.jpg" alt="Image 18">
+    <img src="images/19.jpg" alt="Image 19">
+    <img src="images/20.jpg" alt="Image 20">
+    <img src="images/21.jpg" alt="Image 21">
+    <img src="images/22.jpg" alt="Image 22">
+    <img src="images/23.jpg" alt="Image 23">
+    <img src="images/24.jpg" alt="Image 24">
+    <img src="images/25.jpg" alt="Image 25">
+    <img src="images/26.jpg" alt="Image 26">
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    <!-- Download Button -->
+    <button class="download-btn" onclick="downloadFile()">
+      <img src="images/Download.png" alt="Download">
+    </button>
+
+    <!-- Scrolling Percentage -->
+    <div class="scroll-percentage">0%</div>
+  </div>
+
+  <script>
+    // Download Button Functionality
+    function downloadFile() {
+      window.location.href = "https://drive.usercontent.google.com/u/0/uc?id=1-E_OzFqQkVlil36_t8zzisoWH5BPdaOI&export=download";
+    }
+
+    const container = document.getElementById('imageContainer');
+    const scrollPercentage = document.querySelector('.scroll-percentage');
+    const totalImages = container.querySelectorAll('img').length;
+    let autoScroll = true; // To track auto-scroll state
+
+    // Scrolling Percentage Indicator
+    container.addEventListener('scroll', () => {
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+
+      // Calculate percentage
+      const percentage = Math.round((scrollTop / scrollHeight) * 100);
+
+      // Update the text
+      scrollPercentage.textContent = `${percentage}%`;
+
+      // If user scrolls manually, disable auto-scroll
+      if (scrollTop > 0 && autoScroll) {
+        autoScroll = false;
+      }
+    });
+
+    // Auto-Scroll Functionality
+    let currentIndex = 0;
+
+    function autoScrollImages() {
+      if (!autoScroll) return;
+
+      const images = container.querySelectorAll('img');
+      if (currentIndex < totalImages - 1) {
+        currentIndex++;
+        images[currentIndex].scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Auto-scroll every 2 seconds
+    setInterval(autoScrollImages, 2000);
+  </script>
+</body>
+</html>
