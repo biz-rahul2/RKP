@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-		<!--	created with www.mysitemapgenerator.com	-->
-		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 	<loc>https://thelamp.site/</loc>
 	<lastmod>2025-01-19T20:13:20+01:00</lastmod>
@@ -36,6 +34,12 @@
 	<lastmod>2025-01-19T20:13:26+01:00</lastmod>
 	<priority>0.8</priority>
 </url>
+
+ 
+  
+            <!-- Books For Mobiles	-->
+
+
 <url>
 	<loc>https://thelamp.site/Books/</loc>
 	<lastmod>2025-01-19T20:13:26+01:00</lastmod>
@@ -64,7 +68,7 @@
 
 
 
-
+<!--	Books For Desktops	-->
 			
 			<url>
 	<loc>https://thelamp.site/Book/</loc>
