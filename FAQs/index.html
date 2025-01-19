@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>FAQs Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHRSH68L3T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MHRSH68L3T');
+</script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+      perspective: 1000px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #ff6f91, #ff9671);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .faq-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform: translateZ(0);
+    }
+
+    .faq-card:hover {
+      transform: translateZ(20px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      padding: 15px 20px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .faq-question .circle {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      line-height: 1;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+      background: #f7f7f7;
+      color: #444;
+    }
+
+    .faq-card.active .faq-answer {
+      display: block;
+    }
+
+    #top-logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    #top-logo img {
+      max-height: 30px;
+      width: auto;
+    }
+
+    .highlight {
+      color: #ff5733;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 500px) {
+      .faq-question {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="top-logo">
+    <img src="Blacklogo.png" alt="Brand Logo">
+</div>
+  <div class="container">
+    <h1>FAQs</h1>
+    <p>कुछ सवाल जो हर कोई मुझसे हमेशा पूछता रहता है, उन्ही कुछ सवालो के जवाब</p>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        The Lamp kya hai? <span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>The Lamp mere <span class="highlight">brand</span> ka Name hai.</p>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        Tum kitne ghante padhai karte ho? <span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Ek zamana tha jab mai kitab se uthta hi nahi tha, aur ab kitab mujhse uthti nahi hai 🤣, Waise abhi bhi main thora padhaakoo hoon. to <span class="highlight">kabhi kabhi 2-3 ghante</span> padh leta hu</p>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        Tum apne name me Puri kyu likhte ho? <span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Puri Mere <span class="highlight">caste</span> ka naam hai, Waise ek bat batau kayi sare log mujhe rahul se jyada Puri name se mujhe pehchante hain 💁‍♂️.</p>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        Tumhari girlfriend kaun hai? <span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Abhi tak to nahi hai, lekin ek din jarur milegi. Waise tumko pata chale to mujhe bhi bata dena 🤭🙈</p>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        Pink colour to larkiyo ka favourite hota hai lekin tum to larke ho? <span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>ha mujhe pink pasand hai kyunki Pink ek sundar rang hai aur rang ka gender se koi sambandh nahi hota. Sabka apna-apna pasand hota hai. So, <span class="highlight">don't be judge colour depending by gender</span></p>
+      </div>
+    </div>
+
+    <div class="faq-card">
+      <div class="faq-question">
+        Tumhare instagram username me cyb ka kya matlab hai?<span class="circle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>cyb ek short name hai jiska fullname <span class="highlight">Cyber</span> hai. actually mai internet aur technology se kafi juda huaa hu isliye maine apna ye username choose kiya.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const faqCards = document.querySelectorAll('.faq-card');
+
+    faqCards.forEach(card => {
+      const question = card.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        const isActive = card.classList.contains('active');
+
+        // Close all cards
+        faqCards.forEach(c => {
+          c.classList.remove('active');
+          c.querySelector('.faq-answer').style.display = 'none';
+          c.querySelector('.circle').textContent = '+';
+        });
+
+        // Toggle current card
+        if (!isActive) {
+          card.classList.add('active');
+          card.querySelector('.faq-answer').style.display = 'block';
+          card.querySelector('.circle').textContent = '-';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
