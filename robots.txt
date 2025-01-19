@@ -5,7 +5,7 @@ Disallow:
 Allow: /
 
 # Sitemap Declaration
-Sitemap: https://the-lamp.github.io/sitemap.xml  
+Sitemap: https://thelamp.site/sitemap.xml  
 
 # Delay to Prevent Overloading
 Crawl-delay: 5 
