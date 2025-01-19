@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Skills</title>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MHRSH68L3T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MHRSH68L3T');
+</script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .container {
+            width: 350px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff99;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(#00ff99, transparent, #00ff99);
+            animation: rotateBackground 6s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateBackground {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .title {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #00ff99;
+            letter-spacing: 2px;
+        }
+
+        .languages {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #e0e0e0;
+        }
+
+        .language {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .language:hover {
+            background: rgba(0, 255, 153, 0.2);
+            transform: scale(1.05);
+        }
+
+        .percentage {
+            color: #00ff99;
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #ff4500;
+            font-weight: bold;
+        }
+
+        .Fluent {
+            color: #FFFF00;
+            font-weight: bold;
+        }
+
+        .note {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 1em;
+            color: #ffffff;
+            text-align: left;
+            line-height: 1.5;
+            border-left: 3px solid #00ff99;
+        }
+
+        .note span {
+            color: #00ff99;
+        }
+
+        .note .pending-text {
+            color: #ff4500;
+        }
+
+        .note .Fluent-text {
+            color: #FFFF00;
+        }
+
+        .note strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        .note ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .note ul li {
+            margin-bottom: 10px;
+        }
+
+        .note ul li::before {
+            content: "✔ ";
+            color: #00ff99;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Language Skills</div>
+        <div class="languages">
+            <div class="language">Hindi ➡️ <span class="Fluent">(Fluent)</span></div>
+            <div class="language">English ➡️ <span class="percentage">(65%)</span></div>
+            <div class="language">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span></div>
+            <div class="language">Spanish ➡️ <span class="pending">(pending)</span></div>
+            <div class="language">Mandarin (中文) ➡️ <span class="pending">(pending)</span></div>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong>
+            <ul>
+                <li>
+                    <span>यहाँ प्रतिशत % </span>का मतलब है कि वह language मुझे कितनी आती है. 
+                </li>
+                <li>
+                    <span class="pending-text">Pending </span>का मतलब है कि मैंने वह language अभी तक नहीं सीखी है, लेकिन कुछ महीनों बाद सीखने का इरादा है
+                </li>
+                <li>
+                    <span class="Fluent-text">Fluent </span>का मतलब है कि मैं उस भाषा को आसानी से बोल और समझ सकता हूँ
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
