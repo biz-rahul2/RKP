@@ -1,0 +1,39 @@
+User-agent: *  
+Disallow:  
+
+# Allow Everything for Crawling and Indexing
+Allow: /
+
+# Sitemap Declaration
+Sitemap: https://the-lamp.github.io/sitemap.xml  
+
+# Delay to Prevent Overloading
+Crawl-delay: 5 
+
+# Block Bad Bots (Protecting from Spam Crawlers)
+User-agent: AhrefsBot  
+Disallow: /  
+User-agent: MJ12bot  
+Disallow: /  
+User-agent: SemrushBot  
+Disallow: /  
+
+# Allow Googlebot Full Access
+User-agent: Googlebot  
+Allow: /  
+
+# Allow Bingbot Full Access
+User-agent: Bingbot  
+Allow: /  
+
+# Allow Images Crawling for Google Image Search
+User-agent: Googlebot-Image  
+Allow: /  
+
+# Allow Google Ads Bot for Better Ad Indexing
+User-agent: AdsBot-Google  
+Allow: /  
+
+# Allow Mobile Crawlers for Mobile-First Indexing
+User-agent: Googlebot-Mobile  
+Allow: /
