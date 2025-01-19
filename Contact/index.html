@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Contact Us</title>
+    <style>
+        .container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: none; /* No background for container */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove rounded corners */
+    box-shadow: none; /* Remove shadow */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .divider {
+            height: 4px;
+            background: linear-gradient(90deg, #ff5f6d, #ffc371);
+            margin: 40px 0;
+            border-radius: 5px;
+        }
+
+        /* Social Media Section */
+         .social-media {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* CSS for BGMI Icon */
+        .social-media a.bgmi img {
+            width: 40px; /* BGMI icon size */
+            height: 40px;
+            object-fit: cover; /* Ensure the image fits proportionally */
+        }
+
+        /* CSS for other social media icons */
+        .social-media a i {
+            font-size: 40px; /* Size for Font Awesome icons */
+        }
+
+        /* Email Button Section */
+        .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(135deg, #ff5f6d, #ffc371);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff9966, #ff5e62);
+        }
+
+        /* Form Section */
+        form {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        form .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        form input, form textarea, form select {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        form textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        form button {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        form button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        }
+
+        h1, h2, .section-heading {
+    font-family: 'Playfair Display', serif;
+        }
+        body, p, form input, form textarea, form select {
+    font-family: 'Roboto', sans-serif;
+        }
+.btn, .form-group label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+        form input, form textarea, form select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Add a light border */
+    border-radius: 5px;
+    outline: none;
+    background: #f9f9f9; /* Add a light background color */
+    color: #333; /* Make text color darker for contrast */
+    transition: all 0.3s ease; /* Add a hover effect */
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #36d1dc; /* Highlight border on focus */
+    box-shadow: 0 0 5px rgba(54, 209, 220, 0.5); /* Add focus glow */
+    background: #ffffff; /* Slightly brighter background */
+}
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Here Are 3 Methods to Contact Me</h1>
+        
+    <div class="container">
+        <!-- Divider -->
+        <div class="divider"></div>
+        
+        <!-- Social Media Section -->
+        <div class="section">
+            <h2 class="section-heading">Join Us on Social Media</h2>
+            <p class="section-description">Do you want to explore something new? Visit my social media profiles and connect with me!</p>
+            <div class="social-media">
+        <a href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.bgmi.in" target="_blank" title="BGMI">
+            <img src="532px-Battlegrounds_Mobile_India.png" alt="BGMI Logo">
+        </a>
+        <a href="https://snapchat.com" target="_blank" title="Snapchat"><i class="fab fa-snapchat"></i></a>
+        <a href="https://github.com" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://telegram.org" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Email Section -->
+        <div class="section">
+            <h2 class="section-heading">Send Me an Email</h2>
+            <p class="section-description">Want to discuss something privately? Feel free to drop me an email anytime!</p>
+            <a href="mailto:your-email@example.com?subject=Hello Rahul&body=Hello Rahul, I would like to discuss something with you." class="btn">
+                Send Email to Me
+            </a>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Secret Message Form -->
+        <div class="section">
+            <h2 class="section-heading">Send a Secret Message</h2>
+            <p class="section-description">Got something confidential to share? Use this secure form to send me a secret message.</p>
+            <form>
+                <div class="form-group">
+                    <label for="name">Your Name or Codename:</label>
+                    <input type="text" id="name" placeholder="Enter your name or codename">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email (Optional):</label>
+                    <input type="email" id="email" placeholder="Enter your email (optional)">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender">
+                        <option value="" disabled selected>Select your gender</option>
+                        <option value="male">Male ♂️</option>
+                        <option value="female">Female ♀️</option>
+                        <option value="other">Trans-gender ⚧️</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="secret-message">Your Secret Message:</label>
+                    <textarea id="secret-message" placeholder="Enter your secret message here..."></textarea>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+    </div>
+</body>
+</html>
