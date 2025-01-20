@@ -258,21 +258,27 @@ input, select, textarea {
 
         <!-- Email Section -->
 <div class="email-section">
-    <h2 class="email-heading">Send Me an Email</h2>
-    <p class="email-description">Want to discuss something privately? Fill out the form below!</p>
+    <h2 class="email-heading">Drop me a message</h2>
+    <p class="email-description">Want to chat? Fill out the form below!</p>
     
     <form id="emailForm">
         <label for="email-name">Your Name</label>
         <input type="text" id="email-name" name="name" required>
         
         <label for="email-subject">Subject</label>
-        <select id="email-subject" name="subject" required>
+        <select id="email-subject" name="subject" required onchange="toggleCustomSubject()">
             <option value="" disabled selected>Select a topic</option>
-            <option value="booking">Booking</option>
-            <option value="appointment">Appointment</option>
-            <option value="collaboration">Collaboration</option>
-            <option value="other">Other</option>
+            <option value="Question">Mujhe tumse kuchh swal puchhna hai</option>
+            <option value="Chat">Mujhe tumse kuchh baat karni hai</option>
+            <option value="Random">Mujhe tumse bas kuchh random share karna hai</option>
+            <option value="Other">Other</option>
         </select>
+
+        <!-- Custom Subject Input (Hidden by Default) -->
+        <div id="custom-subject-container" style="display: none;">
+            <label for="custom-subject">Enter Your Topic</label>
+            <input type="text" id="custom-subject" name="custom-subject">
+        </div>
 
         <label for="email-message">Your Message</label>
         <textarea id="email-message" name="message" rows="5" required></textarea>
@@ -281,28 +287,52 @@ input, select, textarea {
     </form>
 </div>
 
+        <!-- Divider -->
+        <div class="divider"></div>
+        
 <script>
+function toggleCustomSubject() {
+    const subjectDropdown = document.getElementById("email-subject");
+    const customSubjectContainer = document.getElementById("custom-subject-container");
+    if (subjectDropdown.value === "Other") {
+        customSubjectContainer.style.display = "block";
+    } else {
+        customSubjectContainer.style.display = "none";
+    }
+}
+
 document.getElementById("emailForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
     const name = document.getElementById("email-name").value;
-    const subject = document.getElementById("email-subject").value;
+    const subjectDropdown = document.getElementById("email-subject").value;
+    const customSubject = document.getElementById("custom-subject").value.trim();
     const message = document.getElementById("email-message").value;
 
-    // Constructing mailto link
-    const mailtoLink = `mailto:contact@thelamp.site?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hello Rahul,\n\nMy Name: ${name}\n\nMessage:\n${message}`)}`;
+    let finalSubject = "";
+    if (subjectDropdown === "Other" && customSubject) {
+        finalSubject = customSubject;
+    } else if (subjectDropdown === "Question") {
+        finalSubject = "Mujhe tumse kuchh swal puchhna hai";
+    } else if (subjectDropdown === "Chat") {
+        finalSubject = "Mujhe tumse kuchh baat karni hai";
+    } else if (subjectDropdown === "Random") {
+        finalSubject = "Mujhe tumse bas kuchh random share karna hai";
+    }
 
-    // Opening user's email client
+    const emailBody = `Hey buddy, what's up? 👋%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
+
+    const mailtoLink = `mailto:contact@thelamp.site?subject=${encodeURIComponent(finalSubject)}&body=${emailBody}`;
+
+    // Open email client
     window.location.href = mailtoLink;
-});
 
+    // Redirect to thank-you.html after 3 seconds
     setTimeout(() => {
-        window.location.href = "../thank-you.html";
-    }, 3000); // Adjust the delay as needed
+        window.location.href = "thank-you.html";
+    }, 3000);
 });
 </script>
-
-        <!-- Divider -->
-        <div class="divider"></div>
+        
 </body>
 </html>
