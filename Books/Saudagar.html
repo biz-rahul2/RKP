@@ -224,5 +224,10 @@ document.querySelector('.viewer').addEventListener('scroll', () => {
 // Run the check when the page loads
 checkAndScroll();
 </script>
+    <script>
+    if (!/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location.replace("https://thelamp.site/Book/Saudagar.html"); 
+    }
+    </script>
 </body>
 </html>
