@@ -68,10 +68,10 @@
         <label for="email-subject">Subject</label>
         <select id="email-subject" name="subject" required onchange="toggleCustomSubject()">
             <option value="" disabled selected>Select a topic</option>
-            <option value="Booking">Booking: I want to book an appointment</option>
-            <option value="Collaboration">Collaboration: I want to collaborate with you</option>
-            <option value="Talk">Talk: I just want to talk to him</option>
-            <option value="Other">Other (Custom)</option>
+            <option value="Booking">Booking</option>
+            <option value="Collaboration">Collaboration</option>
+            <option value="Talk">I just want to talk to you</option>
+            <option value="Other">Other</option>
         </select>
 
         <!-- Custom Subject Input (Hidden by Default) -->
@@ -112,9 +112,9 @@ document.getElementById("emailForm").addEventListener("submit", function(event) 
     } else if (subjectDropdown === "Booking") {
         finalSubject = "Booking: I want to book an appointment";
     } else if (subjectDropdown === "Collaboration") {
-        finalSubject = "Collaboration: I want to collaborate with you";
+        finalSubject = "I want to collaborate with you";
     } else if (subjectDropdown === "Talk") {
-        finalSubject = "Talk: I just want to talk to him";
+        finalSubject = "mujhe tumse kuchh batein karni hai";
     }
 
     const emailBody = `Dear The Lamp Team,%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
