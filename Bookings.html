@@ -56,51 +56,79 @@
 </head>
 <body>
 
-    <div class="container">
-        <h2>Book an Appointment</h2>
-        <p>Fill out the form below to send a request.</p>
+    <!-- Email Section -->
+<div class="email-section">
+    <h2 class="email-heading">Send Me an Email</h2>
+    <p class="email-description">Want to discuss something privately? Fill out the form below!</p>
+    
+    <form id="emailForm">
+        <label for="email-name">Your Name</label>
+        <input type="text" id="email-name" name="name" required>
+        
+        <label for="email-subject">Subject</label>
+        <select id="email-subject" name="subject" required onchange="toggleCustomSubject()">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="Booking">Booking: I want to book an appointment</option>
+            <option value="Collaboration">Collaboration: I want to collaborate with you</option>
+            <option value="Talk">Talk: I just want to talk to him</option>
+            <option value="Other">Other (Custom)</option>
+        </select>
 
-        <form id="appointmentForm">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" required>
+        <!-- Custom Subject Input (Hidden by Default) -->
+        <div id="custom-subject-container" style="display: none;">
+            <label for="custom-subject">Enter Custom Subject</label>
+            <input type="text" id="custom-subject" name="custom-subject">
+        </div>
 
-            <label for="email">Your Email</label>
-            <input type="email" id="email" required>
+        <label for="email-message">Your Message</label>
+        <textarea id="email-message" name="message" rows="5" required></textarea>
 
-            <label for="subject">Subject</label>
-            <select id="subject" required>
-                <option value="" disabled selected>Select a topic</option>
-                <option value="Booking">Booking</option>
-                <option value="Appointment">Appointment</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Other">Other</option>
-            </select>
+        <button type="submit" class="email-btn">Send Email</button>
+    </form>
+</div>
 
-            <label for="message">Your Message</label>
-            <textarea id="message" rows="5" required></textarea>
+<script>
+function toggleCustomSubject() {
+    const subjectDropdown = document.getElementById("email-subject");
+    const customSubjectContainer = document.getElementById("custom-subject-container");
+    if (subjectDropdown.value === "Other") {
+        customSubjectContainer.style.display = "block";
+    } else {
+        customSubjectContainer.style.display = "none";
+    }
+}
 
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
+document.getElementById("emailForm").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    <script>
-        document.getElementById("appointmentForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+    const name = document.getElementById("email-name").value;
+    const subjectDropdown = document.getElementById("email-subject").value;
+    const customSubject = document.getElementById("custom-subject").value.trim();
+    const message = document.getElementById("email-message").value;
 
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            const subject = document.getElementById("subject").value;
-            const message = document.getElementById("message").value;
+    let finalSubject = "";
+    if (subjectDropdown === "Other" && customSubject) {
+        finalSubject = customSubject;
+    } else if (subjectDropdown === "Booking") {
+        finalSubject = "Booking: I want to book an appointment";
+    } else if (subjectDropdown === "Collaboration") {
+        finalSubject = "Collaboration: I want to collaborate with you";
+    } else if (subjectDropdown === "Talk") {
+        finalSubject = "Talk: I just want to talk to him";
+    }
 
-            const mailtoLink = `mailto:contact@thelamp.site?subject=${encodeURIComponent(subject)} - ${encodeURIComponent(name)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message)}`;
+    const emailBody = `Dear The Lamp Team,%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
 
-            window.location.href = mailtoLink;
+    const mailtoLink = `mailto:contact@thelamp.site?subject=${encodeURIComponent(finalSubject)}&body=${emailBody}`;
 
-            setTimeout(() => {
-                window.location.href = "thank-you.html"; // Redirect after email
-            }, 1000);
-        });
-    </script>
+    // Open email client
+    window.location.href = mailtoLink;
 
+    // Redirect to thank-you.html after 3 seconds
+    setTimeout(() => {
+        window.location.href = "thank-you.html";
+    }, 3000);
+});
+</script>
 </body>
 </html>
