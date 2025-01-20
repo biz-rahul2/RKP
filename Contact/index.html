@@ -177,6 +177,55 @@ form input:focus, form textarea:focus, form select:focus {
     box-shadow: 0 0 5px rgba(54, 209, 220, 0.5); /* Add focus glow */
     background: #ffffff; /* Slightly brighter background */
 }
+
+        .email-section {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.email-heading {
+    text-align: center;
+    color: #333;
+}
+
+.email-description {
+    text-align: center;
+    color: #777;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.email-btn {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.email-btn:hover {
+    background: #218838;
+}
     </style>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -208,13 +257,45 @@ form input:focus, form textarea:focus, form select:focus {
         <div class="divider"></div>
 
         <!-- Email Section -->
-        <div class="section">
-            <h2 class="section-heading">Send Me an Email</h2>
-            <p class="section-description">Want to discuss something privately? Feel free to drop me an email anytime!</p>
-            <a href="mailto:contact@thelamp.site?subject=Hello Rahul&body=Hello Rahul, I would like to discuss something with you." class="btn">
-                Send Email to Me
-            </a>
-        </div>
+<div class="email-section">
+    <h2 class="email-heading">Send Me an Email</h2>
+    <p class="email-description">Want to discuss something privately? Fill out the form below!</p>
+    
+    <form id="emailForm">
+        <label for="email-name">Your Name</label>
+        <input type="text" id="email-name" name="name" required>
+        
+        <label for="email-subject">Subject</label>
+        <select id="email-subject" name="subject" required>
+            <option value="" disabled selected>Select a topic</option>
+            <option value="booking">Booking</option>
+            <option value="appointment">Appointment</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="email-message">Your Message</label>
+        <textarea id="email-message" name="message" rows="5" required></textarea>
+
+        <button type="submit" class="email-btn">Send Email</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("emailForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("email-name").value;
+    const subject = document.getElementById("email-subject").value;
+    const message = document.getElementById("email-message").value;
+
+    // Constructing mailto link
+    const mailtoLink = `mailto:contact@thelamp.site?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Hello Rahul,\n\nMy Name: ${name}\n\nMessage:\n${message}`)}`;
+
+    // Opening user's email client
+    window.location.href = mailtoLink;
+});
+</script>
 
         <!-- Divider -->
         <div class="divider"></div>
