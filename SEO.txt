@@ -22,11 +22,7 @@
                 <meta name="msapplication-square128x128logo" content="https://optimise2.assets-servd.host/lamp-magazine/production/uploads/favicons/mstile-70x70.png?w=128&h=128&auto=compress%2Cformat&fit=crop&dm=1674591089&s=d76d13ca9848fc96fce9a9ee15737d4b">
                     
             <title>The Lamp Magazine | Home Page</title>
-<script>window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments)};
-gtag('js', new Date());
-gtag('config', 'G-80PV3CBDXW', {'send_page_view': true,'anonymize_ip': true,'link_attribution': false,'allow_display_features': false});
-</script><meta name="generator" content="SEOmatic">
+<meta name="generator" content="SEOmatic"
 <meta name="keywords" content="Catholic, magazine, journal, liturature, science, fine arts, commentary">
 <meta name="description" content="A CATHOLIC JOURNAL OF LITERATURE, SCIENCE, THE FINE ARTS, ETC.">
 <meta name="referrer" content="no-referrer-when-downgrade">
