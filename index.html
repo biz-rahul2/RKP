@@ -145,6 +145,27 @@
         .special-wind-line-9 { left: -16%; }
         .special-wind-line-10 { left: -18%; }
 
+        .heading {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff5733;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
         .subtext {
             font-size: 1.2rem;
             color: #333;
@@ -156,7 +177,10 @@
 </head>
 
 <body>
-        <div class="subtext">Welcome to The Lamp</div>
+        <div class="heading">
+        Welcome to
+        <div class="subtext">The Lamp</div>
+    </div>
     <div class="runner-container">
         <!-- brand logo -->
 <img src="Dashboard/images/1000160661 (1).png" alt="The Lamp Logo" class="brand-logo">
