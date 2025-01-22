@@ -1,7 +1,7 @@
 {
   "name": "The Lamp",
   "short_name": "The Lamp",
-  "start_url": "https://thelamp.site",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
