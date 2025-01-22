@@ -1,13 +1,7 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head>
+
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta charset="utf-8">
-            <meta content="width=device-width, initial-scale=1.0" name="viewport">
-                        <link rel="preload" href="https://use.typekit.net/ipq6piy.css" as="style">
-<link rel="stylesheet" href="css/ipq6piy.css">
-        <!-- Accent Color -->
-<style>
-    :root { --color-accent: 184, 132, 44; }
-</style>    
+            <meta content="width=device-width, initial-scale=1.0" name="viewport">   
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114.png">
                 <link rel="apple-touch-icon-precomposed" sizes="120x120" href="images/apple-touch-icon-120x120.png">
                 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144x144.png">
