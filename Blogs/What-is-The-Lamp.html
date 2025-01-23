@@ -84,9 +84,27 @@
                 text-align: left;
             }
         }
+
+        #top-logo2 {
+    position: absolute;
+    top: 10px; /* Distance from top */
+    right: 10px; /* Distance from right (change to `right: 10px` for right side) */
+    z-index: 1000; /* Ensures it's above other content */
+}
+
+#top-logo2 img {
+    max-height: 50px; /* Smaller logo height */
+    width: auto;      /* Maintain aspect ratio */
+    display: block;
+}
     </style>
 </head>
 <body>
+    <div id="top-logo2">
+    <a href="https://thelamp.site">
+        <img src="home-icon-silhouette-svgrepo-com.svg" alt="Home Logo">
+    </a>
+    </div>
     <header>
         The Lamp
     </header>
