@@ -29,25 +29,6 @@
             font-weight: bold;
         }
 
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            background-color: #575757;
-            color: white;
-        }
-
         .container {
             padding: 20px;
             max-width: 1200px;
@@ -71,54 +52,67 @@
             background-color: #333;
             color: white;
             text-align: center;
-            padding: 10px 0;
+            padding: 20px 0;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
 
+        footer .footer-buttons {
+            margin-top: 10px;
+        }
+
+        .footer-buttons a {
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 10px 20px;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-buttons a:hover {
+            background-color: #45a049;
+        }
+
         @media (max-width: 768px) {
-            nav a {
-                float: none;
-                width: 100%;
-                text-align: left;
+            .footer-buttons a {
+                display: block;
+                margin: 10px auto;
+                text-align: center;
             }
         }
 
         #top-logo2 {
-    position: absolute;
-    top: 10px; /* Distance from top */
-    right: 10px; /* Distance from right (change to `right: 10px` for right side) */
-    z-index: 1000; /* Ensures it's above other content */
-}
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
 
-#top-logo2 img {
-    max-height: 50px; /* Smaller logo height */
-    width: auto;      /* Maintain aspect ratio */
-    display: block;
-}
+        #top-logo2 img {
+            max-height: 50px;
+            width: auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div id="top-logo2">
-    <a href="https://thelamp.site">
-        <img src="home-icon-silhouette-svgrepo-com (1).svg" alt="Home Logo">
-    </a>
+        <a href="https://thelamp.site">
+            <img src="home-icon-silhouette-svgrepo-com (1).svg" alt="Home Logo">
+        </a>
     </div>
     <header>
         The Lamp
     </header>
-    <nav>
-        <a href="#about">About Us</a>
-        <a href="#mission">Our Mission</a>
-        <a href="#vision">Our Vision</a>
-        <a href="#contact">Contact</a>
-    </nav>
 
     <div class="container">
         <!-- About Section -->
         <div id="about" class="section">
-            <h1>What is The Lamp?</h1> <!-- H1 for better SEO -->
+            <h1>What is The Lamp?</h1>
             <p>
                 The Lamp is not about bulbs or lighting fixtures. It is a trademark and a brand name that represents our mission to empower the middle-class community. We are dedicated to creating accessible opportunities for financial growth and technological advancement.
             </p>
@@ -151,6 +145,10 @@
 
     <footer>
         &copy; 2025 The Lamp. All rights reserved.
+        <div class="footer-buttons">
+            <a href="https://thelamp.site" target="_blank">Visit My Full Website</a>
+            <a href="mailto:contact@thelamp.site">Contact Us</a>
+        </div>
     </footer>
 </body>
 </html>
