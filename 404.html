@@ -26,11 +26,6 @@
       location.href = location.protocol + '//' + location.hostname.replace('www.', '') + location.pathname + location.search;
     }
 
-    // Redirect old URLs
-    if (location.pathname.startsWith('/RKP')) {
-      location.href = 'https://thelamp.site/' + location.pathname.replace('/RKP', '') + location.search;
-    }
-
     // Redirect to Dashboard after 5 seconds
     setTimeout(() => {
       window.location.href = "https://thelamp.site/Dashboard";
