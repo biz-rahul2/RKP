@@ -37,7 +37,7 @@
 <!-- Web App Metadata -->
 <meta name="apple-mobile-web-app-title" content="The Lamp" />
     
-    <!-- Organization Schema -->
+   <!-- Organization Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,7 +45,7 @@
   "name": "The Lamp",
   "url": "https://thelamp.site/",
   "logo": "https://thelamp.site/TheLampBanner.png",
-  "description": "The Lamp is a only a trademark, so it's not realated to any Lamps or bulbs realated activities. The Lamp's sword is hope, creativity, and endless possibilities.",
+  "description": "The Lamp is only a trademark, so it's not related to any lamps or bulbs-related activities. The Lamp's sword is hope, creativity, and endless possibilities.",
   "sameAs": [
     "https://snapchat.com/add/cyb_rahul",
     "https://instagram.com/cyb_rahul",
@@ -62,28 +62,131 @@
   }
 }
 </script>
-  
-  <!-- Website Navigation Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "url": "https://thelamp.site/",
-    "name": "The Lamp",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://yourwebsite.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    },
-    "mainEntity": [
-      { "@type": "SiteNavigationElement", "name": "My Interests", "url": "https://thelamp.site/Interests/" },
-      { "@type": "SiteNavigationElement", "name": "My Books", "url": "https://thelamp.site/Books/" },
-      { "@type": "SiteNavigationElement", "name": "Battlegrounds Mobile India", "url": "https://thelamp.site/BGMI/" },
-      { "@type": "SiteNavigationElement", "name": "FAQs", "url": "https://thelamp.site/FAQs/" },
-      { "@type": "SiteNavigationElement", "name": "Contact Us", "url": "https://thelamp.site/Contact/" }
-    ]
+
+<!-- Website Navigation Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://thelamp.site/",
+  "name": "The Lamp",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://yourwebsite.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "mainEntity": [
+    { "@type": "SiteNavigationElement", "name": "My Interests", "url": "https://thelamp.site/Interests/" },
+    { "@type": "SiteNavigationElement", "name": "My Books", "url": "https://thelamp.site/Books/" },
+    { "@type": "SiteNavigationElement", "name": "Battlegrounds Mobile India", "url": "https://thelamp.site/BGMI/" },
+    { "@type": "SiteNavigationElement", "name": "FAQs", "url": "https://thelamp.site/FAQs/" },
+    { "@type": "SiteNavigationElement", "name": "Contact Us", "url": "https://thelamp.site/Contact/" }
+  ]
+}
+</script>
+
+<!-- Book: शिकायते -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "शिकायते",
+  "author": "Rahul Kumar Puri",
+  "description": "शिकायते कहानी दिखाती है कि कैसे प्यार और खोने का एहसास हमें अंदर से बदल सकता है और हमारी ज़िंदगी को मुश्किल मोड़ पर ले जा सकता है। ये सिर्फ एक कहानी नहीं है, बल्कि मानसिक स्वास्थ्य और खुद को संभालने की ताकत के बारे में एक गहरी सीख भी देती है।",
+  "url": "https://thelamp.site/Book/Shikayten.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Lamp Publications"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.1",
+    "reviewCount": "45"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
   }
-  </script>
+}
+</script>
+
+<!-- Book: सौदागर -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "सौदागर",
+  "author": "Rahul Kumar Puri",
+  "description": "सौदागर कहानी दिखाती है कि कैसे हर दिन लगता है कि मैं यह जरूर कर लूंगा और आज का दिन मेरे लिए सबसे खास होगा, लेकिन हर बार सिर्फ सोचते-सोचते दिन बीत जाता है। अब सवाल यह है, क्या मैं सच में कर भी पाऊंगा या नहीं?",
+  "url": "https://thelamp.site/Book/Saudagar.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Lamp Publications"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "3.9",
+    "reviewCount": "32"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is The Lamp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Lamp is only a trademark, so it's not related to any lamps or bulbs-related activities. The Lamp's sword is hope, creativity, and endless possibilities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact customer support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can contact our support team at contact@thelamp.site or call us at my Instagram cyb_rahul"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are The Lamp's products free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, some of our books and resources are entirely free to use and share."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I find your books?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can find our books on our official website under the 'Books' section."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "who is the Founder of The Lamp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rahul Kumar Puri is the Founder of The Lamp"
+      }
+    }
+  ]
+}
+</script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
