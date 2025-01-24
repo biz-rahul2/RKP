@@ -1,0 +1,149 @@
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "The Lamp",
+  "url": "https://thelamp.site/",
+  "logo": "https://thelamp.site/TheLampBanner.png",
+  "description": "The Lamp is only a trademark, so it's not related to any lamps or bulbs-related activities. The Lamp's sword is hope, creativity, and endless possibilities.",
+  "sameAs": [
+    "https://snapchat.com/add/cyb_rahul",
+    "https://instagram.com/cyb_rahul",
+    "https://t.me/cyb_rahul",
+    "https://www.linkedin.com/in/cyb-rahul"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Rahul Kumar Puri"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "The Lamp Inc."
+  }
+}
+</script>
+
+<!-- Website Navigation Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://thelamp.site/",
+  "name": "The Lamp",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://yourwebsite.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "mainEntity": [
+    { "@type": "SiteNavigationElement", "name": "My Interests", "url": "https://thelamp.site/Interests/" },
+    { "@type": "SiteNavigationElement", "name": "My Books", "url": "https://thelamp.site/Books/" },
+    { "@type": "SiteNavigationElement", "name": "Battlegrounds Mobile India", "url": "https://thelamp.site/BGMI/" },
+    { "@type": "SiteNavigationElement", "name": "FAQs", "url": "https://thelamp.site/FAQs/" },
+    { "@type": "SiteNavigationElement", "name": "Contact Us", "url": "https://thelamp.site/Contact/" }
+  ]
+}
+</script>
+
+<!-- Book: Lighting the Way Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "Lighting the Way",
+  "author": "Your Name",
+  "description": "Discover the art of using light to transform spaces and emotions.",
+  "url": "https://yourwebsite.com/lighting-the-way",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Lamp Publications"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "95"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<!-- Book: The Enlightened Path Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "The Enlightened Path",
+  "author": "Your Name",
+  "description": "A guide to achieving mindfulness and clarity in everyday life.",
+  "url": "https://yourwebsite.com/enlightened-path",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Lamp Publications"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "120"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is The Lamp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Lamp is a platform that offers advanced lighting solutions and informative content to users."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact customer support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can contact our support team at support@thelamp.com or call us at +1-800-123-4567."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are The Lamp's products free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, some of our books and resources are entirely free to use and share."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I find your books?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can find our books on our official website under the 'Books' section."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need an account to access your books?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, you don’t need an account to access and download the free books available on The Lamp."
+      }
+    }
+  ]
+}
+</script>
