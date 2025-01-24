@@ -30,6 +30,33 @@
             max-height: 60px;
             width: auto;
         }
+
+        footer {
+            background: linear-gradient(90deg, #333, #444);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer .footer-buttons {
+            margin-top: 10px;
+        }
+
+        .footer-buttons a {
+            text-decoration: none;
+            color: white;
+            background: #4CAF50;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin: 0 10px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-buttons a:hover {
+            background: #2E7D32;
+        }
     </style>
 </head>
 <body style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #f9f9f9; color: #333;">
@@ -185,11 +212,12 @@
         </section>
     </main>
 
-    <footer style="text-align: center; padding: 10px; background-color: #34495e; color: #fff;">
-    <a href="https://thelamp.site" style="text-decoration: none; color: inherit;">
-        <p>© 2025 The Lamp - All Rights Reserved</p>
-    </a>
-    <p><a href="https://thelamp.site/Contact" style="text-decoration: none; color: #fff;">Contact Us</a></p>
+    <footer>
+        &copy; 2025 The Lamp. All rights reserved.
+        <div class="footer-buttons">
+            <a href="https://thelamp.site" target="_blank">Visit My Full Website</a>
+            <a href="https://thelamp.site/Contact">Contact Us</a>
+        </div>
     </footer>
 </body>
   </html>
