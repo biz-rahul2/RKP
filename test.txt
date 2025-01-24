@@ -51,17 +51,17 @@
 {
   "@context": "https://schema.org",
   "@type": "Book",
-  "name": "Lighting the Way",
-  "author": "Your Name",
-  "description": "Discover the art of using light to transform spaces and emotions.",
-  "url": "https://yourwebsite.com/lighting-the-way",
+  "name": "शिकायते",
+  "author": "Rahul Kumar Puri",
+  "description": ""शिकायते" कहानी दिखाती है कि कैसे प्यार और खोने का एहसास हमें अंदर से बदल सकता है और हमारी ज़िंदगी को मुश्किल मोड़ पर ले जा सकता है। ये सिर्फ एक कहानी नहीं है, बल्कि मानसिक स्वास्थ्य और खुद को संभालने की ताकत के बारे में एक गहरी सीख भी देती है।",
+  "url": "https://thelamp.site/Book/Shikayten.html",
   "publisher": {
     "@type": "Organization",
     "name": "The Lamp Publications"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
+    "ratingValue": "4.1",
     "reviewCount": "95"
   },
   "offers": {
