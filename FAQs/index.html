@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>FAQs | The Lamp</title>
-    <meta name="description" content="Explore our FAQ page for clear, concise responses to your queries About me or The Lamp Organization. ">
-    <meta name="robots" content="index, follow">
-<meta name="author" content="Rahul Kumar Puri">
+  <meta name="keywords" content="The Lamp, Rahul Kumar Puri, The Lamp Organization, FAQs about The Lamp, Rahul Kumar Puri FAQ">
+  <meta name="description" content="Get answers to frequently asked questions about Rahul Kumar Puri and The Lamp. Discover who we are, our vision, and personal details about Rahul Kumar Puri.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Rahul Kumar Puri">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  
   <style>
+    /* Global styles */
     * {
       margin: 0;
       padding: 0;
@@ -21,11 +22,11 @@
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       color: #333;
-      perspective: 1000px;
     }
 
     .container {
@@ -48,7 +49,6 @@
       font-size: 1rem;
       text-align: center;
       margin-bottom: 20px;
-      color: #333;
     }
 
     .faq-card {
@@ -58,11 +58,10 @@
       margin-bottom: 20px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      transform: translateZ(0);
     }
 
     .faq-card:hover {
-      transform: translateZ(20px);
+      transform: scale(1.02);
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
     }
 
@@ -87,9 +86,7 @@
       justify-content: center;
       align-items: center;
       font-size: 1.2rem;
-      line-height: 1;
       text-align: center;
-      flex-shrink: 0;
     }
 
     .faq-answer {
@@ -105,91 +102,92 @@
       display: block;
     }
 
-    #top-logo {
-      position: absolute;
-      top: 10px;
-      left: 10px;
+    footer {
+      margin-top: 50px;
+      width: 100%;
+      padding: 20px;
+      background: #333;
+      color: #fff;
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
-    #top-logo img {
-      max-height: 30px;
-      width: auto;
-    }
-
-    .highlight {
-      color: #ff5733;
+    footer a {
+      color: #ff9a9e;
+      text-decoration: none;
       font-weight: bold;
     }
 
-    @media screen and (max-width: 500px) {
-      .faq-question {
-        font-size: 1rem;
-      }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-<div id="top-logo">
-    <img src="Blacklogo.png" alt="Brand Logo">
-</div>
   <div class="container">
     <h1>FAQs</h1>
-    <p>कुछ सवाल जो हर कोई मुझसे हमेशा पूछता रहता है, उन्ही कुछ सवालो के जवाब</p>
+    <p>Explore frequently asked questions about <strong>The Lamp</strong> and <strong>Rahul Kumar Puri</strong>.</p>
 
     <div class="faq-card">
       <div class="faq-question">
-        The Lamp kya hai? <span class="circle">+</span>
+        What is The Lamp? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>The Lamp mere <span class="highlight">brand</span> ka Name hai.</p>
+        <p><strong>The Lamp</strong> is the brand name created by <strong>Rahul Kumar Puri</strong>. It represents creativity and passion.</p>
       </div>
     </div>
 
     <div class="faq-card">
       <div class="faq-question">
-        Tum kitne ghante padhai karte ho? <span class="circle">+</span>
+        How many hours do you study daily? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>Ek zamana tha jab mai kitab se uthta hi nahi tha, aur ab kitab mujhse uthti nahi hai 🤣, Waise abhi bhi main thora padhaakoo hoon. to <span class="highlight">kabhi kabhi 2-3 ghante</span> padh leta hu</p>
+        <p>On average, I study for 2-3 hours daily, but sometimes it depends on the day and mood!</p>
       </div>
     </div>
 
     <div class="faq-card">
       <div class="faq-question">
-        Tum apne name me Puri kyu likhte ho? <span class="circle">+</span>
+        Why do you use "Puri" in your name? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>Puri Mere <span class="highlight">caste</span> ka naam hai, Waise ek bat batau kayi sare log mujhe rahul se jyada Puri name se mujhe pehchante hain 💁‍♂️.</p>
+        <p>"Puri" is my <span class="highlight">caste</span> name, and many people recognize me more by this than my first name.</p>
       </div>
     </div>
 
     <div class="faq-card">
       <div class="faq-question">
-        Tumhari girlfriend kaun hai? <span class="circle">+</span>
+        Do you have a girlfriend? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>Abhi tak to nahi hai, lekin ek din jarur milegi. Waise tumko pata chale to mujhe bhi bata dena 🤭🙈</p>
+        <p>Not yet, but someday I'll meet the right person! Let me know if you find her first!</p>
       </div>
     </div>
 
     <div class="faq-card">
       <div class="faq-question">
-        Pink colour to larkiyo ka favourite hota hai lekin tum to larke ho? <span class="circle">+</span>
+        Why do you like pink if you're a boy? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>ha mujhe pink pasand hai kyunki Pink ek sundar rang hai aur rang ka gender se koi sambandh nahi hota. Sabka apna-apna pasand hota hai. So, <span class="highlight">don't be judge colour depending by gender</span></p>
+        <p>Pink is a beautiful color, and colors don't belong to genders. <strong>The Lamp</strong> stands for breaking stereotypes!</p>
       </div>
     </div>
 
     <div class="faq-card">
       <div class="faq-question">
-        Tumhare instagram username me cyb ka kya matlab hai?<span class="circle">+</span>
+        What does "cyb" in your Instagram username mean? <span class="circle">+</span>
       </div>
       <div class="faq-answer">
-        <p>cyb ek short name hai jiska fullname <span class="highlight">Cyber</span> hai. actually mai internet aur technology se kafi juda huaa hu isliye maine apna ye username choose kiya.</p>
+        <p>"Cyb" stands for <strong>Cyber</strong>. I chose this as I'm passionate about technology and the internet.</p>
       </div>
     </div>
   </div>
+
+  <footer>
+    <p>Copyright &copy; 2025 <strong>Rahul Kumar Puri</strong> | All Rights Reserved</p>
+    <p>Follow <strong>The Lamp</strong> on <a href="https://instagram.com/cyb_rahul" target="_blank">Instagram</a></p>
+  </footer>
 
   <script>
     const faqCards = document.querySelectorAll('.faq-card');
