@@ -62,7 +62,7 @@
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "4.1",
-    "reviewCount": "95"
+    "reviewCount": "45"
   },
   "offers": {
     "@type": "Offer",
@@ -77,18 +77,18 @@
 {
   "@context": "https://schema.org",
   "@type": "Book",
-  "name": "The Enlightened Path",
-  "author": "Your Name",
-  "description": "A guide to achieving mindfulness and clarity in everyday life.",
-  "url": "https://yourwebsite.com/enlightened-path",
+  "name": "सौदागर",
+  "author": "Rahul Kumar Puri",
+  "description": "सौदागर कहानी दिखाती है कि कैसे हर दिन लगता है कि मैं यह जरूर कर लूंगा और आज का दिन मेरे लिए सबसे खास होगा, लेकिन हर बार सिर्फ सोचते-सोचते दिन बीत जाता है। अब सवाल यह है, क्या मैं सच में कर भी पाऊंगा या नहीं?",
+  "url": "https://thelamp.site/Book/Saudagar.html",
   "publisher": {
     "@type": "Organization",
     "name": "The Lamp Publications"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "120"
+    "ratingValue": "3.9",
+    "reviewCount": "32"
   },
   "offers": {
     "@type": "Offer",
