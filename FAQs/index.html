@@ -19,16 +19,17 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #333;
-      perspective: 1000px;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4, #fbc2eb);
+  display: flex;
+  flex-direction: column; /* Column layout to stack content and footer */
+  justify-content: space-between; /* Space between content and footer */
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+  perspective: 1000px;
     }
-
+    
     .container {
       width: 90%;
       max-width: 500px;
