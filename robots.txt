@@ -1,8 +1,6 @@
 User-agent: *  
 Disallow:  
 
-Allow: /images/
-
 # Allow Everything for Crawling and Indexing
 Allow: /
 
