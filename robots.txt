@@ -1,6 +1,8 @@
 User-agent: *  
 Disallow:  
 
+Allow: /images/
+
 # Allow Everything for Crawling and Indexing
 Allow: /
 
@@ -8,7 +10,7 @@ Allow: /
 Sitemap: https://thelamp.site/sitemap.xml  
 
 # Delay to Prevent Overloading
-Crawl-delay: 5 
+Crawl-delay: 5
 
 # Block Bad Bots (Protecting from Spam Crawlers)
 User-agent: AhrefsBot  
