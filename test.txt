@@ -109,7 +109,7 @@
       "name": "What is The Lamp?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Lamp is a platform that offers advanced lighting solutions and informative content to users."
+        "text": "The Lamp is only a trademark, so it's not related to any lamps or bulbs-related activities. The Lamp's sword is hope, creativity, and endless possibilities."
       }
     },
     {
@@ -117,7 +117,7 @@
       "name": "How can I contact customer support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can contact our support team at support@thelamp.com or call us at +1-800-123-4567."
+        "text": "You can contact our support team at contact@thelamp.site or call us at my Instagram cyb_rahul"
       }
     },
     {
@@ -138,10 +138,10 @@
     },
     {
       "@type": "Question",
-      "name": "Do I need an account to access your books?",
+      "name": "who is the Founder of The Lamp?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No, you don’t need an account to access and download the free books available on The Lamp."
+        "text": "Rahul Kumar Puri is the Founder of The Lamp"
       }
     }
   ]
