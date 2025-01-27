@@ -107,74 +107,78 @@
     </div>
 
     <script>
-        const exams = [
-            { subject: "Economics", date: "2025-02-01T14:00:00" },
-            { subject: "Business Studies", date: "2025-02-05T14:00:00" },
-            { subject: "Hindi", date: "2025-02-08T09:30:00" },
-            { subject: "English", date: "2025-02-06T09:30:00" },
-            { subject: "Accountancy", date: "2025-02-13T09:30:00" }
-        ];
+    const exams = [
+        { subject: "Economics", date: "2025-02-01T14:00:00" },
+        { subject: "Business Studies", date: "2025-02-05T14:00:00" },
+        { subject: "Hindi", date: "2025-02-08T09:30:00" },
+        { subject: "English", date: "2025-02-06T09:30:00" },
+        { subject: "Accountancy", date: "2025-02-13T09:30:00" }
+    ];
 
-        function updateCountdown() {
-            const now = new Date();
-            let nextExam = null;
+    let currentSubject = null;
 
-            for (let exam of exams) {
-                let examTime = new Date(exam.date);
-                if (now < examTime) {
-                    nextExam = exam;
-                    break;
+    function updateCountdown() {
+        const now = new Date();
+        let nextExam = null;
+
+        for (let exam of exams) {
+            let examTime = new Date(exam.date);
+            if (now < examTime) {
+                nextExam = exam;
+                break;
+            }
+        }
+
+        if (!nextExam) {
+            document.getElementById("countdown").style.display = "none";
+            document.getElementById("quote-container").innerText = "All exams are over! Enjoy your time.";
+            return;
+        }
+
+        const examDate = new Date(nextExam.date);
+        const timeDiff = examDate - now;
+
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days.toString().padStart(2, "0");
+        document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+        document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+        document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+
+        // Update current subject if it changes
+        if (currentSubject !== nextExam.subject) {
+            currentSubject = nextExam.subject;
+            fetchQuote(currentSubject);
+        }
+    }
+
+    function fetchQuote(subject) {
+        fetch('quotes.json')
+            .then(response => response.json())
+            .then(quotes => {
+                const subjectQuotes = quotes[subject] || [];
+                if (subjectQuotes.length > 0) {
+                    const quoteIndex = Math.floor(Math.random() * subjectQuotes.length);
+                    document.getElementById("quote-container").innerText = subjectQuotes[quoteIndex];
+                } else {
+                    document.getElementById("quote-container").innerText = "Keep pushing forward!";
                 }
-            }
+            })
+            .catch(() => {
+                document.getElementById("quote-container").innerText = "Stay motivated and work hard!";
+            });
+    }
 
-            if (!nextExam) {
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("quote-container").innerText = "All exams are over! Enjoy your time.";
-                return;
-            }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
-            const examDate = new Date(nextExam.date);
-            const timeDiff = examDate - now;
-
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days.toString().padStart(2, "0");
-            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
-            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
-            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
-
-            fetchQuote(nextExam.subject);
-        }
-
-        function fetchQuote(subject) {
-            fetch('quotes.json')
-                .then(response => response.json())
-                .then(quotes => {
-                    const subjectQuotes = quotes[subject] || [];
-                    if (subjectQuotes.length > 0) {
-                        const quoteIndex = Math.floor(Math.random() * subjectQuotes.length);
-                        document.getElementById("quote-container").innerText = subjectQuotes[quoteIndex];
-                    } else {
-                        document.getElementById("quote-container").innerText = "Keep pushing forward!";
-                    }
-                })
-                .catch(() => {
-                    document.getElementById("quote-container").innerText = "Stay motivated and work hard!";
-                });
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Refresh quote every minute
-        setInterval(() => {
-            const now = new Date();
-            const currentSubject = exams.find(exam => now < new Date(exam.date))?.subject;
-            if (currentSubject) fetchQuote(currentSubject);
-        }, 60000); // 60000ms = 1 minute
-    </script>
+    // Fetch a new quote every minute
+    setInterval(() => {
+        if (currentSubject) fetchQuote(currentSubject);
+    }, 60000); // 60000ms = 1 minute
+</script>
 </body>
 </html>
