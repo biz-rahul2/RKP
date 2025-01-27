@@ -23,10 +23,69 @@
         .header {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo span {
+            color: #eef3f7;
+        }
+
+        .nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #eef3f7;
+        }
+
+        /* Banner Section */
+        .banner {
             text-align: center;
-            padding: 50px 20px;
+            background: url('https://via.placeholder.com/1200x400') no-repeat center center/cover;
+            color: white;
+            padding: 60px 20px;
+            font-size: 22px;
+            position: relative;
+        }
+
+        .banner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tagline {
             font-size: 28px;
             font-weight: 600;
+            font-family: 'Playfair Display', serif;
         }
 
         /* Company Info Section */
@@ -91,7 +150,16 @@
                 padding: 20px;
             }
             .header {
-                font-size: 24px;
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .banner {
+                font-size: 20px;
+                padding: 40px 20px;
             }
             h2 {
                 font-size: 24px;
@@ -103,11 +171,27 @@
 
     <!-- Header -->
     <div class="header">
-        Welcome to Your Company
+        <div class="logo">
+            <span>Your</span>Company
+        </div>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="vision.html">Vision</a>
+            <a href="mission.html">Mission</a>
+            <a href="#about">About</a>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner">
+        <div class="banner-content">
+            <h1 class="tagline">"Innovating for a Brighter Future"</h1>
+            <p>Your success is our mission.</p>
+        </div>
     </div>
 
     <!-- Main Container -->
-    <div class="container">
+    <div class="container" id="about">
         <h2>About Our Company</h2>
         <p>
             "Your Company Name" is a leading firm specializing in innovative solutions. We aim to provide the best services to our clients worldwide. Our company is built on trust, creativity, and excellence.
@@ -142,4 +226,4 @@
     </div>
 
 </body>
-  </html>
+</html>
