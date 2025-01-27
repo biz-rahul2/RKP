@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Countdown</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            color: #d32f2f;
+            transition: background 1s, color 1s;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+        .timer-container {
+            margin: 30px auto;
+            width: 50%;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 2s;
+        }
+        .timer {
+            font-size: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Exam Countdown Timer</h1>
+    <div class="timer-container">
+        <h2 id="subject">Upcoming Exam: </h2>
+        <div class="timer" id="countdown"></div>
+    </div>
+
+    <script>
+        const exams = [
+            { subject: "Economics", date: "2025-02-01T14:00:00" },
+            { subject: "Business Studies", date: "2025-02-05T14:00:00" },
+            { subject: "Hindi", date: "2025-02-08T09:30:00" },
+            { subject: "English", date: "2025-02-06T09:30:00" },
+            { subject: "Accountancy", date: "2025-02-13T09:30:00" }
+        ];
+
+        function updateCountdown() {
+            const now = new Date();
+            let nextExam = null;
+
+            for (let exam of exams) {
+                let examTime = new Date(exam.date);
+                if (now < examTime) {
+                    nextExam = exam;
+                    break;
+                }
+            }
+
+            if (!nextExam) {
+                document.getElementById("subject").innerText = "All exams are over!";
+                document.getElementById("countdown").innerText = "";
+                return;
+            }
+
+            document.getElementById("subject").innerText = "Upcoming Exam: " + nextExam.subject;
+            let examDate = new Date(nextExam.date);
+            let timeDiff = examDate - now;
+
+            let days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerText =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            // **Color Logic**
+            let examStart = new Date(nextExam.date);
+            let warningTime = new Date(examStart.getTime() - 30 * 60 * 1000); // 30 min before exam
+
+            if (now >= warningTime && now < examStart) {
+                document.body.style.background = "linear-gradient(to right, #b71c1c, #ff5252)";
+                document.body.style.color = "white";
+            } else if (now >= examStart && now < examDate) {
+                document.body.style.background = "red";
+                document.body.style.color = "darkred";
+            } else {
+                document.body.style.background = "linear-gradient(to right, #ff9a9e, #fad0c4)";
+                document.body.style.color = "#d32f2f";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+</body>
+</html>
