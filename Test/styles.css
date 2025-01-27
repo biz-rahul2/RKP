@@ -9,17 +9,19 @@ body {
     font-size: 22px;
 }
 
-/* Header */
-header {
-    background: linear-gradient(135deg, #222, #444);
-    color: #fff;
-    padding: 40px 20px;
-    text-align: center;
+/* Stylish H1 (Title) */
+h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 36px;
+    font-size: 50px;
     font-weight: bold;
-    letter-spacing: 2px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: linear-gradient(45deg, #d35400, #e67e22);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Main Image */
@@ -30,11 +32,11 @@ header {
     margin: 30px 0;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in-out;
 }
 
 .main-image:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 /* Headings */
@@ -43,6 +45,7 @@ h2 {
     font-size: 36px;
     font-weight: bold;
     text-align: center;
+    text-decoration: underline;
 }
 
 /* Meta Info */
@@ -76,40 +79,44 @@ h2 {
 /* Footer */
 footer {
     text-align: center;
-    padding: 30px;
-    background: #222;
+    padding: 40px;
+    background: linear-gradient(to right, #222, #444);
     color: white;
     margin-top: 40px;
+    border-radius: 12px 12px 0 0;
 }
 
 /* Full Website Button */
 .full-website-btn {
     background: #d35400;
     color: white;
-    padding: 12px 24px;
+    padding: 14px 28px;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .full-website-btn:hover {
     background: #e67e22;
+    transform: scale(1.1);
 }
 
 /* Footer Links */
 .footer-links {
     margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .footer-links a {
     color: white;
     text-decoration: none;
-    margin: 10px;
+    margin: 8px 15px;
     font-size: 18px;
-    display: inline-block;
     transition: color 0.3s ease;
 }
 
@@ -124,13 +131,14 @@ footer {
 
 .social-icons a {
     color: white;
-    font-size: 26px;
+    font-size: 30px;
     margin: 10px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .social-icons a:hover {
     color: #e67e22;
+    transform: scale(1.2);
 }
 
 /* Copyright */
