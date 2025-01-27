@@ -174,7 +174,7 @@
             const now = new Date();
             const currentSubject = exams.find(exam => now < new Date(exam.date))?.subject;
             if (currentSubject) fetchQuote(currentSubject);
-        }, 60000); // 60000ms = 1 minute
+        }, 600000); // 60000ms = 1 minute
     </script>
 </body>
 </html>
