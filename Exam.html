@@ -5,46 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Countdown</title>
     <style>
+        /* General Styling */
         body {
             text-align: center;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            color: #d32f2f;
-            transition: background 1s, color 1s;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(120deg, #74ebd5, #9face6);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
         }
+
         h1 {
             margin-top: 50px;
-            font-size: 36px;
-            text-transform: uppercase;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
+
+        /* Timer Container */
         .timer-container {
             margin: 30px auto;
-            width: 50%;
-            padding: 20px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            width: 60%;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             animation: fadeIn 2s;
         }
+
         .timer {
-            font-size: 50px;
+            font-size: 60px;
             font-weight: bold;
-            margin-top: 20px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
+
+        #subject {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Countdown Segments */
+        .countdown-segment {
+            display: inline-block;
+            margin: 10px 15px;
+            text-align: center;
+        }
+
+        .segment-number {
+            font-size: 60px;
+            font-weight: bold;
+            background: #ffffff;
+            color: #333;
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .segment-number:hover {
+            transform: scale(1.1);
+        }
+
+        .segment-label {
+            font-size: 18px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-
     <h1>Exam Countdown Timer</h1>
     <div class="timer-container">
         <h2 id="subject">Upcoming Exam: </h2>
-        <div class="timer" id="countdown"></div>
+        <div class="timer" id="countdown">
+            <div class="countdown-segment">
+                <div class="segment-number" id="days">00</div>
+                <div class="segment-label">Days</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="segment-number" id="hours">00</div>
+                <div class="segment-label">Hours</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="segment-number" id="minutes">00</div>
+                <div class="segment-label">Minutes</div>
+            </div>
+            <div class="countdown-segment">
+                <div class="segment-number" id="seconds">00</div>
+                <div class="segment-label">Seconds</div>
+            </div>
+        </div>
     </div>
+    <footer>
+        All the best for your exams! Stay focused and do your best.
+    </footer>
 
     <script>
         const exams = [
@@ -69,7 +144,7 @@
 
             if (!nextExam) {
                 document.getElementById("subject").innerText = "All exams are over!";
-                document.getElementById("countdown").innerText = "";
+                document.getElementById("countdown").style.display = "none";
                 return;
             }
 
@@ -82,28 +157,14 @@
             let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-            document.getElementById("countdown").innerText =
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            // **Color Logic**
-            let examStart = new Date(nextExam.date);
-            let warningTime = new Date(examStart.getTime() - 30 * 60 * 1000); // 30 min before exam
-
-            if (now >= warningTime && now < examStart) {
-                document.body.style.background = "linear-gradient(to right, #b71c1c, #ff5252)";
-                document.body.style.color = "white";
-            } else if (now >= examStart && now < examDate) {
-                document.body.style.background = "red";
-                document.body.style.color = "darkred";
-            } else {
-                document.body.style.background = "linear-gradient(to right, #ff9a9e, #fad0c4)";
-                document.body.style.color = "#d32f2f";
-            }
+            document.getElementById("days").innerText = days.toString().padStart(2, "0");
+            document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
         }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
-
 </body>
 </html>
