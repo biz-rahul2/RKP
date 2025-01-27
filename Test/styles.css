@@ -11,23 +11,30 @@ body {
 
 /* Header */
 header {
-    background: #222;
+    background: linear-gradient(135deg, #222, #444);
     color: #fff;
-    padding: 30px;
+    padding: 40px 20px;
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 28px;
+    font-size: 36px;
     font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Main Image */
 .main-image {
     width: 100%;
-    max-height: 450px;
+    max-height: 500px;
     object-fit: cover;
     margin: 30px 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.02);
 }
 
 /* Headings */
@@ -69,9 +76,66 @@ h2 {
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
     background: #222;
     color: white;
     margin-top: 40px;
+}
+
+/* Full Website Button */
+.full-website-btn {
+    background: #d35400;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
     font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.full-website-btn:hover {
+    background: #e67e22;
+}
+
+/* Footer Links */
+.footer-links {
+    margin: 20px 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 18px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #e67e22;
+}
+
+/* Social Icons */
+.social-icons {
+    margin: 20px 0;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 26px;
+    margin: 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e67e22;
+}
+
+/* Copyright */
+footer p {
+    font-size: 16px;
+    margin-top: 15px;
+    opacity: 0.8;
 }
