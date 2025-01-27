@@ -2,11 +2,11 @@
 body {
     font-family: 'Merriweather', serif;
     margin: 0;
-    padding: 20px;
-    background: #fdfaf6;
+    padding: 50px 10%;
+    background: linear-gradient(to bottom, #fdfaf6, #f5eee5);
     color: #333;
-    line-height: 1.8;
-    font-size: 20px;
+    line-height: 1.9;
+    font-size: 22px;
 }
 
 /* Header */
@@ -16,27 +16,54 @@ header {
     padding: 30px;
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
 }
 
 /* Main Image */
 .main-image {
     width: 100%;
-    max-height: 400px;
+    max-height: 450px;
     object-fit: cover;
-    margin: 20px 0;
+    margin: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Headings */
 h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
+    text-align: center;
 }
 
-p {
-    margin-bottom: 20px;
+/* Meta Info */
+.meta {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+/* Drop Cap Style */
+.drop-cap::first-letter {
+    font-size: 60px;
+    font-weight: bold;
+    float: left;
+    margin-right: 10px;
+    font-family: 'Playfair Display', serif;
+    color: #d35400;
+}
+
+/* Blockquote Style */
+.quote {
+    font-style: italic;
+    text-align: center;
+    font-size: 26px;
+    font-family: 'Playfair Display', serif;
+    color: #555;
+    margin: 40px 0;
 }
 
 /* Footer */
@@ -45,5 +72,6 @@ footer {
     padding: 20px;
     background: #222;
     color: white;
-    margin-top: 30px;
+    margin-top: 40px;
+    font-size: 18px;
 }
