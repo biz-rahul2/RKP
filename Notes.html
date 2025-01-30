@@ -20,6 +20,10 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
         button {
             padding: 10px 15px;
             margin: 5px;
@@ -44,12 +48,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        #view-section {
-            display: none;
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -63,12 +61,6 @@
 
     <h2>Your README Files</h2>
     <div id="readme-list"></div>
-
-    <div id="view-section">
-        <h2 id="view-title"></h2>
-        <pre id="view-content"></pre>
-        <button onclick="closeReadme()">Close</button>
-    </div>
 
     <script>
         const STORAGE_KEY = "readme_files";
@@ -118,13 +110,34 @@
             let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
             const file = files[index];
 
-            document.getElementById("view-title").innerText = file.title;
-            document.getElementById("view-content").innerText = file.content;
-            document.getElementById("view-section").style.display = "block";
-        }
-
-        function closeReadme() {
-            document.getElementById("view-section").style.display = "none";
+            // New tab me README.md open karna
+            const newTab = window.open();
+            newTab.document.write(`
+                <html>
+                <head>
+                    <title>${file.title}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 20px;
+                            white-space: pre-wrap;
+                            word-wrap: break-word;
+                        }
+                        pre {
+                            background-color: #f4f4f4;
+                            padding: 10px;
+                            border-radius: 5px;
+                            overflow-x: auto;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${file.title}</h1>
+                    <pre>${file.content}</pre>
+                </body>
+                </html>
+            `);
+            newTab.document.close();
         }
 
         function deleteReadme(index) {
