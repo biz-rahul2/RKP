@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #add-section {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #readme-list {
+            margin-top: 20px;
+        }
+        .readme-item {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #view-section {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>README.md Manager</h1>
+    
+    <div id="add-section">
+        <input type="text" id="title-input" placeholder="Enter title">
+        <textarea id="content-input" placeholder="Enter README.md content"></textarea>
+        <button onclick="addReadme()">Add README</button>
+    </div>
+
+    <h2>Your README Files</h2>
+    <div id="readme-list"></div>
+
+    <div id="view-section">
+        <h2 id="view-title"></h2>
+        <pre id="view-content"></pre>
+        <button onclick="closeReadme()">Close</button>
+    </div>
+
+    <script>
+        const STORAGE_KEY = "readme_files";
+
+        function loadReadmes() {
+            const readmeList = document.getElementById("readme-list");
+            readmeList.innerHTML = "";
+
+            let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            
+            // 30 din ke baad files delete karna
+            const currentTime = new Date().getTime();
+            files = files.filter(file => currentTime - file.timestamp < 30 * 24 * 60 * 60 * 1000);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+
+            files.forEach((file, index) => {
+                const div = document.createElement("div");
+                div.className = "readme-item";
+                div.innerHTML = `
+                    <span onclick="viewReadme(${index})">${file.title}</span>
+                    <button onclick="renameReadme(${index})">Rename</button>
+                    <button onclick="deleteReadme(${index})">Delete</button>
+                `;
+                readmeList.appendChild(div);
+            });
+        }
+
+        function addReadme() {
+            const title = document.getElementById("title-input").value.trim();
+            const content = document.getElementById("content-input").value.trim();
+            
+            if (!title || !content) {
+                alert("Please enter both title and content!");
+                return;
+            }
+
+            let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            files.push({ title, content, timestamp: new Date().getTime() });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+
+            document.getElementById("title-input").value = "";
+            document.getElementById("content-input").value = "";
+            loadReadmes();
+        }
+
+        function viewReadme(index) {
+            let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const file = files[index];
+
+            document.getElementById("view-title").innerText = file.title;
+            document.getElementById("view-content").innerText = file.content;
+            document.getElementById("view-section").style.display = "block";
+        }
+
+        function closeReadme() {
+            document.getElementById("view-section").style.display = "none";
+        }
+
+        function deleteReadme(index) {
+            let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            files.splice(index, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+            loadReadmes();
+        }
+
+        function renameReadme(index) {
+            let files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            const newTitle = prompt("Enter new title:", files[index].title);
+            if (newTitle) {
+                files[index].title = newTitle;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+                loadReadmes();
+            }
+        }
+
+        // Page load par files load karna
+        window.onload = loadReadmes;
+    </script>
+</body>
+</html>
