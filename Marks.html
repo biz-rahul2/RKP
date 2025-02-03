@@ -65,6 +65,35 @@
         button:hover {
             background: #e6b800;
         }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: #27293d;
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+        }
+        .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -90,17 +119,29 @@
             <input type="number" id="marks" min="0" max="50">
 
             <button onclick="addMarks()">Add Marks</button>
+            <button onclick="showMarks()">Check Marks</button>
+        </div>
+    </div>
+
+    <!-- Modal Box -->
+    <div id="marksModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Your Marks</h2>
+            <ul id="marksList"></ul>
         </div>
     </div>
 
     <script>
         let totalMarks = 0;
         let subjects = ["Hindi", "English", "Economics", "Business Studies", "Accountancy"];
+        let marksData = {};
         let storedData = JSON.parse(localStorage.getItem("marksData"));
 
         if (storedData) {
             totalMarks = storedData.totalMarks;
             subjects = storedData.remainingSubjects;
+            marksData = storedData.marksData;
             updateUI();
         }
 
@@ -116,9 +157,10 @@
             }
 
             totalMarks += marks;
+            marksData[subject] = marks;
             subjects = subjects.filter(sub => sub !== subject);
 
-            localStorage.setItem("marksData", JSON.stringify({ totalMarks, remainingSubjects: subjects }));
+            localStorage.setItem("marksData", JSON.stringify({ totalMarks, remainingSubjects: subjects, marksData }));
             updateUI();
         }
 
@@ -141,6 +183,24 @@
                 subjectSelect.innerHTML = "<option>No subjects left</option>";
                 document.querySelector("button").disabled = true;
             }
+        }
+
+        function showMarks() {
+            let modal = document.getElementById("marksModal");
+            let marksList = document.getElementById("marksList");
+            marksList.innerHTML = "";
+
+            for (let subject in marksData) {
+                let listItem = document.createElement("li");
+                listItem.innerText = `${subject}: ${marksData[subject]}/50`;
+                marksList.appendChild(listItem);
+            }
+
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("marksModal").style.display = "none";
         }
     </script>
 </body>
