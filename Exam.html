@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Countdown</title>
+    <title>OH NO! Exams Are Coming!</title>
     <style>
         /* General Styling */
         body {
             text-align: center;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(120deg, #74ebd5, #9face6);
-            color: #ffffff;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(120deg, #ff6b6b, #f7d794);
+            color: #000;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
             transition: all 0.5s ease;
+        }
+
+        /* Funny Exam Title */
+        #countdown-title {
+            font-size: 28px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: shake 1s infinite;
         }
 
         /* Countdown */
@@ -25,16 +36,6 @@
             align-items: center;
             gap: 30px;
             margin-top: 15vh;
-        }
-
-        .countdown-title {
-            font-size: 28px;
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
         }
 
         .countdown-row {
@@ -49,7 +50,7 @@
         .segment-number {
             font-size: 60px;
             font-weight: bold;
-            background: #ffffff;
+            background: yellow;
             color: #333;
             border-radius: 10px;
             padding: 15px 20px;
@@ -58,7 +59,7 @@
         }
 
         .segment-number:hover {
-            transform: scale(1.1);
+            transform: rotate(360deg);
         }
 
         .segment-label {
@@ -66,17 +67,18 @@
             text-transform: uppercase;
             font-weight: bold;
             color: #fff;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
-        /* Motivational Message */
+        /* Funny Message */
         #message-container {
             margin-top: 50px;
             font-size: 22px;
-            font-style: italic;
             font-weight: bold;
-            color: #ffeb3b;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            color: #000;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            border-radius: 15px;
             animation: fadeIn 2s;
         }
 
@@ -85,11 +87,19 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
     <div id="countdown">
-        <div id="countdown-title" class="countdown-title">Loading next exam...</div>
+        <div id="countdown-title">Loading your doom...</div>
 
         <!-- First Row: Days and Hours -->
         <div class="countdown-row">
@@ -117,7 +127,7 @@
     </div>
     
     <div id="message-container">
-        Stay focused and keep pushing forward!
+        Preparing to cry in 3... 2... 1...
     </div>
 
     <script>
@@ -127,25 +137,29 @@
         { subject: "Accountancy", date: "2025-02-13T09:30:00" }
     ];
 
+    const funnyTitles = [
+        "Your Fate Awaits!",
+        "Exam is Coming... Run!",
+        "Better Start Praying!",
+        "Why Didn't You Start Studying Sooner?!",
+        "Panic Mode Activated!"
+    ];
+
     function updateCountdown() {
         const now = new Date();
-        let nextExam = null;
+        
+        // Sort exams in case they're out of order
+        exams.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-        for (let exam of exams) {
-            let examTime = new Date(exam.date);
-            if (now < examTime) {
-                nextExam = exam;
-                break;
-            }
-        }
+        let nextExam = exams.find(exam => new Date(exam.date) > now);
 
         if (!nextExam) {
             document.getElementById("countdown").style.display = "none";
-            document.getElementById("message-container").innerText = "All exams are over! Enjoy your time.";
+            document.getElementById("message-container").innerText = "Exams are over! Party time! 🎉";
             return;
         }
 
-        document.getElementById("countdown-title").innerText = `Next Exam: ${nextExam.subject}`;
+        document.getElementById("countdown-title").innerText = `${funnyTitles[Math.floor(Math.random() * funnyTitles.length)]} - Next: ${nextExam.subject}`;
 
         const examDate = new Date(nextExam.date);
         const timeDiff = examDate - now;
