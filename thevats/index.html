@@ -19,7 +19,7 @@
             text-align: center;
             color: white;
             background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            overflow: hidden; /* ✅ Fix for unwanted horizontal scrolling */
+            overflow: hidden; /* ✅ Fix for unwanted scrolling */
         }
 
         /* Background */
@@ -117,19 +117,6 @@
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
         }
 
-        /* Floating Hearts (Optimized) */
-        .heart {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.7);
-            animation: floatUp 4s ease-in-out forwards;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.3); opacity: 0; }
-        }
-
         /* Footer */
         .footer {
             margin-top: 30px;
@@ -169,23 +156,6 @@
 
         <p class="footer">Made with ❤️ by Someone Who Cares</p>
     </div>
-
-    <script>
-        // Floating Hearts (Optimized)
-        function createHeart() {
-            if (document.querySelectorAll('.heart').length > 10) return; // ✅ Prevents too many hearts
-
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = ["💖", "❤️", "💕", "💘"][Math.floor(Math.random() * 4)];
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-            document.body.appendChild(heart);
-
-            setTimeout(() => heart.remove(), 4000); // ✅ Auto removes hearts to prevent lag
-        }
-        setInterval(createHeart, 800); // ✅ Slower heart generation (every 0.8s)
-    </script>
 
 </body>
 </html>
