@@ -14,12 +14,17 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth; /* ✅ Smooth Scrolling Enabled */
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             color: white;
             background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            overflow: hidden; /* ✅ Fix for unwanted scrolling */
+            min-height: 100vh; /* ✅ Ensures full height */
+            overflow-y: auto; /* ✅ Allows scrolling */
         }
 
         /* Background */
