@@ -7,6 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+        /* Body and Background */
         body {
             margin: 0;
             padding: 0;
@@ -15,51 +16,96 @@
             text-align: center;
             color: white;
             overflow-x: hidden;
+            position: relative;
         }
 
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/1600x900/?romantic,love') center/cover no-repeat;
+            z-index: -1;
+            opacity: 0.3;
+            animation: zoomInOut 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes zoomInOut {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+
+        /* Container Styling */
         .container {
             max-width: 600px;
             margin: 50px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(12px);
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
             position: relative;
-            animation: fadeIn 1.5s ease-in-out;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.5s ease-in-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
+        /* Profile Picture */
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffd700;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1);
+        }
+
+        /* Text Styling */
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .profile-pic {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #ffd700;
-            margin: 20px auto;
-            display: block;
-        }
-
         .username {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #ffd700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .message {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: 1.8;
             margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1.5s forwards ease-in-out;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .highlight {
@@ -67,9 +113,34 @@
             color: #ffd700;
         }
 
+        /* Buttons & Links */
+        .links {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ffd700;
+            border-radius: 25px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .links a:hover {
+            color: white;
+            background: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Floating Hearts */
         .heart {
             position: absolute;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: rgba(255, 255, 255, 0.8);
             animation: float 4s linear infinite;
         }
@@ -79,36 +150,18 @@
             100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
         }
 
-        .links {
-            margin-top: 20px;
-            font-size: 1rem;
-        }
-
-        .links a {
-            color: #ffd700;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .links a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
+        /* Footer */
         .footer {
             margin-top: 30px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
+
+    <div class="background"></div> <!-- Parallax Background -->
 
     <div class="container">
         <img src="thevats___14031122_135344614.jpg" alt="Crush's Photo" class="profile-pic">
@@ -125,44 +178,31 @@
             <br><br>
             Phir achanak tumne apna Instagram account <span class="highlight">private</span> kar liya.  
             And now I realized that, <span class="highlight">sab tut gaya...</span>  
-            <br><br>
-            Mai ek <span class="highlight">web developer</span> hu.  
-            Aur isliye maine ghanto tak code likha sirf tumse apni ye baat kehne ke liye –  
-            <span class="highlight">ek special website banayi!</span>  
         </p>
 
         <h2>Bura na mano to ek sawaal puchhu?</h2>
         <p class="message">Will you be my friend? 😊</p>
 
         <div class="links">
-            <p>Maine to apne baare me bata diya,  
-            Lekin agar tum mere baare me aur bhi kuch jaana chahti ho toh  
-            <a href="https://thelamp.site" target="_blank">Click Here</a></p>
-
-            <p>Agar tumhe mujhe kuch kehna hai, toh yahan  
-            <a href="https://instagram.com/cyb_rahul" target="_blank">Click Here</a></p>
-
-            <p>Agar tum friend nahi banana chahti, toh ignore this…  
-            <br>Mai tumhe dubara pareshaan nahi karunga.  
-            <br><br>
-            But if you feel the same… <span class="highlight">I’ll be waiting.</span> ❤️</p>
+            <a href="https://thelamp.site" target="_blank">Know More About Me</a>
+            <a href="https://instagram.com/cyb_rahul" target="_blank">Reply on Instagram</a>
         </div>
 
         <p class="footer">Made with ❤️ by Someone Who Cares</p>
     </div>
 
     <script>
-        // Floating hearts effect
+        // Floating Hearts Effect
         function createHeart() {
             const heart = document.createElement("div");
             heart.classList.add("heart");
-            heart.innerHTML = "💖";
+            heart.innerHTML = ["💖", "❤️", "💕", "💘"][Math.floor(Math.random() * 4)];
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 500);
+        setInterval(createHeart, 400);
     </script>
 
 </body>
