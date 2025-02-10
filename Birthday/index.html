@@ -4,59 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Countdown | The Lamp RKP</title>
-  <meta name="keywords" content="The Lamp RKP, Rahul Kumar Puri, The Lamp RKP Organization, The Lamp RKP Official,  cyb_rahul">
-    <meta name="description" content="Get ready to celebrate Rahul Kumar Puri's Birthday. Track the days, hours, and moments until Rahul Kumar Puri special day arrives. Let the excitement build!">
-    <meta name="robots" content="index, follow">
-<meta name="author" content="Rahul Kumar Puri">
+  <meta name="keywords" content="The Lamp RKP, Rahul Kumar Puri, The Lamp RKP Organization, The Lamp RKP Official, cyb_rahul">
+  <meta name="description" content="Get ready to celebrate Rahul Kumar Puri's Birthday. Track the days, hours, and moments until Rahul Kumar Puri special day arrives. Let the excitement build!">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Rahul Kumar Puri">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/darkly/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-  <h1>Countdown to My Birthday</h1>
-</header>
+    <h1>Countdown to My Birthday</h1>
+  </header>
 
-<div id="countdown">
-  <div class="group">
-    <div class="countdown-section">
-      <div class="countdown-value" id="months">0</div>
-      <div class="countdown-label">Months</div>
+  <div id="countdown">
+    <div class="group">
+      <div class="countdown-section">
+        <div class="countdown-value" id="months">0</div>
+        <div class="countdown-label">Months</div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-value" id="days">0</div>
+        <div class="countdown-label">Days</div>
+      </div>
     </div>
-    <div class="countdown-section">
-      <div class="countdown-value" id="days">0</div>
-      <div class="countdown-label">Days</div>
+    <div class="group">
+      <div class="countdown-section">
+        <div class="countdown-value" id="hours">0</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-value" id="minutes">0</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-section">
+        <div class="countdown-value" id="seconds">0</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
     </div>
-  </div>
-  <div class="group">
-    <div class="countdown-section">
-      <div class="countdown-value" id="hours">0</div>
-      <div class="countdown-label">Hours</div>
-    </div>
-    <div class="countdown-section">
-      <div class="countdown-value" id="minutes">0</div>
-      <div class="countdown-label">Minutes</div>
-    </div>
-    <div class="countdown-section">
-      <div class="countdown-value" id="seconds">0</div>
-      <div class="countdown-label">Seconds</div>
-    </div>
-  </div>
-</div>
-
-  <div id="age-container" style="text-align: center; margin-top: 100px;">
-  <h2>What's My Age?</h2>
-  <div id="live-age" style="font-size: 1.5rem; font-family: 'Russo One', sans-serif; color: #fff;"></div>
-  </div>
-  
-  <!-- Final Countdown Section -->
-  <div id="final-countdown-container" style="display: none;">
-    <div id="final-countdown">60</div>
   </div>
 
   <!-- Birthday Message -->
   <div id="birthday-message" style="display: none;">
-    <h1>I am 18 Year Now</h1>
+    <h1>Today is My Birthday!</h1>
   </div>
 
   <!-- Confetti and Balloons -->
@@ -64,180 +54,127 @@
   <div id="balloon-container"></div>
 
   <!-- Divider -->
-        <div class="divider"></div>
+  <div class="divider"></div>
 
   <footer>
-        © 2025 <strong>The Lamp RKP</strong>. All rights reserved. Created by <a href="https://thelamp.site/Founder" target="_blank">Rahul Kumar Puri</a>. Explore more at <a href="https://thelamp.site/" target="_blank">The Lamp RKP</a>.
+    © 2025 <strong>The Lamp RKP</strong>. All rights reserved. Created by <a href="https://thelamp.site/Founder" target="_blank">Rahul Kumar Puri</a>. Explore more at <a href="https://thelamp.site/" target="_blank">The Lamp RKP</a>.
   </footer>
-  
+
   <script>
     const birthDate = new Date(new Date().getFullYear(), 6, 25); // 25 July of the current year
-const mainCountdownElement = document.getElementById('countdown');
-const birthdayMessageElement = document.getElementById('birthday-message');
-const ageContainerElement = document.getElementById('age-container');
-const confettiContainer = document.getElementById('confetti-container');
-const balloonContainer = document.getElementById('balloon-container');
+    const mainCountdownElement = document.getElementById('countdown');
+    const birthdayMessageElement = document.getElementById('birthday-message');
+    const confettiContainer = document.getElementById('confetti-container');
+    const balloonContainer = document.getElementById('balloon-container');
 
-// Function to replace the header text
-function replaceHeaderText(text) {
-  const header = document.querySelector('header h1');
-  if (header) {
-    header.textContent = text;
-  }
-}
+    // Function to replace the header text
+    function replaceHeaderText(text) {
+      const header = document.querySelector('header h1');
+      if (header) {
+        header.textContent = text;
+      }
+    }
 
-// Function to display the birthday message
-function showBirthdayMessage() {
-  replaceHeaderText("Today is My Birthday"); // Replace header text
-  mainCountdownElement.style.display = 'none'; // Hide the countdown
-  ageContainerElement.style.display = 'none'; // Hide the age calculator
-  birthdayMessageElement.style.display = 'block'; // Show the birthday message
-  launchConfetti();
-  launchBalloons();
-}
+    // Function to display the birthday message
+    function showBirthdayMessage() {
+      replaceHeaderText("Today is My Birthday");
+      mainCountdownElement.style.display = 'none';
+      birthdayMessageElement.style.display = 'block';
+      launchConfetti();
+      launchBalloons();
+    }
 
-// Countdown update function
-function updateCountdown() {
-  const now = new Date();
-  const timeDiff = birthDate - now;
+    // Countdown update function
+    function updateCountdown() {
+      const now = new Date();
+      const timeDiff = birthDate - now;
 
-    // Logic to determine what text to show
-if (now.getMonth() === 5 && now.getDate() >= 1 && now.getDate() < 25) {
-  replaceHeaderText("Next Month is My Birthday");
-} else if (now.getMonth() === 6 && now.getDate() >= 1 && now.getDate() < 18) {
-  replaceHeaderText("This Month is My Birthday");
-} else if (now.getMonth() === 6 && now.getDate() >= 18 && now.getDate() < 22) {
-  replaceHeaderText("Next Week is My Birthday");
-} else if (now.getMonth() === 6 && now.getDate() >= 22 && now.getDate() < 25) {
-  replaceHeaderText("This Week is My Birthday");
-} else if (now.getMonth() === 6 && now.getDate() === 24) {
-  replaceHeaderText("Yesterday is My Birthday");
-} else if (now.getMonth() === 6 && now.getDate() === 25) {
-  // Hide countdown and age calculator on the birthday
-  clearInterval(countdownInterval);
-  showBirthdayMessage();
-  return;
-} else if (now.getMonth() === 6 && now.getDate() > 25) {
-  replaceHeaderText("Countdown to My Birthday");
-  mainCountdownElement.style.display = 'none';
-  ageContainerElement.style.display = 'none';
-  return;
-} else {
-  replaceHeaderText("Countdown to My Birthday");
-}
+      // Logic to determine what text to show
+      if (now.getMonth() === 5 && now.getDate() >= 1 && now.getDate() < 25) {
+        replaceHeaderText("Next Month is My Birthday");
+      } else if (now.getMonth() === 6 && now.getDate() >= 1 && now.getDate() < 18) {
+        replaceHeaderText("This Month is My Birthday");
+      } else if (now.getMonth() === 6 && now.getDate() >= 18 && now.getDate() < 22) {
+        replaceHeaderText("Next Week is My Birthday");
+      } else if (now.getMonth() === 6 && now.getDate() >= 22 && now.getDate() < 25) {
+        replaceHeaderText("This Week is My Birthday");
+      } else if (now.getMonth() === 6 && now.getDate() === 25) {
+        clearInterval(countdownInterval);
+        showBirthdayMessage();
+        return;
+      } else {
+        replaceHeaderText("Countdown to My Birthday");
+      }
 
-  // Update countdown values
-  if (timeDiff > 0) {
-    const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
-    const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+      // Update countdown values
+      if (timeDiff > 0) {
+        const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+        const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-    document.getElementById('months').textContent = months;
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
-  } else {
-    clearInterval(countdownInterval);
-    showBirthdayMessage();
-  }
-}
+        document.getElementById('months').textContent = months;
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+      } else {
+        clearInterval(countdownInterval);
+        showBirthdayMessage();
+      }
+    }
 
-// Set your actual birthdate
-const actualBirthDate = new Date("2007-07-25T00:00:00"); // YYYY-MM-DD format
+    // Function to launch confetti
+    function launchConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDelay = Math.random() * 3 + 's';
+        confetti.style.backgroundColor = randomColor();
+        confettiContainer.appendChild(confetti);
+      }
+    }
 
-// Function to calculate live age
-function calculateAge() {
-  const now = new Date();
+    // Function to generate a random color
+    function randomColor() {
+      const colors = ['#ff6a00', '#ee0979', '#fad0c4', '#ff0077', '#00c9ff'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
 
-  // If today is the birthday, hide age calculator
-  if (now.getMonth() === 6 && now.getDate() === 25) {
-    ageContainerElement.style.display = 'none';
-    return;
-  }
+    // Function to launch balloons
+    function launchBalloons() {
+      for (let i = 0; i < 20; i++) {
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.textContent = '🎈';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDelay = Math.random() * 5 + 's';
 
-  ageContainerElement.style.display = 'block'; // Show age calculator on other days
+        balloon.addEventListener('click', () => popBalloon(balloon));
+        balloonContainer.appendChild(balloon);
+      }
+    }
 
-  let years = now.getFullYear() - actualBirthDate.getFullYear();
-  let months = now.getMonth() - actualBirthDate.getMonth();
-  let days = now.getDate() - actualBirthDate.getDate();
+    // Function to pop a balloon
+    function popBalloon(balloon) {
+      const blast = document.createElement('div');
+      blast.classList.add('blast');
+      blast.textContent = '💥';
+      blast.style.left = balloon.style.left;
+      blast.style.top = balloon.getBoundingClientRect().top + 'px';
 
-  // Adjust for negative values
-  if (days < 0) {
-    months--;
-    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate(); // Days in the previous month
-    days += prevMonth;
-  }
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
+      document.body.appendChild(blast);
+      balloon.remove();
 
-  // Display the calculated age
-  const ageElement = document.getElementById("live-age");
-  if (ageElement) {
-    ageElement.textContent = `${years} Years, ${months} Months, and ${days} Days`;
-  } else {
-    console.error("Element with ID 'live-age' not found.");
-  }
-}
+      setTimeout(() => {
+        blast.remove();
+      }, 1000);
+    }
 
-// Call the function every second to update the age live
-setInterval(calculateAge, 1000);
-
-// Function to launch confetti
-function launchConfetti() {
-  for (let i = 0; i < 100; i++) {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
-    confetti.style.left = Math.random() * 100 + 'vw';
-    confetti.style.animationDelay = Math.random() * 3 + 's';
-    confetti.style.backgroundColor = randomColor();
-    confettiContainer.appendChild(confetti);
-  }
-}
-
-// Function to generate a random color
-function randomColor() {
-  const colors = ['#ff6a00', '#ee0979', '#fad0c4', '#ff0077', '#00c9ff'];
-  return colors[Math.floor(Math.random() * colors.length)];
-}
-
-// Function to launch balloons
-function launchBalloons() {
-  for (let i = 0; i < 20; i++) {
-    const balloon = document.createElement('div');
-    balloon.classList.add('balloon');
-    balloon.textContent = '🎈';
-    balloon.style.left = Math.random() * 100 + 'vw';
-    balloon.style.animationDelay = Math.random() * 5 + 's';
-
-    balloon.addEventListener('click', () => popBalloon(balloon));
-    balloonContainer.appendChild(balloon);
-  }
-}
-
-// Function to pop a balloon
-function popBalloon(balloon) {
-  const blast = document.createElement('div');
-  blast.classList.add('blast');
-  blast.textContent = '💥';
-  blast.style.left = balloon.style.left;
-  blast.style.top = balloon.getBoundingClientRect().top + 'px';
-
-  document.body.appendChild(blast);
-
-  balloon.remove();
-
-  setTimeout(() => {
-    blast.remove();
-  }, 1000);
-}
-
-// Start the countdown interval
-const countdownInterval = setInterval(updateCountdown, 1000);
+    // Start the countdown interval
+    const countdownInterval = setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
