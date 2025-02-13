@@ -28,9 +28,11 @@
         }
 
         :root {
-            --bg-color: #121212;
+            --bg-color: #0a0a0a;
             --text-color: #fff;
             --card-bg: rgba(255, 255, 255, 0.1);
+            --btn-bg: rgba(255, 255, 255, 0.2);
+            --neon-color: #00ffff;
         }
 
         .container {
@@ -39,11 +41,11 @@
             border-radius: 15px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
-            width: 350px;
+            width: 400px;
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 600;
         }
 
@@ -60,39 +62,74 @@
 
         .social-links a {
             text-decoration: none;
-            color: var(--text-color);
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
+            color: var(--neon-color);
+            background: var(--btn-bg);
+            padding: 12px 20px;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 500;
-            transition: transform 0.2s ease-in-out;
+            font-size: 18px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--neon-color);
+            transition: 0.3s ease-in-out;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 10%, transparent 70%);
+            top: -50%;
+            left: -50%;
+            transition: 0.3s ease-in-out;
+        }
+
+        .social-links a:hover::before {
+            top: 0;
+            left: 0;
         }
 
         .social-links a:hover {
+            background: var(--neon-color);
+            color: #0a0a0a;
             transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
         }
 
+        /* Dark/Light Mode Button */
         .theme-toggle {
-            margin-top: 20px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--neon-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 14px;
-            background: #fff;
-            color: #121212;
-            padding: 5px 10px;
-            border-radius: 5px;
+            box-shadow: 0 0 10px var(--neon-color);
+        }
+
+        .theme-toggle img {
+            width: 25px;
+            height: 25px;
         }
 
     </style>
 </head>
 <body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" id="theme-icon">
+    </div>
+
     <div class="container">
         <h1>Cyb Rahul</h1>
-        <p>Connect with me on social media</p>
+        <p>Follow me on social media</p>
         <div class="social-links">
             <a href="https://www.facebook.com/share/12E8rCAugeB/" target="_blank">Facebook</a>
             <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=cyb-rahul" target="_blank">LinkedIn</a>
@@ -100,18 +137,25 @@
             <a href="https://snapchat.com/add/cyb_rahul" target="_blank">Snapchat</a>
             <a href="https://instagram.com/cyb_rahul" target="_blank">Instagram</a>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
     </div>
 
     <script>
         function toggleTheme() {
             let root = document.documentElement;
-            if (root.style.getPropertyValue('--bg-color') === '#121212') {
+            let themeIcon = document.getElementById("theme-icon");
+
+            if (root.style.getPropertyValue('--bg-color') === '#0a0a0a') {
                 root.style.setProperty('--bg-color', '#ffffff');
-                root.style.setProperty('--text-color', '#121212');
+                root.style.setProperty('--text-color', '#0a0a0a');
+                root.style.setProperty('--btn-bg', 'rgba(0, 0, 0, 0.1)');
+                root.style.setProperty('--neon-color', '#0077ff');
+                themeIcon.src = "https://cdn-icons-png.flaticon.com/512/839/839860.png"; // Sun Icon
             } else {
-                root.style.setProperty('--bg-color', '#121212');
+                root.style.setProperty('--bg-color', '#0a0a0a');
                 root.style.setProperty('--text-color', '#ffffff');
+                root.style.setProperty('--btn-bg', 'rgba(255, 255, 255, 0.2)');
+                root.style.setProperty('--neon-color', '#00ffff');
+                themeIcon.src = "https://cdn-icons-png.flaticon.com/512/1163/1163661.png"; // Moon Icon
             }
         }
     </script>
