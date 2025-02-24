@@ -1,143 +1,258 @@
-<!DOCTYPE html><html lang="en">
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>My Language Skills | The Lamp RKP</title>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Language Skills | The Lamp RKP</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>  
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');  body {  
-        font-family: 'Orbitron', sans-serif;  
-        background: #0f0f0f;  
-        color: #fff;  
-        display: flex;  
-        flex-direction: column;  
-        justify-content: center;  
-        align-items: center;  
-        min-height: 100vh;  
-        margin: 0;  
-        padding: 20px;  
-    }  
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
-    .title {  
-        font-size: 2.2em;  
-        margin-bottom: 20px;  
-        text-transform: uppercase;  
-        color: #00ff99;  
-        letter-spacing: 2px;  
-    }  
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
 
-    .languages {  
-        font-size: 1.2em;  
-        line-height: 2;  
-        color: #e0e0e0;  
-    }  
+        .title {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #00ff99;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
 
-    .language {  
-        background: rgba(255, 255, 255, 0.1);  
-        border-radius: 10px;  
-        padding: 12px;  
-        margin: 8px 0;  
-        cursor: pointer;  
-        transition: background 0.3s ease, transform 0.3s ease;  
-    }  
+        .languages {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #e0e0e0;
+        }
 
-    .language:hover {  
-        background: rgba(0, 255, 153, 0.2);  
-        transform: scale(1.05);  
-    }  
+        .language {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
 
-    .info-icon {  
-        margin-left: 10px;  
-        cursor: pointer;  
-        color: #00ff99;  
-        font-size: 18px;  
-    }  
+        .language:hover {
+            background: rgba(0, 255, 153, 0.2);
+            transform: scale(1.05);
+        }
 
-    .modal {  
-        display: none;  
-        position: fixed;  
-        z-index: 1000;  
-        left: 50%;  
-        top: 50%;  
-        transform: translate(-50%, -50%);
-        width: 90%;  
-        max-width: 400px;  
-        background-color: #222;  
-        padding: 20px;  
-        border-radius: 10px;  
-        text-align: center;  
-        box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);  
-    }  
+        .info-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            color: #00ff99;
+            font-size: 18px;
+        }
 
-    .close {  
-        color: #fff;  
-        float: right;  
-        font-size: 24px;  
-        cursor: pointer;  
-    }  
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 90%;
+            max-width: 500px;
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 153, 0.3);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #00ff99;
+        }
 
-    .progress-bar-container {
-        width: 100%;
-        background: #333;
-        border-radius: 5px;
-        margin: 10px 0;
-        overflow: hidden;
-    }
+        .modal.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
 
-    .progress-bar {
-        height: 10px;
-        width: 0;
-        background: #00ff99;
-        transition: width 1.5s ease-in-out;
-    }
-</style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+        }
 
+        .close {
+            color: #00ff99;
+            float: right;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        .close:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        #langTitle {
+            font-size: 2em;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(0, 255, 153, 0.7);
+            position: relative;
+            display: inline-block;
+        }
+
+        #langTitle::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff99, transparent);
+        }
+
+        #langChart {
+            margin: 20px auto;
+            max-width: 250px;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 153, 0.3));
+        }
+
+        #langInfo {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 20px 0;
+            color: #c0c0c0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #00ff99;
+        }
+
+        .progress-bar-container {
+            position: relative;
+            width: 100%;
+            background: #333;
+            border-radius: 5px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar-container::before {
+            content: attr(data-progress);
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff99;
+            font-size: 0.9em;
+            text-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        .progress-bar {
+            height: 10px;
+            width: 0;
+            background: #00ff99;
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
 </head>
-<body>  
-    <div class="title">My Language Skills</div>  
-    <div class="languages">  
-        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ Fluent <span class="info-icon">ℹ️</span></div>  
-        <div class="language" onclick="openModal('Hindi')">Hindi ➡️ Fluent <span class="info-icon">ℹ️</span></div>  
-        <div class="language" onclick="openModal('English')">English ➡️ 70% <span class="info-icon">ℹ️</span></div>  
-        <div class="language" onclick="openModal('Chinese')">Chinese ➡️ 5% <span class="info-icon">ℹ️</span></div>  
-        <div class="language" onclick="openModal('Spanish')">Spanish ➡️ Pending <span class="info-icon">ℹ️</span></div>  
-    </div>  <div id="languageModal" class="modal">  
-    <span class="close" onclick="closeModal()">&times;</span>  
-    <h2 id="langTitle"></h2>  
-    <canvas id="langChart"></canvas>  
-    <div class="progress-bar-container">
-        <div id="progressBar" class="progress-bar"></div>
+<body>
+    <div class="title">My Language Skills</div>
+    <div class="languages">
+        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ Fluent <span class="info-icon">ℹ️</span></div>
+        <div class="language" onclick="openModal('Hindi')">Hindi ➡️ Fluent <span class="info-icon">ℹ️</span></div>
+        <div class="language" onclick="openModal('English')">English ➡️ 70% <span class="info-icon">ℹ️</span></div>
+        <div class="language" onclick="openModal('Chinese')">Chinese ➡️ 5% <span class="info-icon">ℹ️</span></div>
+        <div class="language" onclick="openModal('Spanish')">Spanish ➡️ Pending <span class="info-icon">ℹ️</span></div>
     </div>
-    <p id="langInfo"></p>  
-</div>  
 
-<script>  
-    const languages = {  
-        "Bhojpuri": { percent: 100, info: "I am fully fluent in Bhojpuri." },  
-        "Hindi": { percent: 100, info: "I can read, write, and speak Hindi fluently." },  
-        "English": { percent: 70, info: "I can write and understand English very well but can't speak well anymore." },  
-        "Chinese": { percent: 5, info: "I have started learning basic Chinese." },  
-        "Spanish": { percent: 0, info: "I plan to learn Spanish in the future." }  
-    };  
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" onclick="closeModal()"></div>
 
-    function openModal(lang) {  
-        document.getElementById("langTitle").innerText = lang;  
-        document.getElementById("langInfo").innerText = languages[lang].info;  
-        document.getElementById("progressBar").style.width = "0";
-        setTimeout(() => { document.getElementById("progressBar").style.width = languages[lang].percent + "%"; }, 100);
+    <!-- Modal -->
+    <div id="languageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="langTitle"></h2>
+        <canvas id="langChart"></canvas>
+        <div class="progress-bar-container" data-progress="">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <p id="langInfo"></p>
+    </div>
 
-        new Chart(document.getElementById("langChart"), {  
-            type: 'doughnut',  
-            data: { labels: [lang, "Remaining"], datasets: [{ data: [languages[lang].percent, 100 - languages[lang].percent], backgroundColor: ["#00ff99", "#444"] }] },  
-            options: { responsive: true, maintainAspectRatio: false }  
-        });  
-        document.getElementById("languageModal").style.display = "block";  
-    }  
+    <script>
+        const languages = {
+            "Bhojpuri": { percent: 100, info: "I am fully fluent in Bhojpuri." },
+            "Hindi": { percent: 100, info: "I can read, write, and speak Hindi fluently." },
+            "English": { percent: 70, info: "I can write and understand English very well but can't speak well anymore." },
+            "Chinese": { percent: 5, info: "I have started learning basic Chinese." },
+            "Spanish": { percent: 0, info: "I plan to learn Spanish in the future." }
+        };
 
-    function closeModal() {  
-        document.getElementById("languageModal").style.display = "none";  
-    }  
-</script>
+        function openModal(lang) {
+            const modal = document.getElementById("languageModal");
+            const overlay = document.querySelector(".modal-overlay");
+            const progressContainer = document.querySelector(".progress-bar-container");
 
+            // Set modal content
+            document.getElementById("langTitle").innerText = lang;
+            document.getElementById("langInfo").innerText = languages[lang].info;
+            progressContainer.setAttribute('data-progress', `${languages[lang].percent}%`);
+
+            // Reset progress bar
+            document.getElementById("progressBar").style.width = "0";
+            setTimeout(() => {
+                document.getElementById("progressBar").style.width = languages[lang].percent + "%";
+            }, 100);
+
+            // Create chart
+            new Chart(document.getElementById("langChart"), {
+                type: 'doughnut',
+                data: {
+                    labels: [lang, "Remaining"],
+                    datasets: [{
+                        data: [languages[lang].percent, 100 - languages[lang].percent],
+                        backgroundColor: ["#00ff99", "#444"]
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            // Show modal and overlay
+            overlay.style.display = "block";
+            modal.style.display = "block";
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("languageModal");
+            const overlay = document.querySelector(".modal-overlay");
+
+            modal.classList.remove('active');
+            overlay.style.display = "none";
+            document.body.style.overflow = "auto";
+
+            // Delay hiding modal for animation
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 300);
+        }
+    </script>
 </body>
 </html>
