@@ -223,21 +223,20 @@ canvas {
     <div class="container">
         <div class="title">My Language Skills</div>
         <div class="languages">
-            <div class="language">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span></div>
-            <div class="language">Hindi ➡️ <span class="Fluent">(Fluent)</span></div>
-            <div class="language">English ➡️ <span class="percentage">(65%)</span></div>
-            <div class="language">Chinese ➡️ <span class="percentage">(5%)</span></div>
-            <div class="language">Spanish ➡️ <span class="pending">(pending)</span></div>
+    <div class="language">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Bhojpuri')">ℹ️</span></div>
+    <div class="language">Hindi ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Hindi')">ℹ️</span></div>
+    <div class="language">English ➡️ <span class="percentage">(70%)</span> <span class="info-icon" onclick="openModal('English')">ℹ️</span></div>
+    <div class="language">Chinese ➡️ <span class="percentage">(5%)</span> <span class="info-icon" onclick="openModal('Chinese')">ℹ️</span></div>
+    <div class="language">Spanish ➡️ <span class="pending">(pending)</span> <span class="info-icon" onclick="openModal('Spanish')">ℹ️</span></div>
         </div>
 
-        <!-- Language Details Modal -->
+        <!-- Modal Structure -->
 <div id="languageModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <div class="modal-body">
-            <canvas id="progressChart"></canvas>
-            <p id="languageInfo"></p>
-        </div>
+        <h2 id="langTitle"></h2>
+        <canvas id="langChart"></canvas>
+        <p id="langInfo"></p>
     </div>
 </div>
         
