@@ -9,12 +9,8 @@
         font-family: 'Orbitron', sans-serif;
         background: #0f0f0f;
         color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
+        text-align: center;
+        padding: 50px 20px;
     }
 
     .title {
@@ -35,40 +31,26 @@
         }
     }
 
-    .languages {
-        font-size: 1.2em;
-        line-height: 2;
-        text-align: center;
-    }
-
     .language {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 12px;
-        margin: 8px 0;
+        font-size: 1.4em;
         cursor: pointer;
-        transition: background 0.3s ease, transform 0.3s ease;
-        position: relative;
+        transition: color 0.3s ease, transform 0.3s ease;
     }
 
     .language:hover {
-        background: rgba(0, 255, 153, 0.2);
-        transform: scale(1.05);
-    }
-
-    .percentage {
         color: #00ff99;
-        font-weight: bold;
+        transform: scale(1.1);
     }
 
-    .pending {
-        color: #ff4500;
-        font-weight: bold;
+    .info-icon {
+        margin-left: 10px;
+        cursor: pointer;
+        color: #00ff99;
+        font-size: 18px;
     }
 
-    .Fluent {
-        color: #FFFF00;
-        font-weight: bold;
+    .info-icon:hover {
+        color: #ffff00;
     }
 
     .modal {
@@ -86,13 +68,25 @@
 
     .modal-content {
         background: #222;
-        padding: 20px;
-        border-radius: 10px;
+        padding: 30px;
+        border-radius: 15px;
         text-align: center;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        width: 80%;
+        max-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.7);
         position: relative;
+        animation: popUp 0.3s ease-out;
+    }
+
+    @keyframes popUp {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 
     .close {
@@ -107,40 +101,20 @@
     .close:hover {
         color: #00ff99;
     }
-
-    .progress-bar {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        overflow: hidden;
-        margin: 15px 0;
-    }
-
-    .progress-fill {
-        height: 10px;
-        background: #00ff99;
-        width: 0;
-        transition: width 1.5s ease-in-out;
-    }
 </style>
 
 </head>
 <body>
     <div class="title">My Language Skills</div>
-    <div class="languages">
-        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri > <span class="Fluent">(Fluent)</span></div>
-        <div class="language" onclick="openModal('Hindi')">Hindi > <span class="Fluent">(Fluent)</span></div>
-        <div class="language" onclick="openModal('English')">English > <span class="percentage">(70%)</span></div>
-        <div class="language" onclick="openModal('Chinese')">Chinese > <span class="percentage">(5%)</span></div>
-        <div class="language" onclick="openModal('Spanish')">Spanish > <span class="pending">(Pending)</span></div>
-    </div><div id="languageModal" class="modal">
+    <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Bhojpuri')">ℹ️</span></div>
+    <div class="language" onclick="openModal('Hindi')">Hindi ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Hindi')">ℹ️</span></div>
+    <div class="language" onclick="openModal('English')">English ➡️ <span class="percentage">(70%)</span> <span class="info-icon" onclick="openModal('English')">ℹ️</span></div>
+    <div class="language" onclick="openModal('Chinese')">Chinese ➡️ <span class="percentage">(5%)</span> <span class="info-icon" onclick="openModal('Chinese')">ℹ️</span></div>
+    <div class="language" onclick="openModal('Spanish')">Spanish ➡️ <span class="pending">(Pending)</span> <span class="info-icon" onclick="openModal('Spanish')">ℹ️</span></div><div id="languageModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <h2 id="langTitle"></h2>
         <canvas id="langChart"></canvas>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
         <p id="langInfo"></p>
     </div>
 </div>
@@ -157,30 +131,11 @@
     const modal = document.getElementById("languageModal");
     const langTitle = document.getElementById("langTitle");
     const langInfo = document.getElementById("langInfo");
-    const progressFill = document.getElementById("progressFill");
     let langChart;
 
     function openModal(lang) {
         langTitle.innerText = lang;
         langInfo.innerText = languages[lang].info;
-        progressFill.style.width = "0";
-        setTimeout(() => {
-            progressFill.style.width = languages[lang].percent + "%";
-        }, 200);
-
-        if (langChart) langChart.destroy();
-        const ctx = document.getElementById("langChart").getContext("2d");
-        langChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [lang, "Remaining"],
-                datasets: [{
-                    data: [languages[lang].percent, 100 - languages[lang].percent],
-                    backgroundColor: ["#00ff99", "#444"]
-                }]
-            }
-        });
-
         modal.style.display = "flex";
     }
 
