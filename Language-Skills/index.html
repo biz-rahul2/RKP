@@ -1,38 +1,44 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html><html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Language Skills | The Lamp RKP</title>
-    <meta name="keywords" content="The Lamp RKP, Rahul Kumar Puri, The Lamp RKP Organization, The Lamp RKP Official, cyb_rahul, Language Skills, Hindi, English, Bhojpuri, Spanish, Mandarin">
-    <meta name="description" content="Discover the languages Rahul Kumar Puri speaks, writes, and understands, along with his proficiency levels in each. Explore The Lamp RKP for more.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Rahul Kumar Puri"><style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
-    body {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');body {
         font-family: 'Orbitron', sans-serif;
         background: #0f0f0f;
         color: #fff;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
-        min-height: 100vh;
+        justify-content: center;
+        height: 100vh;
         margin: 0;
-        padding: 20px;
     }
 
     .title {
-        font-size: 2.2em;
+        font-size: 2.5em;
         margin-bottom: 20px;
         text-transform: uppercase;
         color: #00ff99;
         letter-spacing: 2px;
+        animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            text-shadow: 0 0 10px #00ff99;
+        }
+        to {
+            text-shadow: 0 0 20px #00ff99, 0 0 30px #00ff99;
+        }
     }
 
     .languages {
         font-size: 1.2em;
         line-height: 2;
-        color: #e0e0e0;
+        text-align: center;
     }
 
     .language {
@@ -42,6 +48,7 @@
         margin: 8px 0;
         cursor: pointer;
         transition: background 0.3s ease, transform 0.3s ease;
+        position: relative;
     }
 
     .language:hover {
@@ -82,50 +89,61 @@
         padding: 20px;
         border-radius: 10px;
         text-align: center;
-        width: 80%;
-        max-width: 400px;
-        box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 0 20px rgba(0, 255, 153, 0.5);
+        position: relative;
     }
 
     .close {
         color: #fff;
-        float: right;
         font-size: 24px;
         cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 15px;
     }
 
     .close:hover {
         color: #00ff99;
     }
 
-    .info-icon {
-        margin-left: 10px;
-        cursor: pointer;
-        color: #00ff99;
-        font-size: 18px;
+    .progress-bar {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 15px 0;
     }
 
-    .info-icon:hover {
-        color: #ffff00;
+    .progress-fill {
+        height: 10px;
+        background: #00ff99;
+        width: 0;
+        transition: width 1.5s ease-in-out;
     }
 </style>
 
-</head><body>
-        <div class="title">My Language Skills</div>
-        <div class="languages">
-            <div class="language">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Bhojpuri')">ℹ️</span></div>
-            <div class="language">Hindi ➡️ <span class="Fluent">(Fluent)</span> <span class="info-icon" onclick="openModal('Hindi')">ℹ️</span></div>
-            <div class="language">English ➡️ <span class="percentage">(70%)</span> <span class="info-icon" onclick="openModal('English')">ℹ️</span></div>
-            <div class="language">Chinese ➡️ <span class="percentage">(5%)</span> <span class="info-icon" onclick="openModal('Chinese')">ℹ️</span></div>
-            <div class="language">Spanish ➡️ <span class="pending">(pending)</span> <span class="info-icon" onclick="openModal('Spanish')">ℹ️</span></div>
-        </div><div id="languageModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="langTitle"></h2>
-            <canvas id="langChart"></canvas>
-            <p id="langInfo"></p>
+</head>
+<body>
+    <div class="title">My Language Skills</div>
+    <div class="languages">
+        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ <span class="Fluent">(Fluent)</span></div>
+        <div class="language" onclick="openModal('Hindi')">Hindi ➡️ <span class="Fluent">(Fluent)</span></div>
+        <div class="language" onclick="openModal('English')">English ➡️ <span class="percentage">(70%)</span></div>
+        <div class="language" onclick="openModal('Chinese')">Chinese ➡️ <span class="percentage">(5%)</span></div>
+        <div class="language" onclick="openModal('Spanish')">Spanish ➡️ <span class="pending">(Pending)</span></div>
+    </div><div id="languageModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="langTitle"></h2>
+        <canvas id="langChart"></canvas>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
         </div>
-        </div>
+        <p id="langInfo"></p>
+    </div>
+</div>
 
 <script>
     const languages = {
@@ -139,24 +157,37 @@
     const modal = document.getElementById("languageModal");
     const langTitle = document.getElementById("langTitle");
     const langInfo = document.getElementById("langInfo");
-    const ctx = document.getElementById("langChart").getContext("2d");
+    const progressFill = document.getElementById("progressFill");
     let langChart;
 
     function openModal(lang) {
         langTitle.innerText = lang;
         langInfo.innerText = languages[lang].info;
+        progressFill.style.width = "0";
+        setTimeout(() => {
+            progressFill.style.width = languages[lang].percent + "%";
+        }, 200);
+
+        if (langChart) langChart.destroy();
+        const ctx = document.getElementById("langChart").getContext("2d");
+        langChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [lang, "Remaining"],
+                datasets: [{
+                    data: [languages[lang].percent, 100 - languages[lang].percent],
+                    backgroundColor: ["#00ff99", "#444"]
+                }]
+            }
+        });
+
         modal.style.display = "flex";
     }
 
     function closeModal() {
         modal.style.display = "none";
     }
-
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            closeModal();
-        }
-    };
 </script>
 
-</body></html>
+</body>
+</html>
