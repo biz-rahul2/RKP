@@ -281,34 +281,41 @@
 
     // Function to Open Modal with Chart
     function openModal(lang) {
-        langTitle.innerText = lang;
-        langInfo.innerText = languages[lang].info;
+    langTitle.innerText = lang;
+    langInfo.innerText = languages[lang].info;
 
-        // Destroy previous chart if exists
-        if (langChart) {
-            langChart.destroy();
-        }
+    // Ensure the canvas is replaced each time to avoid old chart issues
+    let newCanvas = document.createElement("canvas");
+    newCanvas.id = "langChart";
+    document.querySelector(".modal-content").replaceChild(newCanvas, ctx.canvas);
 
-        // Create new Pie Chart
-        langChart = new Chart(ctx, {
-            type: "doughnut",
-            data: {
-                labels: ["Proficiency", "Remaining"],
-                datasets: [{
-                    data: [languages[lang].percent, 100 - languages[lang].percent],
-                    backgroundColor: ["#00ff99", "#444"],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                animation: {
-                    animateRotate: true,
-                    duration: 1500
-                }
+    let newCtx = newCanvas.getContext("2d");
+
+    // Destroy previous chart if exists
+    if (langChart) {
+        langChart.destroy();
+    }
+
+    // Create new Pie Chart
+    langChart = new Chart(newCtx, {
+        type: "doughnut",
+        data: {
+            labels: ["Proficiency", "Remaining"],
+            datasets: [{
+                data: [languages[lang].percent, 100 - languages[lang].percent],
+                backgroundColor: ["#00ff99", "#444"],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            animation: {
+                animateRotate: true,
+                duration: 1500
             }
-        });
+        }
+    });
 
-        modal.style.display = "flex";
+    modal.style.display = "flex"; // Modal show karega
     }
 
     // Close Modal
