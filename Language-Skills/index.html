@@ -262,74 +262,63 @@
         © 2025 <strong>The Lamp RKP</strong>. All rights reserved. Created by <a href="https://thelamp.site/Founder" target="_blank">Rahul Kumar Puri</a>. Explore more at <a href="https://thelamp.site/" target="_blank">The Lamp RKP</a>.
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.getElementById("languageModal");
-        const closeModal = document.querySelector(".close");
-        const languageInfo = document.getElementById("languageInfo");
-        const ctx = document.getElementById("progressChart").getContext("2d");
+ <script>
+    // Language Data
+    const languages = {
+        "Bhojpuri": { percent: 100, info: "I am fully fluent in Bhojpuri." },
+        "Hindi": { percent: 100, info: "I can read, write, and speak Hindi fluently." },
+        "English": { percent: 70, info: "I can write and understand English very well but can't speak well anymore." },
+        "Chinese": { percent: 5, info: "I have started learning basic Chinese." },
+        "Spanish": { percent: 0, info: "I plan to learn Spanish in the future." }
+    };
 
-        let chartInstance = null;
+    // Modal Elements
+    const modal = document.getElementById("languageModal");
+    const closeBtn = document.querySelector(".close");
+    const langTitle = document.getElementById("langTitle");
+    const langInfo = document.getElementById("langInfo");
+    const ctx = document.getElementById("langChart").getContext("2d");
+    let langChart;
 
-        const languages = {
-            "Bhojpuri": { level: 100, description: "I can fluently speak, read, and write in Bhojpuri." },
-            "Hindi": { level: 100, description: "Hindi is my native language, and I am fully proficient in it." },
-            "English": { level: 70, description: "I can write and understand English very well but can't speak well anymore." },
-            "Chinese": { level: 5, description: "I have started learning Chinese but only know basic words." },
-            "Spanish": { level: 0, description: "I have not started learning Spanish yet but plan to do so in the future." }
-        };
+    // Function to Open Modal with Chart
+    function openModal(lang) {
+        langTitle.innerText = lang;
+        langInfo.innerText = languages[lang].info;
 
-        document.querySelectorAll(".language").forEach(item => {
-            item.innerHTML += " <span class='details-button'>&gt;</span>";
-            item.addEventListener("click", function () {
-                let languageName = this.textContent.split(" ➡️")[0].trim();
-                if (languages[languageName]) {
-                    languageInfo.textContent = languages[languageName].description;
-                    showChart(languages[languageName].level);
-                    modal.style.display = "flex";
-                }
-            });
-        });
-
-        function showChart(percentage) {
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-
-            chartInstance = new Chart(ctx, {
-                type: "doughnut",
-                data: {
-                    labels: ["Known", "Remaining"],
-                    datasets: [{
-                        data: [percentage, 100 - percentage],
-                        backgroundColor: ["#00ff99", "#333"],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: "70%",
-                    animation: {
-                        animateRotate: true,
-                        duration: 1000
-                    }
-                }
-            });
+        // Destroy previous chart if exists
+        if (langChart) {
+            langChart.destroy();
         }
 
-        closeModal.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-
-        window.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.style.display = "none";
+        // Create new Pie Chart
+        langChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Proficiency", "Remaining"],
+                datasets: [{
+                    data: [languages[lang].percent, 100 - languages[lang].percent],
+                    backgroundColor: ["#00ff99", "#444"],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    animateRotate: true,
+                    duration: 1500
+                }
             }
         });
-    });
-</script>
-</body>
 
+        modal.style.display = "flex";
+    }
+
+    // Close Modal
+    closeBtn.onclick = () => (modal.style.display = "none");
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+ </script>
+</body>
 </html>
