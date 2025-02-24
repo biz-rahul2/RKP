@@ -254,5 +254,63 @@
     © 2025 <strong>The Lamp RKP</strong>. All rights reserved. Created by <a href="https://thelamp.site/Founder" target="_blank">Rahul Kumar Puri</a>. Explore more at <a href="https://thelamp.site/" target="_blank">The Lamp RKP</a>.    
 </footer>
 
+    <script>
+    // Language Data
+    const languages = {
+        "Bhojpuri": { percent: 100, info: "I am fully fluent in Bhojpuri." },
+        "Hindi": { percent: 100, info: "I can read, write, and speak Hindi fluently." },
+        "English": { percent: 70, info: "I can write and understand English very well but can't speak well anymore." },
+        "Chinese": { percent: 5, info: "I have started learning basic Chinese." },
+        "Spanish": { percent: 0, info: "I plan to learn Spanish in the future." }
+    };
+
+    // Modal Elements
+    const modal = document.getElementById("languageModal");
+    const closeBtn = document.querySelector(".close");
+    const langTitle = document.getElementById("langTitle");
+    const langInfo = document.getElementById("langInfo");
+    const ctx = document.getElementById("langChart").getContext("2d");
+    let langChart;
+
+    // Function to Open Modal with Chart
+    function openModal(lang) {
+        langTitle.innerText = lang;
+        langInfo.innerText = languages[lang].info;
+
+        // Destroy previous chart if exists
+        if (langChart) {
+            langChart.destroy();
+        }
+
+        // Create new Pie Chart
+        langChart = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+                labels: ["Proficiency", "Remaining"],
+                datasets: [{
+                    data: [languages[lang].percent, 100 - languages[lang].percent],
+                    backgroundColor: ["#00ff99", "#444"],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                animation: {
+                    animateRotate: true,
+                    duration: 1500
+                }
+            }
+        });
+
+        modal.style.display = "flex";
+    }
+
+    // Close Modal
+    closeBtn.onclick = () => (modal.style.display = "none");
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+    </script>
 </body>  
 </html>
