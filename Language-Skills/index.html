@@ -46,26 +46,26 @@
         transform: scale(1.05);  
     }  
 
+    .info-icon {  
+        margin-left: 10px;  
+        cursor: pointer;  
+        color: #00ff99;  
+        font-size: 18px;  
+    }  
+
     .modal {  
         display: none;  
         position: fixed;  
         z-index: 1000;  
-        left: 0;  
-        top: 0;  
-        width: 100%;  
-        height: 100%;  
-        background-color: rgba(0, 0, 0, 0.8);  
-        justify-content: center;  
-        align-items: center;  
-    }  
-
-    .modal-content {  
-        background: #222;  
+        left: 50%;  
+        top: 50%;  
+        transform: translate(-50%, -50%);
+        width: 90%;  
+        max-width: 400px;  
+        background-color: #222;  
         padding: 20px;  
         border-radius: 10px;  
         text-align: center;  
-        width: 80%;  
-        max-width: 400px;  
         box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);  
     }  
 
@@ -96,21 +96,19 @@
 <body>  
     <div class="title">My Language Skills</div>  
     <div class="languages">  
-        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ Fluent</div>  
-        <div class="language" onclick="openModal('Hindi')">Hindi ➡️ Fluent</div>  
-        <div class="language" onclick="openModal('English')">English ➡️ 70%</div>  
-        <div class="language" onclick="openModal('Chinese')">Chinese ➡️ 5%</div>  
-        <div class="language" onclick="openModal('Spanish')">Spanish ➡️ Pending</div>  
+        <div class="language" onclick="openModal('Bhojpuri')">Bhojpuri ➡️ Fluent <span class="info-icon">ℹ️</span></div>  
+        <div class="language" onclick="openModal('Hindi')">Hindi ➡️ Fluent <span class="info-icon">ℹ️</span></div>  
+        <div class="language" onclick="openModal('English')">English ➡️ 70% <span class="info-icon">ℹ️</span></div>  
+        <div class="language" onclick="openModal('Chinese')">Chinese ➡️ 5% <span class="info-icon">ℹ️</span></div>  
+        <div class="language" onclick="openModal('Spanish')">Spanish ➡️ Pending <span class="info-icon">ℹ️</span></div>  
     </div>  <div id="languageModal" class="modal">  
-    <div class="modal-content">  
-        <span class="close" onclick="closeModal()">&times;</span>  
-        <h2 id="langTitle"></h2>  
-        <canvas id="langChart"></canvas>  
-        <div class="progress-bar-container">
-            <div id="progressBar" class="progress-bar"></div>
-        </div>
-        <p id="langInfo"></p>  
-    </div>  
+    <span class="close" onclick="closeModal()">&times;</span>  
+    <h2 id="langTitle"></h2>  
+    <canvas id="langChart"></canvas>  
+    <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <p id="langInfo"></p>  
 </div>  
 
 <script>  
@@ -122,43 +120,23 @@
         "Spanish": { percent: 0, info: "I plan to learn Spanish in the future." }  
     };  
 
-    let modal = document.getElementById("languageModal");  
-    let langTitle = document.getElementById("langTitle");  
-    let langInfo = document.getElementById("langInfo");  
-    let progressBar = document.getElementById("progressBar");  
-    let ctx = document.getElementById("langChart").getContext("2d");  
-    let langChart;  
-
     function openModal(lang) {  
-        langTitle.innerText = lang;  
-        langInfo.innerText = languages[lang].info;  
-        progressBar.style.width = "0";
-        setTimeout(() => { progressBar.style.width = languages[lang].percent + "%"; }, 100);
+        document.getElementById("langTitle").innerText = lang;  
+        document.getElementById("langInfo").innerText = languages[lang].info;  
+        document.getElementById("progressBar").style.width = "0";
+        setTimeout(() => { document.getElementById("progressBar").style.width = languages[lang].percent + "%"; }, 100);
 
-        if (langChart) langChart.destroy();  
-        langChart = new Chart(ctx, {  
+        new Chart(document.getElementById("langChart"), {  
             type: 'doughnut',  
-            data: {  
-                labels: [lang, "Remaining"],  
-                datasets: [{  
-                    data: [languages[lang].percent, 100 - languages[lang].percent],  
-                    backgroundColor: ["#00ff99", "#444"]  
-                }]  
-            },  
+            data: { labels: [lang, "Remaining"], datasets: [{ data: [languages[lang].percent, 100 - languages[lang].percent], backgroundColor: ["#00ff99", "#444"] }] },  
             options: { responsive: true, maintainAspectRatio: false }  
         });  
-        modal.style.display = "flex";  
+        document.getElementById("languageModal").style.display = "block";  
     }  
 
     function closeModal() {  
-        modal.style.display = "none";  
+        document.getElementById("languageModal").style.display = "none";  
     }  
-
-    window.onclick = (event) => {  
-        if (event.target == modal) {  
-            closeModal();  
-        }  
-    };  
 </script>
 
 </body>
