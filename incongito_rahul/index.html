@@ -19,36 +19,41 @@
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
         }
 
         .container {
             max-width: 600px;
             margin: auto;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 30px;
             margin-bottom: 15px;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
         p {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.8;
             margin-bottom: 20px;
+            color: #f1f1f1;
         }
 
         .follow-section {
-            margin: 20px 0;
+            margin: 30px 0;
         }
 
         .follow-button {
@@ -56,32 +61,31 @@
             text-decoration: none;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             color: #fff;
-            padding: 12px 25px;
-            border-radius: 30px;
+            padding: 15px 30px;
+            border-radius: 50px;
             font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.5);
+            font-size: 16px;
+            transition: 0.4s;
+            box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.6);
+            border: none;
+            cursor: pointer;
         }
 
         .follow-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 5px 20px rgba(255, 75, 43, 0.7);
+            transform: scale(1.08);
+            box-shadow: 0px 8px 20px rgba(255, 75, 43, 0.8);
         }
 
-        .note {
-            font-size: 14px;
-            color: #ffcc00;
-            margin-top: 20px;
+        /* Divider Line */
+        .divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
+            margin: 40px auto;
+            border-radius: 5px;
         }
 
-        .screenshot {
-            margin-top: 20px;
-            border-radius: 10px;
-            max-width: 100%;
-            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
+        /* Private Button */
         .private {
             background: rgba(255, 255, 255, 0.2);
             cursor: not-allowed;
@@ -92,6 +96,14 @@
             transform: none;
             box-shadow: none;
         }
+
+        .note {
+            font-size: 15px;
+            color: #ffcc00;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
     </style>
 </head>
 <body>
@@ -105,8 +117,11 @@
         </p>
 
         <div class="follow-section">
-            <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="follow-button" target="_blank">Follow @cyb_rahul</a>
+            <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="follow-button" target="_blank">🚀 Follow @cyb_rahul</a>
         </div>
+
+        <!-- Divider Line -->
+        <div class="divider"></div>
 
         <p>
             **Meri private ID** sirf personal aur close friends ke liye hai.  
@@ -115,15 +130,13 @@
         </p>
 
         <div class="follow-section">
-            <a href="https://www.instagram.com/incongito_rahul?igsh=MWxlcng4ejJkdnMzMg==" class="follow-button private" target="_blank">@incongito_rahul (Private)</a>
+            <a href="https://www.instagram.com/incongito_rahul?igsh=MWxlcng4ejJkdnMzMg==" class="follow-button private" target="_blank">🔒 @incongito_rahul (Private)</a>
         </div>
 
         <p class="note">
             Hope aap meri feelings samjh paoge!  
             Public ID pe aap sabse interact karne ka mauka milega. See you there! ❤️  
         </p>
-
-        <img src="screenshot.jpg" alt="Follow Requests Screenshot" class="screenshot">
 
     </div>
 
