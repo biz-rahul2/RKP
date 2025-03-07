@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Par Mujhse Judein</title>
+    <title>Follow Me on Instagram</title>
     <style>
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             text-align: center;
             padding: 40px 20px;
@@ -22,16 +25,20 @@
         .container {
             max-width: 600px;
             margin: auto;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         h1 {
             font-size: 28px;
             margin-bottom: 15px;
-            color: #ffcccb;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         p {
@@ -47,21 +54,23 @@
         .follow-button {
             display: inline-block;
             text-decoration: none;
-            background: #ff4d4d;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
             color: #fff;
             padding: 12px 25px;
             border-radius: 30px;
             font-weight: bold;
             transition: 0.3s;
+            box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.5);
         }
 
         .follow-button:hover {
-            background: #cc0000;
+            transform: scale(1.05);
+            box-shadow: 0px 5px 20px rgba(255, 75, 43, 0.7);
         }
 
         .note {
             font-size: 14px;
-            color: #ffd700;
+            color: #ffcc00;
             margin-top: 20px;
         }
 
@@ -69,23 +78,30 @@
             margin-top: 20px;
             border-radius: 10px;
             max-width: 100%;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .private {
-            background: gray;
+            background: rgba(255, 255, 255, 0.2);
             cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .private:hover {
+            transform: none;
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Instagram पर मुझसे जुड़ें</h1>
+        <h1>Follow Me on Instagram</h1>
         
         <p>
-            अगर आप मुझसे Instagram पर जुड़ना चाहते हैं, तो मैं आपका स्वागत करता हूँ!  
-            आप मेरे **Public Account** को फॉलो कर सकते हैं, जहां मैं अपने विचार, अपडेट और मज़ेदार चीज़ें शेयर करता हूँ।
+            **Hey guys!** Agar aap mujhse Instagram pe connect hona chahte ho, to aap **meri public ID follow kar sakte ho**.  
+            Yahan mai apni life, thoughts aur kuch cool posts share karta hoon.  
         </p>
 
         <div class="follow-section">
@@ -93,9 +109,9 @@
         </div>
 
         <p>
-            हालांकि, मेरा **Private Account** केवल मेरे लिए और कुछ खास लोगों के लिए है।  
-            इस ID पर मैं सिर्फ उन्हीं लोगों को जोड़ता हूँ जिन्हें मैं काफ़ी अच्छे से जानता हूँ।  
-            इसलिए कृपया इस ID पर follow request न भेजें।
+            **Meri private ID** sirf personal aur close friends ke liye hai.  
+            Yeh mera **private space** hai jisme sirf **selected logon** ka access hai.  
+            **Request bhejne ka koi fayda nahi** kyunki mai accept nahi kar paunga.  
         </p>
 
         <div class="follow-section">
@@ -103,8 +119,8 @@
         </div>
 
         <p class="note">
-            मुझे खुशी होगी अगर आप मेरे पब्लिक अकाउंट पर मुझसे जुड़ेंगे!  
-            आपकी समझदारी और सम्मान के लिए धन्यवाद।
+            Hope aap meri feelings samjh paoge!  
+            Public ID pe aap sabse interact karne ka mauka milega. See you there! ❤️  
         </p>
 
         <img src="screenshot.jpg" alt="Follow Requests Screenshot" class="screenshot">
