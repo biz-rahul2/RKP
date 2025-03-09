@@ -46,18 +46,34 @@
     }    
 
     .language {    
-        background: rgba(255, 255, 255, 0.1);    
-        border-radius: 10px;    
-        padding: 12px;    
-        margin: 8px 0;    
-        cursor: pointer;    
-        transition: background 0.3s ease, transform 0.3s ease;    
-    }    
+    background: rgba(255, 255, 255, 0.1); /* Light transparent background */  
+    border-radius: 15px;    
+    padding: 15px;    
+    margin: 10px 0;    
+    cursor: pointer;    
+    transition: all 0.3s ease;    
+    backdrop-filter: blur(10px); /* Glass effect */
+    border: 1px solid rgba(0, 255, 153, 0.5); /* Light border */
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.3); /* Neon glow */
+    display: flex;    
+    justify-content: space-between;    
+    align-items: center;    
+    font-size: 1.2em;    
+    font-weight: bold;    
+    text-transform: uppercase;    
+    letter-spacing: 1px;    
+}    
 
-    .language:hover {    
-        background: rgba(0, 255, 153, 0.2);    
-        transform: scale(1.05);    
-    }    
+.language:hover {    
+    background: rgba(0, 255, 153, 0.2); /* Brighter hover effect */  
+    transform: translateY(-3px) scale(1.05); /* Lift effect */  
+    box-shadow: 0 0 15px rgba(0, 255, 153, 0.6); /* Stronger glow on hover */  
+}    
+
+.percentage, .Fluent {    
+    font-weight: bold;    
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Soft glow effect */  
+}
 
     .percentage {    
         color: #00ff99;    
