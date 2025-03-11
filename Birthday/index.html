@@ -1,180 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Countdown | The Lamp RKP</title>
-  <meta name="keywords" content="The Lamp RKP, Rahul Kumar Puri, The Lamp RKP Organization, The Lamp RKP Official, cyb_rahul">
-  <meta name="description" content="Get ready to celebrate Rahul Kumar Puri's Birthday. Track the days, hours, and moments until Rahul Kumar Puri special day arrives. Let the excitement build!">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Rahul Kumar Puri">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/darkly/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Russo+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Birthday: 25 July</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time {
+            font-size: 1.5em;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .message-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffd700;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Countdown to My Birthday</h1>
-  </header>
+    <div class="container">
+        <h1>🎉 My Birthday: 25 July 🎂</h1>
 
-  <div id="countdown">
-    <div class="group">
-      <div class="countdown-section">
-        <div class="countdown-value" id="months">0</div>
-        <div class="countdown-label">Months</div>
-      </div>
-      <div class="countdown-section">
-        <div class="countdown-value" id="days">0</div>
-        <div class="countdown-label">Days</div>
-      </div>
+        <!-- Funny Message Box -->
+        <div id="messageBox" class="message-box"></div>
+
+        <!-- Countdown Timer -->
+        <div id="countdown">
+            <div class="time"><span id="months"></span> Months</div>
+            <div class="time"><span id="days"></span> Days</div>
+            <div class="time"><span id="hours"></span> Hours</div>
+            <div class="time"><span id="minutes"></span> Minutes</div>
+            <div class="time"><span id="seconds"></span> Seconds</div>
+        </div>
     </div>
-    <div class="group">
-      <div class="countdown-section">
-        <div class="countdown-value" id="hours">0</div>
-        <div class="countdown-label">Hours</div>
-      </div>
-      <div class="countdown-section">
-        <div class="countdown-value" id="minutes">0</div>
-        <div class="countdown-label">Minutes</div>
-      </div>
-      <div class="countdown-section">
-        <div class="countdown-value" id="seconds">0</div>
-        <div class="countdown-label">Seconds</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Birthday Message -->
-  <div id="birthday-message" style="display: none;">
-    <h1>Today is My Birthday!</h1>
-  </div>
+    <script>
+        function countdown() {
+            const birthdayDate = new Date("July 25, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = birthdayDate - now;
 
-  <!-- Confetti and Balloons -->
-  <div id="confetti-container"></div>
-  <div id="balloon-container"></div>
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-  <!-- Divider -->
-  <div class="divider"></div>
+            document.getElementById("months").innerText = months;
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
 
-  <footer>
-    © 2025 <strong>The Lamp RKP</strong>. All rights reserved. Created by <a href="https://thelamp.site/Founder" target="_blank">Rahul Kumar Puri</a>. Explore more at <a href="https://thelamp.site/" target="_blank">The Lamp RKP</a>.
-  </footer>
+            updateMessage();
+        }
 
-  <script>
-    const birthDate = new Date(new Date().getFullYear(), 6, 25); // 25 July of the current year
-    const mainCountdownElement = document.getElementById('countdown');
-    const birthdayMessageElement = document.getElementById('birthday-message');
-    const confettiContainer = document.getElementById('confetti-container');
-    const balloonContainer = document.getElementById('balloon-container');
+        function updateMessage() {
+            const today = new Date();
+            const month = today.getMonth() + 1; // January = 0, so add 1
+            const day = today.getDate();
+            let message = "";
 
-    // Function to replace the header text
-    function replaceHeaderText(text) {
-      const header = document.querySelector('header h1');
-      if (header) {
-        header.textContent = text;
-      }
-    }
+            if (month === 6) {
+                message = "बस 1 महीना और इंतज़ार करो, फिर देखना क्या बवाल मचता है! 🤣";
+            } else if (month === 7 && day >= 1 && day <= 7) {
+                message = "बस 3 हफ्ते और... फिर तो धमाका ही धमाका होगा! 🔥";
+            } else if (month === 7 && day >= 8 && day <= 14) {
+                message = "बस 2 हफ्ते और... अब तो बेचैनी बढ़ रही है! 😆";
+            } else if (month === 7 && day >= 15 && day <= 21) {
+                message = "बस 1 हफ्ता और... इंतज़ार का टाइम ख़त्म होने वाला है! ⏳";
+            } else if (month === 7 && day === 23) {
+                message = "अब तो धैर्य जवाब दे रहा है... बस दो दिन और! 🤯🔥";
+            } else if (month === 7 && day === 24) {
+                message = "कल मेरा जन्मदिन है, और मैं एक साल और बड़ा होने वाला हूँ! 🎂";
+            } else if (month === 7 && day === 25) {
+                message = "🎉आज मेरा जन्मदिन है! Party Hard!🥳🎂";
+                startConfetti();
+                playBirthdaySong();
+            } else if (month === 7 && day === 26) {
+                message = "अब क्या देखने आए हो? मेरा जन्मदिन तो कल ही था! 😂";
+            }
 
-    // Function to display the birthday message
-    function showBirthdayMessage() {
-      replaceHeaderText("Today is My Birthday");
-      mainCountdownElement.style.display = 'none';
-      birthdayMessageElement.style.display = 'block';
-      launchConfetti();
-      launchBalloons();
-    }
+            document.getElementById("messageBox").innerText = message;
+        }
 
-    // Countdown update function
-    function updateCountdown() {
-      const now = new Date();
-      const timeDiff = birthDate - now;
+        function startConfetti() {
+            let end = Date.now() + 5 * 1000;
+            let colors = ["#bb0000", "#ffffff"];
 
-      // Logic to determine what text to show
-      if (now.getMonth() === 5 && now.getDate() >= 1 && now.getDate() < 25) {
-        replaceHeaderText("Next Month is My Birthday");
-      } else if (now.getMonth() === 6 && now.getDate() >= 1 && now.getDate() < 18) {
-        replaceHeaderText("This Month is My Birthday");
-      } else if (now.getMonth() === 6 && now.getDate() >= 18 && now.getDate() < 22) {
-        replaceHeaderText("Next Week is My Birthday");
-      } else if (now.getMonth() === 6 && now.getDate() >= 22 && now.getDate() < 25) {
-        replaceHeaderText("This Week is My Birthday");
-      } else if (now.getMonth() === 6 && now.getDate() === 25) {
-        clearInterval(countdownInterval);
-        showBirthdayMessage();
-        return;
-      } else {
-        replaceHeaderText("Countdown to My Birthday");
-      }
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
 
-      // Update countdown values
-      if (timeDiff > 0) {
-        const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
-        const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
 
-        document.getElementById('months').textContent = months;
-        document.getElementById('days').textContent = days;
-        document.getElementById('hours').textContent = hours;
-        document.getElementById('minutes').textContent = minutes;
-        document.getElementById('seconds').textContent = seconds;
-      } else {
-        clearInterval(countdownInterval);
-        showBirthdayMessage();
-      }
-    }
+        function playBirthdaySong() {
+            let audio = new Audio("https://www.myinstants.com/media/sounds/happy-birthday-music-box.mp3");
+            audio.play();
+        }
 
-    // Function to launch confetti
-    function launchConfetti() {
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.animationDelay = Math.random() * 3 + 's';
-        confetti.style.backgroundColor = randomColor();
-        confettiContainer.appendChild(confetti);
-      }
-    }
+        setInterval(countdown, 1000);
+    </script>
 
-    // Function to generate a random color
-    function randomColor() {
-      const colors = ['#ff6a00', '#ee0979', '#fad0c4', '#ff0077', '#00c9ff'];
-      return colors[Math.floor(Math.random() * colors.length)];
-    }
-
-    // Function to launch balloons
-    function launchBalloons() {
-      for (let i = 0; i < 20; i++) {
-        const balloon = document.createElement('div');
-        balloon.classList.add('balloon');
-        balloon.textContent = '🎈';
-        balloon.style.left = Math.random() * 100 + 'vw';
-        balloon.style.animationDelay = Math.random() * 5 + 's';
-
-        balloon.addEventListener('click', () => popBalloon(balloon));
-        balloonContainer.appendChild(balloon);
-      }
-    }
-
-    // Function to pop a balloon
-    function popBalloon(balloon) {
-      const blast = document.createElement('div');
-      blast.classList.add('blast');
-      blast.textContent = '💥';
-      blast.style.left = balloon.style.left;
-      blast.style.top = balloon.getBoundingClientRect().top + 'px';
-
-      document.body.appendChild(blast);
-      balloon.remove();
-
-      setTimeout(() => {
-        blast.remove();
-      }, 1000);
-    }
-
-    // Start the countdown interval
-    const countdownInterval = setInterval(updateCountdown, 1000);
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1"></script>
 </body>
 </html>
