@@ -20,7 +20,7 @@
             padding: 20px;
         }
 
-        /* Stylish Heading */
+        /* Stylish Single-Line Heading */
         h1 {
             font-size: 3em;
             font-weight: bold;
@@ -28,6 +28,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: fadeIn 2s ease-in-out;
+            white-space: nowrap;
         }
 
         /* Message Box */
@@ -49,19 +50,27 @@
         #countdown {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
 
+        /* Stylish Countdown Boxes */
         .time {
-            font-size: 1.8em;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 15px;
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            padding: 15px 20px;
             border-radius: 10px;
             width: 120px;
             text-align: center;
             font-weight: bold;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .time:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
         }
 
         /* Animation */
