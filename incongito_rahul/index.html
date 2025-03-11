@@ -15,19 +15,21 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        /* Background Animation */
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            animation: gradientBG 10s infinite alternate ease-in-out;
+            animation: bgAnimation 8s infinite alternate ease-in-out;
             color: #fff;
             text-align: center;
             padding: 50px 20px;
         }
 
-        @keyframes gradientBG {
+        @keyframes bgAnimation {
             0% { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
-            100% { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); }
+            100% { background: linear-gradient(135deg, #1b1b2f, #16213e, #0f3460); }
         }
 
+        /* Container with Glass Effect */
         .container {
             max-width: 600px;
             margin: auto;
@@ -39,7 +41,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 1.2s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -47,6 +49,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Neon Glow Heading */
         h1 {
             font-size: 30px;
             margin-bottom: 15px;
@@ -55,12 +58,13 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             font-weight: 600;
-            animation: glow 2s infinite alternate;
+            text-shadow: 0px 0px 10px rgba(255, 65, 108, 0.8);
+            animation: neonGlow 1.5s infinite alternate;
         }
 
-        @keyframes glow {
-            0% { text-shadow: 0px 0px 10px rgba(255, 65, 108, 0.6); }
-            100% { text-shadow: 0px 0px 20px rgba(255, 75, 43, 0.9); }
+        @keyframes neonGlow {
+            0% { text-shadow: 0px 0px 15px rgba(255, 65, 108, 0.6); }
+            100% { text-shadow: 0px 0px 25px rgba(255, 75, 43, 1); }
         }
 
         p {
@@ -70,10 +74,16 @@
             color: #f1f1f1;
         }
 
-        .follow-section {
-            margin: 30px 0;
+        /* Divider */
+        .divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
+            margin: 40px auto;
+            border-radius: 5px;
         }
 
+        /* 3D Hover Button */
         .follow-button {
             display: inline-block;
             text-decoration: none;
@@ -83,31 +93,15 @@
             border-radius: 50px;
             font-weight: bold;
             font-size: 16px;
-            transition: 0.4s;
+            transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.6);
             border: none;
             cursor: pointer;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
         }
 
         .follow-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 8px 20px rgba(255, 75, 43, 0.8);
-        }
-
-        /* Divider Line */
-        .divider {
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
-            margin: 40px auto;
-            border-radius: 5px;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0px 10px 25px rgba(255, 75, 43, 0.9);
         }
 
         /* Private Button */
@@ -120,25 +114,6 @@
         .private:hover {
             transform: none;
             box-shadow: none;
-        }
-
-        .note {
-            font-size: 15px;
-            color: #ffcc00;
-            margin-top: 20px;
-            font-style: italic;
-        }
-
-        /* Animated Text Effect */
-        .highlight {
-            color: #ff416c;
-            font-weight: bold;
-            animation: textBlink 1.5s infinite alternate;
-        }
-
-        @keyframes textBlink {
-            0% { opacity: 1; }
-            100% { opacity: 0.7; }
         }
 
         /* Clickable Instagram Handle */
@@ -154,6 +129,20 @@
             text-decoration: underline;
         }
 
+        /* Note with subtle glowing effect */
+        .note {
+            font-size: 15px;
+            color: #ffcc00;
+            margin-top: 20px;
+            font-style: italic;
+            animation: glowNote 1.5s infinite alternate;
+        }
+
+        @keyframes glowNote {
+            0% { text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5); }
+            100% { text-shadow: 0px 0px 20px rgba(255, 204, 0, 1); }
+        }
+
     </style>
 </head>
 <body>
@@ -165,9 +154,9 @@
         <div class="divider"></div>
 
         <p>
-            यह <span class="highlight">मेरी प्राइवेट ID</span> है जो केवल मेरे बेहद करीबियों के लिए है।  
-            अगर आप <span class="highlight">मेरे बहुत खास</span> हैं, तो रिक्वेस्ट भेज सकते हैं,  
-            लेकिन अगर नहीं, तो <span class="highlight">सॉरी!</span> मैं एक्सेप्ट नहीं कर पाऊंगा।  
+            yah meri private id hai jo sirf mere liye aur mere kafi jyada close logo ke liye hai. kyunki
+            Yeh mera private space hai jisme sirf kuchh hi logon ka access hai.  
+            isliye Request bhejne ka koi fayda nahi kyunki mai accept nahi kar paunga.   Sorry! 
         </p>
 
         <div class="follow-section">
@@ -175,10 +164,9 @@
         </div>
 
         <p class="note">
-            अगर आप मुझसे जुड़ना चाहते हैं तो  
-            <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="public-id" target="_blank">@cyb_rahul</a>  
-            को फॉलो करें क्योंकि यह मेरी **Public ID** है।  
-            See you there! ❤️  
+            agar aap mere kafi jyada close hai to request bhaj sakte hai mai accept jarur karunga.  
+            warna aap <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="public-id" target="_blank">@cyb_rahul</a> ko follow kijiye  
+            kyunki ye meri public id hai. See you there! ❤️  
         </p>
 
     </div>
