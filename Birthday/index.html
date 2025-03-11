@@ -20,9 +20,9 @@
             padding: 20px;
         }
 
-        /* Stylish Single-Line Heading */
+        /* Stylish Heading (Smaller & Fits Properly) */
         h1 {
-            font-size: 3em;
+            font-size: 2.2em; /* Reduced size for better fit */
             font-weight: bold;
             background: linear-gradient(45deg, #ff9a9e, #fad0c4);
             -webkit-background-clip: text;
@@ -37,7 +37,7 @@
             padding: 15px;
             border-radius: 10px;
             margin: 20px 0;
-            font-size: 1.5em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #ffdd57;
             animation: fadeIn 1s ease-in-out;
@@ -46,22 +46,28 @@
             text-align: center;
         }
 
-        /* Countdown Timer */
-        #countdown {
+        /* Countdown Container */
+        #countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .countdown-row {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 15px;
         }
 
         /* Stylish Countdown Boxes */
         .time {
-            font-size: 1.5em;
+            font-size: 1.4em;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             padding: 15px 20px;
             border-radius: 10px;
-            width: 120px;
+            width: 110px;
             text-align: center;
             font-weight: bold;
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
@@ -78,6 +84,17 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* Responsive Fix */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .time {
+                width: 90px;
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -87,12 +104,16 @@
     <div id="messageBox" class="message-box"></div>
 
     <!-- Countdown Timer -->
-    <div id="countdown">
-        <div class="time"><span id="months"></span> Months</div>
-        <div class="time"><span id="days"></span> Days</div>
-        <div class="time"><span id="hours"></span> Hours</div>
-        <div class="time"><span id="minutes"></span> Minutes</div>
-        <div class="time"><span id="seconds"></span> Seconds</div>
+    <div id="countdown-container">
+        <div class="countdown-row">
+            <div class="time"><span id="months"></span> Months</div>
+            <div class="time"><span id="days"></span> Days</div>
+        </div>
+        <div class="countdown-row">
+            <div class="time"><span id="hours"></span> Hours</div>
+            <div class="time"><span id="minutes"></span> Minutes</div>
+            <div class="time"><span id="seconds"></span> Seconds</div>
+        </div>
     </div>
 
     <script>
