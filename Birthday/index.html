@@ -22,7 +22,7 @@
 
         /* Stylish Heading (Smaller & Fits Properly) */
         h1 {
-            font-size: 2.2em; /* Reduced size for better fit */
+            font-size: 2.2em; /* Adjusted for better fit */
             font-weight: bold;
             background: linear-gradient(45deg, #ff9a9e, #fad0c4);
             -webkit-background-clip: text;
@@ -51,23 +51,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
         }
 
         .countdown-row {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         /* Stylish Countdown Boxes */
         .time {
-            font-size: 1.4em;
+            font-size: 1.3em;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            padding: 15px 20px;
+            padding: 12px 18px;
             border-radius: 10px;
-            width: 110px;
+            width: 95px;
             text-align: center;
             font-weight: bold;
             box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
@@ -91,8 +91,9 @@
                 font-size: 1.8em;
             }
             .time {
-                width: 90px;
-                font-size: 1.2em;
+                width: 80px;
+                font-size: 1.1em;
+                padding: 10px;
             }
         }
     </style>
@@ -112,6 +113,8 @@
         <div class="countdown-row">
             <div class="time"><span id="hours"></span> Hours</div>
             <div class="time"><span id="minutes"></span> Minutes</div>
+        </div>
+        <div class="countdown-row">
             <div class="time"><span id="seconds"></span> Seconds</div>
         </div>
     </div>
@@ -141,7 +144,7 @@
             const today = new Date();
             const month = today.getMonth() + 1;
             const day = today.getDate();
-            let message = "";
+            let message = "⌛ अब बहुत टाइम है यार मेरा बर्थडे आने में, So wait.....";
 
             if (month === 6) {
                 message = "⏳ बस 1 महीना और... फिर धूम मचेगी! 🚀🔥";
