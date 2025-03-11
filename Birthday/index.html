@@ -9,7 +9,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #000428, #004e92);
+            background: linear-gradient(135deg, #000428, #004e92, #00c6ff);
             color: white;
             text-align: center;
             display: flex;
@@ -18,93 +18,85 @@
             align-items: center;
             height: 100vh;
             padding: 20px;
+            overflow: hidden;
         }
 
-        /* Stylish Heading (Smaller & Fits Properly) */
         h1 {
-            font-size: 2.2em; /* Adjusted for better fit */
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-size: 2.5em;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffdde1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.4);
             animation: fadeIn 2s ease-in-out;
-            white-space: nowrap;
         }
 
-        /* Message Box */
         .message-box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 18px;
+            border-radius: 12px;
             margin: 20px 0;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: bold;
             color: #ffdd57;
-            animation: fadeIn 1s ease-in-out;
-            width: 80%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-in-out;
             max-width: 500px;
-            text-align: center;
         }
 
-        /* Countdown Container */
         #countdown-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 25px;
         }
 
         .countdown-row {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* Stylish Countdown Boxes */
         .time {
-            font-size: 1.3em;
+            font-size: 1.4em;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            padding: 12px 18px;
-            border-radius: 10px;
-            width: 95px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 100px;
             text-align: center;
             font-weight: bold;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
-            transition: transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .time:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+            box-shadow: 0 0 25px rgba(255, 255, 0, 0.9);
         }
 
-        /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Fix */
         @media (max-width: 480px) {
             h1 {
                 font-size: 1.8em;
             }
             .time {
-                width: 80px;
-                font-size: 1.1em;
-                padding: 10px;
+                min-width: 80px;
+                font-size: 1.2em;
+                padding: 12px;
             }
         }
     </style>
 </head>
 <body>
     <h1>🎉 My Birthday: 25 July 🎂</h1>
-
-    <!-- Funny Message Box -->
     <div id="messageBox" class="message-box"></div>
-
-    <!-- Countdown Timer -->
     <div id="countdown-container">
         <div class="countdown-row">
             <div class="time"><span id="months"></span> Months</div>
@@ -144,27 +136,19 @@
             const today = new Date();
             const month = today.getMonth() + 1;
             const day = today.getDate();
-            let message = "⌛ अब बहुत टाइम है यार मेरा बर्थडे आने में, So wait.....";
+            let message = "⌛ अभी बहुत टाइम है... So chill! 😎";
 
-            if (month === 6) {
-                message = "⏳ बस 1 महीना और... फिर धूम मचेगी! 🚀🔥";
-            } else if (month === 7 && day >= 1 && day <= 7) {
-                message = "💥 बस 3 हफ्ते और... फिर धमाका होगा! 🎊";
-            } else if (month === 7 && day >= 8 && day <= 14) {
-                message = "🔥 बस 2 हफ्ते और... अब तो सस्पेंस बढ़ रहा है! 😆";
-            } else if (month === 7 && day >= 15 && day <= 21) {
-                message = "🕺 बस 1 हफ्ता और... तैयारी शुरू कर दो! 🎉";
-            } else if (month === 7 && day === 23) {
-                message = "🤯 अब तो इंतजार नहीं हो रहा... बस 2 दिन और! 🔥";
-            } else if (month === 7 && day === 24) {
-                message = "🎂 कल मेरा Birthday है... Party Mode ON! 🥳";
-            } else if (month === 7 && day === 25) {
+            if (month === 6) message = "⏳ 1 महीना बाकी... तैयारी करो! 🎈";
+            else if (month === 7 && day <= 7) message = "🎉 3 हफ्ते बाकी! एक्साइटेड हो? 🔥";
+            else if (month === 7 && day >= 8 && day <= 14) message = "🔥 2 हफ्ते और... मजा आएगा! 😆";
+            else if (month === 7 && day >= 15 && day <= 21) message = "🕺 1 हफ्ता और... पार्टी टाइम! 🎊";
+            else if (month === 7 && day === 23) message = "🤯 सिर्फ 2 दिन बाकी! 🎂";
+            else if (month === 7 && day === 24) message = "🥳 कल बर्थडे है! तैयारी पूरी? 🔥";
+            else if (month === 7 && day === 25) {
                 message = "🎉 आज मेरा Birthday है! Let's Celebrate! 🎂🎊";
                 startConfetti();
                 playBirthdaySong();
-            } else if (month === 7 && day === 26) {
-                message = "😂 अब क्या देखने आए? मेरा Birthday कल था! 😆";
-            }
+            } else if (month === 7 && day === 26) message = "😂 अब क्या देखने आए? Party खत्म! 😆";
 
             document.getElementById("messageBox").innerText = message;
         }
@@ -174,24 +158,10 @@
             let colors = ["#ff0000", "#ffff00", "#00ff00", "#0000ff"];
 
             (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: colors });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: colors });
 
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                if (Date.now() < end) requestAnimationFrame(frame);
             })();
         }
 
