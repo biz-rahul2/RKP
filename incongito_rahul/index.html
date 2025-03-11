@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Notice</title>
+    <title>Private Access Only</title>
     <style>
         /* Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -17,9 +17,15 @@
 
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            animation: gradientBG 10s infinite alternate ease-in-out;
             color: #fff;
             text-align: center;
             padding: 50px 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+            100% { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); }
         }
 
         .container {
@@ -33,6 +39,12 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -43,6 +55,12 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             font-weight: 600;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0px 0px 10px rgba(255, 65, 108, 0.6); }
+            100% { text-shadow: 0px 0px 20px rgba(255, 75, 43, 0.9); }
         }
 
         p {
@@ -69,10 +87,17 @@
             box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.6);
             border: none;
             cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         .follow-button:hover {
-            transform: scale(1.08);
+            transform: scale(1.1);
             box-shadow: 0px 8px 20px rgba(255, 75, 43, 0.8);
         }
 
@@ -104,20 +129,45 @@
             font-style: italic;
         }
 
+        /* Animated Text Effect */
+        .highlight {
+            color: #ff416c;
+            font-weight: bold;
+            animation: textBlink 1.5s infinite alternate;
+        }
+
+        @keyframes textBlink {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Clickable Instagram Handle */
+        .public-id {
+            text-decoration: none;
+            color: #ffcc00;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .public-id:hover {
+            color: #ff4b2b;
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Important Notice</h1>
+        <h1>Private Access Only</h1>
         
         <!-- Divider Line -->
         <div class="divider"></div>
 
         <p>
-            yah meri private id hai jo sirf mere liye aur mere kafi jyada close logo ke liye hai. kyunki
-            Yeh mera private space hai jisme sirf kuchh hi logon ka access hai.  
-            isliye Request bhejne ka koi fayda nahi kyunki mai accept nahi kar paunga.   Sorry! 
+            यह <span class="highlight">मेरी प्राइवेट ID</span> है जो केवल मेरे बेहद करीबियों के लिए है।  
+            अगर आप <span class="highlight">मेरे बहुत खास</span> हैं, तो रिक्वेस्ट भेज सकते हैं,  
+            लेकिन अगर नहीं, तो <span class="highlight">सॉरी!</span> मैं एक्सेप्ट नहीं कर पाऊंगा।  
         </p>
 
         <div class="follow-section">
@@ -125,8 +175,10 @@
         </div>
 
         <p class="note">
-            agar aap mere kafi jyada close hai to request bhaj sakte hai mai accept jarur karunga. 
-            warna aap @cyb_rahul ko follow kijiye kyunki ye meri public id hai. See you there! ❤️  
+            अगर आप मुझसे जुड़ना चाहते हैं तो  
+            <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="public-id" target="_blank">@cyb_rahul</a>  
+            को फॉलो करें क्योंकि यह मेरी **Public ID** है।  
+            See you there! ❤️  
         </p>
 
     </div>
