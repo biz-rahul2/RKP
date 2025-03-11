@@ -9,55 +9,62 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            background: linear-gradient(to right, #000428, #004e92);
             color: white;
             text-align: center;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            flex-direction: column;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.2);
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 600px;
         }
 
+        /* Stylish Heading */
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 2s ease-in-out;
         }
 
+        /* Message Box */
+        .message-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffdd57;
+            animation: fadeIn 1s ease-in-out;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        /* Countdown Timer */
         #countdown {
             display: flex;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
             margin-top: 20px;
         }
 
         .time {
-            font-size: 1.5em;
+            font-size: 1.8em;
             background: rgba(255, 255, 255, 0.3);
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .message-box {
-            background: rgba(0, 0, 0, 0.5);
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            font-size: 1.2em;
+            width: 120px;
+            text-align: center;
             font-weight: bold;
-            color: #ffd700;
-            animation: fadeIn 1s ease-in-out;
         }
 
+        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -65,20 +72,18 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 My Birthday: 25 July 🎂</h1>
+    <h1>🎉 My Birthday: 25 July 🎂</h1>
 
-        <!-- Funny Message Box -->
-        <div id="messageBox" class="message-box"></div>
+    <!-- Funny Message Box -->
+    <div id="messageBox" class="message-box"></div>
 
-        <!-- Countdown Timer -->
-        <div id="countdown">
-            <div class="time"><span id="months"></span> Months</div>
-            <div class="time"><span id="days"></span> Days</div>
-            <div class="time"><span id="hours"></span> Hours</div>
-            <div class="time"><span id="minutes"></span> Minutes</div>
-            <div class="time"><span id="seconds"></span> Seconds</div>
-        </div>
+    <!-- Countdown Timer -->
+    <div id="countdown">
+        <div class="time"><span id="months"></span> Months</div>
+        <div class="time"><span id="days"></span> Days</div>
+        <div class="time"><span id="hours"></span> Hours</div>
+        <div class="time"><span id="minutes"></span> Minutes</div>
+        <div class="time"><span id="seconds"></span> Seconds</div>
     </div>
 
     <script>
@@ -104,28 +109,28 @@
 
         function updateMessage() {
             const today = new Date();
-            const month = today.getMonth() + 1; // January = 0, so add 1
+            const month = today.getMonth() + 1;
             const day = today.getDate();
             let message = "";
 
             if (month === 6) {
-                message = "बस 1 महीना और इंतज़ार करो, फिर देखना क्या बवाल मचता है! 🤣";
+                message = "⏳ बस 1 महीना और... फिर धूम मचेगी! 🚀🔥";
             } else if (month === 7 && day >= 1 && day <= 7) {
-                message = "बस 3 हफ्ते और... फिर तो धमाका ही धमाका होगा! 🔥";
+                message = "💥 बस 3 हफ्ते और... फिर धमाका होगा! 🎊";
             } else if (month === 7 && day >= 8 && day <= 14) {
-                message = "बस 2 हफ्ते और... अब तो बेचैनी बढ़ रही है! 😆";
+                message = "🔥 बस 2 हफ्ते और... अब तो सस्पेंस बढ़ रहा है! 😆";
             } else if (month === 7 && day >= 15 && day <= 21) {
-                message = "बस 1 हफ्ता और... इंतज़ार का टाइम ख़त्म होने वाला है! ⏳";
+                message = "🕺 बस 1 हफ्ता और... तैयारी शुरू कर दो! 🎉";
             } else if (month === 7 && day === 23) {
-                message = "अब तो धैर्य जवाब दे रहा है... बस दो दिन और! 🤯🔥";
+                message = "🤯 अब तो इंतजार नहीं हो रहा... बस 2 दिन और! 🔥";
             } else if (month === 7 && day === 24) {
-                message = "कल मेरा जन्मदिन है, और मैं एक साल और बड़ा होने वाला हूँ! 🎂";
+                message = "🎂 कल मेरा Birthday है... Party Mode ON! 🥳";
             } else if (month === 7 && day === 25) {
-                message = "🎉आज मेरा जन्मदिन है! Party Hard!🥳🎂";
+                message = "🎉 आज मेरा Birthday है! Let's Celebrate! 🎂🎊";
                 startConfetti();
                 playBirthdaySong();
             } else if (month === 7 && day === 26) {
-                message = "अब क्या देखने आए हो? मेरा जन्मदिन तो कल ही था! 😂";
+                message = "😂 अब क्या देखने आए? मेरा Birthday कल था! 😆";
             }
 
             document.getElementById("messageBox").innerText = message;
@@ -133,18 +138,18 @@
 
         function startConfetti() {
             let end = Date.now() + 5 * 1000;
-            let colors = ["#bb0000", "#ffffff"];
+            let colors = ["#ff0000", "#ffff00", "#00ff00", "#0000ff"];
 
             (function frame() {
                 confetti({
-                    particleCount: 2,
+                    particleCount: 5,
                     angle: 60,
                     spread: 55,
                     origin: { x: 0 },
                     colors: colors
                 });
                 confetti({
-                    particleCount: 2,
+                    particleCount: 5,
                     angle: 120,
                     spread: 55,
                     origin: { x: 1 },
