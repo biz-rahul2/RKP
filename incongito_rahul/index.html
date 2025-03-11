@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Access Only</title>
+    <title>Important Notice</title>
     <style>
         /* Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -15,21 +15,13 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Background Animation */
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            animation: bgAnimation 8s infinite alternate ease-in-out;
             color: #fff;
             text-align: center;
             padding: 50px 20px;
         }
 
-        @keyframes bgAnimation {
-            0% { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
-            100% { background: linear-gradient(135deg, #1b1b2f, #16213e, #0f3460); }
-        }
-
-        /* Container with Glass Effect */
         .container {
             max-width: 600px;
             margin: auto;
@@ -41,15 +33,8 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
-            animation: fadeIn 1.2s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Neon Glow Heading */
         h1 {
             font-size: 30px;
             margin-bottom: 15px;
@@ -58,13 +43,6 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             font-weight: 600;
-            text-shadow: 0px 0px 10px rgba(255, 65, 108, 0.8);
-            animation: neonGlow 1.5s infinite alternate;
-        }
-
-        @keyframes neonGlow {
-            0% { text-shadow: 0px 0px 15px rgba(255, 65, 108, 0.6); }
-            100% { text-shadow: 0px 0px 25px rgba(255, 75, 43, 1); }
         }
 
         p {
@@ -74,16 +52,10 @@
             color: #f1f1f1;
         }
 
-        /* Divider */
-        .divider {
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
-            margin: 40px auto;
-            border-radius: 5px;
+        .follow-section {
+            margin: 30px 0;
         }
 
-        /* 3D Hover Button */
         .follow-button {
             display: inline-block;
             text-decoration: none;
@@ -93,15 +65,24 @@
             border-radius: 50px;
             font-weight: bold;
             font-size: 16px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.4s;
             box-shadow: 0px 5px 15px rgba(255, 65, 108, 0.6);
             border: none;
             cursor: pointer;
         }
 
         .follow-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0px 10px 25px rgba(255, 75, 43, 0.9);
+            transform: scale(1.08);
+            box-shadow: 0px 8px 20px rgba(255, 75, 43, 0.8);
+        }
+
+        /* Divider Line */
+        .divider {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
+            margin: 40px auto;
+            border-radius: 5px;
         }
 
         /* Private Button */
@@ -116,31 +97,11 @@
             box-shadow: none;
         }
 
-        /* Clickable Instagram Handle */
-        .public-id {
-            text-decoration: none;
-            color: #ffcc00;
-            font-weight: bold;
-            transition: color 0.3s ease-in-out;
-        }
-
-        .public-id:hover {
-            color: #ff4b2b;
-            text-decoration: underline;
-        }
-
-        /* Note with subtle glowing effect */
         .note {
             font-size: 15px;
             color: #ffcc00;
             margin-top: 20px;
             font-style: italic;
-            animation: glowNote 1.5s infinite alternate;
-        }
-
-        @keyframes glowNote {
-            0% { text-shadow: 0px 0px 10px rgba(255, 204, 0, 0.5); }
-            100% { text-shadow: 0px 0px 20px rgba(255, 204, 0, 1); }
         }
 
     </style>
@@ -148,7 +109,7 @@
 <body>
 
     <div class="container">
-        <h1>Private Access Only</h1>
+        <h1>Important Notice</h1>
         
         <!-- Divider Line -->
         <div class="divider"></div>
@@ -164,9 +125,8 @@
         </div>
 
         <p class="note">
-            agar aap mere kafi jyada close hai to request bhaj sakte hai mai accept jarur karunga.  
-            warna aap <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="public-id" target="_blank">@cyb_rahul</a> ko follow kijiye  
-            kyunki ye meri public id hai. See you there! ❤️  
+            agar aap mere kafi jyada close hai to request bhaj sakte hai mai accept jarur karunga. 
+            warna aap <a href="https://www.instagram.com/cyb_rahul?igsh=bGk3Ym5pa2I2Y2Zr" class="public-id" target="_blank">@cyb_rahul</a> ko follow kijiye kyunki ye meri public id hai. See you there! ❤️  
         </p>
 
     </div>
