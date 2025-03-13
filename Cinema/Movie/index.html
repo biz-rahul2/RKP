@@ -3,38 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 20 Indian Movies</title>
+    <title>Top 15 Must-Watch Movies</title> <!-- Updated Title -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Top 20 Indian Movies</h1>
+        <h1>Top 15 Must-Watch Movies</h1> <!-- Updated Heading -->
         <p class="tagline">Ye movies abtak ki meri dekhi huyi sabse best movies hai. Chalo check karte hai ki aapne isme se kaun kaun si movies ko dekha hai.</p>
         <div id="movie-list" class="movie-grid"></div>
     </div>
 
     <script>
         const movies = [
-            { name: "Kabir Singh", year: 2019, poster: "images/Kabir_singh.JPG" },
-            { name: "Ek Villain", year: 2014, poster: "images/Ek_villain.JPG" },
-            { name: "Animal", year: 2023, poster: "images/Animal.JPG" },
-            { name: "Yeh Jawaani Hai Deewani", year: 2013, poster: "images/Yeh_jawaani_hai_deewani.JPG" },
-            { name: "Tamasha", year: 2015, poster: "images/Tamasha.JPG" },
-            { name: "KGF", year: 2018, poster: "images/KGF.JPG" },
-            { name: "Siddat", year: 2022, poster: "images/Sidhhat.JPG" },
-            { name: "Chandani Chauk to China", year: 2009, poster: "images/Chandani_chauk_to_china.JPG" },
-            { name: "Sanam Teri Kasam", year: 2016, poster: "images/Sanam_teri_kasam.JPG" },
-            { name: "Laila Majnu", year: 2018, poster: "images/Laila_majnu.JPG" },
-            { name: "Sholay", year: 1975, poster: "images/Sholay.JPG" },
-            { name: "Freddy", year: 2022, poster: "images/Freddy.JPG" },
-            { name: "Rockstar", year: 2011, poster: "images/Rockstar.JPG" },
-            { name: "RRR", year: 2022, poster: "images/RRR.JPG" },
-            { name: "OK Jaanu", year: 2017, poster: "images/Ok_jaanu.JPG" },
-            { name: "Aashiqui 2", year: 2013, poster: "images/Aashiqui2.JPG" },
-            { name: "Phobia", year: 2016, poster: "images/Phobia.JPG" },
-            { name: "Bloody Daddy", year: 2023, poster: "images/Bloddy_daddy.JPG" },
-            { name: "Jab We Met", year: 2007, poster: "images/Jab_we_met.JPG" },
-            { name: "Malang", year: 2020, poster: "images/Malang.JPG" }
+            { name: "October", year: 2018, country: "India", poster: "images/October.jpg" },
+            { name: "Elemental", year: 2023, country: "USA", poster: "images/Elemental.jpg" },
+            { name: "The Boss Baby", year: 2017, country: "USA", poster: "images/Boss_Baby.jpg" },
+            { name: "Inside Out 2", year: 2024, country: "USA", poster: "images/Inside_Out_2.jpg" },
+            { name: "Titanic", year: 1997, country: "USA", poster: "images/Titanic.jpg" },
+            { name: "Deadpool 2", year: 2018, country: "USA", poster: "images/Deadpool_2.jpg" },
+            { name: "The Pursuit of Happyness", year: 2006, country: "USA", poster: "images/Pursuit_of_Happyness.jpg" },
+            { name: "The Fault in Our Stars", year: 2014, country: "USA", poster: "images/Fault_in_our_stars.jpg" },
+            { name: "My Girl", year: 1991, country: "USA", poster: "images/My_Girl.jpg" },
+            { name: "Avatar: The Way of Water", year: 2022, country: "USA", poster: "images/Avatar_2.jpg" },
+            { name: "Yesterday Once More", year: 2004, country: "China", poster: "images/Yesterday_Once_More.jpg" },
+            { name: "Enter the Dragon", year: 1973, country: "China", poster: "images/Enter_the_Dragon.jpg" },
+            { name: "CJ7", year: 2008, country: "China", poster: "images/CJ7.jpg" },
+            { name: "Buddies in India", year: 2017, country: "China", poster: "images/Buddies_in_India.jpg" },
+            { name: "The Truman Show", year: 1998, country: "USA", poster: "images/Truman_Show.jpg" }
         ];
 
         const movieList = document.getElementById("movie-list");
@@ -49,6 +44,7 @@
                     <div class="overlay">
                         <div class="movie-title">${movie.name}</div>
                         <div class="movie-year">${movie.year}</div>
+                        <div class="movie-country">${movie.country}</div>
                     </div>
                 </div>
             `;
@@ -75,19 +71,19 @@
         }
 
         h1 {
-    font-size: 2rem; /* Font size thoda chhota kiya */
-    margin-bottom: 5px; /* Space kam kiya */
-    line-height: 1.2; /* Heading ka height optimize kiya */
-    text-transform: uppercase;
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
-}
+            font-size: 2rem;
+            margin-bottom: 5px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+        }
 
-.tagline {
-    font-size: 1rem; /* Thoda chhota font */
-    margin-bottom: 10px; /* Space aur reduce kiya */
-    color: #ddd;
-    line-height: 1.2; /* Line height adjust kiya */
-}
+        .tagline {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #ddd;
+            line-height: 1.2;
+        }
 
         .container {
             max-width: 1100px;
@@ -126,8 +122,8 @@
             height: 260px;
             object-fit: cover;
             border-radius: 12px;
-            user-select: none; /* Click effect remove */
-            pointer-events: none; /* Image ke clicks disable */
+            user-select: none;
+            pointer-events: none;
         }
 
         .overlay {
@@ -150,6 +146,13 @@
         .movie-year {
             color: #bbb;
             font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .movie-country {
+            color: #ffcc00;
+            font-size: 0.9rem;
+            font-weight: bold;
             margin-top: 5px;
         }
     </style>
