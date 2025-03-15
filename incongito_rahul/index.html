@@ -27,7 +27,7 @@
             margin: auto;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
-            padding: 25px; /* Padding थोड़ा कम किया */
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -36,53 +36,55 @@
         }
 
         h1 {
-            font-size: 24px; /* छोटा किया */
+            font-size: 24px;
             margin-bottom: 10px;
-            margin-top: -10px; /* थोड़ा ऊपर किया */
+            margin-top: -5px;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             font-weight: 600;
-            white-space: nowrap; /* 1 लाइन में रखा */
+            white-space: nowrap;
             overflow: hidden;
         }
 
         p {
-            font-size: 14px; /* छोटा किया */
-            line-height: 1.5; /* लाइन की ऊंचाई कम की */
-            margin-bottom: 15px; /* मार्जिन कम किया */
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            text-align: justify; /* Ensures text fits fully in the container */
             color: #f1f1f1;
         }
 
         /* Divider Line */
         .divider {
-            width: 80%;
+            width: 100%;
             height: 2px;
             background: linear-gradient(to right, transparent, #ff416c, #ff4b2b, transparent);
-            margin: 30px auto; /* मार्जिन कम किया */
+            margin: 25px 0;
             border-radius: 5px;
         }
 
         /* Public ID Stylish Text */
         .public-id {
             font-weight: bold;
-            font-size: 14px; /* नॉर्मल टेक्स्ट के बराबर किया */
+            font-size: 16px;
             background: linear-gradient(45deg, #ff416c, #ff4b2b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .note {
-            font-size: 13px; /* छोटा किया */
+            font-size: 15px;
             color: #ffcc00;
-            margin-top: 15px; /* मार्जिन थोड़ा कम किया */
+            margin-top: 15px;
             font-style: italic;
+            text-align: justify; /* Ensures text fits fully in the container */
         }
 
         /* Screenshot Styling */
         .screenshot-container {
-            margin-top: 15px; /* Space कम किया */
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,7 +92,7 @@
 
         .screenshot {
             width: 100%;
-            max-width: 230px; /* थोड़ा छोटा किया */
+            max-width: 250px;
             border-radius: 10px;
             box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.3);
