@@ -104,6 +104,27 @@
             font-style: italic;
         }
 
+        /* Screenshot Styling */
+        .screenshot-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screenshot {
+            width: 100%;
+            max-width: 250px; /* Adjust as needed */
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -131,6 +152,12 @@
 
         <!-- Divider Line -->
         <div class="divider"></div>
+
+        <!-- Screenshot Section -->
+        <div class="screenshot-container">
+            <img src="screenshot.jpg" alt="Private ID Screenshot" class="screenshot">
+        </div>
+        
         <p>
             Abhi mere is private id par sirf 1 follower hai aur wo mera hi public id hai jo mera follower hai. 
             kyunki aajtak mujhe koi aisa insaan mila hi nahi jo mere kafi jyada close hai isliye mere bas 1 follower hai jo ki mai khud hu. 
