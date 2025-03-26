@@ -1,7 +1,7 @@
 /* TEAM */
 Developer: Rahul Kumar Puri
 Designer: The Lamp RKP Team
-Writer: The Lamp Organization
+Writer: The Lamp RKP Organization
 Contact: contact@thelamp.site
 Website: https://thelamp.site
 
