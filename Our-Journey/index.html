@@ -3,36 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Journey - Ultra Stylish Timeline</title>
+    <title>My Journey - Responsive & Stylish Timeline</title>
     <style>
-        /* Import Google Font */
+        /* Google Font */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
         /* Global Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #0a0a0a, #111);
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
             color: #fff;
             text-align: center;
             overflow-x: hidden;
         }
 
+        /* Header */
         header {
-            padding: 50px 20px;
-            font-size: 2rem;
+            padding: 20px;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, #ff6b6b, #5568fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: bold;
             text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 15px 0;
         }
 
         /* Timeline Container */
         .timeline {
             max-width: 700px;
-            margin: 50px auto;
+            margin: 100px auto 50px;
+            padding: 20px;
             position: relative;
         }
 
@@ -47,13 +58,16 @@
             text-align: left;
             backdrop-filter: blur(10px);
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-            transform: translateX(-50px);
+            transform: translateY(30px);
             opacity: 0;
-            transition: all 0.5s ease-out;
+            transition: all 0.4s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .timeline-item.active {
-            transform: translateX(0);
+            transform: translateY(0);
             opacity: 1;
         }
 
@@ -71,20 +85,49 @@
             box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* Hover Effect */
-        .timeline-item:hover {
-            transform: scale(1.05);
-            transition: 0.3s;
+        /* Image Style */
+        .timeline-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
         }
 
-        /* Neon Glow Effect */
+        /* Text Styling */
         .timeline-item h2 {
             color: #ffcc00;
             text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+            font-size: 1.3rem;
         }
         .timeline-item p {
             font-size: 1rem;
             color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.5rem;
+            }
+            .timeline {
+                max-width: 90%;
+            }
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timeline-item img {
+                width: 60px;
+                height: 60px;
+            }
+            .timeline-item h2 {
+                font-size: 1.1rem;
+            }
+            .timeline-item p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -96,40 +139,46 @@
 
     <section class="timeline">
         <div class="timeline-item" data-year="25 July 2007">
-            <h2>Born</h2>
-            <p>The journey started!</p>
+            <img src="https://via.placeholder.com/80" alt="Born">
+            <div>
+                <h2>Born</h2>
+                <p>The journey started!</p>
+            </div>
         </div>
         <div class="timeline-item" data-year="2016">
-            <h2>Realized the Importance of Money</h2>
-            <p>First time I understood that money is crucial.</p>
+            <img src="https://via.placeholder.com/80" alt="Money Realization">
+            <div>
+                <h2>Realized the Importance of Money</h2>
+                <p>First time I understood that money is crucial.</p>
+            </div>
         </div>
         <div class="timeline-item" data-year="2020">
-            <h2>First Online Earnings</h2>
-            <p>Earned ₹700 through Hugo & Helo App.</p>
+            <img src="https://via.placeholder.com/80" alt="First Earnings">
+            <div>
+                <h2>First Online Earnings</h2>
+                <p>Earned ₹700 through Hugo & Helo App.</p>
+            </div>
         </div>
         <div class="timeline-item" data-year="2022">
-            <h2>First Poem</h2>
-            <p>Wrote a poem for my teacher.</p>
+            <img src="https://via.placeholder.com/80" alt="First Poem">
+            <div>
+                <h2>First Poem</h2>
+                <p>Wrote a poem for my teacher.</p>
+            </div>
         </div>
         <div class="timeline-item" data-year="June 2022">
-            <h2>Affiliate Marketing</h2>
-            <p>Earned ₹1400 by selling guitars & watches.</p>
+            <img src="https://via.placeholder.com/80" alt="Affiliate Marketing">
+            <div>
+                <h2>Affiliate Marketing</h2>
+                <p>Earned ₹1400 by selling guitars & watches.</p>
+            </div>
         </div>
         <div class="timeline-item" data-year="March 2023">
-            <h2>Ethical Hacking Journey</h2>
-            <p>Started ethical hacking but couldn't continue.</p>
-        </div>
-        <div class="timeline-item" data-year="June 2024">
-            <h2>Started Web Development</h2>
-            <p>My coding journey began!</p>
-        </div>
-        <div class="timeline-item" data-year="24 February 2025">
-            <h2>First Web Development Client</h2>
-            <p>Earned ₹1500 from my first project.</p>
-        </div>
-        <div class="timeline-item" data-year="Present">
-            <h2>Finding More Clients</h2>
-            <p>Expanding my web development career.</p>
+            <img src="https://via.placeholder.com/80" alt="Ethical Hacking">
+            <div>
+                <h2>Ethical Hacking Journey</h2>
+                <p>Started ethical hacking but couldn't continue.</p>
+            </div>
         </div>
     </section>
 
@@ -139,7 +188,6 @@
 
         function showItems() {
             const triggerBottom = window.innerHeight * 0.9;
-
             items.forEach(item => {
                 const itemTop = item.getBoundingClientRect().top;
                 if (itemTop < triggerBottom) {
