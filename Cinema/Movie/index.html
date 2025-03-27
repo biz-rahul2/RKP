@@ -3,33 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 15 Must-Watch Movies</title> <!-- Updated Title -->
+    <title>Top 15 Must-Watch Movies</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Top 15 Must-Watch Movies</h1> <!-- Updated Heading -->
+        <h1>Top 15 Must-Watch Movies</h1>
         <p class="tagline">Ye movies abtak ki meri dekhi huyi sabse best movies hai. Chalo check karte hai ki aapne isme se kaun kaun si movies ko dekha hai.</p>
         <div id="movie-list" class="movie-grid"></div>
     </div>
 
     <script>
         const movies = [
-            { name: "The Notebook", year: 2018, country: "USA", poster: "images/The_Notebook.jpg" },
+            { name: "The Notebook", year: 2004, country: "USA", poster: "images/The_Notebook.jpg" },
             { name: "Elemental", year: 2023, country: "USA", poster: "images/Elemental.jpg" },
-            { name: "Battle Royale", year: 2000, country: "Japan", poster: "images/Battle_royale.jpeg" },
-            { name: "Pagal Khana", year: 2024, country: "Pakistan", poster: "images/Pagalkhana.jpeg" },
+            { name: "Battle Royale", year: 2000, country: "Japan", poster: "images/Battle_Royale.jpg" },
             { name: "Titanic", year: 1997, country: "USA", poster: "images/Titanic.jpg" },
             { name: "Deadpool 2", year: 2018, country: "USA", poster: "images/Deadpool_2.jpg" },
-            { name: "The Pursuit of Happyness", year: 2006, country: "USA", poster: "images/The_persuit_of_happiness.jpg" },
-            { name: "The Fault in Our Stars", year: 2014, country: "USA", poster: "images/The_fault_in_our_stars.jpg" },
-            { name: "My Girl", year: 1991, country: "USA", poster: "images/My_girl.jpg" },
+            { name: "The Pursuit of Happyness", year: 2006, country: "USA", poster: "images/The_Pursuit_of_Happyness.jpg" },
+            { name: "The Fault in Our Stars", year: 2014, country: "USA", poster: "images/The_Fault_in_Our_Stars.jpg" },
+            { name: "My Girl", year: 1991, country: "USA", poster: "images/My_Girl.jpg" },
             { name: "Avatar: The Way of Water", year: 2022, country: "USA", poster: "images/Avatar_2.jpg" },
-            { name: "Yesterday Once More", year: 2004, country: "China", poster: "images/Yesterday_once_more.jpg" },
-            { name: "Enter the Dragon", year: 1973, country: "China", poster: "images/Enter_the_dragon.jpg" },
+            { name: "Yesterday Once More", year: 2004, country: "China", poster: "images/Yesterday_Once_More.jpg" },
+            { name: "Enter the Dragon", year: 1973, country: "China", poster: "images/Enter_the_Dragon.jpg" },
             { name: "CJ7", year: 2008, country: "China", poster: "images/CJ7.jpg" },
-            { name: "Buddies in India", year: 2017, country: "China", poster: "images/Buddies_in_india.jpeg" },
-            { name: "The Truman Show", year: 1998, country: "USA", poster: "images/The_truman_show.jpeg" }
+            { name: "Buddies in India", year: 2017, country: "China", poster: "images/Buddies_in_India.jpg" },
+            { name: "The Truman Show", year: 1998, country: "USA", poster: "images/The_Truman_Show.jpg" }
         ];
 
         const movieList = document.getElementById("movie-list");
@@ -40,7 +39,7 @@
 
             movieCard.innerHTML = `
                 <div class="image-container">
-                    <img src="${movie.poster}" alt="${movie.name}">
+                    <img src="${movie.poster}" alt="Poster of ${movie.name} (${movie.year})" loading="lazy">
                     <div class="overlay">
                         <div class="movie-title">${movie.name}</div>
                         <div class="movie-year">${movie.year}</div>
@@ -108,7 +107,7 @@
 
         .movie-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
         }
 
         .image-container {
@@ -119,7 +118,7 @@
 
         .image-container img {
             width: 100%;
-            height: 260px;
+            height: auto; /* अब पूरी तरह responsive */
             object-fit: cover;
             border-radius: 12px;
             user-select: none;
@@ -131,29 +130,51 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.8);
             padding: 10px;
             color: white;
             text-align: center;
         }
 
         .movie-title {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: bold;
             text-transform: uppercase;
         }
 
         .movie-year {
+            font-size: 0.9rem;
+            font-style: italic;
             color: #bbb;
-            font-size: 1rem;
-            margin-top: 5px;
         }
 
         .movie-country {
-            color: #ffcc00;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            margin-top: 5px;
+            color: #ffcc00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .movie-title {
+                font-size: 1rem;
+            }
+
+            .movie-year {
+                font-size: 0.8rem;
+            }
+
+            .movie-country {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </body>
