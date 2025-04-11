@@ -1,118 +1,187 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Memories</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;700&display=swap');body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-        color: white;
-        text-align: center;
-        padding: 20px;
-    }
-    
-    h1 {
-        font-family: 'Dancing Script', cursive;
-        font-size: 4em;
-        color: #ffdd57;
-        text-shadow: 3px 3px 15px rgba(255, 221, 87, 0.8);
-    }
-    
-    .section {
-        margin: 30px auto;
-        padding: 25px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s ease-in-out;
-        width: 90%;
-        max-width: 650px;
-    }
-    
-    .section:hover {
-        transform: scale(1.05);
-    }
-    
-    img, video, audio {
-        max-width: 100%;
-        border-radius: 12px;
-        margin-top: 15px;
-        transition: transform 0.3s ease-in-out;
-    }
-    
-    img:hover, video:hover, audio:hover {
-        transform: scale(1.05);
-    }
-    
-    .btn {
-        background: #ff4b2b;
-        color: white;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        font-size: 1.2em;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    
-    .btn:hover {
-        background: #ff416c;
-        transform: scale(1.1);
-    }
-    
-    .chat-image {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto 20px;
-    }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Memories</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@300;600&display=swap');
 
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.5em;
+      color: #ffdd57;
+      margin-top: 20px;
+      text-shadow: 2px 2px 20px rgba(255, 221, 87, 0.9);
+    }
+
+    .section {
+      margin: 60px auto;
+      padding: 30px 20px;
+      max-width: 1000px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(15px);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .section:hover {
+      transform: scale(1.03);
+    }
+
+    h2 {
+      font-size: 2.5em;
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-family: 'Dancing Script', cursive;
+      color: #ff6f61;
+    }
+
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      text-align: left;
+    }
+
+    .favorite-box {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 20px;
+      border-radius: 15px;
+      transition: 0.3s ease;
+    }
+
+    .favorite-box:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .favorite-box h4 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.6em;
+      color: #ffb347;
+      margin-bottom: 10px;
+    }
+
+    .favorite-box p {
+      font-size: 1.1em;
+      line-height: 1.6em;
+    }
+
+    iframe, img, video, audio {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 15px;
+      margin-top: 20px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    img:hover, video:hover, audio:hover {
+      transform: scale(1.05);
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.4em;
+      font-family: 'Dancing Script', cursive;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin: 40px auto;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+    }
+
+    .chat-image {
+      max-width: 250px;
+      margin: 20px auto;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <img src="Chat_box.png" alt="Chat Box" class="chat-image">
-    <h1>Our Special Memories ❤️</h1><div class="section">
+
+  <img src="Chat_box.png" alt="Chat Box" class="chat-image" />
+  <h1>Our Special Memories</h1>
+
+  <div class="section">
     <h2>Nicknames</h2>
     <p><strong>She Calls Me:</strong> Meri sapole, jaan, Sugar Daddy</p>
     <p><strong>I Call Her:</strong> Meri jaan, meri lado, meri pari, nagin, chudail</p>
-</div>
+  </div>
 
-<div class="section">
+  <div class="section">
     <h2>Favorites</h2>
-    <p><strong>Her Favorite Color:</strong> Black | <strong>Mine:</strong> Pink</p>
-    <p><strong>Her Favorite Actor:</strong> Me | <strong>Mine:</strong> Shahid Kapoor</p>
-    <p><strong>Favorite Place:</strong> Gujarat | <strong>Mine:</strong> China</p>
-    <p><strong>Favorite Song:</strong> Hal-E-Dil | <strong>Mine:</strong> Tum Hi Ho, Broken Angel</p>
-    <p><strong>Favorite Movie:</strong> Dhadkan | <strong>Mine:</strong> Too Many to List!</p>
-    <p><strong>Favorite Games:</strong> Cricket, Kabaddi | <strong>Mine:</strong> PUBG, Playing with Hearts 🤣</p>
-</div>
+    <div class="favorites-grid">
+      <div class="favorite-box">
+        <h4>Colors</h4>
+        <p><strong>Her:</strong> Black<br><strong>Mine:</strong> Pink</p>
+      </div>
+      <div class="favorite-box">
+        <h4>Actors</h4>
+        <p><strong>Her:</strong> Me<br><strong>Mine:</strong> Shahid Kapoor</p>
+      </div>
+      <div class="favorite-box">
+        <h4>Places</h4>
+        <p><strong>Her:</strong> Gujarat<br><strong>Mine:</strong> China</p>
+      </div>
+      <div class="favorite-box">
+        <h4>Songs</h4>
+        <p><strong>Her:</strong> Hal-E-Dil<br><strong>Mine:</strong> Tum Hi Ho, Broken Angel</p>
+      </div>
+      <div class="favorite-box">
+        <h4>Movies</h4>
+        <p><strong>Her:</strong> Dhadkan<br><strong>Mine:</strong> Too Many to List!</p>
+      </div>
+      <div class="favorite-box">
+        <h4>Games</h4>
+        <p><strong>Her:</strong> Cricket, Kabaddi<br><strong>Mine:</strong> PUBG, Playing with Hearts</p>
+      </div>
+    </div>
+  </div>
 
-<div class="section">
-    <h2>Our Distance ❤️</h2>
-    <iframe src="https://www.google.com/maps/embed?..." width="100%" height="300" allowfullscreen loading="lazy"></iframe>
-</div>
+  <div class="section">
+    <h2>Our Distance</h2>
+    <iframe src="https://www.google.com/maps/embed?..." height="300" allowfullscreen loading="lazy"></iframe>
+  </div>
 
-<div class="section">
+  <div class="section">
     <h2>Our Online Moments</h2>
-    <h3>Online Kiss 💋</h3>
-    <video controls><source src="Online_kiss.mp4" type="video/mp4"></video>
-    <h3>Online Hug 🤗</h3>
-    <video controls><source src="Online_hug.mp4" type="video/mp4"></video>
-    <h3>Hand Heart ❤️</h3>
-    <img src="Hand_heart.jpg" alt="Hand Heart">
-</div>
+    <h3>Online Kiss</h3>
+    <video controls><source src="Online_kiss.mp4" type="video/mp4" /></video>
+    <h3>Online Hug</h3>
+    <video controls><source src="Online_hug.mp4" type="video/mp4" /></video>
+    <h3>Hand Heart</h3>
+    <img src="Hand_heart.jpg" alt="Hand Heart" />
+  </div>
 
-<div class="section">
-    <h2>I Love You ❤️</h2>
+  <div class="section">
+    <h2>I Love You</h2>
     <h3>Her Voice Note</h3>
-    <audio controls><source src="Khusboo.mp3" type="audio/mp3"></audio>
+    <audio controls><source src="Khusboo.mp3" type="audio/mp3" /></audio>
     <h3>My Voice Note</h3>
-    <audio controls><source src="Rahul.mp3" type="audio/mp3"></audio>
-</div>
+    <audio controls><source src="Rahul.mp3" type="audio/mp3" /></audio>
+  </div>
 
-<button class="btn">Our Forever ❤️</button>
+  <button class="btn">Our Forever</button>
 
 </body>
 </html>
