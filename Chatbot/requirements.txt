@@ -1,1 +1,4 @@
-g
+flask
+flask-cors
+torch
+sentence-transformers
