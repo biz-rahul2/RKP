@@ -14,21 +14,21 @@
 
     <script>
         const movies = [
-            { name: "Kabir Singh", year: 2019, industry: "Bollywood", poster: "images/Kabir_singh.JPG" },
-            { name: "Ek Villain", year: 2014, industry: "Bollywood", poster: "images/Ek_villain.JPG" },
-            { name: "Animal", year: 2023, industry: "Bollywood", poster: "images/Animal.JPG" },
-            { name: "KGF", year: 2018, industry: "Tollywood", poster: "images/KGF.JPG" },
-            { name: "Chandani Chauk to China", year: 2009, industry: "Bollywood", poster: "images/Chandani_chauk_to_china.JPG" },
-            { name: "Laila Majnu", year: 2018, industry: "Bollywood", poster: "images/Laila_majnu.JPG" },
-            { name: "Sholay", year: 1975, industry: "Bollywood", poster: "images/Sholay.JPG" },
-            { name: "Freddy", year: 2022, industry: "Bollywood", poster: "images/Freddy.JPG" },
-            { name: "Rockstar", year: 2011, industry: "Bollywood", poster: "images/Rockstar.JPG" },
-            { name: "RRR", year: 2022, industry: "Tollywood", poster: "images/RRR.JPG" },
-            { name: "Aashiqui 2", year: 2013, industry: "Bollywood", poster: "images/Aashiqui2.JPG" },
-            { name: "Phobia", year: 2016, industry: "Bollywood", poster: "images/Phobia.JPG" },
-            { name: "Bloody Daddy", year: 2023, industry: "Bollywood", poster: "images/Bloddy_daddy.JPG" },
-            { name: "Farzi", year: 2023, industry: "Bollywood", poster: "images/Farzi.jpg" },
-            { name: "Malang", year: 2020, industry: "Bollywood", poster: "images/Malang.JPG" }
+            { name: "Kabir Singh", industry: "Bollywood", poster: "images/Kabir_singh.JPG" },
+            { name: "Ek Villain", industry: "Bollywood", poster: "images/Ek_villain.JPG" },
+            { name: "Animal", industry: "Bollywood", poster: "images/Animal.JPG" },
+            { name: "KGF", industry: "Tollywood", poster: "images/KGF.JPG" },
+            { name: "Chandani Chauk to China", industry: "Bollywood", poster: "images/Chandani_chauk_to_china.JPG" },
+            { name: "Laila Majnu", industry: "Bollywood", poster: "images/Laila_majnu.JPG" },
+            { name: "Sholay", industry: "Bollywood", poster: "images/Sholay.JPG" },
+            { name: "Freddy", industry: "Bollywood", poster: "images/Freddy.JPG" },
+            { name: "Rockstar", industry: "Bollywood", poster: "images/Rockstar.JPG" },
+            { name: "RRR", industry: "Tollywood", poster: "images/RRR.JPG" },
+            { name: "Aashiqui 2", industry: "Bollywood", poster: "images/Aashiqui2.JPG" },
+            { name: "Phobia", industry: "Bollywood", poster: "images/Phobia.JPG" },
+            { name: "Bloody Daddy", industry: "Bollywood", poster: "images/Bloddy_daddy.JPG" },
+            { name: "Farzi", industry: "Bollywood", poster: "images/Farzi.jpg" },
+            { name: "Malang", industry: "Bollywood", poster: "images/Malang.JPG" }
         ];
 
         const movieList = document.getElementById("movie-list");
@@ -42,7 +42,6 @@
                     <img src="${movie.poster}" alt="${movie.name}">
                     <div class="overlay">
                         <div class="movie-title">${movie.name}</div>
-                        <div class="movie-year">${movie.year}</div>
                         <div class="movie-industry">${movie.industry}</div>
                     </div>
                 </div>
@@ -133,12 +132,6 @@
             font-size: 1.3rem;
             font-weight: 600;
             text-transform: uppercase;
-        }
-
-        .movie-year {
-            color: #bbb;
-            font-size: 1rem;
-            margin-top: 5px;
         }
 
         .movie-industry {
