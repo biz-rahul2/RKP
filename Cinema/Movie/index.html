@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 15 International Movies and Dramas</title> <!-- Updated Title -->
+    <title>Top 15 International Movies and Dramas</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Top 15 International Movies and Dramas</h1> <!-- Updated Heading -->
+        <h1>Top 15 International Movies and Dramas</h1>
         <div id="movie-list" class="movie-grid"></div>
     </div>
 
     <script>
         const movies = [
-            { name: "The Notebook", year: 2004, country: "USA", poster: "images/The_Notebook.jpg" },
-            { name: "Elemental", year: 2023, country: "USA", poster: "images/Elemental.jpg" },
-            { name: "Battle Royale", year: 2000, country: "Japan", poster: "images/Battle_royale.jpeg" },
-            { name: "Pagal Khana", year: 2024, country: "Pakistan", poster: "images/Pagalkhana.jpeg" },
-            { name: "Titanic", year: 1997, country: "USA", poster: "images/Titanic.jpg" },
-            { name: "Deadpool 2", year: 2018, country: "USA", poster: "images/Deadpool_2.jpg" },
-            { name: "The Pursuit of Happyness", year: 2006, country: "USA", poster: "images/The_persuit_of_happiness.jpg" },
-            { name: "The Fault in Our Stars", year: 2014, country: "USA", poster: "images/The_fault_in_our_stars.jpg" },
-            { name: "My Girl", year: 1991, country: "USA", poster: "images/My_girl.jpg" },
-            { name: "Avatar: The Way of Water", year: 2022, country: "USA", poster: "images/Avatar_2.jpg" },
-            { name: "Yesterday Once More", year: 2004, country: "China", poster: "images/Yesterday_once_more.jpg" },
-            { name: "Enter the Dragon", year: 1973, country: "Hong Kong", poster: "images/Enter_the_dragon.jpg" },
-            { name: "Monster Hunt", year: 2015, country: "China", poster: "images/Monster_hunt.jpg" },
-            { name: "Buddies in India", year: 2017, country: "China", poster: "images/Buddies_in_india.jpeg" },
-            { name: "The Truman Show", year: 1998, country: "USA", poster: "images/The_truman_show.jpeg" }
+            { name: "The Notebook", country: "USA", poster: "images/The_Notebook.jpg" },
+            { name: "Elemental", country: "USA", poster: "images/Elemental.jpg" },
+            { name: "Battle Royale", country: "Japan", poster: "images/Battle_royale.jpeg" },
+            { name: "Pagal Khana", country: "Pakistan", poster: "images/Pagalkhana.jpeg" },
+            { name: "Titanic", country: "USA", poster: "images/Titanic.jpg" },
+            { name: "Deadpool 2", country: "USA", poster: "images/Deadpool_2.jpg" },
+            { name: "The Pursuit of Happyness", country: "USA", poster: "images/The_persuit_of_happiness.jpg" },
+            { name: "The Fault in Our Stars", country: "USA", poster: "images/The_fault_in_our_stars.jpg" },
+            { name: "My Girl", country: "USA", poster: "images/My_girl.jpg" },
+            { name: "Avatar: The Way of Water", country: "USA", poster: "images/Avatar_2.jpg" },
+            { name: "Yesterday Once More", country: "China", poster: "images/Yesterday_once_more.jpg" },
+            { name: "Enter the Dragon", country: "Hong Kong", poster: "images/Enter_the_dragon.jpg" },
+            { name: "Monster Hunt", country: "China", poster: "images/Monster_hunt.jpg" },
+            { name: "Buddies in India", country: "China", poster: "images/Buddies_in_india.jpeg" },
+            { name: "The Truman Show", country: "USA", poster: "images/The_truman_show.jpeg" }
         ];
 
         const movieList = document.getElementById("movie-list");
@@ -42,7 +42,6 @@
                     <img src="${movie.poster}" alt="${movie.name}">
                     <div class="overlay">
                         <div class="movie-title">${movie.name}</div>
-                        <div class="movie-year">${movie.year}</div>
                         <div class="movie-country">${movie.country}</div>
                     </div>
                 </div>
@@ -133,12 +132,6 @@
             font-size: 1.3rem;
             font-weight: 600;
             text-transform: uppercase;
-        }
-
-        .movie-year {
-            color: #bbb;
-            font-size: 1rem;
-            margin-top: 5px;
         }
 
         .movie-country {
