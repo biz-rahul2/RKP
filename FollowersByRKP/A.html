@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Initializing System</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+      padding: 30px;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      font-size: 15px;
+      line-height: 1.5;
+      text-shadow: 0 0 2px #00ff00;
+      animation: flicker 1.5s infinite alternate;
+    }
+
+    .blink {
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.95; }
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: black;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="matrix">
+    <canvas id="matrixCanvas"></canvas>
+  </div>
+  <div id="terminal"></div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const servers = [
+      'Server 1 -> ✅ CONNECTED',
+      'Server 2 -> ❌ FAILED',
+      'Server 3 -> ✅ CONNECTED',
+      'Server 4 -> ✅ CONNECTED',
+      'Server 5 -> ✅ CONNECTED',
+      'Server 6 -> ✅ CONNECTED',
+      'Server 7 -> ❌ FAILED',
+      'Server 8 -> ✅ CONNECTED',
+      'Server 9 -> ✅ CONNECTED',
+      'Server 10 -> ✅ CONNECTED',
+      'Server 11 -> ✅ CONNECTED',
+      'Server 12 -> ✅ CONNECTED',
+      'Server 13 -> ✅ CONNECTED',
+      'Server 14 -> ✅ CONNECTED',
+      'Server 15 -> ❌ FAILED',
+      'Server 16 -> ✅ CONNECTED',
+      'Server 17 -> ✅ CONNECTED',
+      'Server 18 -> ✅ CONNECTED',
+      'Server 19 -> ✅ CONNECTED',
+      'Server 20 -> ✅ CONNECTED',
+      'Server 21 -> ✅ CONNECTED',
+      'Server 22 -> ❌ FAILED'
+    ];
+
+    const lines = [
+      'Initializing Cleanzerom Protocol...',
+      'Accessing Root Shell...',
+      'Loading AI Core...',
+      'Decrypting Target Servers...',
+      '',
+      'Establishing Connections:',
+      ...servers,
+      '',
+      'Injecting Payload...',
+      'Spoofing DNS Records...',
+      'Bypassing Instagram API Limits...',
+      'Terminal Mode Enabled...',
+      'Finalizing Access Layer...',
+      '',
+      '>>> ACCESS GRANTED [✓]',
+      '>>> Redirecting to Deep Panel...'
+    ];
+
+    let i = 0;
+    function typeLine() {
+      if (i < lines.length) {
+        terminal.innerHTML += lines[i] + '\n';
+        i++;
+        setTimeout(typeLine, 250); // typing speed
+      } else {
+        setTimeout(() => {
+          window.location.href = 'main.html'; // redirect to main page
+        }, 3000);
+      }
+    }
+
+    typeLine();
+
+    // MATRIX BACKGROUND
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    let matrix = "01";
+    matrix = matrix.split("");
+
+    let font_size = 12;
+    let columns = canvas.width / font_size;
+    let drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = font_size + "px Courier";
+      for (let i = 0; i < drops.length; i++) {
+        let text = matrix[Math.floor(Math.random() * matrix.length)];
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
