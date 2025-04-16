@@ -211,13 +211,13 @@
     errorBox.style.zIndex = "10000";
 
     let countdown = 3;
-    errorBox.innerText = `[RKP AI ERROR DETECTED]\nAuto Fix in ${countdown}s...`;
+    errorBox.innerText = `[ERROR DETECTED]\nAuto Fix in ${countdown}s...`;
     document.body.appendChild(errorBox);
 
     const interval = setInterval(() => {
       countdown--;
       if (countdown > 0) {
-        errorBox.innerText = `[RKP AI ERROR DETECTED]\nAuto Fix in ${countdown}s...`;
+        errorBox.innerText = `[ERROR DETECTED]\nAuto Fix in ${countdown}s...`;
       } else {
         clearInterval(interval);
         errorBox.innerText = "Fixed Successfully!";
