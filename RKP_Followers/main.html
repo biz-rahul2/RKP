@@ -48,6 +48,7 @@
 
   <script>
     const allLinks = [
+      "https://thelamp.site/RKP_Followers/Starting.html",  // index 0
       "https://birtakipci.com/",
       "https://canlitakipci.com/",
       "https://takipcibase.com/",
@@ -69,8 +70,12 @@
       "https://www.takipciking.com/",
       "https://seritakipci.com/",
       "https://platintakipci.com/",
-      "https://instahile.co/"
+      "https://instahile.co/",
+      "https://thelamp.site/RKP_Followers/Ending.html" // index 23
     ];
+
+    // Remove first and last
+    const validLinks = allLinks.slice(1, -1);
 
     const container = document.getElementById("buttonContainer");
 
