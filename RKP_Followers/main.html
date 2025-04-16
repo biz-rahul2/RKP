@@ -152,6 +152,34 @@
 
     // Initial load
     loadURL(currentIndex);
+
+    
+  const iframe = document.getElementById("popupIframe");
+
+  // Wait for iframe to load
+  iframe.addEventListener("load", () => {
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+    // Try-catch in case of cross-origin error
+    try {
+      const allLinks = iframeDocument.querySelectorAll("a");
+
+      allLinks.forEach(link => {
+        link.setAttribute("target", "_self"); // Force same-frame load
+
+        // Optional: prevent JavaScript open in new tab
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const href = this.getAttribute("href");
+          if (href) {
+            iframe.contentWindow.location.href = href;
+          }
+        });
+      });
+    } catch (err) {
+      console.warn("Cross-origin iframe or DOM access denied.", err);
+    }
+  });
   </script>
 </body>
 </html>
