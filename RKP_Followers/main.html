@@ -54,7 +54,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
+      gap: 15px;
       font-size: 18px;
       font-weight: bold;
       border-bottom: 1px solid #00ff00;
@@ -65,8 +65,8 @@
       border: 1px solid #00ff00;
       color: #00ff00;
       cursor: pointer;
-      padding: 5px 12px;
-      font-size: 20px;
+      padding: 7px 16px;
+      font-size: 22px;
       border-radius: 6px;
       transition: all 0.2s ease-in-out;
     }
@@ -74,16 +74,19 @@
       background: #002200;
       box-shadow: 0 0 10px #00ff00;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="hacker-bg"></div>
   <div class="popup">
     <div class="url-bar">
-      <button onclick="prevURL()">👈</button>
+      <button id="prevBtn" onclick="prevURL()">👈</button>
       RKP Instagram Panel
-      <button onclick="refreshIframe()">⟳</button>
-      <button onclick="nextURL()">👉</button>
+      <button id="refreshBtn" onclick="refreshIframe()">⟳</button>
+      <button id="nextBtn" onclick="nextURL()">👉</button>
     </div>
     <iframe id="popupIframe" src=""></iframe>
   </div>
@@ -99,6 +102,7 @@
       "https://takipcimx.net/login",
       "https://takipcizen.com/",
       "https://takipcitime.com/",
+      "https://global-smm.biz/",
       "https://takipcigir.com/",
       "https://takipcikrali.com/",
       "https://bayitakipci.com/",
@@ -110,24 +114,28 @@
       "https://www.takipciking.com/",
       "https://seritakipci.com/",
       "https://platintakipci.com/",
-      "https://instahile.co/",
-      "https://thelamp.site/RKP_Followers/Bye.html"
+      "https://instahile.co/"
     ];
 
     let currentIndex = 0;
 
     function loadURL(index) {
       document.getElementById("popupIframe").src = serverLinks[index];
+      updateButtons();
     }
 
     function nextURL() {
-      currentIndex = (currentIndex + 1) % serverLinks.length;
-      loadURL(currentIndex);
+      if (currentIndex < serverLinks.length - 1) {
+        currentIndex++;
+        loadURL(currentIndex);
+      }
     }
 
     function prevURL() {
-      currentIndex = (currentIndex - 1 + serverLinks.length) % serverLinks.length;
-      loadURL(currentIndex);
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadURL(currentIndex);
+      }
     }
 
     function refreshIframe() {
@@ -135,7 +143,12 @@
       iframe.src = iframe.src;
     }
 
-    // Load initial URL
+    function updateButtons() {
+      document.getElementById("prevBtn").classList.toggle("hidden", currentIndex === 0);
+      document.getElementById("nextBtn").classList.toggle("hidden", currentIndex === serverLinks.length - 1);
+    }
+
+    // Initial load
     loadURL(currentIndex);
   </script>
 </body>
