@@ -213,6 +213,25 @@
       window.location.href = 'Main.html';
     }, (index + 10) * 250);
 
+    function addLoadingLine(text, duration, delay = 250) {
+  setTimeout(() => {
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'line';
+    loadingDiv.textContent = `${text} [0%]`;
+    terminal.appendChild(loadingDiv);
+    scrollTerminal();
+
+    let percent = 0;
+    const interval = duration / 100;
+    const loader = setInterval(() => {
+      percent++;
+      loadingDiv.textContent = `${text} [${percent}%]`;
+      scrollTerminal();
+      if (percent >= 100) clearInterval(loader);
+    }, interval * 1000);
+  }, delay * index++);
+    }
+    
     // Matrix Background
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
