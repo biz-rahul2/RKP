@@ -139,18 +139,16 @@
       '>> Establishing Connections...'
     ];
 
-    const postServerSteps = [
-  { type: 'text', line: '>> Injecting Payload...' },
-  { type: 'loading', line: '>> Injecting Payload', duration: 4 },
-  { type: 'text', line: '>> Spoofing DNS Records...' },
-  { type: 'loading', line: '>> Spoofing DNS Records', duration: 4 },
-  { type: 'text', line: '>> Bypassing Instagram API Limits...' },
-  { type: 'loading', line: '>> Bypassing Instagram API Limits', duration: 14 },
-  { type: 'text', line: '>> Finalizing Access Layer...' },
-  { type: 'text', line: '', },
-  { type: 'text', line: '>>> ACCESS GRANTED [✓]' },
-  { type: 'text', line: '>>> Redirecting to Deep Panel...' }
-];
+    const postServerLines = [
+      '',
+      '>> Injecting Payload...',
+      '>> Spoofing DNS Records...',
+      '>> Bypassing Instagram API Limits...',
+      '>> Finalizing Access Layer...',
+      '',
+      '>>> ACCESS GRANTED [✓]',
+      '>>> Redirecting to Deep Panel...'
+    ];
 
     let index = 0;
 
@@ -212,36 +210,9 @@
 
     // Final redirect
     setTimeout(() => {
-      window.location.href = 'Main.html';
+      window.location.href = 'main.html';
     }, (index + 10) * 250);
 
-    function addLoadingLine(text, duration, delay = 250) {
-  setTimeout(() => {
-    const loadingDiv = document.createElement('div');
-    loadingDiv.className = 'line';
-    loadingDiv.textContent = `${text} [0%]`;
-    terminal.appendChild(loadingDiv);
-    scrollTerminal();
-
-    let percent = 0;
-    const interval = duration / 100;
-    const loader = setInterval(() => {
-      percent++;
-      loadingDiv.textContent = `${text} [${percent}%]`;
-      scrollTerminal();
-      if (percent >= 100) clearInterval(loader);
-    }, interval * 1000);
-  }, delay * index++);
-    }
-
-    postServerSteps.forEach(item => {
-  if (item.type === 'text') {
-    addLine(item.line);
-  } else if (item.type === 'loading') {
-    addLoadingLine(item.line, item.duration);
-  }
-});
-    
     // Matrix Background
     const canvas = document.getElementById("matrixCanvas");
     const ctx = canvas.getContext("2d");
