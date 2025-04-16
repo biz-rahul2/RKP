@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InstaHack Server Terminal</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000000;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+    }.hacker-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(0,255,0,0.05) 0%, rgba(0,0,0,0.9) 100%);
+  background-size: cover;
+  animation: glitch 3s infinite;
+  z-index: 1;
+}
+
+@keyframes glitch {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.9; }
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 85vh;
+  border: 2px solid #00ff00;
+  background: rgba(10, 10, 10, 0.95);
+  z-index: 99;
+  box-shadow: 0 0 30px #00ff00;
+  border-radius: 8px;
+}
+
+.popup iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.url-bar {
+  background: #111;
+  color: #00ff00;
+  padding: 10px;
+  font-size: 15px;
+  border-bottom: 1px solid #00ff00;
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.matrix-text {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  z-index: 2;
+  color: #00ff00;
+  opacity: 0.7;
+  animation: text-flicker 2s infinite;
+}
+
+@keyframes text-flicker {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.4; }
+}
+
+.terminal-stream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  font-size: 12px;
+  line-height: 14px;
+  opacity: 0.05;
+  white-space: pre-wrap;
+  padding: 30px;
+  color: #00ff00;
+}
+
+  </style>
+</head>
+<body>
+  <div class="hacker-bg"></div>
+  <div class="terminal-stream">
+    [ ACCESS GRANTED ]\n>> Injecting server protocols...\n>> Retrieving Instagram endpoint...\n>> Encrypting connection\n>> Anonymous proxy activated...\n>> Launching client-side manipulation engine...
+  </div>  <div class="popup">
+    <div class="url-bar" id="urlDisplay">Loading Secure Server...</div>
+    <iframe id="popupIframe" src=""></iframe>
+  </div>  <div class="matrix-text">Hacking Instagram follower modules... Server secured.</div>  <script>
+    const serverLinks = [
+      "https://birtakipci.com/",
+      "https://canlitakipci.com/",
+      "https://takipcibase.com/",
+      "https://igfollower.net/",
+      "https://instamoda.org/",
+      "https://fastfollow.in/",
+      "https://takipcimx.net/login",
+      "https://takipcizen.com/",
+      "https://takipcitime.com/",
+      "https://global-smm.biz/",
+      "https://takipcigir.com/",
+      "https://takipcikrali.com/",
+      "https://bayitakipci.com/",
+      "https://followersize.com/",
+      "https://takipciking.net/",
+      "https://takipcikutusu.com/",
+      "https://bigtakip.net/",
+      "https://www.takipcimx.com/",
+      "https://www.takipciking.com/",
+      "https://seritakipci.com/",
+      "https://platintakipci.com/",
+      "https://instahile.co/"
+    ];
+
+    const selectedURL = serverLinks[Math.floor(Math.random() * serverLinks.length)];
+    document.getElementById("popupIframe").src = selectedURL;
+    document.getElementById("urlDisplay").innerText = `Server Access Link: ${selectedURL}`;
+  </script></body>
+</html>
