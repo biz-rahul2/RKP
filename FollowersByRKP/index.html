@@ -50,18 +50,6 @@
   border-bottom-right-radius: 8px;
 }
 
-.url-bar {
-  background: #111;
-  color: #00ff00;
-  padding: 10px;
-  font-size: 15px;
-  border-bottom: 1px solid #00ff00;
-  font-weight: bold;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  text-shadow: 0 0 5px #00ff00;
-}
-
 .matrix-text {
   position: fixed;
   bottom: 10px;
@@ -132,6 +120,5 @@
 
     const selectedURL = serverLinks[Math.floor(Math.random() * serverLinks.length)];
     document.getElementById("popupIframe").src = selectedURL;
-    document.getElementById("urlDisplay").innerText = `Server Access Link: ${selectedURL}`;
   </script></body>
 </html>
