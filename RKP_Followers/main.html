@@ -2,99 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RKP Instagram Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RKP Server Links</title>
   <style>
     body {
       margin: 0;
-      background: #000000;
+      background: #000;
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
-      overflow: hidden;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
     }
-    .hacker-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(180deg, rgba(0,255,0,0.05) 0%, rgba(0,0,0,0.9) 100%);
-      animation: glitch 3s infinite;
-      z-index: 1;
-    }
-    @keyframes glitch {
-      0% { opacity: 0.9; }
-      50% { opacity: 0.7; }
-      100% { opacity: 0.9; }
-    }
-    .popup {
-      position: relative;
-      width: 95vw;
-      height: 93vh;
-      border: 2px solid #00ff00;
-      background: rgba(10, 10, 10, 0.98);
-      z-index: 99;
-      box-shadow: 0 0 40px #00ff00;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .popup iframe {
-      width: 100%;
-      height: calc(100% - 50px);
-      border: none;
-    }
-    .url-bar {
-      height: 50px;
-      background: #001800;
-      color: #00ff88;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      border-bottom: 1px solid #00ff00;
+    h1 {
+      margin: 20px 0;
       text-shadow: 0 0 10px #00ff00;
     }
-    .url-bar button {
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
       background: transparent;
       border: 1px solid #00ff00;
       color: #00ff00;
       cursor: pointer;
-      padding: 7px 16px;
-      font-size: 22px;
+      padding: 10px 18px;
+      font-size: 16px;
       border-radius: 6px;
-      transition: all 0.2s ease-in-out;
+      transition: 0.2s;
     }
-    .url-bar button:hover {
+    button:hover {
       background: #002200;
       box-shadow: 0 0 10px #00ff00;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="hacker-bg"></div>
-  <div class="popup">
-    <div class="url-bar">
-      <button id="prevBtn" onclick="prevURL()">👈</button>
-      RKP Instagram Panel
-      <button id="refreshBtn" onclick="refreshIframe()">⟳</button>
-      <button id="nextBtn" onclick="nextURL()">👉</button>
-    </div>
-    <iframe id="popupIframe" src=""></iframe>
-  </div>
+  <h1>RKP Server Links</h1>
+  <div class="button-container" id="buttonContainer"></div>
 
   <script>
-    const serverLinks = [
-      "https://thelamp.site/RKP_Followers/Starting.html",
-      "https://birtakipci.com/tools",
+    const allLinks = [
+      "https://thelamp.site/RKP_Followers/Starting.html",  // index 0
+      "https://birtakipci.com/",
       "https://canlitakipci.com/",
       "https://takipcibase.com/",
       "https://igfollower.net/",
@@ -116,70 +71,22 @@
       "https://seritakipci.com/",
       "https://platintakipci.com/",
       "https://instahile.co/",
-      "https://thelamp.site/RKP_Followers/Ending.html"
+      "https://thelamp.site/RKP_Followers/Ending.html" // index 23
     ];
 
-    let currentIndex = 0;
+    // Remove first and last
+    const validLinks = allLinks.slice(1, -1);
 
-    function loadURL(index) {
-      document.getElementById("popupIframe").src = serverLinks[index];
-      updateButtons();
-    }
+    const container = document.getElementById("buttonContainer");
 
-    function nextURL() {
-      if (currentIndex < serverLinks.length - 1) {
-        currentIndex++;
-        loadURL(currentIndex);
-      }
-    }
-
-    function prevURL() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        loadURL(currentIndex);
-      }
-    }
-
-    function refreshIframe() {
-      const iframe = document.getElementById("popupIframe");
-      iframe.src = iframe.src;
-    }
-
-    function updateButtons() {
-      document.getElementById("prevBtn").classList.toggle("hidden", currentIndex === 0);
-      document.getElementById("nextBtn").classList.toggle("hidden", currentIndex === serverLinks.length - 1);
-    }
-
-    // Initial load
-    loadURL(currentIndex);
-
-    
-  const iframe = document.getElementById("popupIframe");
-
-  // Wait for iframe to load
-  iframe.addEventListener("load", () => {
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-
-    // Try-catch in case of cross-origin error
-    try {
-      const allLinks = iframeDocument.querySelectorAll("a");
-
-      allLinks.forEach(link => {
-        link.setAttribute("target", "_self"); // Force same-frame load
-
-        // Optional: prevent JavaScript open in new tab
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const href = this.getAttribute("href");
-          if (href) {
-            iframe.contentWindow.location.href = href;
-          }
-        });
-      });
-    } catch (err) {
-      console.warn("Cross-origin iframe or DOM access denied.", err);
-    }
-  });
+    validLinks.forEach((link, i) => {
+      const btn = document.createElement("button");
+      btn.textContent = `Server${i + 1}`;
+      btn.onclick = () => {
+        window.location.href = link; // open in same tab
+      };
+      container.appendChild(btn);
+    });
   </script>
 </body>
 </html>
