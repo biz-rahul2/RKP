@@ -171,5 +171,96 @@
   });
 </script>
 
+  
+<script>
+  function showError(message) {
+    const errorBox = document.createElement("div");
+    errorBox.style.position = "fixed";
+    errorBox.style.top = "50%";
+    errorBox.style.left = "50%";
+    errorBox.style.transform = "translate(-50%, -50%)";
+    errorBox.style.background = "#111";
+    errorBox.style.color = "#0f0";
+    errorBox.style.border = "2px solid #0f0";
+    errorBox.style.padding = "20px";
+    errorBox.style.fontFamily = "monospace";
+    errorBox.style.fontSize = "14px";
+    errorBox.style.borderRadius = "8px";
+    errorBox.style.boxShadow = "0 0 20px #0f0a";
+    errorBox.style.zIndex = "10000";
+    errorBox.innerText = message;
+
+    document.body.appendChild(errorBox);
+    setTimeout(() => errorBox.remove(), 5000);
+  }
+
+  function showLoading(button, callback) {
+    const originalText = button.innerText;
+    button.innerText = "Connecting...";
+    button.disabled = true;
+    setTimeout(() => {
+      button.innerText = originalText;
+      button.disabled = false;
+      if (Math.random() < 0.5) {
+        const autoFix = document.createElement("div");
+        autoFix.style.position = "fixed";
+        autoFix.style.bottom = "20px";
+        autoFix.style.left = "50%";
+        autoFix.style.transform = "translateX(-50%)";
+        autoFix.style.background = "#003322";
+        autoFix.style.color = "#00ffcc";
+        autoFix.style.padding = "10px 18px";
+        autoFix.style.border = "1px solid #00ffcc99";
+        autoFix.style.borderRadius = "8px";
+        autoFix.style.fontSize = "13px";
+        autoFix.innerText = "Auto Error Fixing by RKP AI...";
+        document.body.appendChild(autoFix);
+        setTimeout(() => {
+          autoFix.innerText = "Fixed Successfully!";
+          setTimeout(() => autoFix.remove(), 1000);
+        }, 2000);
+      } else {
+        callback();
+      }
+    }, 2000 + Math.random() * 1000);
+  }
+
+  // Override existing button creation logic
+  serverList.innerHTML = ''; // Clear previous
+  links.forEach((link, i) => {
+    const div = document.createElement("div");
+    div.className = "server-line";
+
+    const button = document.createElement("button");
+    button.innerText = "Open";
+
+    button.addEventListener("click", () => {
+      if (i === 3 || i === 9) {
+        // Server4 or Server10 (index starts from 0)
+        const errorMsg =
+`[ERROR CODE: RKP-403]
+> /rkp/server/modules/rahul.handler.js
+> Critical Module Failure at Line 21
+
+System Alert: Unauthorized access blocked.
+Rahul failed to recover the RKP route.`;
+        showError(errorMsg);
+      } else {
+        // For others, 15% chance of fake loading/error
+        if (Math.random() < 0.15) {
+          showLoading(button, () => {
+            window.location.href = link;
+          });
+        } else {
+          window.location.href = link;
+        }
+      }
+    });
+
+    div.innerHTML = `<span>Server${i + 1}</span>`;
+    div.appendChild(button);
+    serverList.appendChild(div);
+  });
+          </script>
 </body>
 </html>
