@@ -139,16 +139,18 @@
       '>> Establishing Connections...'
     ];
 
-    const postServerLines = [
-      '',
-      '>> Injecting Payload...',
-      '>> Spoofing DNS Records...',
-      '>> Bypassing Instagram API Limits...',
-      '>> Finalizing Access Layer...',
-      '',
-      '>>> ACCESS GRANTED [✓]',
-      '>>> Redirecting to Deep Panel...'
-    ];
+    const postServerSteps = [
+  { type: 'text', line: '>> Injecting Payload...' },
+  { type: 'loading', line: '>> Injecting Payload', duration: 4 },
+  { type: 'text', line: '>> Spoofing DNS Records...' },
+  { type: 'loading', line: '>> Spoofing DNS Records', duration: 4 },
+  { type: 'text', line: '>> Bypassing Instagram API Limits...' },
+  { type: 'loading', line: '>> Bypassing Instagram API Limits', duration: 14 },
+  { type: 'text', line: '>> Finalizing Access Layer...' },
+  { type: 'text', line: '', },
+  { type: 'text', line: '>>> ACCESS GRANTED [✓]' },
+  { type: 'text', line: '>>> Redirecting to Deep Panel...' }
+];
 
     let index = 0;
 
