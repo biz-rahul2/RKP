@@ -1,124 +1,186 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InstaHack Server Terminal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>System Access</title>
   <style>
     body {
       margin: 0;
-      background: #000000;
-      color: #00ff00;
+      background-color: #0d0d0d;
       font-family: 'Courier New', Courier, monospace;
+      color: #00ffcc;
       overflow: hidden;
-    }.hacker-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(180deg, rgba(0,255,0,0.05) 0%, rgba(0,0,0,0.9) 100%);
-  background-size: cover;
-  animation: glitch 3s infinite;
-  z-index: 1;
-}
+    }
 
-@keyframes glitch {
-  0% { opacity: 0.9; }
-  50% { opacity: 0.7; }
-  100% { opacity: 0.9; }
-}
+    #matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
 
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  height: 85vh;
-  border: 2px solid #00ff00;
-  background: rgba(10, 10, 10, 0.95);
-  z-index: 99;
-  box-shadow: 0 0 30px #00ff00;
-  border-radius: 8px;
-}
+    #terminal {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.6;
+      text-shadow: 0 0 3px #00ffcc;
+    }
 
-.popup iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
+    .line {
+      opacity: 0;
+      animation: type 0.5s ease forwards;
+    }
 
-.matrix-text {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  z-index: 2;
-  color: #00ff00;
-  opacity: 0.7;
-  animation: text-flicker 2s infinite;
-}
+    .server-line {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,255,204,0.2);
+      padding: 3px 0;
+      margin: 2px 0;
+    }
 
-@keyframes text-flicker {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 0.4; }
-}
+    .status {
+      font-weight: bold;
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
 
-.terminal-stream {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  font-size: 12px;
-  line-height: 14px;
-  opacity: 0.05;
-  white-space: pre-wrap;
-  padding: 30px;
-  color: #00ff00;
-}
+    .ok {
+      color: #0f0;
+      background: rgba(0,255,0,0.1);
+    }
 
+    .fail {
+      color: #f00;
+      background: rgba(255,0,0,0.1);
+    }
+
+    @keyframes type {
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="hacker-bg"></div>
-  <div class="terminal-stream">
-    [ ACCESS GRANTED ]\n>> Injecting server protocols...\n>> Retrieving Instagram endpoint...\n>> Encrypting connection\n>> Anonymous proxy activated...\n>> Launching client-side manipulation engine...
-  </div>  <div class="popup">
-    <div class="url-bar" id="urlDisplay">Loading Secure Server...</div>
-    <iframe id="popupIframe" src=""></iframe>
-  </div>  <div class="matrix-text">Hacking Instagram follower modules... Server secured.</div>  <script>
-    const serverLinks = [
-      "https://birtakipci.com/",
-      "https://canlitakipci.com/",
-      "https://takipcibase.com/",
-      "https://igfollower.net/",
-      "https://instamoda.org/",
-      "https://fastfollow.in/",
-      "https://takipcimx.net/login",
-      "https://takipcizen.com/",
-      "https://takipcitime.com/",
-      "https://global-smm.biz/",
-      "https://takipcigir.com/",
-      "https://takipcikrali.com/",
-      "https://bayitakipci.com/",
-      "https://followersize.com/",
-      "https://takipciking.net/",
-      "https://takipcikutusu.com/",
-      "https://bigtakip.net/",
-      "https://www.takipcimx.com/",
-      "https://www.takipciking.com/",
-      "https://seritakipci.com/",
-      "https://platintakipci.com/",
-      "https://instahile.co/"
+  <canvas id="matrixCanvas"></canvas>
+  <div id="terminal"></div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+
+    const servers = [
+      {name: 'Server 1', status: true},
+      {name: 'Server 2', status: false},
+      {name: 'Server 3', status: true},
+      {name: 'Server 4', status: true},
+      {name: 'Server 5', status: true},
+      {name: 'Server 6', status: true},
+      {name: 'Server 7', status: false},
+      {name: 'Server 8', status: true},
+      {name: 'Server 9', status: true},
+      {name: 'Server 10', status: true},
+      {name: 'Server 11', status: true},
+      {name: 'Server 12', status: true},
+      {name: 'Server 13', status: true},
+      {name: 'Server 14', status: true},
+      {name: 'Server 15', status: false},
+      {name: 'Server 16', status: true},
+      {name: 'Server 17', status: true},
+      {name: 'Server 18', status: true},
+      {name: 'Server 19', status: true},
+      {name: 'Server 20', status: true},
+      {name: 'Server 21', status: true},
+      {name: 'Server 22', status: false}
     ];
 
-    const selectedURL = serverLinks[Math.floor(Math.random() * serverLinks.length)];
-    document.getElementById("popupIframe").src = selectedURL;
-  </script></body>
+    const lines = [
+      '>> Initializing Cleanzerom Protocol...',
+      '>> Accessing Root Shell...',
+      '>> Loading AI Core...',
+      '>> Decrypting Target Servers...',
+      '',
+      '>> Establishing Connections:'
+    ];
+
+    const postServerLines = [
+      '',
+      '>> Injecting Payload...',
+      '>> Spoofing DNS Records...',
+      '>> Bypassing Instagram API Limits...',
+      '>> Finalizing Access Layer...',
+      '',
+      '>>> ACCESS GRANTED [✓]',
+      '>>> Redirecting to Deep Panel...'
+    ];
+
+    let index = 0;
+
+    function addLine(text, delay = 250) {
+      setTimeout(() => {
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.style.animationDelay = '0s';
+        line.textContent = text;
+        terminal.appendChild(line);
+      }, delay * index++);
+    }
+
+    function addServerLine(server, delay = 250) {
+      setTimeout(() => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'server-line line';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = server.name;
+
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'status ' + (server.status ? 'ok' : 'fail');
+        statusSpan.textContent = server.status ? 'CONNECTED' : 'FAILED';
+
+        wrapper.appendChild(nameSpan);
+        wrapper.appendChild(statusSpan);
+        terminal.appendChild(wrapper);
+      }, delay * index++);
+    }
+
+    lines.forEach(line => addLine(line));
+    servers.forEach(server => addServerLine(server));
+    postServerLines.forEach(line => addLine(line));
+
+    setTimeout(() => {
+      window.location.href = 'main.html';
+    }, (index + 12) * 250);
+
+    // Matrix Background
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    let chars = "01";
+    chars = chars.split("");
+    let font_size = 14;
+    let columns = canvas.width / font_size;
+    let drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ffcc";
+      ctx.font = font_size + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        let text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 30);
+  </script>
+</body>
 </html>
