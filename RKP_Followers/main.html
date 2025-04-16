@@ -86,6 +86,35 @@
       box-shadow: 0 0 10px #00ffffaa;
       transform: scale(1.05);
     }
+
+    .insta-follow {
+  text-align: center;
+  margin-top: 20px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.insta-follow a {
+  background: linear-gradient(135deg, #ff0050, #ff7a00);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 22px;
+  font-weight: bold;
+  border-radius: 25px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  box-shadow: 0 0 12px #ff0040aa;
+  transition: 0.3s ease;
+}
+
+.insta-follow a:hover {
+  background: linear-gradient(135deg, #ff3c8d, #ffc107);
+  box-shadow: 0 0 18px #ff5b9e;
+  transform: scale(1.05);
+}
   </style>
 </head>
 <body>
@@ -97,6 +126,10 @@
   <div id="serverList"></div>
 </div>
 
+  <div class="insta-follow">
+  <a href="https://instagram.com/cyb_rahul" target="_blank">Follow me on Instagram</a>
+  </div>
+  
 <script>
   const links = [
     "https://birtakipci.com/",
