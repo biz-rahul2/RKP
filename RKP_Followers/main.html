@@ -11,6 +11,10 @@
       color: #00ff00;
       font-family: 'Courier New', Courier, monospace;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     .hacker-bg {
       position: fixed;
@@ -19,7 +23,6 @@
       width: 100vw;
       height: 100vh;
       background: linear-gradient(180deg, rgba(0,255,0,0.05) 0%, rgba(0,0,0,0.9) 100%);
-      background-size: cover;
       animation: glitch 3s infinite;
       z-index: 1;
     }
@@ -29,95 +32,62 @@
       100% { opacity: 0.9; }
     }
     .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90vw;
-      height: 85vh;
+      position: relative;
+      width: 95vw;
+      height: 93vh;
       border: 2px solid #00ff00;
-      background: rgba(10, 10, 10, 0.95);
+      background: rgba(10, 10, 10, 0.98);
       z-index: 99;
-      box-shadow: 0 0 30px #00ff00;
-      border-radius: 8px;
+      box-shadow: 0 0 40px #00ff00;
+      border-radius: 10px;
+      overflow: hidden;
     }
     .popup iframe {
       width: 100%;
-      height: calc(100% - 40px);
+      height: calc(100% - 50px);
       border: none;
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
     }
     .url-bar {
-      height: 40px;
-      background: #001100;
-      color: #00ff00;
-      text-align: center;
-      line-height: 40px;
-      font-weight: bold;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+      height: 50px;
+      background: #001800;
+      color: #00ff88;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #00ff00;
+      text-shadow: 0 0 10px #00ff00;
     }
     .url-bar button {
       background: transparent;
       border: 1px solid #00ff00;
       color: #00ff00;
       cursor: pointer;
-      padding: 5px 10px;
-      font-size: 16px;
-      border-radius: 4px;
+      padding: 5px 12px;
+      font-size: 20px;
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
     }
-    .matrix-text {
-      position: fixed;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      font-size: 14px;
-      z-index: 2;
-      color: #00ff00;
-      opacity: 0.7;
-      animation: text-flicker 2s infinite;
-    }
-    @keyframes text-flicker {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 0.4; }
-    }
-    .terminal-stream {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      font-size: 12px;
-      line-height: 14px;
-      opacity: 0.05;
-      white-space: pre-wrap;
-      padding: 30px;
-      color: #00ff00;
+    .url-bar button:hover {
+      background: #002200;
+      box-shadow: 0 0 10px #00ff00;
     }
   </style>
 </head>
 <body>
   <div class="hacker-bg"></div>
-  <div class="terminal-stream">
-    [ ACCESS GRANTED ]\n>> Injecting server protocols...\n>> Retrieving Instagram endpoint...\n>> Encrypting connection\n>> Anonymous proxy activated...\n>> Launching client-side manipulation engine...
-  </div>
   <div class="popup">
     <div class="url-bar">
       <button onclick="prevURL()">👈</button>
-      <span id="urlDisplay">RKP Instagram Panel</span>
+      RKP Instagram Panel
       <button onclick="refreshIframe()">⟳</button>
       <button onclick="nextURL()">👉</button>
     </div>
     <iframe id="popupIframe" src=""></iframe>
   </div>
-  <div class="matrix-text">Hacking Instagram follower modules... Server secured.</div>
+
   <script>
     const serverLinks = [
       "https://birtakipci.com/",
@@ -148,7 +118,6 @@
 
     function loadURL(index) {
       document.getElementById("popupIframe").src = serverLinks[index];
-      document.getElementById("urlDisplay").textContent = serverLinks[index];
     }
 
     function nextURL() {
@@ -166,7 +135,7 @@
       iframe.src = iframe.src;
     }
 
-    // Initial load
+    // Load initial URL
     loadURL(currentIndex);
   </script>
 </body>
