@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RKP Server Terminal</title>
+  <title>System Access</title>
   <style>
     body {
       margin: 0;
@@ -20,156 +20,225 @@
       z-index: -1;
     }
 
+    #terminal {
+      padding: 30px;
+      max-height: 90vh;
+      overflow-y: auto;
+      font-size: 16px;
+      line-height: 1.5;
+      text-shadow: 0 0 3px #00ffcc;
+    }
+
+    .line {
+      opacity: 0;
+      animation: type 0.3s ease forwards;
+    }
+
+    @keyframes type {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Server terminal popup */
     .popup-terminal {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 360px;
-      height: 500px;
-      background-color: #0a0a0aee;
-      border: 2px solid #00ffffaa;
-      border-radius: 14px;
-      box-shadow: 0 0 25px #00ffff88, 0 0 10px #00ffcc66 inset;
-      padding: 18px;
+      top: 10%;
+      right: 5%;
+      width: 320px;
+      height: 420px;
+      background-color: #111;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffff55;
+      padding: 15px;
       z-index: 999;
       overflow-y: auto;
-      backdrop-filter: blur(3px);
+      display: none; /* Hidden initially */
     }
 
     .popup-terminal h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
+      margin: 0 0 10px;
+      font-size: 16px;
       color: #00ffff;
       border-bottom: 1px solid #00ffff55;
-      padding-bottom: 6px;
-      text-align: center;
-      text-shadow: 0 0 5px #00ffffaa;
+      padding-bottom: 5px;
     }
 
     .server-line {
-      margin: 8px 0;
-      padding: 8px 10px;
-      border-radius: 6px;
-      background: #111;
-      box-shadow: inset 0 0 5px #00ffff22;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s ease;
+      margin: 3px 0;
+      padding: 4px 6px;
+      border-radius: 4px;
+      background-color: #111;
     }
 
-    .server-line:hover {
-      background: #002222;
-    }
-
-    .server-line span {
-      color: #0ff;
+    .status {
       font-weight: bold;
-      text-shadow: 0 0 3px #0ff;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 13px;
     }
 
-    .server-line button {
-      background: transparent;
-      border: 1px solid #00ffffcc;
-      color: #00ffff;
-      cursor: pointer;
-      padding: 5px 12px;
-      font-size: 14px;
-      border-radius: 5px;
-      transition: 0.2s;
-      text-shadow: 0 0 5px #00ffffaa;
+    .ok {
+      color: #0f0;
+      background: rgba(0, 255, 0, 0.1);
     }
 
-    .server-line button:hover {
-      background: #003333;
-      box-shadow: 0 0 10px #00ffffaa;
-      transform: scale(1.05);
+    .fail {
+      color: #f55;
+      background: rgba(255, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
+  <canvas id="matrixCanvas"></canvas>
 
-<canvas id="matrixCanvas"></canvas>
+  <div id="terminal"></div>
 
-<div class="popup-terminal">
-  <h3>RKP Server Terminal</h3>
-  <div id="serverList"></div>
-</div>
+  <div class="popup-terminal" id="serverBox">
+    <h3>Server Connection Status</h3>
+  </div>
 
-<script>
-  const links = [
-    "https://birtakipci.com/",
-    "https://canlitakipci.com/",
-    "https://takipcibase.com/",
-    "https://igfollower.net/",
-    "https://instamoda.org/",
-    "https://fastfollow.in/",
-    "https://takipcimx.net/login",
-    "https://takipcizen.com/",
-    "https://takipcitime.com/",
-    "https://global-smm.biz/",
-    "https://takipcigir.com/",
-    "https://takipcikrali.com/",
-    "https://bayitakipci.com/",
-    "https://followersize.com/",
-    "https://takipciking.net/",
-    "https://takipcikutusu.com/",
-    "https://bigtakip.net/",
-    "https://www.takipcimx.com/",
-    "https://www.takipciking.com/",
-    "https://seritakipci.com/",
-    "https://platintakipci.com/",
-    "https://instahile.co/"
-  ];
+  <script>
+    const terminal = document.getElementById('terminal');
+    const serverBox = document.getElementById('serverBox');
 
-  const serverList = document.getElementById("serverList");
+    const servers = [
+      {name: 'Server 1', status: true},
+      {name: 'Server 2', status: false},
+      {name: 'Server 3', status: true},
+      {name: 'Server 4', status: true},
+      {name: 'Server 5', status: true},
+      {name: 'Server 6', status: true},
+      {name: 'Server 7', status: false},
+      {name: 'Server 8', status: true},
+      {name: 'Server 9', status: true},
+      {name: 'Server 10', status: true},
+      {name: 'Server 11', status: true},
+      {name: 'Server 12', status: true},
+      {name: 'Server 13', status: true},
+      {name: 'Server 14', status: true},
+      {name: 'Server 15', status: false},
+      {name: 'Server 16', status: true},
+      {name: 'Server 17', status: true},
+      {name: 'Server 18', status: true},
+      {name: 'Server 19', status: true},
+      {name: 'Server 20', status: true},
+      {name: 'Server 21', status: true},
+      {name: 'Server 22', status: false}
+    ];
 
-  links.forEach((link, i) => {
-    const div = document.createElement("div");
-    div.className = "server-line";
-    div.innerHTML = `
-      <span>Server${i + 1}</span>
-      <button onclick="window.location.href='${link}'">Open</button>
-    `;
-    serverList.appendChild(div);
-  });
+    const lines = [
+      '>> Initializing Cleanzerom Protocol...',
+      '>> Accessing Root Shell...',
+      '>> Loading AI Core...',
+      '>> Decrypting Target Servers...',
+      '',
+      '>> Establishing Connections...'
+    ];
 
-  // Matrix animation
-  const canvas = document.getElementById("matrixCanvas");
-  const ctx = canvas.getContext("2d");
+    const postServerLines = [
+      '',
+      '>> Injecting Payload...',
+      '>> Spoofing DNS Records...',
+      '>> Bypassing Instagram API Limits...',
+      '>> Finalizing Access Layer...',
+      '',
+      '>>> ACCESS GRANTED [✓]',
+      '>>> Redirecting to Deep Panel...'
+    ];
 
-  canvas.height = window.innerHeight;
-  canvas.width = window.innerWidth;
+    let index = 0;
 
-  const letters = "01";
-  const fontSize = 16;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
+    function scrollTerminal() {
+      terminal.scrollTop = terminal.scrollHeight;
+    }
 
-  function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function scrollServerBox() {
+      serverBox.scrollTop = serverBox.scrollHeight;
+    }
 
-    ctx.fillStyle = "#00ff66";
-    ctx.font = fontSize + "px monospace";
+    function addLine(text, delay = 250) {
+      setTimeout(() => {
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.textContent = text;
+        terminal.appendChild(line);
+        scrollTerminal();
+      }, delay * index++);
+    }
 
-    drops.forEach((y, i) => {
-      const text = letters[Math.floor(Math.random() * letters.length)];
-      ctx.fillText(text, i * fontSize, y * fontSize);
+    function addServerLine(server, delay = 250) {
+      setTimeout(() => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'server-line';
 
-      if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
-    });
-  }
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = server.name;
 
-  setInterval(drawMatrix, 50);
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'status ' + (server.status ? 'ok' : 'fail');
+        statusSpan.textContent = server.status ? 'CONNECTED' : 'FAILED';
 
-  window.addEventListener("resize", () => {
+        wrapper.appendChild(nameSpan);
+        wrapper.appendChild(statusSpan);
+        serverBox.appendChild(wrapper);
+        scrollServerBox();
+      }, delay * index++);
+    }
+
+    // Show intro lines
+    lines.forEach(line => addLine(line));
+
+    // Show server box just before server lines start
+    setTimeout(() => {
+      serverBox.style.display = 'block';
+    }, 250 * (index + 1));
+
+    // Add server connections
+    servers.forEach(server => addServerLine(server));
+
+    // Hide server box after all server lines are shown
+    setTimeout(() => {
+      serverBox.style.display = 'none';
+    }, 250 * (index + 5));
+
+    // Continue rest of terminal output
+    postServerLines.forEach(line => addLine(line));
+
+    // Final redirect
+    setTimeout(() => {
+      window.location.href = 'main.html';
+    }, (index + 10) * 250);
+
+    // Matrix Background
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
-  });
-</script>
+    let chars = "01";
+    chars = chars.split("");
+    let font_size = 14;
+    let columns = canvas.width / font_size;
+    let drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
 
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ffcc";
+      ctx.font = font_size + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        let text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * font_size, drops[i] * font_size);
+        if (drops[i] * font_size > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 30);
+  </script>
 </body>
 </html>
