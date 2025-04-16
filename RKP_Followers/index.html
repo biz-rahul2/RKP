@@ -233,6 +233,14 @@
     }, interval * 1000);
   }, delay * index++);
     }
+
+    postServerSteps.forEach(item => {
+  if (item.type === 'text') {
+    addLine(item.line);
+  } else if (item.type === 'loading') {
+    addLoadingLine(item.line, item.duration);
+  }
+});
     
     // Matrix Background
     const canvas = document.getElementById("matrixCanvas");
