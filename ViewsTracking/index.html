@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Instagram Views Tracker</title>
+  <title>Reel Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +14,7 @@
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
       color: #fff;
       display: flex;
@@ -21,12 +23,33 @@
       padding: 2rem 1rem;
     }
 
-    h1 {
-      background: linear-gradient(45deg, #ff416c, #ff4b2b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    .percentage-container {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: conic-gradient(#00ffaa 0% 0%, #292929 0% 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #00ffaa;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .percentage-container::after {
+      content: '';
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      background: #121212;
+      border-radius: 50%;
+    }
+
+    .percent-text {
+      position: relative;
+      z-index: 2;
     }
 
     .container {
@@ -120,7 +143,11 @@
   </style>
 </head>
 <body>
-  <h1>Reel Views Tracker</h1>
+
+  <div class="percentage-container" id="progressCircle">
+    <span class="percent-text" id="percentText">0%</span>
+  </div>
+
   <div class="container">
     <h3>Today: <span id="todayDate"></span></h3>
     <label for="views">Your Highest Reel Views:</label>
@@ -136,16 +163,25 @@
     const todayDate = new Date().toISOString().split('T')[0];
     document.getElementById("todayDate").textContent = todayDate;
 
+    const TARGET = 100000;
+
+    function updateProgress(percent) {
+      const circle = document.getElementById("progressCircle");
+      const text = document.getElementById("percentText");
+      circle.style.background = `conic-gradient(#00ffaa 0% ${percent}%, #292929 ${percent}% 100%)`;
+      text.textContent = `${percent}%`;
+    }
+
     function saveViews() {
-      const views = document.getElementById("views").value;
+      const views = parseInt(document.getElementById("views").value);
       if (!views || views <= 0) {
-        alert("Bhai valid number daal pehle!");
+        alert("Bhai valid number daal!");
         return;
       }
 
       const entry = {
         date: todayDate,
-        views: parseInt(views),
+        views: views,
         timestamp: Date.now()
       };
 
@@ -153,13 +189,22 @@
       data = data.filter(item => item.date !== todayDate);
       data.push(entry);
 
-      // Filter only last 90 days
       const pastLimit = Date.now() - 90 * 24 * 60 * 60 * 1000;
       data = data.filter(item => item.timestamp >= pastLimit);
 
       localStorage.setItem("viewsData", JSON.stringify(data));
       document.getElementById("views").value = "";
+
       loadHistory();
+      updatePercentage();
+    }
+
+    function updatePercentage() {
+      let data = JSON.parse(localStorage.getItem("viewsData")) || [];
+      const todayEntry = data.find(item => item.date === todayDate);
+      const todayViews = todayEntry ? todayEntry.views : 0;
+      let percent = Math.min(Math.floor((todayViews / TARGET) * 100), 100);
+      updateProgress(percent);
     }
 
     function toggleHistory() {
@@ -182,7 +227,9 @@
       });
     }
 
+    // On Load
     loadHistory();
+    updatePercentage();
   </script>
 </body>
 </html>
