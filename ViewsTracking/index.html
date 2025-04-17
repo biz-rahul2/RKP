@@ -160,16 +160,27 @@
   </div>
 
   <script>
-    const todayDate = new Date().toISOString().split('T')[0];
-    document.getElementById("todayDate").textContent = todayDate;
-
     const TARGET = 100000;
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function formatDate(dateObj) {
+      const date = new Date(dateObj);
+      const day = date.getDate();
+      const month = monthNames[date.getMonth()];
+      return `${day} ${month}`;
+    }
+
+    const todayDate = formatDate(new Date());
+    document.getElementById("todayDate").textContent = todayDate;
 
     function updateProgress(percent) {
       const circle = document.getElementById("progressCircle");
       const text = document.getElementById("percentText");
       circle.style.background = `conic-gradient(#00ffaa 0% ${percent}%, #292929 ${percent}% 100%)`;
-      text.textContent = `${percent}%`;
+      text.textContent = `${percent.toFixed(2)}%`;
     }
 
     function saveViews() {
@@ -203,7 +214,7 @@
       let data = JSON.parse(localStorage.getItem("viewsData")) || [];
       const todayEntry = data.find(item => item.date === todayDate);
       const todayViews = todayEntry ? todayEntry.views : 0;
-      let percent = Math.min(Math.floor((todayViews / TARGET) * 100), 100);
+      let percent = Math.min((todayViews / TARGET) * 100, 100);
       updateProgress(percent);
     }
 
@@ -217,7 +228,7 @@
       historyList.innerHTML = "";
 
       const data = JSON.parse(localStorage.getItem("viewsData")) || [];
-      const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const sorted = data.sort((a, b) => b.timestamp - a.timestamp);
 
       sorted.forEach(entry => {
         const div = document.createElement("div");
