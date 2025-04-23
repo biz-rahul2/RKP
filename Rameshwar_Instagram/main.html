@@ -202,29 +202,7 @@
   });
 </script>
 
-  
-<script>
-  function showBlockedError(message) {
-    const errorBox = document.createElement("div");
-    errorBox.style.position = "fixed";
-    errorBox.style.top = "50%";
-    errorBox.style.left = "50%";
-    errorBox.style.transform = "translate(-50%, -50%)";
-    errorBox.style.background = "#111";
-    errorBox.style.color = "#0f0";
-    errorBox.style.border = "2px solid #0f0";
-    errorBox.style.padding = "20px";
-    errorBox.style.fontFamily = "monospace";
-    errorBox.style.fontSize = "14px";
-    errorBox.style.borderRadius = "8px";
-    errorBox.style.boxShadow = "0 0 20px #0f0a";
-    errorBox.style.zIndex = "10000";
-    errorBox.innerText = message;
-
-    document.body.appendChild(errorBox);
-    setTimeout(() => errorBox.remove(), 5000);
-  }
-
+  <script>
   function showTempError(button, link) {
     const errorBox = document.createElement("div");
     errorBox.style.position = "fixed";
@@ -269,20 +247,10 @@
     button.innerText = "Open";
 
     button.addEventListener("click", () => {
-      if (i === 3 || i === 9) {
-        const errorMsg =
-`[ERROR CODE: Rameshwar9$%Gosw-403]
-> /rameshwar/server/modules/handler.js
-> Critical Module Failure at Line 21
-
-Internal Server Alert: access blocked.`;
-        showBlockedError(errorMsg);
+      if (Math.random() < 0.10) {
+        showTempError(button, link);
       } else {
-        if (Math.random() < 0.10) {
-          showTempError(button, link);
-        } else {
-          window.location.href = link;
-        }
+        window.location.href = link;
       }
     });
 
@@ -290,6 +258,6 @@ Internal Server Alert: access blocked.`;
     div.appendChild(button);
     serverList.appendChild(div);
   });
-</script>
+  </script>
 </body>
 </html>
