@@ -26,14 +26,26 @@
         }
 
         .runner {
-            position: absolute;
-            bottom: 50%;
-            left: -10%;
-            width: 150px; /* Runner size reduced */
-            height: auto;
-            opacity: 0.9;
-            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.4));
-        }
+    position: absolute;
+    bottom: 50%;
+    left: -10%;
+    width: 100px; /* Default Mobile size */
+    height: auto;
+    opacity: 0.9;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.4));
+}
+
+@media (min-width: 768px) {
+    .runner {
+        width: 150px; /* Tablet size */
+    }
+}
+
+@media (min-width: 1025px) {
+    .runner {
+        width: 200px; /* Desktop size */
+    }
+}
 
         .shadow {
             position: absolute;
