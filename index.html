@@ -169,13 +169,12 @@
         // Determine the duration based on device type
 let duration;
 if (window.innerWidth < 768) {
-    duration = 7; // Mobile devices
+    duration = 12; // Mobile devices - slower
 } else if (window.innerWidth >= 768 && window.innerWidth <= 1024) {
-    duration = 9; // Tablets
+    duration = 15; // Tablets - slower
 } else {
-    duration = 12; // Desktops
+    duration = 18; // Desktops - slowest
 }
-
 // Variable to track if redirect has been triggered
 let redirectTriggered = false;
 
