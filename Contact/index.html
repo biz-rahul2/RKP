@@ -253,7 +253,7 @@ input, select, textarea {
 
         <!-- Email Section -->
 <div class="email-section">
-    <h2 class="email-heading">Drop me a message</h2>
+    <h2 class="email-heading">Drop me a Email</h2>
     <p class="email-description">Want to chat? Fill out the form below!</p>
     
     <form id="emailForm">
@@ -315,18 +315,12 @@ document.getElementById("emailForm").addEventListener("submit", function(event) 
         finalSubject = "Mujhe tumse bas kuchh random share karna hai";
     }
 
-    const emailBody = `Hey buddy, what's up? 👋%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
+    const emailBody = `Hello Rahul, Kaise ho? 👋%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
 
     const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${emailBody}`;
 
     // Open email client
     window.location.href = mailtoLink;
-
-    // Redirect to thank-you.html after 3 seconds
-    setTimeout(() => {
-        window.location.href = "../thank-you.html";
-    }, 3000);
-});
 </script>
         
 </body>
