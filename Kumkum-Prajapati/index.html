@@ -3,137 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kumkum Prajapati</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <title>Kumkum Prajapati - Special</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      box-sizing: border-box;
+    }
+    body {
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
       overflow-x: hidden;
     }
-
     .intro {
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: url('your-gif.gif') no-repeat center center/cover;
-      color: #fff;
-      text-shadow: 2px 2px 8px #000;
-    }
-
-    .typewriter h1 {
-      overflow: hidden;
-      border-right: .15em solid #fff;
-      white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: .15em;
-      animation: typing 4s steps(30, end), blink-caret .75s step-end infinite;
-      font-size: 2.5rem;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: white; }
-    }
-
-    .content {
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
       text-align: center;
-      padding: 50px 20px;
+      position: relative;
     }
-
-    h2 {
-      font-family: 'Pacifico', cursive;
+    .intro h1 {
       font-size: 2.5rem;
       color: #6a1b9a;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
-
-    .info {
-      max-width: 800px;
+    .typewriter {
+      font-family: 'Roboto Mono', monospace;
+      color: #ff4081;
+      font-size: 1.8rem;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ff4081;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.7s step-end infinite alternate;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .content {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      padding: 20px;
+      max-width: 1000px;
       margin: auto;
-      background: #ffffffcc;
+      text-align: center;
+    }
+    .show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .profile-gif img {
+      width: 200px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      margin: 20px 0;
+    }
+    .info-card {
+      background: white;
+      margin: 20px auto;
       padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       text-align: left;
     }
-
-    .info p {
-      font-size: 1.2rem;
-      margin: 10px 0;
-      line-height: 1.6;
-      color: #333;
+    .info-card h2 {
+      color: #5c6bc0;
+      margin-bottom: 15px;
     }
-
+    .info-card p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+    }
     .youtube-links {
-      margin-top: 30px;
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 20px;
+      margin: 20px 0;
     }
-
     .youtube-links a {
       text-decoration: none;
       color: #ff0000;
-      font-size: 2rem;
-      transition: transform 0.3s ease;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 8px 20px rgba(255,0,0,0.2);
+      transition: all 0.3s ease;
     }
-
     .youtube-links a:hover {
-      transform: scale(1.2);
+      background: #ff0000;
+      color: #fff;
     }
-
+    .youtube-links img {
+      width: 25px;
+      margin-right: 10px;
+    }
     footer {
       margin-top: 50px;
-      text-align: center;
-      color: #555;
       font-size: 1rem;
-      padding-bottom: 30px;
+      color: #777;
+      text-align: center;
+      padding: 20px;
     }
   </style>
 </head>
-
 <body>
 
-<section class="intro">
-  <div class="typewriter">
-    <h1>Subh kaam me deri kyu?</h1>
-  </div>
-</section>
+<div class="intro">
+  <h1>Kumkum Prajapati</h1>
+  <div class="typewriter">"Subh kaam me deri kyu?"</div>
+</div>
 
-<section class="content">
-  <h2>Radhe Krishna</h2>
-  
-  <div class="info">
-    <p><strong>Name:</strong> Kumkum Prajapati</p>
-    <p><strong>About:</strong> She runs 2 amazing YouTube channels and is a passionate Krishna devotee.</p>
-    <p><strong>Profession:</strong> Talented Editor and Creative Artist.</p>
-    <p><strong>Interests:</strong> Fascinated by the universe, stars, and the cosmic world.</p>
-    <p><strong>Special Talent:</strong> Ek Number Jasoos (Detective vibes!)</p>
-    <p><strong>Hobbies:</strong> Anime lover, moon admirer, nature enthusiast, romantic and dreamy soul.</p>
-    <p><strong>Personality:</strong> Chill, spiritual, and full of positive vibes.</p>
-    <p><strong>Best Friend:</strong> Sapna</p>
+<div class="content" id="content">
+  <div class="profile-gif">
+    <img src="your-gif.gif" alt="Kumkum's Gif">
   </div>
 
   <div class="youtube-links">
-    <a href="https://youtube.com/@lyrics_vibes7k" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://youtube.com/@radhekrishnavibes7k" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://youtube.com/@lyrics_vibes7k" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Logo">
+      Lyrics Vibes
+    </a>
+    <a href="https://youtube.com/@radhekrishnavibes7k" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Logo">
+      Radhe Krishna Vibes
+    </a>
   </div>
-</section>
+
+  <div class="info-card">
+    <h2>About Kumkum</h2>
+    <p><strong>Famous Dialogue:</strong> "Subh kaam me deri kyu?"</p>
+    <p><strong>Religious:</strong> True devotee of Lord Krishna.</p>
+    <p><strong>Profession:</strong> Talented Editor.</p>
+    <p><strong>Universe Lover:</strong> Deep fascination with stars, cosmic world, and mysteries of universe.</p>
+    <p><strong>Jasoos:</strong> Ek number one jasoos!</p>
+    <p><strong>Anime Fan:</strong> Huge anime lover.</p>
+    <p><strong>Moon & Nature Lover:</strong> Romantic, dreamy, chill and spiritual girl.</p>
+    <p><strong>Best Friend:</strong> Close to Sapna.</p>
+  </div>
+</div>
 
 <footer>
   Made with love for Kumkum by someone who truly admires her.
 </footer>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('content').classList.add('show');
+    }, 4000); // wait until typewriter animation completes
+  });
+</script>
 
 </body>
 </html>
