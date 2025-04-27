@@ -24,24 +24,23 @@
       text-align: center;
       margin: 40px 0 10px;
     }
-    .banner {
-      background: #ff69b4;
-      color: white;
-      padding: 20px;
+    .special-dialogue {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #ff1493;
       text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      border-radius: 15px;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 800px;
-      box-shadow: 0 8px 20px rgba(255,105,180,0.4);
-      animation: pulse 2s infinite;
+      margin: 30px 20px;
+      animation: fadeInUp 2s ease-in-out;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .profile-gif {
       text-align: center;
@@ -92,6 +91,7 @@
       height: auto;
       border-radius: 20px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      margin: 20px;
     }
     .section .text {
       flex: 1;
@@ -99,9 +99,36 @@
       font-size: 1.3rem;
       font-weight: 500;
       color: #d63384;
+      min-width: 250px;
     }
     .section.reverse {
       flex-direction: row-reverse;
+    }
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+      }
+      .section.reverse {
+        flex-direction: column;
+      }
+    }
+    .info-card {
+      background: white;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 20px;
+      max-width: 800px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .info-card h2 {
+      color: #e60073;
+      margin-bottom: 10px;
+    }
+    .info-card p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+      color: #555;
     }
     .bestfriend-card {
       background: #ffe0f0;
@@ -140,12 +167,12 @@
 
 <header>Kumkum Prajapati</header>
 
-<div class="banner">
+<div class="special-dialogue">
   "Subh kaam me deri kyu?"
 </div>
 
 <div class="profile-gif">
-  <img src="Laptop.gif" alt="Kumkum's Gif">
+  <img src="your-gif.gif" alt="Kumkum's Gif">
 </div>
 
 <div class="youtube-links">
@@ -171,12 +198,20 @@
 <div class="section reverse">
   <div class="text">
     <h2>Profession</h2>
-    Editor
+    Talented Editor.
   </div>
-  <img src="Editor.png" alt="Profession">
+  <img src="Laptop.gif" alt="Profession">
 </div>
 
 <div class="section">
+  <div class="text">
+    <h2>Editor</h2>
+    Creative and visionary editor.
+  </div>
+  <img src="Editor.png" alt="Editor">
+</div>
+
+<div class="section reverse">
   <div class="text">
     <h2>Jasoos</h2>
     Ek number one jasoos!
@@ -184,7 +219,13 @@
   <img src="Detective.png" alt="Jasoos">
 </div>
 
-<!-- Best Friend Special -->
+<div class="info-card">
+  <h2>More About Kumkum</h2>
+  <p><strong>Universe Lover:</strong> Deep fascination with stars, cosmic world, and mysteries of universe.</p>
+  <p><strong>Anime Fan:</strong> Huge anime lover.</p>
+  <p><strong>Moon & Nature Lover:</strong> Romantic, dreamy, chill and spiritual girl.</p>
+</div>
+
 <div class="bestfriend-card">
   <h2>Best Friend</h2>
   <p>Close to Sapna - A bond that's pure and unbreakable!</p>
