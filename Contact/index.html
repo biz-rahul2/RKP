@@ -274,7 +274,8 @@ input, select, textarea {
         <!-- Divider -->
         <div class="divider"></div>
         
-<script>
+
+    <script>
 function toggleCustomSubject() {
     const subjectDropdown = document.getElementById("email-subject");
     const customSubjectContainer = document.getElementById("custom-subject-container");
@@ -308,9 +309,9 @@ document.getElementById("emailForm").addEventListener("submit", function(event) 
 
     const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${emailBody}`;
 
-    // Open email client
-    window.location.href = mailtoLink;
-</script>
+    window.location.href = mailtoLink; // YEH ACTIVATE HOGA AB
+});
+    </script>
         
 </body>
 </html>
