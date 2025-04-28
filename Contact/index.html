@@ -283,27 +283,36 @@ function toggleCustomSubject() {
 document.getElementById("emailForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const name = document.getElementById("email-name").value;
+    const name = document.getElementById("email-name").value.trim();
     const subjectDropdown = document.getElementById("email-subject").value;
     const customSubject = document.getElementById("custom-subject").value.trim();
-    const message = document.getElementById("email-message").value;
+    const message = document.getElementById("email-message").value.trim();
 
-    let finalSubject = "";
-    if (subjectDropdown === "Other" && customSubject) {
-        finalSubject = customSubject;
-    } else if (subjectDropdown === "Question") {
-        finalSubject = "Mujhe tumse kuchh swal puchhna hai";
+    let introLine = `Hello Rahul, Tum kaise ho? 👋%0D%0A%0D%0A`;
+    let nameLine = `Mera naam ${name} hai.%0D%0A%0D%0A`;
+    let middleLine = "";
+    
+    if (subjectDropdown === "Question") {
+        middleLine = "Mujhe tumse ek sawal puchhna hai,%0D%0A";
     } else if (subjectDropdown === "Chat") {
-        finalSubject = "Mujhe tumse kuchh baat karni hai";
+        middleLine = "Mujhe tumse ek baat karni hai,%0D%0A";
     } else if (subjectDropdown === "Random") {
-        finalSubject = "Mujhe tumse bas kuchh random share karna hai";
+        middleLine = "Mujhe bas kuchh random share karna hai,%0D%0A";
+    } else if (subjectDropdown === "Appreciation") {
+        middleLine = "Mujhe tumhari tareef karni hai,%0D%0A";
+    } else if (subjectDropdown === "Feedback") {
+        middleLine = "Mujhe apna feedback dena hai,%0D%0A";
+    } else if (subjectDropdown === "Other" && customSubject) {
+        middleLine = `Main apna vishay batana chahta/chahti hoon: ${customSubject}%0D%0A`;
     }
 
-    const emailBody = `Hello Rahul, Kaise ho? 👋%0D%0A%0D%0AMy name is ${name}.%0D%0A%0D%0AMessages:%0D%0A${message}`;
+    let finalBody = introLine + nameLine + middleLine + "%0D%0A" + message;
 
-    const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${emailBody}`;
+    const subjectText = subjectDropdown === "Other" && customSubject ? customSubject : document.querySelector(`#email-subject option[value="${subjectDropdown}"]`).textContent;
 
-    window.location.href = mailtoLink; // YEH ACTIVATE HOGA AB
+    const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(subjectText)}&body=${finalBody}`;
+
+    window.location.href = mailtoLink;
 });
     </script>
         
