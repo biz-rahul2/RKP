@@ -257,5 +257,17 @@ document.querySelector('.viewer').addEventListener('scroll', () => {
 // Run the check when the page loads
 checkAndScroll();
 </script>
+    <script>
+  // Function to check if device is mobile
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Redirect logic
+  if (!isMobileDevice()) {
+    // Not a mobile device, redirect to desktop version
+    window.location.href = "https://drive.google.com/file/d/1ACc1XO2olVh6bDc8fwQs6rqnr3asDjWa/view?usp=drivesdk";
+  }
+    </script>
 </body>
   </html>
