@@ -254,5 +254,17 @@ checkAndScroll();
         window.location.replace("https://thelamp.site/Book/Shikayten.html"); 
     }
     </script>
+    <script>
+  // Function to check if device is mobile
+  function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Redirect logic
+  if (!isMobileDevice()) {
+    // Not a mobile device, redirect to desktop version
+    window.location.href = "https://drive.google.com/file/d/1BbJi-4SEvCN3N0mF8U41DFaE93eMqnnj/view?usp=drivesdk";
+  }
+    </script>
 </body>
 </html>
