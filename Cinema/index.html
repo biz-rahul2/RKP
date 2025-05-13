@@ -1,110 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinematic View of My Life</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinematic View of My Life</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-glass: rgba(30, 30, 40, 0.7);
+      --accent1: #ff8000;
+      --accent2: #ffcc00;
+      --accent3: #0072ff;
+      --accent4: #00c6ff;
+      --white: #fff;
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            background: url('https://source.unsplash.com/1600x900/?cinema,movie') no-repeat center center/cover;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-        }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+      position: relative;
+      color: var(--white);
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #53354a);
+      background-size: 400% 400%;
+      animation: gradientBG 18s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .overlay {
-            background: rgba(0, 0, 0, 0.7);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            padding: 20px;
-        }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 1;
+      background: url('https://source.unsplash.com/1600x900/?cinema,movie') no-repeat center center/cover;
+      filter: blur(6px) brightness(0.5);
+      opacity: 0.7;
+      pointer-events: none;
+    }
 
-        p {
-            font-size: 1.2rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-        }
+    .glass {
+      position: relative;
+      z-index: 2;
+      min-width: 320px;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 2rem 2rem;
+      border-radius: 24px;
+      background: var(--main-glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(120%);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInUp 1.4s cubic-bezier(.77,0,.18,1) 0.4s both;
+    }
 
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    @keyframes fadeInUp {
+      0% { opacity:0; transform: translateY(40px);}
+      100% { opacity:1; transform: translateY(0);}
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            font-size: 1.1rem;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease-in-out;
-            border: 2px solid transparent;
-        }
+    h1 {
+      font-size: 2.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(90deg, var(--accent1), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: cinematicTitle 2.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+    }
 
-        .btn.indian {
-            background: linear-gradient(90deg, #ff8000, #ffcc00);
-        }
+    @keyframes cinematicTitle {
+      0% { letter-spacing: 12px; opacity: 0; }
+      100% { letter-spacing: 2px; opacity: 1; }
+    }
 
-        .btn.international {
-            background: linear-gradient(90deg, #0072ff, #00c6ff);
-        }
+    .cinematic-text {
+      font-size: 1.23rem;
+      font-weight: 400;
+      margin-bottom: 2.2rem;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+      opacity: 0;
+      animation: fadeInText 1.2s ease 1.2s forwards;
+    }
 
-        .btn:hover {
-            transform: scale(1.05);
-            border-color: #fff;
-        }
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-            .btn {
-                font-size: 1rem;
-                padding: 10px 15px;
-            }
-        }
-    </style>
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .btn {
+      min-width: 240px;
+      padding: 15px 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--white);
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      box-shadow: 0 4px 24px 0 rgba(255, 128, 0, 0.18);
+      transition: transform 0.22s cubic-bezier(.77,0,.18,1), box-shadow 0.22s, background 0.4s;
+      outline: none;
+      position: relative;
+      perspective: 400px;
+      letter-spacing: 1px;
+      will-change: transform;
+    }
+    .btn.indian {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    }
+    .btn.international {
+      background: linear-gradient(90deg, var(--accent3), var(--accent4));
+      box-shadow: 0 4px 24px 0 rgba(0, 114, 255, 0.13);
+    }
+    .btn:hover, .btn:focus {
+      transform: scale(1.08) rotateX(8deg) rotateY(-4deg);
+      box-shadow: 0 8px 32px 0 rgba(255,255,255,0.18);
+      background-position: right center;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .glass {
+        padding: 1.2rem 0.7rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .cinematic-text {
+        font-size: 1rem;
+      }
+      .btn {
+        font-size: 1rem;
+        min-width: 160px;
+        padding: 10px 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="overlay"></div>
-
-    <div class="content">
-        <p>Ye Movies abtak ki meri dekhi huyi sabse best Movie hai. Chalo check karte hai ki aapne isme se kise kise dekha hai.</p>
-        
-        <div class="buttons">
-            <a href="https://thelamp.site/Cinema/Movies/" class="btn indian">Top 15 Indian Movies & Series</a>
-            <a href="https://thelamp.site/Cinema/Movie/" class="btn international">Top 15 International Movies & Series</a>
-        </div>
+  <div class="overlay"></div>
+  <div class="glass">
+    <h1>Cinematic View of My Life</h1>
+    <p class="cinematic-text">
+      ये Movies अब तक की मेरी देखी हुई सबसे बेस्ट Movie हैं। चलो चेक करते हैं कि आपने इनमें से कौन-कौन सी देखी है।
+    </p>
+    <div class="buttons">
+      <a href="https://thelamp.site/Cinema/Movies/" class="btn indian">Top 15 Indian Movies & Series</a>
+      <a href="https://thelamp.site/Cinema/Movie/" class="btn international">Top 15 International Movies & Series</a>
     </div>
-
+  </div>
 </body>
 </html>
