@@ -14,6 +14,8 @@
       --primary: #00f2fe;
       --secondary: #4facfe;
       --accent: #43e97b;
+      --bhojpuri: #43e97b;
+      --hindi: #f9d423;
       --bg: #18181f;
       --glass: rgba(255,255,255,0.1);
       --neon: #00ffd0;
@@ -116,17 +118,35 @@
       text-shadow: 0 0 8px var(--primary);
       user-select: none;
     }
-    .fluent-badge {
-      background: linear-gradient(90deg, #f9d423 30%, #ff4e50 100%);
-      color: #18181f;
-      font-weight: bold;
-      font-size: 1.1em;
-      padding: 7px 22px;
-      border-radius: 22px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 10px #f9d42344;
+    /* Special pie chart styles for Bhojpuri */
+    .pie-chart.bhojpuri-pie svg .pie {
+      stroke: url(#bhojpuri-gradient);
+      filter: drop-shadow(0 0 10px var(--bhojpuri));
+      animation: pulse-bhojpuri 1.2s infinite alternate;
+    }
+    .pie-chart.bhojpuri-pie .pie-check {
+      font-size: 2.1em;
+      color: var(--bhojpuri);
+      text-shadow: 0 0 12px var(--bhojpuri);
+    }
+    @keyframes pulse-bhojpuri {
+      0% { filter: drop-shadow(0 0 10px var(--bhojpuri)); }
+      100% { filter: drop-shadow(0 0 22px var(--bhojpuri)); }
+    }
+    /* Special pie chart styles for Hindi */
+    .pie-chart.hindi-pie svg .pie {
+      stroke: url(#hindi-gradient);
+      filter: drop-shadow(0 0 10px var(--hindi));
+      animation: pulse-hindi 1.2s infinite alternate;
+    }
+    .pie-chart.hindi-pie .pie-check {
+      font-size: 2.1em;
+      color: var(--hindi);
+      text-shadow: 0 0 12px var(--hindi);
+    }
+    @keyframes pulse-hindi {
+      0% { filter: drop-shadow(0 0 10px var(--hindi)); }
+      100% { filter: drop-shadow(0 0 22px var(--hindi)); }
     }
     .note-section {
       background: var(--glass);
@@ -148,7 +168,6 @@
       margin-bottom: 10px;
       list-style: disc;
     }
-  
     @media (max-width: 600px) {
       .main-title { font-size: 1.5em; }
       .languages-grid { gap: 18px; }
@@ -166,11 +185,11 @@
   <section class="languages-grid">
     <div class="lang-card">
       <div class="lang-name">Bhojpuri</div>
-      <div class="pie-chart" data-percent="100" data-color="#00f2fe"></div>
+      <div class="pie-chart bhojpuri-pie" data-percent="100"></div>
     </div>
     <div class="lang-card">
       <div class="lang-name">Hindi</div>
-      <div class="pie-chart" data-percent="100" data-color="#00f2fe"></div>
+      <div class="pie-chart hindi-pie" data-percent="100"></div>
     </div>
     <div class="lang-card">
       <div class="lang-name">English</div>
@@ -191,14 +210,44 @@
     // Pie chart generator for each .pie-chart element
     document.querySelectorAll('.pie-chart').forEach(function(el) {
       const percent = parseInt(el.getAttribute('data-percent'), 10);
-      const color = el.getAttribute('data-color') || '#00f2fe';
-      // For full circle, set radius and stroke-width properly
+      // Special handling for Bhojpuri and Hindi
+      const isBhojpuri = el.classList.contains('bhojpuri-pie');
+      const isHindi = el.classList.contains('hindi-pie');
+      let color = el.getAttribute('data-color') || '#00f2fe';
       const size = el.offsetWidth || 110;
       const stroke = 14;
       const radius = (size / 2) - (stroke / 2);
       const circumference = 2 * Math.PI * radius;
+
+      // SVG gradients for special pies
+      let gradientDefs = '';
+      if (isBhojpuri) {
+        gradientDefs = `
+          <defs>
+            <linearGradient id="bhojpuri-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#43e97b"/>
+              <stop offset="100%" stop-color="#38f9d7"/>
+            </linearGradient>
+          </defs>
+        `;
+        color = 'url(#bhojpuri-gradient)';
+      }
+      if (isHindi) {
+        gradientDefs = `
+          <defs>
+            <linearGradient id="hindi-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f9d423"/>
+              <stop offset="100%" stop-color="#ff4e50"/>
+            </linearGradient>
+          </defs>
+        `;
+        color = 'url(#hindi-gradient)';
+      }
+
+      // Pie chart HTML
       el.innerHTML = `
         <svg width="${size}" height="${size}">
+          ${gradientDefs}
           <circle
             stroke="#23234a"
             fill="transparent"
@@ -221,8 +270,11 @@
             style="transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
           />
         </svg>
-        <span class="pie-percent">${percent}%</span>
+        <span class="${(isBhojpuri || isHindi) ? 'pie-check' : 'pie-percent'}">
+          ${(isBhojpuri || isHindi) && percent === 100 ? '✅' : percent + '%'}
+        </span>
       `;
+
       // Animate Pie
       setTimeout(() => {
         const pie = el.querySelector('.pie');
