@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rahul's Instagram Buttons</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    .buttons-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 38px;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+    }
+    .insta-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 26px 40px 26px 28px;
+      border: none;
+      border-radius: 2.3em;
+      background: rgba(255,255,255,0.13);
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #fff;
+      font-size: 1.23rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      overflow: hidden;
+      min-width: 310px;
+      max-width: 95vw;
+    }
+    .insta-btn .icon {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #fd5949 0%, #fccc63 40%, #285AEB 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-right: 10px;
+      filter: drop-shadow(0 2px 8px #000a);
+    }
+    .insta-btn .id-label {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: rgba(0,0,0,0.13);
+      padding: 4px 18px;
+      border-radius: 1.1em;
+      margin-right: 8px;
+      box-shadow: 0 1px 8px #0002;
+      letter-spacing: 2px;
+      text-shadow: 0 1px 4px #0006;
+    }
+    .insta-btn .fullform {
+      display: block;
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: #ffe082;
+      margin-top: 2px;
+      font-style: italic;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 6px #0008;
+    }
+    .insta-btn.main {
+      background: linear-gradient(100deg, rgba(255,111,97,0.22) 0%, rgba(255,255,255,0.08) 100%);
+      border: 2.5px solid #ff6f61;
+      box-shadow: 0 4px 24px #ff6f6135, 0 1.5px 3px #ff6f6122;
+    }
+    .insta-btn.secondary {
+      background: linear-gradient(100deg, rgba(30,144,255,0.22) 0%, rgba(255,255,255,0.08) 100%);
+      border: 2.5px solid #1e90ff;
+      box-shadow: 0 4px 24px #1e90ff35, 0 1.5px 3px #1e90ff22;
+    }
+    .insta-btn.main .id-label {
+      background: linear-gradient(90deg, #ff6f61 0%, #fccc63 100%);
+      color: #fff;
+      text-shadow: 0 2px 8px #ff6f6122;
+    }
+    .insta-btn.secondary .id-label {
+      background: linear-gradient(90deg, #1e90ff 0%, #00ffc6 100%);
+      color: #fff;
+      text-shadow: 0 2px 8px #1e90ff22;
+    }
+    .insta-btn::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -60px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, #fff7 0%, transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .insta-btn:active::after,
+    .insta-btn:focus::after {
+      opacity: 0.18;
+    }
+    .insta-btn:hover, .insta-btn:focus {
+      transform: scale(1.045) translateY(-3px);
+      box-shadow: 0 12px 40px #000a, 0 0px 24px #fff2;
+      background: rgba(255,255,255,0.23);
+    }
+    @media (max-width: 600px) {
+      .insta-btn {
+        font-size: 1.03rem;
+        padding: 18px 10vw 18px 18px;
+        min-width: 0;
+        width: 90vw;
+        max-width: 99vw;
+      }
+      .insta-btn .icon {
+        font-size: 1.6rem;
+      }
+      .insta-btn .id-label {
+        font-size: 1.05rem;
+        padding: 3px 10px;
+      }
+      .insta-btn .fullform {
+        font-size: 0.89rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="buttons-wrapper">
+    <!-- Main ID Button -->
+    <a class="insta-btn main" href="https://instagram.com/cyb_rahul" target="_blank" rel="noopener">
+      <span class="icon"><i class="fab fa-instagram"></i></span>
+      <span>
+        <span class="id-label">@cyb_rahul</span>
+        <span class="fullform">𝗖𝗬𝗕 ➥ My <b>𝗖onquered 𝗬oung 𝗕lood</b></span>
+      </span>
+    </a>
+    <!-- Second ID Button -->
+    <a class="insta-btn secondary" href="https://instagram.com/ujr_rahul" target="_blank" rel="noopener">
+      <span class="icon"><i class="fab fa-instagram"></i></span>
+      <span>
+        <span class="id-label">@ujr_rahul</span>
+        <span class="fullform">𝗨𝗝𝗥 ➥ My <b>𝗨nseen 𝗝ourney 𝗥eflected...</b></span>
+      </span>
+    </a>
+  </div>
+</body>
+</html>
