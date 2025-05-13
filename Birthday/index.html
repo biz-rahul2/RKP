@@ -17,13 +17,25 @@
             --text: #fff;
             --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: 'Montserrat', 'Poppins', sans-serif;
-            background: #0f2027;
             color: var(--text);
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            /* Animated gradient background */
+            background: linear-gradient(120deg, #000428, #004e92, #00c6ff, #ffdde1);
+            background-size: 200% 200%;
+            animation: bgMove 10s ease-in-out infinite alternate;
+        }
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         /* Particle background container */
         #particles-js {
@@ -32,34 +44,48 @@
             height: 100vh;
             top: 0; left: 0;
             z-index: 0;
+            pointer-events: none;
+        }
+        /* Balloons container */
+        #balloons-container {
+            position: fixed;
+            left: 0; top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none;
         }
         .container {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 0;
         }
         .glass-card {
             background: var(--glass-bg);
             box-shadow: var(--shadow);
             border-radius: 24px;
-            padding: 40px 30px;
-            margin: 30px 0;
-            max-width: 500px;
-            width: 90vw;
+            padding: 36px 24px;
+            margin: 32px 0;
+            max-width: 420px;
+            width: 95vw;
             backdrop-filter: blur(16px);
             border: 1.5px solid rgba(255,255,255,0.18);
             transition: background 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .dark-mode .glass-card {
             background: rgba(0,0,0,0.3);
         }
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.7em;
+            font-size: 2.2em;
             letter-spacing: 1px;
             background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffdde1);
             -webkit-background-clip: text;
@@ -67,42 +93,45 @@
             margin-bottom: 10px;
             text-shadow: 2px 2px 14px #fff8;
             animation: fadeInDown 1.2s;
+            text-align: center;
         }
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-40px);}
             to { opacity: 1; transform: translateY(0);}
         }
         .message-box {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #fff;
             background: var(--main-bg);
             border-radius: 12px;
-            padding: 16px;
-            margin: 18px 0 10px 0;
+            padding: 13px 10px;
+            margin: 14px 0 8px 0;
             box-shadow: 0 4px 24px 0 rgba(255,255,255,0.10);
-            min-height: 44px;
+            min-height: 40px;
             font-weight: 600;
             letter-spacing: 0.5px;
             animation: fadeIn 1.5s;
+            text-align: center;
         }
         /* Countdown Timer */
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-            margin-top: 25px;
-            margin-bottom: 10px;
+            gap: 13px;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            width: 100%;
         }
         .countdown-item {
             background: linear-gradient(135deg, #ff416cdd, #ff4b2bdd 80%);
             color: #fff;
-            border-radius: 14px;
-            padding: 20px 10px 10px 10px;
-            box-shadow: 0 0 18px #ff4b2b44;
-            min-width: 80px;
+            border-radius: 13px;
+            padding: 12px 4px 7px 4px;
+            box-shadow: 0 0 13px #ff4b2b44;
+            min-width: 60px;
             text-align: center;
             font-weight: 700;
-            font-size: 1.6em;
+            font-size: 1.2em;
             position: relative;
             overflow: hidden;
             transition: transform 0.2s;
@@ -110,9 +139,9 @@
         }
         .countdown-item span {
             display: block;
-            font-size: 2.1em;
+            font-size: 1.6em;
             font-family: 'Montserrat', sans-serif;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             animation: digitPop 0.8s;
         }
         .countdown-label {
@@ -141,15 +170,15 @@
         /* Dark/Light Mode Toggle */
         .toggle-btn {
             position: absolute;
-            top: 32px;
-            right: 32px;
+            top: 20px;
+            right: 20px;
             background: rgba(255,255,255,0.15);
             border: none;
             border-radius: 50%;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             cursor: pointer;
-            z-index: 10;
+            z-index: 20;
             box-shadow: 0 2px 8px #0002;
             display: flex;
             align-items: center;
@@ -157,7 +186,7 @@
             transition: background 0.3s;
         }
         .toggle-btn i {
-            font-size: 1.5em;
+            font-size: 1.3em;
             color: #fff;
             transition: color 0.3s;
         }
@@ -171,15 +200,48 @@
         }
         /* Responsive */
         @media (max-width: 600px) {
-            .glass-card { padding: 20px 6vw;}
-            .countdown-grid { gap: 10px;}
-            .countdown-item { font-size: 1.1em; padding: 14px 4px 6px 4px;}
-            h1 { font-size: 1.4em;}
+            .glass-card { padding: 13px 2vw; max-width: 99vw;}
+            .countdown-grid { gap: 8px;}
+            .countdown-item { font-size: 1em; padding: 7px 1px 4px 1px; min-width: 45px;}
+            h1 { font-size: 1.15em;}
+            .toggle-btn { width: 38px; height: 38px; top: 7px; right: 7px;}
+        }
+        @media (max-width: 400px) {
+            .glass-card { padding: 7px 1vw;}
+            .countdown-item span { font-size: 1.1em;}
+        }
+        /* Balloons CSS */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 38px;
+            height: 55px;
+            background: radial-gradient(circle at 60% 40%, #ff4b2b 70%, #fff0 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: balloonUp 6s linear forwards;
+            z-index: 100;
+            opacity: 0.85;
+        }
+        .balloon:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -18px;
+            width: 2px;
+            height: 20px;
+            background: #aaa;
+            border-radius: 1px;
+            transform: translateX(-50%);
+        }
+        @keyframes balloonUp {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-110vh) scale(1.05);}
         }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
+    <div id="balloons-container"></div>
     <button class="toggle-btn" onclick="toggleMode()" title="Toggle Dark/Light Mode">
         <i id="modeIcon" class="fa-solid fa-moon"></i>
     </button>
@@ -208,12 +270,12 @@
         // Particle background
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80 },
+                "number": { "value": 60 },
                 "color": { "value": ["#ff4b2b","#ffdd57","#00c6ff","#fff"] },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.45 },
-                "size": { "value": 5, "random": true },
-                "move": { "enable": true, "speed": 2 }
+                "opacity": { "value": 0.35 },
+                "size": { "value": 4, "random": true },
+                "move": { "enable": true, "speed": 1.5 }
             },
             "interactivity": {
                 "events": {
@@ -292,6 +354,7 @@
                 startConfetti();
                 playBirthdaySong();
                 emojiRain();
+                launchBalloons();
             } else if (month === 7 && day === 26) message = "😂 अब क्या देखने आए? Party खत्म! 😆";
 
             document.getElementById("messageBox").innerHTML = message;
@@ -299,12 +362,15 @@
 
         // Confetti
         function startConfetti() {
+            if (window._confettiStarted) return;
+            window._confettiStarted = true;
             let end = Date.now() + 5 * 1000;
             let colors = ["#ff0000", "#ffff00", "#00ff00", "#0000ff"];
             (function frame() {
                 confetti({ particleCount: 7, angle: 60, spread: 65, origin: { x: 0 }, colors: colors });
                 confetti({ particleCount: 7, angle: 120, spread: 65, origin: { x: 1 }, colors: colors });
                 if (Date.now() < end) requestAnimationFrame(frame);
+                else window._confettiStarted = false;
             })();
         }
 
@@ -328,18 +394,18 @@
             rain.style.width = '100vw';
             rain.style.height = '100vh';
             rain.style.pointerEvents = 'none';
-            rain.style.zIndex = 20;
+            rain.style.zIndex = 200;
             document.body.appendChild(rain);
 
             let emojis = ['🎉','🎂','🎈','🥳','🎊','🪅'];
-            let count = 40;
+            let count = 30;
             for (let i = 0; i < count; i++) {
                 let e = document.createElement('span');
                 e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
                 e.style.position = 'absolute';
                 e.style.left = Math.random()*100 + 'vw';
                 e.style.top = '-3em';
-                e.style.fontSize = (Math.random()*2+1.5) + 'em';
+                e.style.fontSize = (Math.random()*2+1.2) + 'em';
                 e.style.opacity = 0.85;
                 e.style.animation = `emojiDrop ${2+Math.random()*2}s linear ${Math.random()}s forwards`;
                 rain.appendChild(e);
@@ -353,6 +419,27 @@
             to { top: 110vh; opacity: 0.1;}
         }`;
         document.head.appendChild(style);
+
+        // Balloons Animation
+        function launchBalloons() {
+            const container = document.getElementById('balloons-container');
+            if (container.childElementCount > 0) return; // Prevent multiple launches
+            const colors = [
+                '#ff4b2b', '#ffdd57', '#00c6ff', '#8e54e9', '#ff9a9e', '#43e97b'
+            ];
+            for (let i = 0; i < 12; i++) {
+                let balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = (Math.random()*90 + 2) + 'vw';
+                balloon.style.background = `radial-gradient(circle at 60% 40%, ${colors[i%colors.length]} 70%, #fff0 100%)`;
+                balloon.style.animationDuration = (5+Math.random()*2) + 's';
+                balloon.style.opacity = 0.7 + Math.random()*0.3;
+                balloon.style.width = (30+Math.random()*18) + 'px';
+                balloon.style.height = (45+Math.random()*20) + 'px';
+                container.appendChild(balloon);
+            }
+            setTimeout(()=>{ container.innerHTML = ''; }, 6000);
+        }
 
         // Start countdown
         setInterval(updateCountdown, 1000);
