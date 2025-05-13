@@ -2,224 +2,339 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Language Skills | Rahul Kumar Puri</title>
-  <meta name="keywords" content="The Lamp RKP, Rahul Kumar Puri, Language Skills, Hindi, English, Bhojpuri, Chinese">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Rahul Kumar Puri, Language Skills, Hindi, English, Bhojpuri, Chinese">
   <meta name="description" content="Discover the languages Rahul Kumar Puri speaks, writes, and understands, along with his proficiency levels in each.">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Rahul Kumar Puri">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #00f2fe;
-      --secondary: #4facfe;
-      --accent: #43e97b;
-      --bg: #18181f;
-      --glass: rgba(255,255,255,0.1);
-      --neon: #00ffd0;
+      --primary: #00fff7;
+      --secondary: #ff00e0;
+      --accent: #fffc00;
+      --bg1: #10102a;
+      --bg2: #1a1a40;
+      --glass: rgba(255,255,255,0.12);
+      --glass2: rgba(0,0,0,0.22);
+      --neon: #00fff7;
       --text: #fff;
       --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-      --border: rgba(255,255,255,0.15);
+      --border: rgba(255,255,255,0.13);
+      --scrollbar: #00fff7;
+      --scrollbar-bg: #23234a;
     }
     * { box-sizing: border-box; }
-    body {
+    html, body {
+      margin: 0; padding: 0;
       min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, var(--bg) 70%, #23234a 100%);
+      width: 100vw;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
       font-family: 'Montserrat', Arial, sans-serif;
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; background: var(--scrollbar-bg);}
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 6px;}
+    /* Animated Background Shapes */
+    .bg-shape {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(22px);
+      opacity: 0.25;
+      z-index: 0;
+      animation: floatShape 12s infinite alternate;
+      pointer-events: none;
+    }
+    .bg-shape1 { width: 320px; height: 320px; left: -80px; top: 10vh; background: linear-gradient(135deg, #00fff7 40%, #ff00e0 100%);}
+    .bg-shape2 { width: 220px; height: 220px; right: -60px; top: 60vh; background: linear-gradient(135deg, #fffc00 40%, #00fff7 100%);}
+    .bg-shape3 { width: 160px; height: 160px; left: 60vw; top: 85vh; background: linear-gradient(135deg, #ff00e0 40%, #fffc00 100%);}
+    @keyframes floatShape {
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(-60px) scale(1.1);}
+    }
+    /* Header */
     header {
-      margin-top: 40px;
-      margin-bottom: 30px;
+      margin-top: 48px;
+      margin-bottom: 32px;
       text-align: center;
+      z-index: 2;
+      position: relative;
+      animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-50px);}
+      100% { opacity: 1; transform: translateY(0);}
     }
     .main-title {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.6em;
-      letter-spacing: 3px;
+      font-size: 2.8em;
+      letter-spacing: 4px;
       color: var(--primary);
-      text-shadow: 0 0 12px var(--neon);
-      margin-bottom: 8px;
+      text-shadow: 0 0 22px var(--neon), 0 0 2px #fff;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      filter: drop-shadow(0px 0px 4px #00fff7);
+      animation: neonPulse 2.2s infinite alternate;
+    }
+    @keyframes neonPulse {
+      0% { text-shadow: 0 0 22px var(--neon), 0 0 2px #fff;}
+      100% { text-shadow: 0 0 38px #fff, 0 0 12px var(--primary);}
     }
     .subtitle {
-      font-size: 1.1em;
+      font-size: 1.18em;
       color: #b2fefa;
-      letter-spacing: 1px;
-      opacity: 0.8;
+      letter-spacing: 1.2px;
+      opacity: 0.85;
+      margin-bottom: 6px;
     }
+    /* Languages Grid */
     .languages-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto 30px auto;
-      padding: 0 10px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 38px;
+      width: 98vw;
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+      z-index: 2;
+      position: relative;
     }
     .lang-card {
-      background: var(--glass);
-      border: 1.5px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 36px 22px 20px 22px;
+      background: linear-gradient(135deg, var(--glass) 80%, var(--glass2) 100%);
+      border: 2.5px solid var(--border);
+      border-radius: 28px;
+      box-shadow: 0 0 24px 2px #00fff766, var(--shadow);
+      padding: 38px 24px 24px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      min-height: 320px;
+      transition: transform 0.28s, box-shadow 0.18s;
+      cursor: pointer;
+      animation: fadeInUp 1.3s cubic-bezier(.77,0,.18,1);
     }
     .lang-card:hover {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 0 20px var(--primary), 0 8px 32px 0 rgba(31, 38, 135, 0.47);
+      transform: translateY(-10px) scale(1.04) rotate(-1deg);
+      box-shadow: 0 0 44px 6px #ff00e0cc, 0 0 22px 2px #00fff7cc;
       border-color: var(--primary);
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(80px);}
+      100% { opacity: 1; transform: translateY(0);}
     }
     .lang-name {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.25em;
-      letter-spacing: 1.5px;
-      margin-bottom: 15px;
+      font-size: 1.32em;
+      letter-spacing: 1.8px;
+      margin-bottom: 16px;
       color: var(--accent);
-      text-shadow: 0 0 8px var(--accent);
+      text-shadow: 0 0 12px var(--accent), 0 0 2px #fff;
       text-transform: uppercase;
     }
+    /* Fluent Badge */
+    .fluent-badge {
+      background: linear-gradient(90deg, #f9d423 20%, #ff4e50 100%);
+      color: #18181f;
+      font-weight: bold;
+      font-size: 1.19em;
+      padding: 12px 32px;
+      border-radius: 22px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      letter-spacing: 1.2px;
+      box-shadow: 0 0 18px #f9d42344, 0 0 8px #ff4e50;
+      border: 2px solid #fff00088;
+      filter: drop-shadow(0px 0px 4px #f9d423);
+      animation: badgeGlow 2.5s infinite alternate;
+    }
+    @keyframes badgeGlow {
+      0% { box-shadow: 0 0 18px #f9d42344, 0 0 8px #ff4e50;}
+      100% { box-shadow: 0 0 38px #f9d423aa, 0 0 16px #ff4e50;}
+    }
+    /* Pie Chart Styles */
     .pie-chart {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 12px;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 18px;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: filter 0.2s;
+      filter: drop-shadow(0 0 12px #00fff7aa);
     }
-    .pie-chart svg {
-      transform: rotate(-90deg);
+    .pie-chart:hover {
+      filter: drop-shadow(0 0 32px #ff00e0cc);
     }
     .pie-percent {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 1.3em;
+      font-size: 1.6em;
       font-weight: bold;
       color: var(--primary);
-      text-shadow: 0 0 8px var(--primary);
+      text-shadow: 0 0 12px var(--primary), 0 0 2px #fff;
+      pointer-events: none;
+      letter-spacing: 1.5px;
+      user-select: none;
     }
-    .fluent-badge {
-      background: linear-gradient(90deg, #f9d423 30%, #ff4e50 100%);
-      color: #18181f;
-      font-weight: bold;
-      font-size: 1.1em;
-      padding: 7px 22px;
-      border-radius: 22px;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 10px #f9d42344;
+    /* Tooltip */
+    .pie-tooltip {
+      position: absolute;
+      left: 50%; top: -48px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.92);
+      color: #fff;
+      border-radius: 12px;
+      padding: 8px 18px;
+      font-size: 1em;
+      white-space: nowrap;
+      box-shadow: 0 0 16px #00fff7aa;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s;
+      z-index: 9;
     }
+    .pie-chart.show-tooltip .pie-tooltip { opacity: 1; }
+    /* Language Description */
+    .lang-desc {
+      font-size: 1.08em;
+      color: #d8ffe5;
+      opacity: 0.88;
+      margin-top: 10px;
+      text-align: center;
+      min-height: 36px;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      text-shadow: 0 0 2px #00fff7;
+    }
+    /* Note Section */
     .note-section {
       background: var(--glass);
-      border-radius: 15px;
-      border-left: 4px solid var(--primary);
-      padding: 22px 18px;
-      margin: 30px 0 0 0;
-      max-width: 520px;
+      border-radius: 18px;
+      border-left: 5px solid var(--primary);
+      padding: 28px 28px 18px 24px;
+      margin: 38px auto 0 auto;
+      max-width: 620px;
       color: #e0e0e0;
-      font-size: 1em;
+      font-size: 1.08em;
       box-shadow: var(--shadow);
-      line-height: 1.6;
+      line-height: 1.7;
+      position: relative;
+      z-index: 2;
+      animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1) 0.2s backwards;
     }
     .note-section ul {
-      padding-left: 18px;
+      padding-left: 22px;
       margin: 0;
     }
     .note-section li {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       list-style: disc;
     }
+    .note-section strong {
+      color: var(--primary);
+      font-size: 1.13em;
+      letter-spacing: 1px;
+    }
+    /* Footer */
     footer {
       width: 100vw;
-      background: rgba(24,24,31,0.92);
+      background: rgba(24,24,31,0.96);
       color: #b2fefa;
-      border-top: 2px solid var(--primary);
+      border-top: 2.5px solid var(--primary);
       text-align: center;
-      font-size: 0.98em;
-      padding: 20px 0 12px 0;
-      margin-top: 40px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 -2px 12px #00ffd033;
+      font-size: 1.05em;
+      padding: 24px 0 14px 0;
+      margin-top: 60px;
+      letter-spacing: 0.6px;
+      box-shadow: 0 -2px 16px #00fff033;
+      z-index: 2;
+      position: relative;
+      animation: fadeInUp 1.3s cubic-bezier(.77,0,.18,1) 0.5s backwards;
+    }
+    footer strong { color: var(--accent);}
+    /* Responsive */
+    @media (max-width: 900px) {
+      .languages-grid { grid-template-columns: 1fr 1fr;}
     }
     @media (max-width: 600px) {
       .main-title { font-size: 1.5em; }
-      .languages-grid { gap: 18px; }
-      .lang-card { padding: 24px 10px 16px 10px; }
-      .pie-chart { width: 70px; height: 70px; }
+      .languages-grid { grid-template-columns: 1fr; gap: 18px;}
+      .lang-card { padding: 20px 8px 12px 8px; min-height: 240px;}
+      .pie-chart { width: 80px; height: 80px;}
+      .note-section { padding: 16px 8px 10px 10px;}
     }
   </style>
 </head>
 <body>
+  <!-- Animated Background Shapes -->
+  <div class="bg-shape bg-shape1"></div>
+  <div class="bg-shape bg-shape2"></div>
+  <div class="bg-shape bg-shape3"></div>
   <header>
     <div class="main-title">My Language Skills</div>
     <div class="subtitle">Languages I speak, write, and understand</div>
   </header>
-
   <section class="languages-grid">
-    <div class="lang-card">
+    <div class="lang-card" style="animation-delay:0.1s;">
       <div class="lang-name">Bhojpuri</div>
       <div class="fluent-badge">Fluent</div>
+      <div class="lang-desc">मेरा मातृभाषा, बोलना, लिखना, समझना सब कुछ आसान।</div>
     </div>
-    <div class="lang-card">
+    <div class="lang-card" style="animation-delay:0.2s;">
       <div class="lang-name">Hindi</div>
       <div class="fluent-badge">Fluent</div>
+      <div class="lang-desc">रोज़मर्रा की भाषा, पढ़ना, लिखना, बोलना सब में दक्ष।</div>
     </div>
-    <div class="lang-card">
+    <div class="lang-card" style="animation-delay:0.3s;">
       <div class="lang-name">English</div>
-      <div class="pie-chart" data-percent="70" data-color="#00f2fe"></div>
+      <div class="pie-chart" data-percent="70" data-color="#00fff7" data-label="English Proficiency"></div>
+      <div class="lang-desc">Intermediate level: पढ़ना, लिखना, बोलना, समझना (70%)</div>
     </div>
-    <div class="lang-card">
+    <div class="lang-card" style="animation-delay:0.4s;">
       <div class="lang-name">Chinese</div>
-      <div class="pie-chart" data-percent="5" data-color="#ff4e50"></div>
+      <div class="pie-chart" data-percent="5" data-color="#ff00e0" data-label="Chinese Proficiency"></div>
+      <div class="lang-desc">Basic: शुरुआती स्तर, कुछ शब्द और वाक्य समझता हूँ (5%)</div>
     </div>
   </section>
-
   <div class="note-section">
     <strong>Note:</strong>
     <ul>
-      <li><span style="color:var(--primary);">Percentage (%)</span> shows my proficiency in that language.</li>
-      <li><span style="color:#f9d423;">Fluent</span> means I can easily speak and understand the language.</li>
+      <li><span style="color:var(--primary);">Percentage (%)</span> का मतलब है कि वह भाषा मुझे कितनी आती है।</li>
+      <li><span style="color:#f9d423;">Fluent</span> का मतलब है कि मैं उस भाषा को आसानी से बोल, लिख और समझ सकता हूँ।</li>
+      <li>Pie chart पर hover करने से proficiency का label दिखेगा।</li>
     </ul>
   </div>
-
   <footer>
     © 2025 <strong>Rahul Kumar Puri</strong> | All rights reserved.
   </footer>
-
   <script>
-    // Pie chart generator for each .pie-chart element
+    // Pie chart generator for each .pie-chart element with tooltip and animation
     document.querySelectorAll('.pie-chart').forEach(function(el) {
       const percent = parseInt(el.getAttribute('data-percent'), 10);
       const color = el.getAttribute('data-color') || '#00f2fe';
-      const radius = 45;
-      const stroke = 14;
+      const label = el.getAttribute('data-label') || '';
+      const radius = 56;
+      const stroke = 16;
       const normalizedRadius = radius - stroke / 2;
       const circumference = 2 * Math.PI * normalizedRadius;
       // SVG Pie
       el.innerHTML = `
-        <svg width="100" height="100">
+        <svg width="130" height="130">
           <circle
-            stroke="#23234a"
+            stroke="#222"
             fill="transparent"
             stroke-width="${stroke}"
             r="${normalizedRadius}"
-            cx="50"
-            cy="50"
+            cx="65"
+            cy="65"
           />
           <circle
             class="pie"
@@ -228,20 +343,36 @@
             stroke-width="${stroke}"
             stroke-linecap="round"
             r="${normalizedRadius}"
-            cx="50"
-            cy="50"
+            cx="65"
+            cy="65"
             stroke-dasharray="${circumference} ${circumference}"
             stroke-dashoffset="${circumference}"
-            style="transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
+            style="transition: stroke-dashoffset 1.5s cubic-bezier(.77,0,.18,1);"
           />
         </svg>
         <span class="pie-percent">${percent}%</span>
+        <div class="pie-tooltip">${label}: ${percent}%</div>
       `;
       // Animate Pie
       setTimeout(() => {
         const pie = el.querySelector('.pie');
         pie.style.strokeDashoffset = circumference - (percent / 100) * circumference;
-      }, 200);
+      }, 200 + Math.random()*200);
+      // Tooltip events
+      el.addEventListener('mouseenter', function() {
+        el.classList.add('show-tooltip');
+      });
+      el.addEventListener('mouseleave', function() {
+        el.classList.remove('show-tooltip');
+      });
+      el.addEventListener('touchstart', function() {
+        el.classList.toggle('show-tooltip');
+      });
+    });
+
+    // Entry animation delay for cards
+    document.querySelectorAll('.lang-card').forEach(function(card, i){
+      card.style.animationDelay = (0.1 + i*0.13) + 's';
     });
   </script>
 </body>
