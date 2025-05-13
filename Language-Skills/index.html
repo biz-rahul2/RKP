@@ -125,6 +125,16 @@
       height: 100%;
       user-select: none;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(.77,0,.18,1);
+    }
+    .pie-percent.visible, .pie-check.visible {
+      opacity: 1;
+      animation: fadeInScale 0.5s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7);}
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1);}
     }
     .pie-percent {
       font-size: 1.3em;
@@ -274,6 +284,7 @@
         emoji = percent + '%';
       }
 
+      // Pie chart HTML
       el.innerHTML = `
         <svg width="${size}" height="${size}">
           ${gradientDefs}
@@ -306,6 +317,11 @@
       setTimeout(() => {
         const pie = el.querySelector('.pie');
         pie.style.strokeDashoffset = circumference - (percent / 100) * circumference;
+        // Show emoji/text after animation (1.2s)
+        setTimeout(() => {
+          const label = el.querySelector('.' + pieClass);
+          if(label) label.classList.add('visible');
+        }, 1200);
       }, 200);
     });
   </script>
