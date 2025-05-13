@@ -309,7 +309,7 @@
                 <p class="interest-description">
                     Bachpan se hi mujhe kuchh-kuchh likhne ka shauk hai, aur isi shauk ki wajah se main ek chhota sa writer bhi hoon 😅
                 </p>
-                <a href="#" class="interest-link" id="writing-link">Read My Articles</a>
+                <a href="https://thelamp.site/Books" class="interest-link">Read My Articles</a>
             </div>
         </div>
     </section>
@@ -363,16 +363,6 @@
                     behavior: 'smooth'
                 });
             });
-        });
-        
-        // Writing link redirect based on screen size
-        document.getElementById('writing-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (window.innerWidth <= 768) {
-                window.location.href = '../Books';
-            } else {
-                window.location.href = '../Book';
-            }
         });
     </script>
 </body>
