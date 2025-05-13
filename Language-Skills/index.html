@@ -76,7 +76,7 @@
       align-items: center;
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
     .lang-card:hover {
       transform: translateY(-6px) scale(1.03);
@@ -95,37 +95,58 @@
     .pie-chart {
       width: 110px;
       height: 110px;
+      min-width: 110px;
+      min-height: 110px;
       margin-bottom: 12px;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: visible;
     }
     .pie-chart svg {
       display: block;
       width: 110px;
       height: 110px;
+      min-width: 110px;
+      min-height: 110px;
       transform: rotate(-90deg);
+      overflow: visible;
     }
-    .pie-percent {
+    .pie-percent, .pie-check {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      pointer-events: none;
+    }
+    .pie-percent {
       font-size: 1.3em;
       font-weight: bold;
       color: var(--primary);
       text-shadow: 0 0 8px var(--primary);
-      user-select: none;
     }
-    /* Special pie chart styles for Bhojpuri */
+    .pie-check {
+      font-size: 2.5em;
+      font-weight: bold;
+      /* Default color, will be overridden for Bhojpuri/Hindi */
+      color: var(--accent);
+      text-shadow: 0 0 12px var(--accent);
+      line-height: 1;
+    }
+    /* Bhojpuri special styles */
     .pie-chart.bhojpuri-pie svg .pie {
-      stroke: url(#bhojpuri-gradient);
+      stroke: url(#bhojpuri-gradient-0);
       filter: drop-shadow(0 0 10px var(--bhojpuri));
       animation: pulse-bhojpuri 1.2s infinite alternate;
     }
     .pie-chart.bhojpuri-pie .pie-check {
-      font-size: 2.1em;
       color: var(--bhojpuri);
       text-shadow: 0 0 12px var(--bhojpuri);
     }
@@ -133,14 +154,13 @@
       0% { filter: drop-shadow(0 0 10px var(--bhojpuri)); }
       100% { filter: drop-shadow(0 0 22px var(--bhojpuri)); }
     }
-    /* Special pie chart styles for Hindi */
+    /* Hindi special styles */
     .pie-chart.hindi-pie svg .pie {
-      stroke: url(#hindi-gradient);
+      stroke: url(#hindi-gradient-1);
       filter: drop-shadow(0 0 10px var(--hindi));
       animation: pulse-hindi 1.2s infinite alternate;
     }
     .pie-chart.hindi-pie .pie-check {
-      font-size: 2.1em;
       color: var(--hindi);
       text-shadow: 0 0 12px var(--hindi);
     }
@@ -172,8 +192,8 @@
       .main-title { font-size: 1.5em; }
       .languages-grid { gap: 18px; }
       .lang-card { padding: 24px 10px 16px 10px; }
-      .pie-chart { width: 70px; height: 70px;}
-      .pie-chart svg { width: 70px; height: 70px;}
+      .pie-chart, .pie-chart svg { width: 70px; height: 70px; min-width: 70px; min-height: 70px;}
+      .pie-check { font-size: 1.5em; }
     }
   </style>
 </head>
@@ -185,11 +205,11 @@
   <section class="languages-grid">
     <div class="lang-card">
       <div class="lang-name">Bhojpuri</div>
-      <div class="pie-chart bhojpuri-pie" data-percent="100"></div>
+      <div class="pie-chart bhojpuri-pie" data-percent="100" data-pie-index="0"></div>
     </div>
     <div class="lang-card">
       <div class="lang-name">Hindi</div>
-      <div class="pie-chart hindi-pie" data-percent="100"></div>
+      <div class="pie-chart hindi-pie" data-percent="100" data-pie-index="1"></div>
     </div>
     <div class="lang-card">
       <div class="lang-name">English</div>
@@ -208,9 +228,8 @@
   </div>
   <script>
     // Pie chart generator for each .pie-chart element
-    document.querySelectorAll('.pie-chart').forEach(function(el) {
+    document.querySelectorAll('.pie-chart').forEach(function(el, idx) {
       const percent = parseInt(el.getAttribute('data-percent'), 10);
-      // Special handling for Bhojpuri and Hindi
       const isBhojpuri = el.classList.contains('bhojpuri-pie');
       const isHindi = el.classList.contains('hindi-pie');
       let color = el.getAttribute('data-color') || '#00f2fe';
@@ -218,33 +237,43 @@
       const stroke = 14;
       const radius = (size / 2) - (stroke / 2);
       const circumference = 2 * Math.PI * radius;
-
-      // SVG gradients for special pies
       let gradientDefs = '';
+      let pieClass = '';
+      let emoji = '';
+      let gradientId = '';
+
+      // Unique gradient id for each pie
       if (isBhojpuri) {
+        gradientId = `bhojpuri-gradient-0`;
         gradientDefs = `
           <defs>
-            <linearGradient id="bhojpuri-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#43e97b"/>
               <stop offset="100%" stop-color="#38f9d7"/>
             </linearGradient>
           </defs>
         `;
-        color = 'url(#bhojpuri-gradient)';
-      }
-      if (isHindi) {
+        color = `url(#${gradientId})`;
+        pieClass = 'pie-check';
+        emoji = percent === 100 ? '✅' : percent + '%';
+      } else if (isHindi) {
+        gradientId = `hindi-gradient-1`;
         gradientDefs = `
           <defs>
-            <linearGradient id="hindi-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#f9d423"/>
               <stop offset="100%" stop-color="#ff4e50"/>
             </linearGradient>
           </defs>
         `;
-        color = 'url(#hindi-gradient)';
+        color = `url(#${gradientId})`;
+        pieClass = 'pie-check';
+        emoji = percent === 100 ? '✅' : percent + '%';
+      } else {
+        pieClass = 'pie-percent';
+        emoji = percent + '%';
       }
 
-      // Pie chart HTML
       el.innerHTML = `
         <svg width="${size}" height="${size}">
           ${gradientDefs}
@@ -270,9 +299,7 @@
             style="transition: stroke-dashoffset 1.2s cubic-bezier(.77,0,.18,1);"
           />
         </svg>
-        <span class="${(isBhojpuri || isHindi) ? 'pie-check' : 'pie-percent'}">
-          ${(isBhojpuri || isHindi) && percent === 100 ? '✅' : percent + '%'}
-        </span>
+        <span class="${pieClass}">${emoji}</span>
       `;
 
       // Animate Pie
