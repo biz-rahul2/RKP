@@ -124,52 +124,39 @@
       margin-bottom: 2.5rem;
     }
 
+    /* BUTTONS - new style */
     .btn {
+      display: inline-block;
       min-width: 260px;
       padding: 16px 0;
       font-size: 1.18rem;
       font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      border: none;
-      border-radius: 9px;
-      cursor: pointer;
+      font-weight: 700;
+      border-radius: 40px;
+      border: 3px solid;
+      border-image: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent2), var(--accent4)) 1;
+      background: rgba(10, 10, 30, 0.88);
       color: var(--white);
-      background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3), var(--accent4));
-      background-size: 200% auto;
-      box-shadow: 0 4px 24px 0 rgba(255, 128, 0, 0.12);
-      transition: transform 0.22s cubic-bezier(.77,0,.18,1), box-shadow 0.22s, background 0.4s;
-      outline: none;
-      letter-spacing: 1px;
-      will-change: transform;
+      text-decoration: none !important; /* REMOVE UNDERLINE */
+      letter-spacing: 1.5px;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+      box-shadow: 0 2px 18px 0 rgba(255, 128, 0, 0.10);
       position: relative;
       overflow: hidden;
     }
-    .btn:hover, .btn:focus {
-      transform: scale(1.09) rotateX(5deg) rotateY(-3deg);
-      box-shadow: 0 8px 32px 0 rgba(255,255,255,0.18);
-      background-position: right center;
-      filter: brightness(1.2);
+    .btn span {
+      background: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent2), var(--accent4));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 1.5px;
     }
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    /* Add a little flicker effect to buttons */
-    .btn::after {
-      content: '';
-      position: absolute;
-      left: -40%;
-      top: 0;
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.23) 0%, rgba(255,255,255,0.07) 100%);
-      transform: skewX(-20deg);
-      transition: left 0.4s;
-      pointer-events: none;
-    }
-    .btn:hover::after {
-      left: 110%;
-      transition: left 0.4s;
+    .btn:focus {
+      outline: 2px solid var(--accent1);
+      outline-offset: 2px;
     }
 
     /* Responsive */
@@ -228,8 +215,8 @@
       चलो चेक करते हैं कि आपने इनमें से कौन-कौन सी देखी है।
     </div>
     <div class="hero-buttons">
-      <a href="https://thelamp.site/Cinema/Movies/" class="btn">Top 15 Indian Movies & Series</a>
-      <a href="https://thelamp.site/Cinema/Movie/" class="btn">Top 15 International Movies & Series</a>
+      <a href="https://thelamp.site/Cinema/Movies/" class="btn"><span>Top 15 Indian Movies & Series</span></a>
+      <a href="https://thelamp.site/Cinema/Movie/" class="btn"><span>Top 15 International Movies & Series</span></a>
     </div>
     <div class="down-arrow">⬇️</div>
   </div>
