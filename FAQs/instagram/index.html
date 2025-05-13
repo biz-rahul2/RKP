@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rahul's Stylish Instagram IDs</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      font-family: 'Roboto', Arial, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 2px;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ff6f61;
+      text-shadow: 2px 2px 8px #00000055;
+    }
+    .insta-container {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .insta-card {
+      background: rgba(30,30,40,0.95);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px #00000033, 0 1.5px 3px #ff6f6122;
+      padding: 32px 26px 24px 26px;
+      min-width: 270px;
+      max-width: 350px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .insta-card.main {
+      border: 2.5px solid #ff6f61;
+      box-shadow: 0 0 24px #ff6f6155, 0 8px 24px #00000033;
+    }
+    .insta-card.secondary {
+      border: 2.5px solid #1e90ff;
+      box-shadow: 0 0 24px #1e90ff55, 0 8px 24px #00000033;
+    }
+    .insta-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 16px 32px #00000055;
+    }
+    .insta-username {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .insta-main-label {
+      background: #ff6f61;
+      color: #fff;
+      font-size: 0.9rem;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-left: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .insta-secondary-label {
+      background: #1e90ff;
+      color: #fff;
+      font-size: 0.9rem;
+      padding: 2px 10px;
+      border-radius: 10px;
+      margin-left: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .full-form {
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+      margin-top: 10px;
+      font-style: italic;
+      color: #f1c40f;
+      text-shadow: 1px 1px 4px #00000033;
+    }
+    .insta-link {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 28px;
+      background: linear-gradient(90deg, #ff6f61 0%, #f1c40f 100%);
+      color: #222;
+      font-weight: 700;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px #00000022;
+      transition: background 0.2s, color 0.2s;
+    }
+    .insta-card.secondary .insta-link {
+      background: linear-gradient(90deg, #1e90ff 0%, #00ffc6 100%);
+      color: #222;
+    }
+    .insta-link:hover {
+      background: #fff;
+      color: #ff6f61;
+    }
+    .insta-card.secondary .insta-link:hover {
+      background: #fff;
+      color: #1e90ff;
+    }
+    @media (max-width: 800px) {
+      .insta-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+      }
+      .insta-card {
+        width: 90vw;
+        max-width: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rahul's Instagram Hub</h1>
+  <div class="insta-container">
+    <div class="insta-card main">
+      <div class="insta-username">
+        <span>@cyb_rahul</span>
+        <span class="insta-main-label">Main ID</span>
+      </div>
+      <div class="full-form">
+        𝗖𝗬𝗕 ➥ My <b>𝗖onquered 𝗬oung 𝗕lood</b>
+      </div>
+      <a class="insta-link" href="https://instagram.com/cyb_rahul" target="_blank" rel="noopener">Visit Profile</a>
+    </div>
+    <div class="insta-card secondary">
+      <div class="insta-username">
+        <span>@ujr_rahul</span>
+        <span class="insta-secondary-label">Second ID</span>
+      </div>
+      <div class="full-form">
+        𝗨𝗝𝗥 ➥ My <b>𝗨nseen 𝗝ourney 𝗥eflected...</b>
+      </div>
+      <a class="insta-link" href="https://instagram.com/ujr_rahul" target="_blank" rel="noopener">Visit Profile</a>
+    </div>
+  </div>
+</body>
+</html>
+
