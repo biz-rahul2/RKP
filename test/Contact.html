@@ -24,12 +24,6 @@
       --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
       --transition: 0.3s cubic-bezier(.4,2,.6,1);
     }
-    [data-theme="dark"] {
-      --main-bg: linear-gradient(120deg, #232526 0%, #414345 100%);
-      --glass-bg: rgba(30,34,45,0.65);
-      --text: #fff;
-      --white: #fff;
-    }
     html, body {
       height: 100%;
       margin: 0;
@@ -49,15 +43,15 @@
     }
     /* Container */
     .container {
-      width: 100%;
-      max-width: 420px;
+      width: 100vw;
+      max-width: 430px;
       margin: 38px auto;
       background: var(--glass-bg);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       backdrop-filter: var(--glass-blur);
       border: 1.5px solid rgba(255,255,255,0.18);
-      padding: 32px 18px 28px 18px;
+      padding: 32px 10px 28px 10px;
       position: relative;
       animation: fadeIn 1.1s cubic-bezier(.4,2,.6,1);
       z-index: 2;
@@ -66,7 +60,6 @@
       from { opacity: 0; transform: translateY(40px);}
       to { opacity: 1; transform: translateY(0);}
     }
-    /* Heading */
     .section-heading {
       text-align: center;
       font-size: 2.1rem;
@@ -78,7 +71,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    /* Social Media */
     .social-media {
       display: flex;
       justify-content: center;
@@ -106,30 +98,6 @@
       box-shadow: 0 8px 24px 0 rgba(54,209,220,0.20);
       background: linear-gradient(135deg, var(--accent2) 10%, var(--primary) 90%);
     }
-    /* Theme Toggle */
-    .toggle-theme {
-      position: fixed;
-      top: 22px;
-      right: 24px;
-      background: var(--glass-bg);
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 2px 8px 0 rgba(54,209,220,0.10);
-      z-index: 100;
-      border: 1.5px solid rgba(255,255,255,0.18);
-      transition: background var(--transition);
-    }
-    .toggle-theme i {
-      font-size: 1.5rem;
-      color: var(--accent2);
-      transition: color 0.3s;
-    }
-    /* Email Section */
     .email-section {
       margin-top: 14px;
     }
@@ -148,7 +116,6 @@
       margin-bottom: 16px;
       font-size: 1.01rem;
     }
-    /* Form */
     form {
       display: flex;
       flex-direction: column;
@@ -223,7 +190,6 @@
       display: none;
       margin-top: -8px;
     }
-    /* Button */
     .email-btn {
       width: 100%;
       padding: 15px 0;
@@ -248,7 +214,6 @@
       background: linear-gradient(90deg, var(--accent2), var(--primary));
       transform: translateY(-2px) scale(1.03);
     }
-    /* Success/Fail Message */
     .form-message {
       text-align: center;
       font-size: 1.08rem;
@@ -258,15 +223,13 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
     }
-    /* Responsive */
     @media (max-width: 500px) {
       .container {
-        max-width: 98vw;
-        padding: 16px 2vw 12px 2vw;
-      }
-      .toggle-theme {
-        right: 10px;
-        top: 10px;
+        max-width: 100vw;
+        padding: 12px 2vw 12px 2vw;
+        margin: 12px 0;
+        border-radius: 0;
+        box-shadow: none;
       }
       .social-media a {
         width: 44px;
@@ -317,10 +280,6 @@
   <div class="bg-shape two"></div>
   <div class="bg-shape three"></div>
 
-  <!-- Dark/Light Mode Toggle -->
-  <div class="toggle-theme" id="themeToggle" title="Toggle dark/light mode">
-    <i class="fas fa-moon"></i>
-  </div>
   <div class="container">
     <!-- Social Media Section -->
     <h2 class="section-heading">Connect with Me</h2>
@@ -365,24 +324,6 @@
     </div>
   </div>
   <script>
-    // Dark/Light Mode Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const icon = themeToggle.querySelector('i');
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    }
-    themeToggle.onclick = () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      setTheme(current === 'light' ? 'dark' : 'light');
-    };
-    // Load theme on page load
-    (function() {
-      const saved = localStorage.getItem('theme');
-      if(saved) setTheme(saved);
-    })();
-
     // Show/hide custom subject
     function toggleCustomSubject() {
       const subjectDropdown = document.getElementById("email-subject");
