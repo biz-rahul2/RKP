@@ -1,0 +1,400 @@
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+/* Arrow animation keyframes */
+@keyframes moveArrow {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.inner-circle-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Apply animation to the arrow */
+.animated-arrow {
+  animation: moveArrow 1.5s infinite;
+}
+
+.page-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.main-wrapper {
+  position: relative;
+}
+
+.section_home-header {
+  position: relative;
+  padding: 80px 0;
+}
+
+.home-header_wrapper {
+  position: relative;
+}
+
+.padding-global {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.container-medium {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-header_component {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.home-header_headline {
+  max-width: 800px;
+}
+
+.hide {
+  display: none;
+}
+
+.heading-style-h1 {
+  font-size: 4rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.header-paragraph {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.is-large {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+
+.home-header_images-wrapper {
+  position: relative;
+  margin-top: 60px;
+}
+
+.home-header_images-wrap {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 400px;
+}
+
+.home-header_image-1, 
+.home-header_image-2, 
+.home-header_image-3 {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: absolute;
+}
+
+.home-header_image-1 {
+  transform: translate3d(-35%, 2%, -100px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(-5deg) skew(0, 0);
+  transform-style: preserve-3d;
+  width: 25%;
+  left: 25%;
+  z-index: 1;
+}
+
+.home-header_image-2 {
+  transform: translate3d(0%, 0%, 0px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);
+  transform-style: preserve-3d;
+  z-index: 2;
+  width: 30%;
+  left: 35%;
+}
+
+.home-header_image-3 {
+  transform: translate3d(32%, 10%, -102px) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(7deg) skew(0, 0);
+  transform-style: preserve-3d;
+  width: 25%;
+  left: 45%;
+  z-index: 1;
+}
+
+.home-header_spacing {
+  height: 60px;
+}
+
+.section_home-feature {
+  padding: 80px 0;
+}
+
+.home-feature_wrapper {
+  width: 100%;
+}
+
+.home-feature_item {
+  margin-bottom: 60px;
+}
+
+.home-feature_component {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-feature_content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.home-feature_texts-wrap {
+  padding-right: 20px;
+}
+
+.home-feature_heading-wrap {
+  margin-bottom: 20px;
+}
+
+.heading-style-h3 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.home-feature_text-wrap p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.home-feature_image-wrap {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.home-feature_image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.section-home-service {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+}
+
+.container-large {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding-section-large {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.content-component-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.max-width-large {
+  max-width: 800px;
+}
+
+.subtitle-item {
+  margin-bottom: 16px;
+}
+
+.subtitle-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.button-wrapper {
+  display: flex;
+}
+
+.align-flex {
+  align-items: center;
+}
+
+.main-button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-button:hover {
+  background-color: #333;
+}
+
+.text-button-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 20px;
+}
+
+.text-button {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inner-circle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.arrow-button {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+._01 {
+  z-index: 2;
+}
+
+._02 {
+  opacity: 0.5;
+}
+
+.spacer-large {
+  height: 80px;
+}
+
+/* For the 3-column layout */
+.posts-3-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* For each post card */
+.post-card {
+  width: 30%;
+  margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 991px) {
+  .content-component-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .home-feature_content {
+    grid-template-columns: 1fr;
+  }
+  
+  .heading-style-h1 {
+    font-size: 3rem;
+  }
+  
+  .home-header_images-wrap {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .post-card {
+    width: 48%;
+  }
+  
+  .home-header_images-wrap {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .home-header_image-1, 
+  .home-header_image-2, 
+  .home-header_image-3 {
+    position: relative;
+    width: 80%;
+    margin-bottom: 20px;
+    transform: none !important;
+    left: auto;
+  }
+  
+  .heading-style-h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .post-card {
+    width: 100%;
+  }
+  
+  .heading-style-h1 {
+    font-size: 2rem;
+  }
+  
+  .padding-section-large {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
