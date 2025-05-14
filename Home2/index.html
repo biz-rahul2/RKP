@@ -302,5 +302,23 @@
     <script>
       $(document).ready(function() {$(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });
     </script>
+    <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Image 1: Left Tilted
+    const img1 = document.querySelector(".home-header_image-1");
+    img1.style.transition = "transform 1s ease-out";
+    img1.style.transform = "translate3d(-35%, 2%, -100px) rotateZ(-5deg)";
+
+    // Image 2: Center
+    const img2 = document.querySelector(".home-header_image-2");
+    img2.style.transition = "transform 1s ease-out";
+    img2.style.transform = "translate3d(0%, 0%, 0px)";
+
+    // Image 3: Right Tilted
+    const img3 = document.querySelector(".home-header_image-3");
+    img3.style.transition = "transform 1s ease-out";
+    img3.style.transform = "translate3d(32%, 10%, -102px) rotateZ(7deg)";
+  });
+    </script>
   </body>
   </html>
