@@ -338,15 +338,29 @@
     <script>
       $(document).ready(function() {$(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });
     </script>
-    <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.querySelector(".home-header_images-wrap");
+<script>
+  const images = document.querySelectorAll(".home-header_image");
+  let current = 0;
 
-    // Add animation class after a short delay
-    setTimeout(() => {
-      wrapper.classList.add("animate");
-    }, 200); // delay triggers transition
-  });
-    </script>
+  function updateImages() {
+    images.forEach((img, i) => {
+      img.classList.remove("active", "left", "right");
+    });
+
+    const prev = (current - 1 + images.length) % images.length;
+    const next = (current + 1) % images.length;
+
+    images[prev].classList.add("left");
+    images[current].classList.add("active");
+    images[next].classList.add("right");
+  }
+
+  updateImages(); // Initial load
+
+  setInterval(() => {
+    current = (current + 1) % images.length;
+    updateImages();
+  }, 4000); // 4 seconds delay between transitions
+</script>
   </body>
   </html>
