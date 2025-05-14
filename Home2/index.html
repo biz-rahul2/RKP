@@ -1,236 +1,180 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>HEY BUDDIES</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: linear-gradient(135deg, #f8d7da 0%, #fff 100%);
       font-family: 'Montserrat', sans-serif;
       text-align: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
-
     header {
-      padding: 20px 10px 0 10px;
+      padding: 20px 10px 0;
     }
-
     header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 0;
+      font-size: 2.5rem; font-weight: 700; margin: 0;
     }
-
     header p {
-      font-size: 1.1rem;
-      margin: 10px 0 0 0;
+      font-size: 1.1rem; margin: 10px 0;
     }
-
     .carousel-outer {
+      position: relative;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 40px 0;
       overflow: hidden;
+      padding: 40px 0;
     }
-
     .carousel {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 90vw;
-      max-width: 700px;
       position: relative;
+      width: 100%;
       height: 60vw;
       max-height: 380px;
       min-height: 240px;
-      perspective: 1000px;
+      perspective: 1200px;
+      touch-action: pan-y;
     }
-
     .carousel-slide {
-      flex: 0 0 60%;
-      max-width: 60%;
-      margin: 0 -12%;
-      opacity: 0.5;
-      transform: scale(0.8) translateX(0) rotateY(0deg);
-      transition: 
-        opacity 0.7s cubic-bezier(.4,2.2,.2,1),
-        transform 0.7s cubic-bezier(.4,2.2,.2,1),
-        box-shadow 0.7s;
-      z-index: 1;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      filter: blur(1px) grayscale(40%);
-      cursor: pointer;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform-origin: center center;
+      transition:
+        transform 0.6s ease,
+        opacity 0.6s ease;
       border-radius: 16px;
-      background: #fff;
       overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 40%;
+      opacity: 0;
     }
-
+    .carousel-slide img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+    }
     .carousel-slide.center {
-      opacity: 1;
-      transform: scale(1) translateX(0) rotateY(0deg);
       z-index: 3;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-      filter: none;
+      width: 60%;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       cursor: default;
     }
-
     .carousel-slide.left {
-      transform: scale(0.85) translateX(-60%) rotateY(12deg);
-      opacity: 0.7;
       z-index: 2;
-      filter: blur(0.5px) grayscale(20%);
+      opacity: 0.7;
+      transform: translate(-80%, -50%) scale(0.85) rotateY(15deg);
     }
-
     .carousel-slide.right {
-      transform: scale(0.85) translateX(60%) rotateY(-12deg);
-      opacity: 0.7;
       z-index: 2;
-      filter: blur(0.5px) grayscale(20%);
+      opacity: 0.7;
+      transform: translate(-20%, -50%) scale(0.85) rotateY(-15deg);
     }
-
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-      transition: filter 0.5s;
-    }
-
-    /* Arrow controls */
     .carousel-arrow {
-      position: absolute;
-      top: 50%;
+      position: absolute; top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.7);
-      border: none;
+      background: rgba(255,255,255,0.8);
+      border: none; outline: none;
+      width: 44px; height: 44px;
       border-radius: 50%;
-      width: 44px;
-      height: 44px;
       font-size: 2rem;
       color: #b71c1c;
       cursor: pointer;
-      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       transition: background 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.11);
-      outline: none;
+      z-index: 5;
     }
     .carousel-arrow:hover {
       background: #f8d7da;
     }
-    .carousel-arrow.left { left: 8px; }
-    .carousel-arrow.right { right: 8px; }
+    .carousel-arrow.left { left: 16px; }
+    .carousel-arrow.right { right: 16px; }
 
-    /* Responsive adjustments */
     @media (max-width: 700px) {
-      .carousel {
-        width: 100vw;
-        max-width: 100vw;
-        height: 60vw;
-        min-height: 180px;
-        max-height: 260px;
-      }
-      .carousel-slide {
-        border-radius: 10px;
-      }
+      header h1 { font-size: 1.8rem; }
+      header p { font-size: 1rem; }
+      .carousel { height: 65vw; min-height: 180px; max-height: 260px; }
+      .carousel-slide { border-radius: 12px; }
     }
     @media (max-width: 480px) {
-      header h1 { font-size: 1.5rem; }
-      header p { font-size: 0.95rem; }
-      .carousel {
-        height: 56vw;
-        min-height: 120px;
-        max-height: 180px;
-      }
-      .carousel-slide {
-        border-radius: 8px;
-      }
+      header h1 { font-size: 1.4rem; }
+      header p { font-size: 0.9rem; }
+      .carousel { height: 75vw; min-height: 120px; max-height: 180px; }
+      .carousel-slide { border-radius: 8px; }
+      .carousel-arrow { width: 36px; height: 36px; font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>HEY BUDDIES</h1>
-  <p>Showcasing Innovation &amp; Skill | RKP's Online Portfolio</p>
-</header>
+  <header>
+    <h1>HEY BUDDIES</h1>
+    <p>Showcasing Innovation &amp; Skill | RKP's Online Portfolio</p>
+  </header>
 
-<div class="carousel-outer">
-  <div class="carousel" id="carousel">
-    <button class="carousel-arrow left" id="prevBtn">&#8592;</button>
-    <div class="carousel-slide"><img src="images/Rohit.webp" alt="Rohit"></div>
-    <div class="carousel-slide"><img src="images/Aman.webp" alt="Aman"></div>
-    <div class="carousel-slide"><img src="images/Rahul.webp" alt="Rahul"></div>
-    <button class="carousel-arrow right" id="nextBtn">&#8594;</button>
+  <div class="carousel-outer">
+    <div class="carousel" id="carousel">
+      <button class="carousel-arrow left" id="prevBtn">&#8592;</button>
+
+      <div class="carousel-slide"><img src="images/Rohit.webp" alt="Rohit"></div>
+      <div class="carousel-slide"><img src="images/Aman.webp" alt="Aman"></div>
+      <div class="carousel-slide"><img src="images/Rahul.webp" alt="Rahul"></div>
+
+      <button class="carousel-arrow right" id="nextBtn">&#8594;</button>
+    </div>
   </div>
-</div>
 
-<script>
-  // Carousel logic with partial side images
-  const slides = document.querySelectorAll('.carousel-slide');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  let current = 0;
+  <script>
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    let idx = 0;
 
-  function updateSlides() {
-    slides.forEach((slide, idx) => {
-      slide.classList.remove('center', 'left', 'right');
-      if (idx === current) {
-        slide.classList.add('center');
-      } else if (idx === (current - 1 + slides.length) % slides.length) {
-        slide.classList.add('left');
-      } else if (idx === (current + 1) % slides.length) {
-        slide.classList.add('right');
-      }
-    });
-  }
-
-  prevBtn.addEventListener('click', () => {
-    current = (current - 1 + slides.length) % slides.length;
-    updateSlides();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % slides.length;
-    updateSlides();
-  });
-
-  // Swipe support for mobile
-  let startX = null;
-  document.getElementById('carousel').addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  });
-  document.getElementById('carousel').addEventListener('touchend', e => {
-    if (startX === null) return;
-    let endX = e.changedTouches[0].clientX;
-    if (endX - startX > 40) {
-      prevBtn.click();
-    } else if (startX - endX > 40) {
-      nextBtn.click();
+    function render() {
+      slides.forEach((s,i) => {
+        s.className = 'carousel-slide'; // reset
+        if (i === idx) s.classList.add('center');
+        else if (i === (idx - 1 + slides.length) % slides.length) s.classList.add('left');
+        else if (i === (idx + 1) % slides.length) s.classList.add('right');
+      });
     }
-    startX = null;
-  });
 
-  // Auto-advance
-  let interval = setInterval(() => {
-    nextBtn.click();
-  }, 3500);
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      idx = (idx - 1 + slides.length) % slides.length;
+      render();
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      idx = (idx + 1) % slides.length;
+      render();
+    });
 
-  // Pause on hover/focus
-  document.getElementById('carousel').addEventListener('mouseenter', () => clearInterval(interval));
-  document.getElementById('carousel').addEventListener('mouseleave', () => {
-    interval = setInterval(() => nextBtn.click(), 3500);
-  });
+    // Touch swipe
+    let startX = 0;
+    const car = document.getElementById('carousel');
+    car.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    car.addEventListener('touchend', e => {
+      let endX = e.changedTouches[0].clientX;
+      if (endX - startX > 30) document.getElementById('prevBtn').click();
+      else if (startX - endX > 30) document.getElementById('nextBtn').click();
+    });
 
-  // Initial state
-  updateSlides();
-</script>
+    // Auto slide
+    let auto = setInterval(() => document.getElementById('nextBtn').click(), 3500);
+    car.addEventListener('mouseenter', () => clearInterval(auto));
+    car.addEventListener('mouseleave', () => auto = setInterval(() => document.getElementById('nextBtn').click(), 3500));
+
+    // Init
+    render();
+  </script>
 
 </body>
 </html>
+
