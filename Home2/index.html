@@ -1,120 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEY BUDDIES</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Global Styles */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f8d7da;
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-        }
-        
-        header {
-            padding: 20px;
-        }
-        
-        header h1 {
-            font-size: 48px;
-            font-weight: 700;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HEY BUDDIES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f8d7da 0%, #fff 100%);
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      min-height: 100vh;
+    }
 
-        header p {
-            font-size: 18px;
-        }
+    header {
+      padding: 20px 10px 0 10px;
+    }
 
-        /* Carousel Styling */
-        .carousel-container {
-            position: relative;
-            width: 800px;
-            height: 450px;
-            margin: 40px auto;
-            overflow: hidden;
-        }
-        
-        .slide {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: all 0.8s ease;
-        }
-        
-        .slide img {
-            width: 300px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
 
-        /* Adjusting visibility */
-        .center {
-            left: 50%;
-            transform: translateX(-50%) scale(1);
-            opacity: 1;
-            z-index: 3;
-        }
+    header p {
+      font-size: 1.1rem;
+      margin: 10px 0 0 0;
+    }
 
-        .left {
-            left: 15%;
-            transform: translateX(-50%) scale(0.85);
-            opacity: 0.7;
-            z-index: 2;
-        }
+    .carousel-outer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px 0;
+      overflow: hidden;
+    }
 
-        .right {
-            left: 85%;
-            transform: translateX(-50%) scale(0.85);
-            opacity: 0.7;
-            z-index: 2;
-        }
-        
-    </style>
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90vw;
+      max-width: 700px;
+      position: relative;
+      height: 60vw;
+      max-height: 380px;
+      min-height: 240px;
+      perspective: 1000px;
+    }
+
+    .carousel-slide {
+      flex: 0 0 60%;
+      max-width: 60%;
+      margin: 0 -12%;
+      opacity: 0.5;
+      transform: scale(0.8) translateX(0) rotateY(0deg);
+      transition: 
+        opacity 0.7s cubic-bezier(.4,2.2,.2,1),
+        transform 0.7s cubic-bezier(.4,2.2,.2,1),
+        box-shadow 0.7s;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      filter: blur(1px) grayscale(40%);
+      cursor: pointer;
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .carousel-slide.center {
+      opacity: 1;
+      transform: scale(1) translateX(0) rotateY(0deg);
+      z-index: 3;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      filter: none;
+      cursor: default;
+    }
+
+    .carousel-slide.left {
+      transform: scale(0.85) translateX(-60%) rotateY(12deg);
+      opacity: 0.7;
+      z-index: 2;
+      filter: blur(0.5px) grayscale(20%);
+    }
+
+    .carousel-slide.right {
+      transform: scale(0.85) translateX(60%) rotateY(-12deg);
+      opacity: 0.7;
+      z-index: 2;
+      filter: blur(0.5px) grayscale(20%);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      transition: filter 0.5s;
+    }
+
+    /* Arrow controls */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.7);
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 2rem;
+      color: #b71c1c;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.11);
+      outline: none;
+    }
+    .carousel-arrow:hover {
+      background: #f8d7da;
+    }
+    .carousel-arrow.left { left: 8px; }
+    .carousel-arrow.right { right: 8px; }
+
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      .carousel {
+        width: 100vw;
+        max-width: 100vw;
+        height: 60vw;
+        min-height: 180px;
+        max-height: 260px;
+      }
+      .carousel-slide {
+        border-radius: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.5rem; }
+      header p { font-size: 0.95rem; }
+      .carousel {
+        height: 56vw;
+        min-height: 120px;
+        max-height: 180px;
+      }
+      .carousel-slide {
+        border-radius: 8px;
+      }
+    }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>HEY BUDDIES</h1>
-    <p>Showcasing Innovation &amp; Skill | RKP's Online Portfolio</p>
+  <h1>HEY BUDDIES</h1>
+  <p>Showcasing Innovation &amp; Skill | RKP's Online Portfolio</p>
 </header>
 
-<div class="carousel-container">
-    <div class="slide" id="slide0"><img src="images/Rohit.webp" alt="Rohit"></div>
-    <div class="slide" id="slide1"><img src="images/Aman.webp" alt="Aman"></div>
-    <div class="slide" id="slide2"><img src="images/Rahul.webp" alt="Rahul"></div>
+<div class="carousel-outer">
+  <div class="carousel" id="carousel">
+    <button class="carousel-arrow left" id="prevBtn">&#8592;</button>
+    <div class="carousel-slide"><img src="images/Rohit.webp" alt="Rohit"></div>
+    <div class="carousel-slide"><img src="images/Aman.webp" alt="Aman"></div>
+    <div class="carousel-slide"><img src="images/Rahul.webp" alt="Rahul"></div>
+    <button class="carousel-arrow right" id="nextBtn">&#8594;</button>
+  </div>
 </div>
 
 <script>
-    let slides = document.querySelectorAll('.slide');
-    let current = 0;
+  // Carousel logic with partial side images
+  const slides = document.querySelectorAll('.carousel-slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let current = 0;
 
-    function updateSlides() {
-        let prev = (current - 1 + slides.length) % slides.length;
-        let next = (current + 1) % slides.length;
+  function updateSlides() {
+    slides.forEach((slide, idx) => {
+      slide.classList.remove('center', 'left', 'right');
+      if (idx === current) {
+        slide.classList.add('center');
+      } else if (idx === (current - 1 + slides.length) % slides.length) {
+        slide.classList.add('left');
+      } else if (idx === (current + 1) % slides.length) {
+        slide.classList.add('right');
+      }
+    });
+  }
 
-        slides.forEach((slide, index) => {
-            slide.classList.remove('center', 'left', 'right');
-            if (index === current) {
-                slide.classList.add('center');
-            } else if (index === prev) {
-                slide.classList.add('left');
-            } else if (index === next) {
-                slide.classList.add('right');
-            }
-        });
-    }
-
+  prevBtn.addEventListener('click', () => {
+    current = (current - 1 + slides.length) % slides.length;
     updateSlides();
+  });
 
-    setInterval(() => {
-        current = (current + 1) % slides.length;
-        updateSlides();
-    }, 3000);
+  nextBtn.addEventListener('click', () => {
+    current = (current + 1) % slides.length;
+    updateSlides();
+  });
+
+  // Swipe support for mobile
+  let startX = null;
+  document.getElementById('carousel').addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+  document.getElementById('carousel').addEventListener('touchend', e => {
+    if (startX === null) return;
+    let endX = e.changedTouches[0].clientX;
+    if (endX - startX > 40) {
+      prevBtn.click();
+    } else if (startX - endX > 40) {
+      nextBtn.click();
+    }
+    startX = null;
+  });
+
+  // Auto-advance
+  let interval = setInterval(() => {
+    nextBtn.click();
+  }, 3500);
+
+  // Pause on hover/focus
+  document.getElementById('carousel').addEventListener('mouseenter', () => clearInterval(interval));
+  document.getElementById('carousel').addEventListener('mouseleave', () => {
+    interval = setInterval(() => nextBtn.click(), 3500);
+  });
+
+  // Initial state
+  updateSlides();
 </script>
 
 </body>
