@@ -52,6 +52,30 @@
     object-fit: cover; /* Isse image box ke andar fit rahega without distortion */
 }
 
+       .home-header_image {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: transform 1s ease, opacity 1s ease;
+    will-change: transform, opacity;
+    position: relative;
+    z-index: 1;
+  }
+
+  .animate .home-header_image-1 {
+    transform: translate3d(-35%, 2%, -100px) rotateZ(-5deg);
+    opacity: 1;
+  }
+
+  .animate .home-header_image-2 {
+    transform: translate3d(0%, 0%, 0px);
+    opacity: 1;
+  }
+
+  .animate .home-header_image-3 {
+    transform: translate3d(32%, 10%, -102px) rotateZ(7deg);
+    opacity: 1;
+  }
+
   /* Apply animation to the arrow */
   .animated-arrow {
     animation: moveArrow 1.5s infinite;
