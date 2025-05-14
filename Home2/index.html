@@ -1,154 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HEY BUDDIES</title>
-  <!-- Google Font for modern sleek look -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-  <style>
-    /* Global Styles */
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f8d7da;
-      font-family: 'Montserrat', sans-serif;
-    }
-    
-    header {
-      text-align: center;
-      padding: 20px;
-    }
-    
-    header h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    
-    header p {
-      font-size: 18px;
-      margin: 0;
-    }
-    
-    /* Carousel Container */
-    .carousel-container {
-      position: relative;
-      width: 800px; /* Container width can be adjusted */
-      height: 450px;
-      margin: 40px auto;
-      overflow: hidden;
-    }
-    
-    /* Slide Common Styles */
-    .slide {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: all 0.5s ease;
-      opacity: 0;
-    }
-    
-    .slide img {
-      width: 300px;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    /* Active, Left & Right Positions */
-    .center {
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-      z-index: 3;
-    }
-    
-    .left {
-      left: 15%;
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0.6;
-      z-index: 2;
-    }
-    
-    .right {
-      left: 85%;
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0.6;
-      z-index: 2;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 820px) {
-      .carousel-container {
-        width: 95%;
-        height: auto;
-      }
-      .slide img {
-        width: 80%;
-        height: auto;
-      }
-      .center {
-        left: 50%;
-      }
-      .left {
-        left: 20%;
-      }
-      .right {
-        left: 80%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEY BUDDIES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f8d7da;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+        
+        header {
+            padding: 20px;
+        }
+        
+        header h1 {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        /* Carousel Styling */
+        .carousel-container {
+            position: relative;
+            width: 800px;
+            height: 450px;
+            margin: 40px auto;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.8s ease;
+        }
+        
+        .slide img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Adjusting visibility */
+        .center {
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            z-index: 3;
+        }
+
+        .left {
+            left: 15%;
+            transform: translateX(-50%) scale(0.85);
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        .right {
+            left: 85%;
+            transform: translateX(-50%) scale(0.85);
+            opacity: 0.7;
+            z-index: 2;
+        }
+        
+    </style>
 </head>
 <body>
-  <header>
+
+<header>
     <h1>HEY BUDDIES</h1>
     <p>Showcasing Innovation &amp; Skill | RKP's Online Portfolio</p>
-  </header>
+</header>
 
-  <div class="carousel-container">
-    <div class="slide" id="slide0">
-      <img src="images/Rohit.webp" alt="Rohit">
-    </div>
-    <div class="slide" id="slide1">
-      <img src="images/Aman.webp" alt="Aman">
-    </div>
-    <div class="slide" id="slide2">
-      <img src="images/Rahul.webp" alt="Rahul">
-    </div>
-  </div>
+<div class="carousel-container">
+    <div class="slide" id="slide0"><img src="images/Rohit.webp" alt="Rohit"></div>
+    <div class="slide" id="slide1"><img src="images/Aman.webp" alt="Aman"></div>
+    <div class="slide" id="slide2"><img src="images/Rahul.webp" alt="Rahul"></div>
+</div>
 
-  <script>
-    // JavaScript for rotating carousel slides
+<script>
     let slides = document.querySelectorAll('.slide');
     let current = 0;
-    const total = slides.length;
 
     function updateSlides() {
-      const prev = (current - 1 + total) % total;
-      const next = (current + 1) % total;
+        let prev = (current - 1 + slides.length) % slides.length;
+        let next = (current + 1) % slides.length;
 
-      slides.forEach((slide, index) => {
-        slide.classList.remove('center', 'left', 'right');
-        if (index === current) {
-          slide.classList.add('center');
-        } else if (index === prev) {
-          slide.classList.add('left');
-        } else if (index === next) {
-          slide.classList.add('right');
-        } else {
-          slide.style.opacity = 0;
-        }
-      });
+        slides.forEach((slide, index) => {
+            slide.classList.remove('center', 'left', 'right');
+            if (index === current) {
+                slide.classList.add('center');
+            } else if (index === prev) {
+                slide.classList.add('left');
+            } else if (index === next) {
+                slide.classList.add('right');
+            }
+        });
     }
 
     updateSlides();
 
     setInterval(() => {
-      current = (current + 1) % total;
-      updateSlides();
+        current = (current + 1) % slides.length;
+        updateSlides();
     }, 3000);
-  </script>
+</script>
+
 </body>
 </html>
