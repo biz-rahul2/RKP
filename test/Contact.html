@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact us | Rahul Kumar Puri</title>
+  <meta name="description" content="Contact The Lamp RKP for all your inquiries. Reach out to us today for any support and collaboration.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Rahul Kumar Puri">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --glass: rgba(255,255,255,0.25);
+      --glass-dark: rgba(30,34,45,0.45);
+      --accent: #ff5f6d;
+      --accent2: #ffc371;
+      --primary: #36d1dc;
+      --primary2: #5b86e5;
+      --text: #232323;
+      --text-light: #fff;
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+      --border: 1.5px solid rgba(255,255,255,0.18);
+      --radius: 18px;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+    }
+    [data-theme="dark"] {
+      --bg: #181d23;
+      --glass: rgba(30,34,45,0.55);
+      --glass-dark: rgba(30,34,45,0.85);
+      --text: #fff;
+      --text-light: #fff;
+      --border: 1.5px solid rgba(255,255,255,0.10);
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Roboto', sans-serif;
+      color: var(--text);
+      transition: background 0.4s;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--glass);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: var(--border);
+      backdrop-filter: blur(18px) saturate(1.2);
+      padding: 36px 30px 24px 30px;
+      animation: fadeIn 1.2s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .section-heading {
+      text-align: center;
+      font-size: 2.3rem;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--primary2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Social Media Section */
+    .social-media {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 28px;
+      margin-top: 12px;
+    }
+    .social-media a {
+      color: var(--primary);
+      font-size: 2.5rem;
+      transition: transform var(--transition), color var(--transition), box-shadow var(--transition);
+      border-radius: 50%;
+      padding: 10px;
+      background: var(--glass);
+      box-shadow: 0 2px 12px 0 rgba(54,209,220,0.10);
+      border: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .social-media a:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--primary2));
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 0;
+    }
+    .social-media a:hover {
+      color: var(--text-light);
+      transform: scale(1.18) rotate(-10deg);
+      box-shadow: 0 6px 24px 0 rgba(54,209,220,0.18);
+    }
+    .social-media a:hover:after {
+      opacity: 0.32;
+    }
+    /* Dark mode toggle */
+    .toggle-theme {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      background: var(--glass);
+      border: var(--border);
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px 0 rgba(54,209,220,0.10);
+      transition: background var(--transition);
+      z-index: 10;
+    }
+    .toggle-theme i {
+      font-size: 1.6rem;
+      color: var(--primary2);
+      transition: color 0.3s;
+    }
+    /* Email Section */
+    .email-section {
+      background: var(--glass-dark);
+      padding: 32px 22px 26px 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: var(--border);
+      width: 100%;
+      max-width: 480px;
+      margin: 30px auto 0 auto;
+      animation: fadeIn 1.5s 0.2s cubic-bezier(.4,2,.6,1) backwards;
+    }
+    .email-heading {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--primary2);
+      margin-bottom: 6px;
+    }
+    .email-description {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 18px;
+      font-size: 1.01rem;
+    }
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      font-size: 1.08rem;
+      padding: 16px 12px 10px 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.10);
+      color: var(--text);
+      outline: none;
+      font-family: 'Roboto', sans-serif;
+      box-shadow: 0 2px 8px 0 rgba(54,209,220,0.05);
+      border: var(--border);
+      transition: background var(--transition), border var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      background: rgba(255,255,255,0.18);
+      border-color: var(--accent);
+    }
+    .form-group label {
+      position: absolute;
+      left: 14px;
+      top: 18px;
+      color: #888;
+      font-size: 1.02rem;
+      pointer-events: none;
+      transition: 0.25s;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      background: transparent;
+    }
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label,
+    .form-group select:focus + label,
+    .form-group select:not([value=""]) + label {
+      top: -10px;
+      left: 10px;
+      font-size: 0.90rem;
+      color: var(--primary2);
+      background: var(--glass-dark);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+    .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' fill='gray' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 8l3 3 3-3' stroke='gray' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 18px;
+    }
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+    /* Custom Subject */
+    #custom-subject-container {
+      display: none;
+      margin-top: -8px;
+    }
+    /* Button */
+    .email-btn {
+      width: 100%;
+      padding: 14px 0;
+      background: linear-gradient(90deg, var(--accent), var(--primary2));
+      color: var(--text-light);
+      font-size: 1.1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 2px 12px 0 rgba(255,95,109,0.08);
+      transition: background var(--transition), transform var(--transition);
+      letter-spacing: 1px;
+    }
+    .email-btn:hover {
+      background: linear-gradient(90deg, var(--primary2), var(--accent));
+      transform: translateY(-3px) scale(1.04);
+    }
+    /* Success/Fail Message */
+    .form-message {
+      text-align: center;
+      font-size: 1.08rem;
+      margin-top: 8px;
+      color: var(--accent);
+      display: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px 2vw 12px 2vw;
+      }
+      .email-section {
+        padding: 18px 2vw 16px 2vw;
+      }
+      .social-media {
+        gap: 18px;
+      }
+      .toggle-theme {
+        right: 16px;
+        top: 14px;
+      }
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; background: var(--glass);}
+    ::-webkit-scrollbar-thumb { background: var(--primary2); border-radius: 8px;}
+  </style>
+</head>
+<body>
+  <!-- Dark/Light Mode Toggle -->
+  <div class="toggle-theme" id="themeToggle" title="Toggle dark/light mode">
+    <i class="fas fa-moon"></i>
+  </div>
+  <div class="container">
+    <!-- Social Media Section -->
+    <h2 class="section-heading">Join Us on Social Media</h2>
+    <div class="social-media">
+      <a href="https://thelamp.site/Contact/Instagram/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://snapchat.com/add/cyb_rahul" target="_blank" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+      <a href="https://t.me/cyb_rahul" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+    <!-- Email Section -->
+    <div class="email-section">
+      <h2 class="email-heading">Drop me a Email</h2>
+      <p class="email-description">Want to chat? Fill out the form below!</p>
+      <form id="emailForm" autocomplete="off">
+        <div class="form-group">
+          <input type="text" id="email-name" name="name" required placeholder=" " maxlength="40">
+          <label for="email-name">Your Name</label>
+        </div>
+        <div class="form-group">
+          <select id="email-subject" name="subject" required onchange="toggleCustomSubject()">
+            <option value="" disabled selected>Choose a topic</option>
+            <option value="Question">Mujhe tumse kuchh sawal puchhna hai</option>
+            <option value="Chat">Mujhe tumse ek personal baat karni hai</option>
+            <option value="Random">Mujhe tumhari ek Help chahiye</option>
+            <option value="Appreciation">Mujhe tumhe ek secret batani hai</option>
+            <option value="Feedback">Tumse ek chhoti si request hai Yaar</option>
+            <option value="Other">Others</option>
+          </select>
+          <label for="email-subject">Subject</label>
+        </div>
+        <!-- Custom Subject Input (Hidden by Default) -->
+        <div class="form-group" id="custom-subject-container">
+          <input type="text" id="custom-subject" name="custom-subject" placeholder=" " maxlength="50">
+          <label for="custom-subject">Enter Your Topic</label>
+        </div>
+        <div class="form-group">
+          <textarea id="email-message" name="message" rows="5" required placeholder=" " maxlength="600"></textarea>
+          <label for="email-message">Your Message</label>
+        </div>
+        <button type="submit" class="email-btn">Send Email <i class="fas fa-paper-plane"></i></button>
+        <div class="form-message" id="formMessage"></div>
+      </form>
+    </div>
+  </div>
+  <script>
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    themeToggle.onclick = () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'light' ? 'dark' : 'light');
+    };
+    // Load theme on page load
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if(saved) setTheme(saved);
+    })();
+
+    // Floating labels for select (force label up if value is set)
+    document.querySelectorAll('select').forEach(sel => {
+      sel.addEventListener('change', function() {
+        if(this.value) this.classList.add('has-value');
+        else this.classList.remove('has-value');
+      });
+    });
+
+    // Show/hide custom subject
+    function toggleCustomSubject() {
+      const subjectDropdown = document.getElementById("email-subject");
+      const customSubjectContainer = document.getElementById("custom-subject-container");
+      if (subjectDropdown.value === "Other") {
+        customSubjectContainer.style.display = "block";
+        document.getElementById('custom-subject').setAttribute('required', 'required');
+      } else {
+        customSubjectContainer.style.display = "none";
+        document.getElementById('custom-subject').removeAttribute('required');
+      }
+    }
+
+    // Email Form Handler
+    document.getElementById("emailForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("email-name").value.trim();
+      const subjectDropdown = document.getElementById("email-subject").value;
+      const customSubject = document.getElementById("custom-subject").value.trim();
+      const message = document.getElementById("email-message").value.trim();
+      const formMessage = document.getElementById("formMessage");
+
+      // Validation
+      if (!name || !subjectDropdown || !message || (subjectDropdown === "Other" && !customSubject)) {
+        formMessage.style.display = "block";
+        formMessage.style.color = "crimson";
+        formMessage.textContent = "Please fill all required fields!";
+        return;
+      }
+      formMessage.style.display = "none";
+
+      let introLine = `Hello Rahul, Tum kaise ho? 👋%0D%0A%0D%0A`;
+      let nameLine = `Mera naam ${name} hai.%0D%0A%0D%0A`;
+      let middleLine = "";
+      if (subjectDropdown === "Question") {
+        middleLine = "Kya tum mujhe bata sakte ho ki,%0D%0A";
+      } else if (subjectDropdown === "Chat") {
+        middleLine = "Kuchh dino se tumse ek bat karni thi,%0D%0A";
+      } else if (subjectDropdown === "Random") {
+        middleLine = "Suna hai sabki help karte ho 😅, to aaj meri bhi ek kardo,%0D%0A";
+      } else if (subjectDropdown === "Appreciation") {
+        middleLine = "Kya tum ek secret jante ho, Tumhe pata hai kya huaa,%0D%0A";
+      } else if (subjectDropdown === "Feedback") {
+        middleLine = "Suno na ek chhoti sa request hai yaar,%0D%0A";
+      } else if (subjectDropdown === "Other" && customSubject) {
+        middleLine = `Kya kar rahe ho Aaj kal: ${customSubject}%0D%0A`;
+      }
+      let finalBody = introLine + nameLine + middleLine + "%0D%0A" + encodeURIComponent(message);
+      const subjectText = subjectDropdown === "Other" && customSubject ? customSubject : document.querySelector(`#email-subject option[value="${subjectDropdown}"]`).textContent;
+      const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(subjectText)}&body=${finalBody}`;
+      // Show success message
+      formMessage.style.display = "block";
+      formMessage.style.color = "green";
+      formMessage.textContent = "Redirecting to your email app...";
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+        formMessage.style.display = "none";
+      }, 900);
+    });
+  </script>
+</body>
+</html>
