@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Calculator</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --main-bg: rgba(255,255,255,0.15);
+            --glass-bg: rgba(255,255,255,0.25);
+            --accent: #ff4b2b;
+            --accent2: #00c6ff;
+            --text: #fff;
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            /* Animated gradient background */
+            background: linear-gradient(120deg, #000428, #004e92, #00c6ff, #ffdde1);
+            background-size: 200% 200%;
+            animation: bgMove 10s ease-in-out infinite alternate;
+        }
+        @keyframes bgMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        /* Particle background container */
+        #particles-js {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0; left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* Balloons container */
+        #balloons-container {
+            position: fixed;
+            left: 0; top: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .container {
+            position: relative;
+            z-index: 5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            box-shadow: var(--shadow);
+            border-radius: 24px;
+            padding: 36px 24px;
+            margin: 20px 0;
+            max-width: 420px;
+            width: 95vw;
+            backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            transition: background 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dark-mode .glass-card {
+            background: rgba(0,0,0,0.3);
+        }
+        h1, h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2em;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffdde1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 14px #fff8;
+            animation: fadeInDown 1.2s;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .message-box {
+            font-size: 1.1em;
+            color: #fff;
+            background: var(--main-bg);
+            border-radius: 12px;
+            padding: 13px 10px;
+            margin: 14px 0 8px 0;
+            box-shadow: 0 4px 24px 0 rgba(255,255,255,0.10);
+            min-height: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            animation: fadeIn 1.5s;
+            text-align: center;
+        }
+        /* Countdown Timer */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 13px;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            width: 100%;
+        }
+        .countdown-item {
+            background: linear-gradient(135deg, #ff416cdd, #ff4b2bdd 80%);
+            color: #fff;
+            border-radius: 13px;
+            padding: 12px 4px 7px 4px;
+            box-shadow: 0 0 13px #ff4b2b44;
+            min-width: 60px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+            animation: popIn 1s;
+        }
+        .countdown-item span {
+            display: block;
+            font-size: 1.6em;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 2px;
+            animation: digitPop 0.8s;
+        }
+        .countdown-label {
+            font-size: 0.85em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+        .age-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            width: 100%;
+        }
+        .age-item {
+            background: linear-gradient(135deg, #00c6ffdd, #0072ffdd 80%);
+            color: #fff;
+            border-radius: 13px;
+            padding: 12px 4px 7px 4px;
+            box-shadow: 0 0 13px #00c6ff44;
+            min-width: 60px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+            animation: popIn 1s;
+        }
+        .age-item span {
+            display: block;
+            font-size: 1.6em;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 2px;
+            animation: digitPop 0.8s;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.7);}
+            to { transform: scale(1);}
+        }
+        @keyframes digitPop {
+            from { opacity: 0; transform: scale(1.5);}
+            to { opacity: 1; transform: scale(1);}
+        }
+        /* Emoji animation */
+        .emoji-bounce {
+            animation: bounce 1.2s infinite alternate;
+            display: inline-block;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-14px);}
+        }
+        /* Dark/Light Mode Toggle */
+        .toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 20;
+            box-shadow: 0 2px 8px #0002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .toggle-btn i {
+            font-size: 1.3em;
+            color: #fff;
+            transition: color 0.3s;
+        }
+        .dark-mode {
+            --main-bg: rgba(0,0,0,0.30);
+            --glass-bg: rgba(0,0,0,0.35);
+            --text: #fff;
+        }
+        .dark-mode body {
+            background: #181818;
+        }
+        /* Date input styles */
+        .date-input-container {
+            display: flex;
+            width: 100%;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .birth-date-input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .birth-date-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .calculate-btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(255, 75, 43, 0.3);
+        }
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 75, 43, 0.4);
+        }
+        .calculate-btn:active {
+            transform: translateY(1px);
+        }
+        .input-card {
+            margin-bottom: 10px;
+        }
+        .result-card {
+            display: none;
+        }
+        .age-card {
+            display: none;
+        }
+        /* Responsive */
+        @media (max-width: 600px) {
+            .glass-card { padding: 13px 2vw; max-width: 99vw;}
+            .countdown-grid, .age-grid { gap: 8px;}
+            .countdown-item, .age-item { font-size: 1em; padding: 7px 1px 4px 1px; min-width: 45px;}
+            h1, h2 { font-size: 1.15em;}
+            .toggle-btn { width: 38px; height: 38px; top: 7px; right: 7px;}
+            .date-input-container { flex-direction: column; }
+            .birth-date-input, .calculate-btn { width: 100%; }
+        }
+        @media (max-width: 400px) {
+            .glass-card { padding: 7px 1vw;}
+            .countdown-item span, .age-item span { font-size: 1.1em;}
+        }
+        /* Balloons CSS */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 38px;
+            height: 55px;
+            background: radial-gradient(circle at 60% 40%, #ff4b2b 70%, #fff0 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: balloonUp 6s linear forwards;
+            z-index: 100;
+            opacity: 0.85;
+        }
+        .balloon:after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -18px;
+            width: 2px;
+            height: 20px;
+            background: #aaa;
+            border-radius: 1px;
+            transform: translateX(-50%);
+        }
+        @keyframes balloonUp {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-110vh) scale(1.05);}
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div id="balloons-container"></div>
+    <button class="toggle-btn" onclick="toggleMode()" title="Toggle Dark/Light Mode">
+        <i id="modeIcon" class="fa-solid fa-moon"></i>
+    </button>
+    <div class="container">
+        <!-- Birth Date Input Card -->
+        <div class="glass-card input-card">
+            <h2>
+                <span class="emoji-bounce">🎂</span> अपना जन्मदिन चुनें <span class="emoji-bounce">🗓️</span>
+            </h2>
+            <div class="date-input-container">
+                <input type="date" id="birthDateInput" class="birth-date-input">
+                <button id="calculateBtn" class="calculate-btn">Calculate</button>
+            </div>
+        </div>
+
+        <!-- Birthday Countdown Card -->
+        <div class="glass-card result-card" id="resultCard">
+            <h1>
+                <span class="emoji-bounce">🎂</span> आपका अगला जन्मदिन <span class="emoji-bounce">🎉</span>
+            </h1>
+            <div id="messageBox" class="message-box"></div>
+            <div class="countdown-grid">
+                <div class="countdown-item"><span id="months">0</span><div class="countdown-label">Months</div></div>
+                <div class="countdown-item"><span id="days">0</span><div class="countdown-label">Days</div></div>
+                <div class="countdown-item"><span id="hours">0</span><div class="countdown-label">Hours</div></div>
+                <div class="countdown-item"><span id="minutes">0</span><div class="countdown-label">Minutes</div></div>
+            </div>
+            <div class="countdown-grid" style="grid-template-columns: 1fr;">
+                <div class="countdown-item"><span id="seconds">0</span><div class="countdown-label">Seconds</div></div>
+            </div>
+        </div>
+
+        <!-- Age Display Card -->
+        <div class="glass-card age-card" id="ageCard">
+            <h1>
+                <span class="emoji-bounce">🌈</span> आपकी वर्तमान उम्र <span class="emoji-bounce">⏳</span>
+            </h1>
+            <div class="age-grid">
+                <div class="age-item"><span id="ageYears">0</span><div class="countdown-label">Years</div></div>
+                <div class="age-item"><span id="ageMonths">0</span><div class="countdown-label">Months</div></div>
+                <div class="age-item"><span id="ageDays">0</span><div class="countdown-label">Days</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60 },
+                "color": { "value": ["#ff4b2b","#ffdd57","#00c6ff","#fff"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.35 },
+                "size": { "value": 4, "random": true },
+                "move": { "enable": true, "speed": 1.5 }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" }
+                }
+            }
+        });
+
+        // Dark/Light Mode
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+            let icon = document.getElementById("modeIcon");
+            if(document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.add('fa-moon');
+                icon.classList.remove('fa-sun');
+            }
+        }
+
+        // DOM Elements
+        const calculateBtn = document.getElementById('calculateBtn');
+        const birthDateInput = document.getElementById('birthDateInput');
+        const resultCard = document.getElementById('resultCard');
+        const ageCard = document.getElementById('ageCard');
+        
+        // Date formatting helper
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+        
+        // Set max date to today
+        birthDateInput.max = formatDate(new Date());
+        
+        // Calculate button click handler
+        calculateBtn.addEventListener('click', function() {
+            const birthDate = birthDateInput.value;
+            
+            if (!birthDate) {
+                alert('कृपया अपनी जन्मतिथि दर्ज करें!');
+                return;
+            }
+            
+            // Show result cards
+            resultCard.style.display = 'flex';
+            ageCard.style.display = 'flex';
+            
+            // Calculate and update displays
+            updateAgeDisplay(birthDate);
+            updateNextBirthdayCountdown(birthDate);
+        });
+
+        // Calculate age in years, months, days
+        function calculateAge(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            
+            let years = today.getFullYear() - birth.getFullYear();
+            let months = today.getMonth() - birth.getMonth();
+            let days = today.getDate() - birth.getDate();
+            
+            // Adjustments for negative months or days
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            return { years, months, days };
+        }
+        
+        // Calculate next birthday
+        function getNextBirthday(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            
+            // Create date for this year's birthday
+            let nextBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+            
+            // If birthday has passed this year, set to next year
+            if (nextBirthday < today) {
+                nextBirthday = new Date(today.getFullYear() + 1, birth.getMonth(), birth.getDate());
+            }
+            
+            return nextBirthday;
+        }
+        
+        // Update age display
+        function updateAgeDisplay(birthDate) {
+            const age = calculateAge(birthDate);
+            
+            animateDigit("ageYears", age.years);
+            animateDigit("ageMonths", age.months);
+            animateDigit("ageDays", age.days);
+        }
+        
+        // Countdown logic for next birthday
+        function updateNextBirthdayCountdown(birthDate) {
+            const nextBirthday = getNextBirthday(birthDate);
+            
+            // Update countdown
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const diff = nextBirthday.getTime() - now;
+                
+                // Calculate months, days, hours, minutes, seconds
+                let totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+                let months = Math.floor(totalDays / 30.5);
+                let days = Math.floor(totalDays % 30.5);
+                let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                animateDigit("months", months);
+                animateDigit("days", days);
+                animateDigit("hours", hours);
+                animateDigit("minutes", minutes);
+                animateDigit("seconds", seconds);
+                
+                updateBirthdayMessage(nextBirthday);
+            }
+            
+            // Start countdown
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
+        // Animate digit change
+        function animateDigit(id, value) {
+            const el = document.getElementById(id);
+            if (el.innerText != value) {
+                el.innerText = value;
+                el.style.animation = "digitPop 0.7s";
+                setTimeout(() => { el.style.animation = ""; }, 700);
+            }
+        }
+        
+        // Update birthday message based on time left
+        function updateBirthdayMessage(nextBirthday) {
+            const today = new Date();
+            const timeDiff = nextBirthday.getTime() - today.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            
+            let message = "⌛ अभी समय है अगले जन्मदिन में! 😎";
+            
+            if (daysDiff <= 0) message = "🎉 आज आपका जन्मदिन है! 🎂";
+            else if (daysDiff === 1) message = "🎊 कल आपका जन्मदिन है! तैयारी पूरी? 🔥";
+            else if (daysDiff <= 7) message = "🎈 एक हफ्ते से भी कम समय! 🥳";
+            else if (daysDiff <= 30) message = "🎁 अगले जन्मदिन में एक महीने से कम समय! 🎁";
+            
+            document.getElementById("messageBox").innerHTML = message;
+        }
+    </script>
+</body>
+  </html>
+  
