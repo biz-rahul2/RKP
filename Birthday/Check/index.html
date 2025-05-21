@@ -688,3 +688,36 @@
             setInterval(updateCountdown, 1000);
         }
         
+        // Update birthday message based on time left
+        function updateBirthdayMessage(nextBirthday) {
+            const today = new Date();
+            const timeDiff = nextBirthday.getTime() - today.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            
+            let message = "<span class='emoji'>⌛</span> अभी समय है अगले जन्मदिन में! <span class='emoji'>😎</span>";
+            
+            if (daysDiff <= 0) message = "<span class='emoji'>🎉</span> आज आपका जन्मदिन है! <span class='emoji'>🎂</span>";
+            else if (daysDiff === 1) message = "<span class='emoji'>🎊</span> कल आपका जन्मदिन है! तैयारी पूरी? <span class='emoji'>🔥</span>";
+            else if (daysDiff <= 7) message = "<span class='emoji'>🎈</span> एक हफ्ते से भी कम समय! <span class='emoji'>🥳</span>";
+            else if (daysDiff <= 30) message = "<span class='emoji'>🎁</span> अगले जन्मदिन में एक महीने से कम समय! <span class='emoji'>🎁</span>";
+            
+            document.getElementById("messageBox").innerHTML = message;
+        }
+        
+        // Toggle theme
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    </script>
+</body>
+</html>
+        
