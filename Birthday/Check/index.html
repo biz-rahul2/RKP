@@ -633,4 +633,58 @@
         }
         
         // Calculate next birthday
-        funct
+        function getNextBirthday(birthDate) {
+            const today = new Date();
+            const birth = new Date(birthDate);
+            
+            // Create date for this year's birthday
+            let nextBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+            
+            // If birthday has passed this year, set to next year
+            if (nextBirthday < today) {
+                nextBirthday = new Date(today.getFullYear() + 1, birth.getMonth(), birth.getDate());
+            }
+            
+            return nextBirthday;
+        }
+        
+        // Update age display
+        function updateAgeDisplay(birthDate) {
+            const age = calculateAge(birthDate);
+            
+            document.getElementById("ageYears").textContent = age.years;
+            document.getElementById("ageMonths").textContent = age.months;
+            document.getElementById("ageDays").textContent = age.days;
+        }
+        
+        // Countdown logic for next birthday
+        function updateNextBirthdayCountdown(birthDate) {
+            const nextBirthday = getNextBirthday(birthDate);
+            
+            // Update countdown
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const diff = nextBirthday.getTime() - now;
+                
+                // Calculate months, days, hours, minutes, seconds
+                let totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+                let months = Math.floor(totalDays / 30.5);
+                let days = Math.floor(totalDays % 30.5);
+                let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById("months").textContent = months;
+                document.getElementById("days").textContent = days;
+                document.getElementById("hours").textContent = hours;
+                document.getElementById("minutes").textContent = minutes;
+                document.getElementById("seconds").textContent = seconds;
+                
+                updateBirthdayMessage(nextBirthday);
+            }
+            
+            // Start countdown
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+        
