@@ -131,13 +131,13 @@ if (!message) {
     // Make sure months, days, hours, minutes, seconds are available in scope
     if (typeof months !== "undefined" && typeof days !== "undefined" && typeof hours !== "undefined" && typeof minutes !== "undefined" && typeof seconds !== "undefined") {
         // 3/2/1 month messages (priority after special dates)
-        if (months > 4) {
+        if (months > 3) {
             message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
-        } else if (months === 4 && days >= 0) {
-            message = "🎂 3 महीने बाद मेरा Birthday है! इंतजार करो...";
         } else if (months === 3 && days >= 0) {
-            message = "🎂 2 महीने बाद मेरा Birthday है! थोड़ा और इंतजार...";
+            message = "🎂 3 महीने बाद मेरा Birthday है! इंतजार करो...";
         } else if (months === 2 && days >= 0) {
+            message = "🎂 2 महीने बाद मेरा Birthday है! थोड़ा और इंतजार...";
+        } else if (months === 1 && days >= 0) {
             message = "🎂 1 महीना बाद मेरा Birthday है! Excitement बढ़ रही है!";
         }
         // Weeks/days/hours/minutes/seconds logic
