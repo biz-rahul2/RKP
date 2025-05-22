@@ -9,6 +9,7 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        /* ... your existing CSS ... */
         :root {
             --primary: #8e2de2;
             --secondary: #4a00e0;
@@ -211,7 +212,7 @@
     <div class="container">
         <div class="card">
             <h1>
-                <span>My Birthday: 25 july</span>
+                <span>My Birthday: 25 July</span>
             </h1>
             <div id="messageBox" class="message-box"></div>
             <div class="countdown-grid">
@@ -242,8 +243,9 @@
     <a href="Check" id="countdown-btn">
         <i class="fa-solid fa-cake-candles"></i> Check Your Birthday
     </a>
+    <!-- Make sure this script comes FIRST -->
+    <script src="birthday-messages.js"></script>
     <script>
-        // Countdown calculation fixed and accurate!
         function updateCountdown() {
             const now = new Date();
             let currentYear = now.getFullYear();
@@ -260,9 +262,6 @@
             if (birthday.getDate() < now.getDate()) months--;
 
             // Calculate the next month date
-            let nextMonth = new Date(now.getFullYear(), now.getMonth() + months + 1, birthday.getDate());
-            if (nextMonth < birthday) nextMonth = birthday;
-
             let days = Math.floor((birthday - new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), 0, 0, 0)) / (1000 * 60 * 60 * 24));
             let hours = birthday.getHours() - now.getHours();
             let minutes = birthday.getMinutes() - now.getMinutes();
@@ -281,9 +280,7 @@
                 days--;
             }
             if (days < 0) {
-                // recalculate months and days
                 months--;
-                let prevMonth = new Date(birthday.getFullYear(), birthday.getMonth() - 1, birthday.getDate());
                 days = Math.floor((birthday - new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), 0, 0, 0)) / (1000 * 60 * 60 * 24));
             }
             months = Math.max(0, months);
@@ -298,10 +295,13 @@
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
 
+            // Call the external message logic function!
+            if (typeof updateBirthdayMessage === "function") {
+                updateBirthdayMessage(months, days, hours, minutes, seconds);
+            }
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
-    <script src="birthday-messages.js"></script>
 </body>
 </html>
