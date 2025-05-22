@@ -7,10 +7,14 @@
   <style>
     body {
       margin: 0;
-      background-color: #000;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: 'Courier New', Courier, monospace;
       color: #00ffcc;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     #matrixCanvas {
@@ -18,103 +22,119 @@
       top: 0;
       left: 0;
       z-index: -1;
+      filter: drop-shadow(0 0 10px #00ffcc);
     }
 
     .popup-terminal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 360px;
-      height: 500px;
-      background-color: #0a0a0aee;
-      border: 2px solid #00ffffaa;
-      border-radius: 14px;
-      box-shadow: 0 0 25px #00ffff88, 0 0 10px #00ffcc66 inset;
-      padding: 18px;
-      z-index: 999;
+      position: relative;
+      width: 400px;
+      height: 520px;
+      background: rgba(10, 10, 10, 0.85);
+      border: 2px solid #00ffffcc;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00ffffcc, 0 0 15px #00ffccaa inset;
+      padding: 20px 25px;
       overflow-y: auto;
-      backdrop-filter: blur(3px);
+      backdrop-filter: blur(6px);
+      animation: fadeInScale 0.6s ease forwards;
     }
 
     .popup-terminal h3 {
-      margin: 0 0 14px;
-      font-size: 18px;
+      margin: 0 0 18px;
+      font-size: 20px;
       color: #00ffff;
-      border-bottom: 1px solid #00ffff55;
-      padding-bottom: 6px;
+      border-bottom: 2px solid #00ffff88;
+      padding-bottom: 8px;
       text-align: center;
-      text-shadow: 0 0 5px #00ffffaa;
+      text-shadow: 0 0 8px #00ffffcc;
+      letter-spacing: 1.2px;
     }
 
     .server-line {
-      margin: 8px 0;
-      padding: 8px 10px;
-      border-radius: 6px;
-      background: #111;
-      box-shadow: inset 0 0 5px #00ffff22;
+      margin: 10px 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #003333, #005555);
+      box-shadow: inset 0 0 10px #00ffff44;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
     }
 
     .server-line:hover {
-      background: #002222;
-    }
-
-    .server-line span {
-      color: #0ff;
-      font-weight: bold;
-      text-shadow: 0 0 3px #0ff;
-    }
-
-    .server-line button {
-      background: transparent;
-      border: 1px solid #00ffffcc;
-      color: #00ffff;
-      cursor: pointer;
-      padding: 5px 12px;
-      font-size: 14px;
-      border-radius: 5px;
-      transition: 0.2s;
-      text-shadow: 0 0 5px #00ffffaa;
-    }
-
-    .server-line button:hover {
-      background: #003333;
-      box-shadow: 0 0 10px #00ffffaa;
+      background: linear-gradient(90deg, #00ffff, #00ccaa);
+      box-shadow: 0 0 15px #00ffffcc, 0 0 20px #00ffccdd inset;
       transform: scale(1.05);
     }
 
+    .server-line span {
+      color: #00ffff;
+      font-weight: 700;
+      text-shadow: 0 0 6px #00ffffcc;
+      letter-spacing: 1.5px;
+    }
+
+    .server-line button {
+      background: linear-gradient(135deg, #00ffff, #00ccaa);
+      border: none;
+      color: #003333;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ffffcc;
+      transition: background 0.3s ease, transform 0.3s ease;
+      text-shadow: none;
+    }
+
+    .server-line button:hover {
+      background: linear-gradient(135deg, #00ccaa, #00ffff);
+      box-shadow: 0 0 18px #00ffffee;
+      transform: scale(1.1);
+    }
+
     .insta-follow {
-  text-align: center;
-  margin-top: 20px;
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
+      text-align: center;
+      margin-top: 20px;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
 
-.insta-follow a {
-  background: linear-gradient(135deg, #ff0050, #ff7a00);
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 22px;
-  font-weight: bold;
-  border-radius: 25px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  box-shadow: 0 0 12px #ff0040aa;
-  transition: 0.3s ease;
-}
+    .insta-follow a {
+      background: linear-gradient(135deg, #ff0050, #ff7a00);
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 26px;
+      font-weight: 800;
+      border-radius: 30px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 18px;
+      box-shadow: 0 0 15px #ff0040cc;
+      transition: 0.3s ease;
+    }
 
-.insta-follow a:hover {
-  background: linear-gradient(135deg, #ff3c8d, #ffc107);
-  box-shadow: 0 0 18px #ff5b9e;
-  transform: scale(1.05);
-}
+    .insta-follow a:hover {
+      background: linear-gradient(135deg, #ff3c8d, #ffc107);
+      box-shadow: 0 0 22px #ff5b9e;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   </style>
 </head>
 <body>
@@ -126,45 +146,32 @@
   <div id="serverList"></div>
 </div>
 
-  <div class="insta-follow">
+<div class="insta-follow">
   <a href="https://instagram.com/goswami__ziddi__bhai__202" target="_blank">Follow Me</a>
-  </div>
+</div>
   
 <script>
+  // Original server links with servers 14, 18, 19, and 20 removed
   const links = [
-  "https://birtakipci.com/",
-  "https://canlitakipci.com/",
-  "https://takipcibase.com/",
-  "https://instamoda.org/",
-  "https://fastfollow.in/",
-  "https://takipcimx.net/login",
-  "https://takipcizen.com/",
-  "https://takipcitime.com/",
-  "https://takipcigir.com/",
-  "https://takipcikrali.com/",
-  "https://bayitakipci.com/",
-  "https://followersize.com/",
-  "https://takipciking.net/",
-  "https://takipcikutusu.com/",
-  "https://bigtakip.net/",
-  "https://www.takipcimx.com/",
-  "https://www.takipciking.com/",
-  "https://seritakipci.com/",
-  "https://platintakipci.com/",
-  "https://instahile.co/"
-];
+    "https://birtakipci.com/",
+    "https://canlitakipci.com/",
+    "https://takipcibase.com/",
+    "https://instamoda.org/",
+    "https://fastfollow.in/",
+    "https://takipcimx.net/login",
+    "https://takipcizen.com/",
+    "https://takipcitime.com/",
+    "https://takipcigir.com/",
+    "https://takipcikrali.com/",
+    "https://bayitakipci.com/",
+    "https://followersize.com/",
+    "https://takipciking.net/",
+    "https://bigtakip.net/",
+    "https://www.takipcimx.com/",
+    "https://www.takipciking.com/"
+  ];
 
   const serverList = document.getElementById("serverList");
-
-  links.forEach((link, i) => {
-    const div = document.createElement("div");
-    div.className = "server-line";
-    div.innerHTML = `
-      <span>Server-${i + 1}</span>
-      <button onclick="window.location.href='${link}'">Open</button>
-    `;
-    serverList.appendChild(div);
-  });
 
   // Matrix animation
   const canvas = document.getElementById("matrixCanvas");
@@ -200,9 +207,7 @@
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
   });
-</script>
 
-  <script>
   function showTempError(button, link) {
     const errorBox = document.createElement("div");
     errorBox.style.position = "fixed";
@@ -238,7 +243,7 @@
     }, 1000);
   }
 
-  serverList.innerHTML = ''; // Clear previous
+  // Create server list
   links.forEach((link, i) => {
     const div = document.createElement("div");
     div.className = "server-line";
@@ -254,10 +259,10 @@
       }
     });
 
-    div.innerHTML = `<span>Server${i + 1}</span>`;
+    div.innerHTML = `<span>Server-${i + 1}</span>`;
     div.appendChild(button);
     serverList.appendChild(div);
   });
-  </script>
+</script>
 </body>
 </html>
