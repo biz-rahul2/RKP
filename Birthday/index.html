@@ -21,6 +21,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
         body {
             font-family: 'Montserrat', 'Poppins', sans-serif;
@@ -198,6 +199,42 @@
         .dark-mode body {
             background: #181818;
         }
+        /* Countdown Button (Added) */
+        #countdown-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 9999;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(90deg, #ff4b2b, #ffdd57, #00c6ff);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.05em;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 4px 24px 0 rgba(255, 75, 43, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.15s;
+            letter-spacing: 0.5px;
+            outline: none;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        #countdown-btn:hover, #countdown-btn:focus {
+            background: linear-gradient(90deg, #00c6ff, #ff4b2b, #ff4b2b);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 32px 0 rgba(0, 198, 255, 0.4);
+            color: #fff;
+        }
+        #countdown-btn i {
+            font-size: 1.2em;
+            animation: bounce 1.2s infinite alternate;
+        }
         /* Responsive */
         @media (max-width: 600px) {
             .glass-card { padding: 13px 2vw; max-width: 99vw;}
@@ -205,10 +242,27 @@
             .countdown-item { font-size: 1em; padding: 7px 1px 4px 1px; min-width: 45px;}
             h1 { font-size: 1.15em;}
             .toggle-btn { width: 38px; height: 38px; top: 7px; right: 7px;}
+            #countdown-btn {
+                font-size: 0.9em;
+                padding: 8px 18px;
+                right: 10px;
+                bottom: 10px;
+                white-space: nowrap;
+                max-width: 90vw;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            #countdown-btn i {
+                font-size: 1em;
+            }
         }
         @media (max-width: 400px) {
             .glass-card { padding: 7px 1vw;}
             .countdown-item span { font-size: 1.1em;}
+            #countdown-btn {
+                font-size: 0.85em;
+                padding: 7px 14px;
+            }
         }
         /* Balloons CSS */
         .balloon {
@@ -237,40 +291,6 @@
             0% { transform: translateY(0) scale(1);}
             100% { transform: translateY(-110vh) scale(1.05);}
         }
-
-        .countdown-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(90deg, #ff4b2b, #ffdd57, #00c6ff);
-    color: #fff;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 1.08em;
-    padding: 12px 28px;
-    border: none;
-    border-radius: 30px;
-    box-shadow: 0 4px 24px 0 #ff4b2b44;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 18px 0 0 0;
-    transition: background 0.3s, transform 0.15s;
-    letter-spacing: 0.5px;
-    outline: none;
-    position: relative;
-    overflow: hidden;
-}
-.countdown-btn:hover, .countdown-btn:focus {
-    background: linear-gradient(90deg, #00c6ff, #ff4b2b, #ffdd57);
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 8px 32px 0 #00c6ff55;
-    color: #fff;
-}
-.countdown-btn i {
-    font-size: 1.2em;
-    animation: bounce 1.2s infinite alternate;
-                                }
-        
     </style>
 </head>
 <body>
@@ -297,28 +317,24 @@
         </div>
     </div>
 
-    <a href="check.html" class="countdown-btn">
-  <i class="fa-solid fa-cake-candles"></i> Check Your Birthday Countdown
-    </a>
-    
-
     <audio id="birthday-audio" src="BirthdayFunnyWish.mp3" preload="auto"></audio>
-    
+    <!-- Check Your Birthday Countdown Button (Added) -->
+    <a href="check.html" id="countdown-btn" class="countdown-btn">
+        <i class="fa-solid fa-cake-candles"></i> Check Your Birthday Countdown
+    </a>
     <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1"></script>
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-
         function playBirthdaySong() {
-    if (!window._birthdaySongPlayed) {
-        var audio = document.getElementById('birthday-audio');
-        audio.currentTime = 0; // Always play from start
-        audio.play();
-        window._birthdaySongPlayed = true;
-    }
+            if (!window._birthdaySongPlayed) {
+                var audio = document.getElementById('birthday-audio');
+                audio.currentTime = 0;
+                audio.play();
+                window._birthdaySongPlayed = true;
+            }
         }
-        
         // Particle background
         particlesJS("particles-js", {
             "particles": {
@@ -335,7 +351,6 @@
                 }
             }
         });
-
         // Dark/Light Mode
         function toggleMode() {
             document.body.classList.toggle('dark-mode');
@@ -348,36 +363,30 @@
                 icon.classList.remove('fa-sun');
             }
         }
-
         // Countdown logic with animation
         function updateCountdown() {
             const birthday = new Date("July 25, 2025 00:00:00").getTime();
             const now = new Date().getTime();
             let diff = birthday - now;
-
             // Calculate months, days, hours, minutes, seconds
             let months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
             let days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
             let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
             // Prevent negative values after birthday
             months = Math.max(0, months);
             days = Math.max(0, days);
             hours = Math.max(0, hours);
             minutes = Math.max(0, minutes);
             seconds = Math.max(0, seconds);
-
             animateDigit("months", months);
             animateDigit("days", days);
             animateDigit("hours", hours);
             animateDigit("minutes", minutes);
             animateDigit("seconds", seconds);
-
             updateMessage();
         }
-
         // Animate digit change
         function animateDigit(id, value) {
             const el = document.getElementById(id);
@@ -387,14 +396,12 @@
                 setTimeout(() => { el.style.animation = ""; }, 700);
             }
         }
-
         // Hindi + English fun messages
         function updateMessage() {
             const today = new Date();
             const month = today.getMonth() + 1;
             const day = today.getDate();
             let message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
-
             if (month === 6) message = "⏳ 1 महीना बाकी... Are You Excited? 🎈";
             else if (month === 7 && day <= 7) message = "🎉 3 हफ्ते बाकी! Excited हो? 🔥";
             else if (month === 7 && day >= 8 && day <= 14) message = "🔥 2 हफ्ते और...  मजा आएगा! 😆";
@@ -408,10 +415,8 @@
                 emojiRain();
                 launchBalloons();
             } else if (month === 7 && day === 26) message = "😂 अब क्या देखने आए? Party खत्म! 😆";
-
             document.getElementById("messageBox").innerHTML = message;
         }
-
         // Confetti
         function startConfetti() {
             if (window._confettiStarted) return;
@@ -425,7 +430,6 @@
                 else window._confettiStarted = false;
             })();
         }
-
         // Birthday Song
         function playBirthdaySong() {
             if (!window._birthdaySongPlayed) {
@@ -434,7 +438,6 @@
                 window._birthdaySongPlayed = true;
             }
         }
-
         // Fun emoji rain animation
         function emojiRain() {
             if (document.getElementById('emoji-rain')) return;
@@ -446,9 +449,8 @@
             rain.style.width = '100vw';
             rain.style.height = '100vh';
             rain.style.pointerEvents = 'none';
-            rain.style.zIndex = 200;
+            rain.style.z-index = 200;
             document.body.appendChild(rain);
-
             let emojis = ['🎉','🎂','🎈','🥳','🎊','🪅'];
             let count = 30;
             for (let i = 0; i < count; i++) {
@@ -471,7 +473,6 @@
             to { top: 110vh; opacity: 0.1;}
         }`;
         document.head.appendChild(style);
-
         // Balloons Animation
         function launchBalloons() {
             const container = document.getElementById('balloons-container');
@@ -492,7 +493,6 @@
             }
             setTimeout(()=>{ container.innerHTML = ''; }, 6000);
         }
-
         // Start countdown
         setInterval(updateCountdown, 1000);
         updateCountdown();
