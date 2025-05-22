@@ -132,7 +132,7 @@ if (!message) {
     if (typeof months !== "undefined" && typeof days !== "undefined" && typeof hours !== "undefined" && typeof minutes !== "undefined" && typeof seconds !== "undefined") {
         // 3/2/1 month messages (priority after special dates)
         if (months > 3) {
-            message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
+            message = "⌛ 3 महीने बाद मेरा Birthday है! इंतजार करो...";
         } else if (months === 3 && days >= 0) {
             message = "🎂 3 महीने बाद मेरा Birthday है! इंतजार करो...";
         } else if (months === 2 && days >= 0) {
