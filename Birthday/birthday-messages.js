@@ -31,14 +31,14 @@ function updateBirthdayMessage(months, days, hours, minutes, seconds) {
             else if (day === 14) message = "🪁 Makar Sankranti! Til-gud ghya, god god bola!";
             else if (day === 25) message = "Aaj mera half brithday hai aur aaj se thik 6 mahine bad mera birthday hai 🎂🎉";
             else if (day === 26) message = "🇮🇳 Happy Republic Day! Jai Hind!";
-            else if (day % 4 === 0) message = "❄️ Thand ka mausam hai, sweater pehanke mere birthday ka wait karo 😅";
+            else if (day % 4 === 0) message = "❄️ Thand ka mausam hai, sweater pehanke mere birthday ka wait karo 😅🧣";
             break;
 
         // -----------------
         // FEBRUARY SPECIALS
         // -----------------
         case 2:
-            if (day === 2) message = "मुझे बाद में बर्थडे विश करना, पहले आज मेरे Aman भैया को विश करो! 🎂🎉";
+            if (day === 2) message = "मुझे बाद में birthday Wish करना, पहले आज मेरे Aman भैया को विश करो! क्योंकि आज उसका birthday है🎂🎉";
             else if (day === 7) message = "🌹 Happy Rose Day! Single हो तो रोते रहो और डबल हो तो और भी ज्यादा रोओ";
             else if (day === 8) message = "💍 Happy Propose Day! Single हो तो रोते रहो और डबल हो तो और भी ज्यादा रोओ";
             else if (day === 9) message = "🍫 Happy Chocolate Day! Single हो तो मुझे चॉकलेट खाने के लिए रुपये भेज दो 😅👍";
