@@ -5,201 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Birthday: 25 July</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
-            --main-bg: rgba(255,255,255,0.15);
-            --glass-bg: rgba(255,255,255,0.25);
-            --accent: #ff4b2b;
-            --accent2: #00c6ff;
-            --text: #fff;
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --primary: #8e2de2;
+            --secondary: #4a00e0;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #333;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --radius: 16px;
         }
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Montserrat', 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text);
+            background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
-            margin: 0;
+            position: relative;
             overflow-x: hidden;
-            /* Animated gradient background */
-            background: linear-gradient(120deg, #000428, #004e92, #00c6ff, #ffdde1);
-            background-size: 200% 200%;
-            animation: bgMove 10s ease-in-out infinite alternate;
         }
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        /* Particle background container */
-        #particles-js {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0; left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-        /* Balloons container */
-        #balloons-container {
-            position: fixed;
-            left: 0; top: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 2;
-            pointer-events: none;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(142, 45, 226, 0.8), rgba(74, 0, 224, 0.8));
+            z-index: -1;
         }
         .container {
-            position: relative;
-            z-index: 5;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 40px 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 0;
-        }
-        .glass-card {
-            background: var(--glass-bg);
-            box-shadow: var(--shadow);
-            border-radius: 24px;
-            padding: 36px 24px;
-            margin: 32px 0;
-            max-width: 420px;
-            width: 95vw;
-            backdrop-filter: blur(16px);
-            border: 1.5px solid rgba(255,255,255,0.18);
-            transition: background 0.3s;
-            display: flex;
-            flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
-        .dark-mode .glass-card {
-            background: rgba(0,0,0,0.3);
+        .card {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--gradient);
         }
         h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.2em;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #ff9a9e, #fad0c4, #ffdde1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 14px #fff8;
-            animation: fadeInDown 1.2s;
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
             text-align: center;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px);}
-            to { opacity: 1; transform: translateY(0);}
+            margin-bottom: 25px;
+            position: relative;
+            font-size: 2.5rem;
         }
         .message-box {
-            font-size: 1.1em;
-            color: #fff;
-            background: var(--main-bg);
+            background: white;
             border-radius: 12px;
-            padding: 13px 10px;
-            margin: 14px 0 8px 0;
-            box-shadow: 0 4px 24px 0 rgba(255,255,255,0.10);
-            min-height: 40px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            animation: fadeIn 1.5s;
+            padding: 15px;
             text-align: center;
+            margin: 20px 0;
+            font-weight: 500;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
         }
-        /* Countdown Timer */
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--gradient);
+        }
+        .emoji-bounce {
+            display: inline-block;
+            animation: bounce 1s infinite alternate;
+            margin: 0 5px;
+            font-size: 1.2em;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 13px;
-            margin-top: 18px;
-            margin-bottom: 7px;
-            width: 100%;
+            gap: 15px;
+            margin: 25px 0;
         }
         .countdown-item {
-            background: linear-gradient(135deg, #ff416cdd, #ff4b2bdd 80%);
-            color: #fff;
-            border-radius: 13px;
-            padding: 12px 4px 7px 4px;
-            box-shadow: 0 0 13px #ff4b2b44;
-            min-width: 60px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 10px;
             text-align: center;
-            font-weight: 700;
-            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s;
-            animation: popIn 1s;
         }
-        .countdown-item span {
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--gradient);
+        }
+        .countdown-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
             display: block;
-            font-size: 1.6em;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 2px;
-            animation: digitPop 0.8s;
         }
         .countdown-label {
-            font-size: 0.85em;
-            font-weight: 500;
+            font-size: 0.85rem;
+            color: #777;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0.85;
         }
-        @keyframes popIn {
-            from { transform: scale(0.7);}
-            to { transform: scale(1);}
-        }
-        @keyframes digitPop {
-            from { opacity: 0; transform: scale(1.5);}
-            to { opacity: 1; transform: scale(1);}
-        }
-        /* Emoji animation */
-        .emoji-bounce {
-            animation: bounce 1.2s infinite alternate;
-            display: inline-block;
-        }
-        @keyframes bounce {
-            0% { transform: translateY(0);}
-            100% { transform: translateY(-14px);}
-        }
-        /* Dark/Light Mode Toggle */
-        .toggle-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.15);
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            z-index: 20;
-            box-shadow: 0 2px 8px #0002;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-        }
-        .toggle-btn i {
-            font-size: 1.3em;
-            color: #fff;
-            transition: color 0.3s;
-        }
-        .dark-mode {
-            --main-bg: rgba(0,0,0,0.30);
-            --glass-bg: rgba(0,0,0,0.35);
-            --text: #fff;
-        }
-        .dark-mode body {
-            background: #181818;
-        }
-        /* Countdown Button (Added) */
+        /* Stylish fixed button */
         #countdown-btn {
             position: fixed;
             right: 20px;
@@ -208,15 +154,15 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(90deg, #ff4b2b, #ffdd57, #00c6ff);
+            background: var(--gradient);
             color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             font-size: 1.05em;
-            padding: 10px 24px;
+            padding: 12px 28px;
             border: none;
             border-radius: 30px;
-            box-shadow: 0 4px 24px 0 rgba(255, 75, 43, 0.3);
+            box-shadow: 0 4px 24px 0 rgba(142, 45, 226, 0.2);
             cursor: pointer;
             text-decoration: none;
             transition: background 0.3s, transform 0.15s;
@@ -226,9 +172,9 @@
             white-space: nowrap;
         }
         #countdown-btn:hover, #countdown-btn:focus {
-            background: linear-gradient(90deg, #00c6ff, #ff4b2b, #ff4b2b);
+            background: linear-gradient(90deg, #ff6b6b, #8e2de2);
             transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 32px 0 rgba(0, 198, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(255, 107, 107, 0.2);
             color: #fff;
         }
         #countdown-btn i {
@@ -237,263 +183,134 @@
         }
         /* Responsive */
         @media (max-width: 600px) {
-            .glass-card { padding: 13px 2vw; max-width: 99vw;}
-            .countdown-grid { gap: 8px;}
-            .countdown-item { font-size: 1em; padding: 7px 1px 4px 1px; min-width: 45px;}
-            h1 { font-size: 1.15em;}
-            .toggle-btn { width: 38px; height: 38px; top: 7px; right: 7px;}
+            .container { padding: 20px 15px; }
+            .card { padding: 20px 15px; }
+            h1 { font-size: 2rem; }
+            .countdown-grid { gap: 10px; }
+            .countdown-value { font-size: 1.5rem; }
+            .countdown-label { font-size: 0.7rem; }
             #countdown-btn {
                 font-size: 0.9em;
-                padding: 8px 18px;
+                padding: 10px 16px;
                 right: 10px;
                 bottom: 10px;
-                white-space: nowrap;
                 max-width: 90vw;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            #countdown-btn i {
-                font-size: 1em;
-            }
         }
         @media (max-width: 400px) {
-            .glass-card { padding: 7px 1vw;}
-            .countdown-item span { font-size: 1.1em;}
             #countdown-btn {
                 font-size: 0.85em;
-                padding: 7px 14px;
+                padding: 7px 10px;
             }
-        }
-        /* Balloons CSS */
-        .balloon {
-            position: absolute;
-            bottom: -100px;
-            width: 38px;
-            height: 55px;
-            background: radial-gradient(circle at 60% 40%, #ff4b2b 70%, #fff0 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: balloonUp 6s linear forwards;
-            z-index: 100;
-            opacity: 0.85;
-        }
-        .balloon:after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -18px;
-            width: 2px;
-            height: 20px;
-            background: #aaa;
-            border-radius: 1px;
-            transform: translateX(-50%);
-        }
-        @keyframes balloonUp {
-            0% { transform: translateY(0) scale(1);}
-            100% { transform: translateY(-110vh) scale(1.05);}
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div id="balloons-container"></div>
-    <button class="toggle-btn" onclick="toggleMode()" title="Toggle Dark/Light Mode">
-        <i id="modeIcon" class="fa-solid fa-moon"></i>
-    </button>
     <div class="container">
-        <div class="glass-card">
+        <div class="card">
             <h1>
                 <span class="emoji-bounce">🎂</span> My Birthday: 25 July <span class="emoji-bounce">🎉</span>
             </h1>
             <div id="messageBox" class="message-box"></div>
             <div class="countdown-grid">
-                <div class="countdown-item"><span id="months">0</span><div class="countdown-label">Months</div></div>
-                <div class="countdown-item"><span id="days">0</span><div class="countdown-label">Days</div></div>
-                <div class="countdown-item"><span id="hours">0</span><div class="countdown-label">Hours</div></div>
-                <div class="countdown-item"><span id="minutes">0</span><div class="countdown-label">Minutes</div></div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="months">0</span>
+                    <span class="countdown-label">Months</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">0</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">0</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">0</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
             </div>
-            <div class="countdown-grid" style="grid-template-columns: 1fr;">
-                <div class="countdown-item"><span id="seconds">0</span><div class="countdown-label">Seconds</div></div>
+            <div class="countdown-item" style="margin: 0 auto; max-width: 160px;">
+                <span class="countdown-value" id="seconds">0</span>
+                <span class="countdown-label">Seconds</span>
             </div>
         </div>
     </div>
-
-    <audio id="birthday-audio" src="BirthdayFunnyWish.mp3" preload="auto"></audio>
-    <!-- Check Your Birthday Countdown Button (Added) -->
-    <a href="Check" id="countdown-btn" class="countdown-btn">
+    <!-- Fixed stylish button -->
+    <a href="check.html" id="countdown-btn">
         <i class="fa-solid fa-cake-candles"></i> Check Your Birthday Countdown
     </a>
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.1"></script>
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        function playBirthdaySong() {
-            if (!window._birthdaySongPlayed) {
-                var audio = document.getElementById('birthday-audio');
-                audio.currentTime = 0;
-                audio.play();
-                window._birthdaySongPlayed = true;
-            }
-        }
-        // Particle background
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 60 },
-                "color": { "value": ["#ff4b2b","#ffdd57","#00c6ff","#fff"] },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.35 },
-                "size": { "value": 4, "random": true },
-                "move": { "enable": true, "speed": 1.5 }
-            },
-            "interactivity": {
-                "events": {
-                    "onhover": { "enable": true, "mode": "repulse" }
-                }
-            }
-        });
-        // Dark/Light Mode
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            let icon = document.getElementById("modeIcon");
-            if(document.body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.add('fa-moon');
-                icon.classList.remove('fa-sun');
-            }
-        }
-        // Countdown logic with animation
+        // Countdown calculation fixed and accurate!
         function updateCountdown() {
-            const birthday = new Date("July 25, 2025 00:00:00").getTime();
-            const now = new Date().getTime();
+            const now = new Date();
+            let currentYear = now.getFullYear();
+            let birthday = new Date(currentYear, 6, 25, 0, 0, 0); // July is month 6 (0-indexed)
+            // If birthday has passed this year, use next year
+            if (now > birthday) {
+                birthday = new Date(currentYear + 1, 6, 25, 0, 0, 0);
+            }
+            // Get total diff in ms
             let diff = birthday - now;
+
             // Calculate months, days, hours, minutes, seconds
-            let months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
-            let days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            // Prevent negative values after birthday
+            let months = birthday.getMonth() - now.getMonth() + (birthday.getFullYear() - now.getFullYear()) * 12;
+            if (birthday.getDate() < now.getDate()) months--;
+
+            // Calculate the next month date
+            let nextMonth = new Date(now.getFullYear(), now.getMonth() + months + 1, birthday.getDate());
+            if (nextMonth < birthday) nextMonth = birthday;
+
+            let days = Math.floor((birthday - new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), 0, 0, 0)) / (1000 * 60 * 60 * 24));
+            let hours = birthday.getHours() - now.getHours();
+            let minutes = birthday.getMinutes() - now.getMinutes();
+            let seconds = birthday.getSeconds() - now.getSeconds();
+
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            if (days < 0) {
+                // recalculate months and days
+                months--;
+                let prevMonth = new Date(birthday.getFullYear(), birthday.getMonth() - 1, birthday.getDate());
+                days = Math.floor((birthday - new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), 0, 0, 0)) / (1000 * 60 * 60 * 24));
+            }
             months = Math.max(0, months);
             days = Math.max(0, days);
             hours = Math.max(0, hours);
             minutes = Math.max(0, minutes);
             seconds = Math.max(0, seconds);
-            animateDigit("months", months);
-            animateDigit("days", days);
-            animateDigit("hours", hours);
-            animateDigit("minutes", minutes);
-            animateDigit("seconds", seconds);
-            updateMessage();
-        }
-        // Animate digit change
-        function animateDigit(id, value) {
-            const el = document.getElementById(id);
-            if (el.innerText != value) {
-                el.innerText = value;
-                el.style.animation = "digitPop 0.7s";
-                setTimeout(() => { el.style.animation = ""; }, 700);
-            }
-        }
-        // Hindi + English fun messages
-        function updateMessage() {
-            const today = new Date();
-            const month = today.getMonth() + 1;
-            const day = today.getDate();
+
+            document.getElementById("months").textContent = months;
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+            // Message logic
             let message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
-            if (month === 6) message = "⏳ 1 महीना बाकी... Are You Excited? 🎈";
-            else if (month === 7 && day <= 7) message = "🎉 3 हफ्ते बाकी! Excited हो? 🔥";
-            else if (month === 7 && day >= 8 && day <= 14) message = "🔥 2 हफ्ते और...  मजा आएगा! 😆";
-            else if (month === 7 && day >= 15 && day <= 21) message = "🕺 1 हफ्ता और...  पार्टी TIME! 🎊";
-            else if (month === 7 && day === 23) message = "🤯 सिर्फ 2 दिन बाकी! 🎂";
-            else if (month === 7 && day === 24) message = "🥳 कल बर्थडे है! तैयारी पूरी? 🔥";
-            else if (month === 7 && day === 25) {
+            if (months === 1 && days === 0) message = "⏳ 1 महीना बाकी... Are You Excited? 🎈";
+            else if (months === 0 && days >= 21) message = "🎉 3 हफ्ते बाकी! Excited हो? 🔥";
+            else if (months === 0 && days >= 14) message = "🔥 2 हफ्ते और...  मजा आएगा! 😆";
+            else if (months === 0 && days >= 7) message = "🕺 1 हफ्ता और...  पार्टी TIME! 🎊";
+            else if (months === 0 && days === 2) message = "🤯 सिर्फ 2 दिन बाकी! 🎂";
+            else if (months === 0 && days === 1) message = "🥳 कल बर्थडे है! तैयारी पूरी? 🔥";
+            else if (months === 0 && days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
                 message = "🎉 आज मेरा Birthday है! Let's Celebrate! 🎂🎊";
-                startConfetti();
-                playBirthdaySong();
-                emojiRain();
-                launchBalloons();
-            } else if (month === 7 && day === 26) message = "😂 अब क्या देखने आए? Party खत्म! 😆";
+            }
             document.getElementById("messageBox").innerHTML = message;
         }
-        // Confetti
-        function startConfetti() {
-            if (window._confettiStarted) return;
-            window._confettiStarted = true;
-            let end = Date.now() + 5 * 1000;
-            let colors = ["#ff0000", "#ffff00", "#00ff00", "#0000ff"];
-            (function frame() {
-                confetti({ particleCount: 7, angle: 60, spread: 65, origin: { x: 0 }, colors: colors });
-                confetti({ particleCount: 7, angle: 120, spread: 65, origin: { x: 1 }, colors: colors });
-                if (Date.now() < end) requestAnimationFrame(frame);
-                else window._confettiStarted = false;
-            })();
-        }
-        // Birthday Song
-        function playBirthdaySong() {
-            if (!window._birthdaySongPlayed) {
-                let audio = new Audio("https://www.myinstants.com/media/sounds/happy-birthday-music-box.mp3");
-                audio.play();
-                window._birthdaySongPlayed = true;
-            }
-        }
-        // Fun emoji rain animation
-        function emojiRain() {
-            if (document.getElementById('emoji-rain')) return;
-            let rain = document.createElement('div');
-            rain.id = 'emoji-rain';
-            rain.style.position = 'fixed';
-            rain.style.top = 0;
-            rain.style.left = 0;
-            rain.style.width = '100vw';
-            rain.style.height = '100vh';
-            rain.style.pointerEvents = 'none';
-            rain.style.z-index = 200;
-            document.body.appendChild(rain);
-            let emojis = ['🎉','🎂','🎈','🥳','🎊','🪅'];
-            let count = 30;
-            for (let i = 0; i < count; i++) {
-                let e = document.createElement('span');
-                e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-                e.style.position = 'absolute';
-                e.style.left = Math.random()*100 + 'vw';
-                e.style.top = '-3em';
-                e.style.fontSize = (Math.random()*2+1.2) + 'em';
-                e.style.opacity = 0.85;
-                e.style.animation = `emojiDrop ${2+Math.random()*2}s linear ${Math.random()}s forwards`;
-                rain.appendChild(e);
-            }
-            setTimeout(()=>{ rain.remove(); }, 5000);
-        }
-        // Emoji drop animation
-        const style = document.createElement('style');
-        style.innerHTML = `
-        @keyframes emojiDrop {
-            to { top: 110vh; opacity: 0.1;}
-        }`;
-        document.head.appendChild(style);
-        // Balloons Animation
-        function launchBalloons() {
-            const container = document.getElementById('balloons-container');
-            if (container.childElementCount > 0) return; // Prevent multiple launches
-            const colors = [
-                '#ff4b2b', '#ffdd57', '#00c6ff', '#8e54e9', '#ff9a9e', '#43e97b'
-            ];
-            for (let i = 0; i < 12; i++) {
-                let balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                balloon.style.left = (Math.random()*90 + 2) + 'vw';
-                balloon.style.background = `radial-gradient(circle at 60% 40%, ${colors[i%colors.length]} 70%, #fff0 100%)`;
-                balloon.style.animationDuration = (5+Math.random()*2) + 's';
-                balloon.style.opacity = 0.7 + Math.random()*0.3;
-                balloon.style.width = (30+Math.random()*18) + 'px';
-                balloon.style.height = (45+Math.random()*20) + 'px';
-                container.appendChild(balloon);
-            }
-            setTimeout(()=>{ container.innerHTML = ''; }, 6000);
-        }
-        // Start countdown
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
