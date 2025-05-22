@@ -31,7 +31,7 @@ function updateBirthdayMessage(months, days, hours, minutes, seconds) {
             else if (day === 14) message = "🪁 Happy Makar Sankranti! पतंग उड़ाते-उड़ाते मेरे Birthday का इंतजार करो 😅🤣";
             else if (day === 25) message = "Aaj mera half brithday hai और आज से ठीक 6 महीने बाद मेरा Birthday है 🎂🎉";
             else if (day === 26) message = "🇮🇳 Happy Republic Day! Jai Hind!";
-            else if (day % 4 === 0) message = "❄️ Thand ka mausam hai, sweater pehanke mere birthday ka wait karo 😅🧣";
+            else if (day % 4 === 0) message = "ठंड का मौसम है, इसलिए स्वेटर पहनके मेरे Birthday का इंतजार करो 😅👚";
             break;
 
         // -----------------
