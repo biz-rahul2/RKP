@@ -146,7 +146,7 @@ function updateBirthdayMessage(months, days, hours, minutes, seconds) {
                     message = "🎉 इसी महीने मेरा Birthday है!";
                     break;
                 default:
-                    message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
+                    message = "⌛ अभी बहुत टाइम है Birthday आने में यार... So chill! 😎";
             }
             // Weeks/days/hours/minutes/seconds logic (only if within 1 month)
             if (months === 1 && days === 0) message = "⏳ 1 महीना बाकी... Are You Excited? 🎈";
