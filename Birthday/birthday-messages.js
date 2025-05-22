@@ -143,7 +143,7 @@ function updateBirthdayMessage(months, days, hours, minutes, seconds) {
                     message = "🎂 1 महीना बाद मेरा Birthday है!";
                     break;
                 case 7:
-                    message = "🎉 इसी महीने मेरा Birthday है!";
+                    message = " 🎂 इसी महीने मेरा Birthday है!";
                     break;
                 default:
                     message = "⌛ अभी बहुत टाइम है Birthday आने में यार... So chill! 😎";
