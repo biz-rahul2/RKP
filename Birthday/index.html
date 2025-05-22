@@ -237,6 +237,40 @@
             0% { transform: translateY(0) scale(1);}
             100% { transform: translateY(-110vh) scale(1.05);}
         }
+
+        .countdown-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #ff4b2b, #ffdd57, #00c6ff);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.08em;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 24px 0 #ff4b2b44;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 18px 0 0 0;
+    transition: background 0.3s, transform 0.15s;
+    letter-spacing: 0.5px;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+.countdown-btn:hover, .countdown-btn:focus {
+    background: linear-gradient(90deg, #00c6ff, #ff4b2b, #ffdd57);
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 8px 32px 0 #00c6ff55;
+    color: #fff;
+}
+.countdown-btn i {
+    font-size: 1.2em;
+    animation: bounce 1.2s infinite alternate;
+                                }
+        
     </style>
 </head>
 <body>
@@ -262,6 +296,11 @@
             </div>
         </div>
     </div>
+
+    <a href="check.html" class="countdown-btn">
+  <i class="fa-solid fa-cake-candles"></i> Check Your Birthday Countdown
+    </a>
+    
 
     <audio id="birthday-audio" src="BirthdayFunnyWish.mp3" preload="auto"></audio>
     
