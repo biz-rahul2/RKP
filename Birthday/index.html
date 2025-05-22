@@ -298,18 +298,6 @@
             document.getElementById("minutes").textContent = minutes;
             document.getElementById("seconds").textContent = seconds;
 
-            // Message logic
-            let message = "⌛ अभी बहुत टाइम है Birthday आने में... So chill! 😎";
-            if (months === 1 && days === 0) message = "⏳ 1 महीना बाकी... Are You Excited? 🎈";
-            else if (months === 0 && days >= 21) message = "🎉 3 हफ्ते बाकी! Excited हो? 🔥";
-            else if (months === 0 && days >= 14) message = "🔥 2 हफ्ते और...  मजा आएगा! 😆";
-            else if (months === 0 && days >= 7) message = "🕺 1 हफ्ता और...  पार्टी TIME! 🎊";
-            else if (months === 0 && days === 2) message = "🤯 सिर्फ 2 दिन बाकी! 🎂";
-            else if (months === 0 && days === 1) message = "🥳 कल बर्थडे है! तैयारी पूरी? 🔥";
-            else if (months === 0 && days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-                message = "🎉 आज मेरा Birthday है! Let's Celebrate! 🎂🎊";
-            }
-            document.getElementById("messageBox").innerHTML = message;
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
