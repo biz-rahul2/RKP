@@ -61,6 +61,7 @@
       align-items: center;
       transition: background 0.3s ease, transform 0.3s ease;
       cursor: pointer;
+      position: relative;
     }
 
     .server-line:hover {
@@ -69,11 +70,21 @@
       transform: scale(1.05);
     }
 
+    .server-line.selected {
+      background: linear-gradient(90deg, #0066ff, #0099ff);
+      box-shadow: 0 0 18px #0066ffcc, 0 0 10px #0066ffcc inset;
+    }
+
     .server-line span {
       color: #00ffff;
       font-weight: 700;
       text-shadow: 0 0 6px #00ffffcc;
       letter-spacing: 1.5px;
+    }
+
+    .server-line.selected span {
+      color: #fff;
+      text-shadow: 0 0 6px #fff;
     }
 
     .server-line button {
@@ -90,10 +101,21 @@
       text-shadow: none;
     }
 
+    .server-line.selected button {
+      background: linear-gradient(135deg, #0066ff, #0099ff);
+      color: #fff;
+      box-shadow: 0 0 18px #0066ffcc;
+    }
+
     .server-line button:hover {
       background: linear-gradient(135deg, #00ccaa, #00ffff);
       box-shadow: 0 0 18px #00ffffee;
       transform: scale(1.1);
+    }
+
+    .server-line.selected button:hover {
+      background: linear-gradient(135deg, #0099ff, #0066ff);
+      box-shadow: 0 0 22px #0066ffcc;
     }
 
     .insta-follow {
@@ -244,14 +266,26 @@
   }
 
   // Create server list
+  const serverElements = [];
   links.forEach((link, i) => {
     const div = document.createElement("div");
     div.className = "server-line";
+    div.dataset.index = i; // For easy reference
 
     const button = document.createElement("button");
     button.innerText = "Open";
 
     button.addEventListener("click", () => {
+      // Remove selected class from all servers
+      serverElements.forEach(el => el.classList.remove("selected"));
+      // Add selected class to current server
+      div.classList.add("selected");
+      // Save selected server index to localStorage with expiry (1 day)
+      const expiry = new Date();
+      expiry.setDate(expiry.getDate() + 1);
+      localStorage.setItem("lastClickedServer", i);
+      localStorage.setItem("lastClickedServerExpiry", expiry.getTime());
+      // Proceed with error or redirect
       if (Math.random() < 0.10) {
         showTempError(button, link);
       } else {
@@ -262,7 +296,23 @@
     div.innerHTML = `<span>Server-${i + 1}</span>`;
     div.appendChild(button);
     serverList.appendChild(div);
+    serverElements.push(div);
   });
+
+  // On page load: check if there's a saved server and if it's not expired
+  const lastClickedServer = localStorage.getItem("lastClickedServer");
+  const expiryTime = localStorage.getItem("lastClickedServerExpiry");
+  if (lastClickedServer !== null && expiryTime !== null) {
+    const now = new Date().getTime();
+    if (now < parseInt(expiryTime)) {
+      // Select the saved server
+      serverElements[lastClickedServer]?.classList.add("selected");
+    } else {
+      // Clear expired data
+      localStorage.removeItem("lastClickedServer");
+      localStorage.removeItem("lastClickedServerExpiry");
+    }
+  }
 </script>
 </body>
 </html>
