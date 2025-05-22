@@ -694,12 +694,12 @@
             const timeDiff = nextBirthday.getTime() - today.getTime();
             const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
             
-            let message = "<span class='emoji'>⌛</span> अभी समय है अगले जन्मदिन में! <span class='emoji'>😎</span>";
+            let message = "<span class='emoji'>⌛</span> तुम्हारा Birthday आने में बस इतना समय बचा है  <span class='emoji'>😎🎂</span>";
             
-            if (daysDiff <= 0) message = "<span class='emoji'>🎉</span> आज आपका जन्मदिन है! <span class='emoji'>🎂</span>";
-            else if (daysDiff === 1) message = "<span class='emoji'>🎊</span> कल आपका जन्मदिन है! तैयारी पूरी? <span class='emoji'>🔥</span>";
-            else if (daysDiff <= 7) message = "<span class='emoji'>🎈</span> एक हफ्ते से भी कम समय! <span class='emoji'>🥳</span>";
-            else if (daysDiff <= 30) message = "<span class='emoji'>🎁</span> अगले जन्मदिन में एक महीने से कम समय! <span class='emoji'>🎁</span>";
+            if (daysDiff <= 0) message = "<span class='emoji'>🎉</span>अरे यार आज तो तुम्हारा Birthday है! <span class='emoji'>🎂</span>";
+            else if (daysDiff === 1) message = "<span class='emoji'>🎊</span> वाह! कल तुम्हारा Birthday है! तैयारी पूरी हो गई? <span class='emoji'>🔥</span>";
+            else if (daysDiff <= 7) message = "<span class='emoji'>🎈</span> अरे यार! एक हफ्ते से भी कम समय है तुम्हारा birthday आने में  <span class='emoji'>🥳</span>";
+            else if (daysDiff <= 30) message = "<span class='emoji'>🎁</span> अरे यार तुम्हारा birthday आने में तो एक महिने से भी कम समय हैं <span class='emoji'>🎁</span>";
             
             document.getElementById("messageBox").innerHTML = message;
         }
