@@ -70,7 +70,7 @@
         
         .warning {
             background-color: #fff3cd;
-            border: 1px solid #ffe8a7;
+            border: 1px solid #ffeaa7;
             padding: 15px;
             border-radius: 5px;
             margin: 20px 0;
@@ -104,9 +104,9 @@
             <div id="browserData"></div>
         </div>
 
-        <div id="extraInfo" class="info-section">
-            <h3>➕ Extra Information</h3>
-            <div id="extraData"></div>
+        <div id="networkInfo" class="info-section">
+            <h3>🌍 Network & Location Data</h3>
+            <div id="networkData"></div>
         </div>
 
         <button class="download-btn" onclick="downloadData()">
@@ -132,9 +132,7 @@
                 'Touch Screen': 'ontouchstart' in window ? 'Yes' : 'No',
                 'Platform': navigator.platform,
                 'Hardware Concurrency': navigator.hardwareConcurrency || 'Unknown',
-                'Device Memory': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown',
-                'Max Touch Points': navigator.maxTouchPoints || 'Unknown',
-                'Device Pixel Ratio': window.devicePixelRatio || 'Unknown'
+                'Device Memory': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown'
             };
             
             // Battery API (if supported)
@@ -153,7 +151,7 @@
         function collectBrowserInfo() {
             const browserData = {
                 'Browser Language': navigator.language,
-                'Languages': navigator.languages ? navigator.languages.join(', ') : 'Unknown',
+                'Languages': navigator.languages.join(', '),
                 'Timezone': Intl.DateTimeFormat().resolvedOptions().timeZone,
                 'Timezone Offset': new Date().getTimezoneOffset(),
                 'Cookies Enabled': navigator.cookieEnabled ? 'Yes' : 'No',
@@ -163,9 +161,7 @@
                 'PDF Viewer': navigator.pdfViewerEnabled ? 'Yes' : 'No',
                 'Referrer': document.referrer || 'Direct Visit',
                 'Current URL': window.location.href,
-                'Viewport Size': `${window.innerWidth} x ${window.innerHeight}`,
-                'Plugins List': navigator.plugins ? Array.from(navigator.plugins).map(p => p.name).join(', ') : 'Unknown',
-                'MIME Types': navigator.mimeTypes ? Array.from(navigator.mimeTypes).map(m => m.type).join(', ') : 'Unknown'
+                'Viewport Size': `${window.innerWidth} x ${window.innerHeight}`
             };
             
             // WebGL Information
@@ -177,6 +173,32 @@
             }
             
             return browserData;
+        }
+        
+        // Network Information Collection
+        async function collectNetworkInfo() {
+            const networkData = {
+                'Connection Type': navigator.connection ? navigator.connection.effectiveType : 'Unknown',
+                'Network Speed': navigator.connection ? `${navigator.connection.downlink} Mbps` : 'Unknown',
+                'Save Data': navigator.connection ? (navigator.connection.saveData ? 'Yes' : 'No') : 'Unknown'
+            };
+            
+            // Get IP and location info from external API
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                networkData['IP Address'] = data.ip || 'Unknown';
+                networkData['City'] = data.city || 'Unknown';
+                networkData['Region'] = data.region || 'Unknown';
+                networkData['Country'] = data.country_name || 'Unknown';
+                networkData['ISP'] = data.org || 'Unknown';
+                networkData['Latitude'] = data.latitude || 'Unknown';
+                networkData['Longitude'] = data.longitude || 'Unknown';
+            } catch (error) {
+                networkData['IP Info'] = 'Could not fetch IP information';
+            }
+            
+            return networkData;
         }
         
         // Display collected data
@@ -196,7 +218,7 @@
         function updateDisplay() {
             displayData(collectedData.device, 'deviceData');
             displayData(collectedData.browser, 'browserData');
-            displayData(collectedData.extra, 'extraData');
+            displayData(collectedData.network, 'networkData');
         }
         
         // Download collected data as text file
@@ -216,9 +238,9 @@
                 content += `${key}: ${value}\n`;
             }
             
-            content += "\nEXTRA INFORMATION:\n";
-            content += "=================\n";
-            for (const [key, value] of Object.entries(collectedData.extra)) {
+            content += "\nNETWORK & LOCATION DATA:\n";
+            content += "=======================\n";
+            for (const [key, value] of Object.entries(collectedData.network)) {
                 content += `${key}: ${value}\n`;
             }
             
@@ -244,13 +266,11 @@
         async function initializeCollection() {
             collectedData.device = collectDeviceInfo();
             collectedData.browser = collectBrowserInfo();
-            collectedData.extra = {
-                'Permissions': 'Check Permission prompts for more detail'
-            };
+            collectedData.network = await collectNetworkInfo();
             
             updateDisplay();
             
-            // Auto-alert after 3 seconds
+            // Auto-download after 3 seconds
             setTimeout(() => {
                 alert('आपका data collect हो गया है! अब आप इसे download कर सकते हैं।');
             }, 3000);
