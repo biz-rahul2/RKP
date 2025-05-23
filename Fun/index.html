@@ -5,16 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Collection Awareness Demo</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
-        .disclaimer { background-color: #ffebee; border: 2px solid #f44336; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
-        .disclaimer h2 { color: #d32f2f; margin-top: 0; }
-        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .info-section { margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; }
-        .info-section h3 { color: #333; margin-top: 0; }
-        .data-item { margin: 5px 0; padding: 5px; background: white; border-radius: 3px; }
-        .download-btn { background-color: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 20px 0; }
-        .download-btn:hover { background-color: #45a049; }
-        .warning { background-color: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .disclaimer {
+            background-color: #ffebee;
+            border: 2px solid #f44336;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .disclaimer h2 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .info-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        .info-section h3 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+        .info-section h3::before {
+            content: "•";
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        .data-item {
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+        .data-item strong {
+            color: #333;
+            min-width: 180px;
+        }
+        .data-item span {
+            color: #555;
+            text-align: right;
+        }
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -22,16 +100,14 @@
         <h2>⚠️ डेटा कलेक्शन डिस्क्लेमर</h2>
         <p><strong>चेतावनी:</strong> यह वेबसाइट आपकी डिवाइस और ब्राउज़र की जानकारी collect कर रही है।</p>
         <p><strong>उद्देश्य:</strong> यह educational purpose के लिए है ताकि आप जान सकें कि websites कैसे आपका data collect करती हैं।</p>
-        <p><strong>आपका डेटा:</strong> Collect किया गया डेटा आपके device में .md (Markdown) file के रूप में download हो जाएगा।</p>
+        <p><strong>आपका डेटा:</strong> Collect किया गया डेटा आपके device में txt file के रूप में download हो जाएगा।</p>
         <p><strong>सुरक्षा:</strong> कोई भी जानकारी server पर store नहीं की जा रही है।</p>
     </div>
-
     <div class="container">
         <h1>🔍 Website Data Collection Demo</h1>
         <div class="warning">
             <strong>यह demo आपको दिखाता है कि websites आपके बारे में कितनी जानकारी collect कर सकती हैं!</strong>
         </div>
-
         <div id="deviceInfo" class="info-section">
             <h3>📱 Device Information</h3>
             <div id="deviceData"></div>
@@ -44,23 +120,20 @@
             <h3>🌍 Network & Location Data</h3>
             <div id="networkData"></div>
         </div>
-        <div id="extraInfo" class="info-section">
-            <h3>➕ Extra Information</h3>
-            <div id="extraData"></div>
-        </div>
-
-        <button class="download-btn" onclick="downloadMarkdown()">
-            📥 अपना Collected Data (.md) Download करें
-        </button>
-
+        <button class="download-btn" onclick="downloadData()">📥 अपना Collected Data Download करें</button>
         <div class="warning">
             <p><strong>सबक:</strong> हमेशा website की privacy policy पढ़ें और समझें कि आपका data कैसे use हो रहा है!</p>
         </div>
+        <div class="footer">
+            <p>Educational Purpose Only | No Data is sent to any server</p>
+        </div>
     </div>
-
     <script>
         let collectedData = {};
+        let batteryLevel = 'Unknown';
+        let batteryCharging = 'Unknown';
         
+        // Device Information Collection
         function collectDeviceInfo() {
             const deviceData = {
                 'Device Type': /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
@@ -72,19 +145,22 @@
                 'Platform': navigator.platform,
                 'Hardware Concurrency': navigator.hardwareConcurrency || 'Unknown',
                 'Device Memory': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown',
-                'Max Touch Points': navigator.maxTouchPoints || 'Unknown',
-                'Device Pixel Ratio': window.devicePixelRatio || 'Unknown'
+                'Battery Level': batteryLevel,
+                'Battery Charging': batteryCharging
             };
             if (navigator.getBattery) {
                 navigator.getBattery().then(function(battery) {
                     deviceData['Battery Level'] = `${Math.round(battery.level * 100)}%`;
                     deviceData['Battery Charging'] = battery.charging ? 'Yes' : 'No';
+                    batteryLevel = deviceData['Battery Level'];
+                    batteryCharging = deviceData['Battery Charging'];
                     updateDisplay();
                 });
             }
             return deviceData;
         }
         
+        // Browser Information Collection
         function collectBrowserInfo() {
             const browserData = {
                 'Browser Language': navigator.language,
@@ -98,9 +174,7 @@
                 'PDF Viewer': navigator.pdfViewerEnabled ? 'Yes' : 'No',
                 'Referrer': document.referrer || 'Direct Visit',
                 'Current URL': window.location.href,
-                'Viewport Size': `${window.innerWidth} x ${window.innerHeight}`,
-                'Plugins List': Array.from(navigator.plugins).map(p => p.name).join(', ') || 'Unknown',
-                'MIME Types': Array.from(navigator.mimeTypes).map(m => m.type).join(', ') || 'Unknown'
+                'Viewport Size': `${window.innerWidth} x ${window.innerHeight}`
             };
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
@@ -111,6 +185,7 @@
             return browserData;
         }
         
+        // Network Information Collection
         async function collectNetworkInfo() {
             const networkData = {
                 'Connection Type': navigator.connection ? navigator.connection.effectiveType : 'Unknown',
@@ -133,79 +208,65 @@
             return networkData;
         }
         
+        // Display collected data
         function displayData(data, containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
             for (const [key, value] of Object.entries(data)) {
                 const div = document.createElement('div');
                 div.className = 'data-item';
-                div.innerHTML = `<strong>${key}:</strong> ${value}`;
+                div.innerHTML = `<strong>${key}</strong><span>${value}</span>`;
                 container.appendChild(div);
             }
         }
         
+        // Update display with all collected data
         function updateDisplay() {
             displayData(collectedData.device, 'deviceData');
             displayData(collectedData.browser, 'browserData');
             displayData(collectedData.network, 'networkData');
-            displayData(collectedData.extra || {}, 'extraData');
         }
         
-        function generateMarkdown() {
-            let content = "";
-            // Title & Disclaimer
-            content += "```
-            content += "╔══════════════════════════════════════════════════════════════════╗\n";
-            content += "║         🛡️  YOUR DEVICE & BROWSER DATA COLLECTION REPORT        ║\n";
-            content += "║           (Educational Purpose Only - No Server Storage)         ║\n";
-            content += "╚══════════════════════════════════════════════════════════════════╝\n";
-            content += "```\n\n";
-            content += `**Generated on:** ${new Date().toLocaleString()}\n\n`;
+        // Download collected data as text file
+        function downloadData() {
+            let content = "╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                        WEBSITE DATA COLLECTION REPORT                          ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n\n";
+            content += `Generated on: ${new Date().toLocaleString()}\n\n`;
             
-            // DEVICE INFORMATION
-            content += "## 📱 Device Information\n\n";
+            content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                             DEVICE INFORMATION                                 ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.device)) {
-                content += `- **${key}:** ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
-            content += "\n";
             
-            // BROWSER & SYSTEM INFORMATION
-            content += "## 🌐 Browser & System Information\n\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                         BROWSER & SYSTEM INFORMATION                          ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.browser)) {
-                content += `- **${key}:** ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
-            content += "\n";
             
-            // NETWORK & LOCATION DATA
-            content += "## 🌍 Network & Location Data\n\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                          NETWORK & LOCATION DATA                               ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.network)) {
-                content += `- **${key}:** ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
-            content += "\n";
             
-            // EXTRA INFORMATION
-            content += "## ➕ Extra Information\n\n";
-            for (const [key, value] of Object.entries(collectedData.extra || {})) {
-                content += `- **${key}:** ${value}\n`;
-            }
-            content += "\n";
-            
-            // PRIVACY WARNING
-            content += "## 🛡️ PRIVACY WARNING\n\n";
-            content += "यह जानकारी सिर्फ educational purpose के लिए collect की गई है।\n\n";
-            content += "Real websites इससे भी ज्यादा detailed information collect कर सकती हैं।\n\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                              PRIVACY WARNING                                   ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
+            content += "यह जानकारी सिर्फ educational purpose के लिए collect की गई है।\n";
+            content += "Real websites इससे भी ज्यादा detailed information collect कर सकती हैं।\n";
             content += "हमेशा privacy policies पढ़ें और अपना data protect करें!\n";
             
-            return content;
-        }
-        
-        function downloadMarkdown() {
-            const content = generateMarkdown();
-            const blob = new Blob([content], { type: 'text/markdown' });
+            const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `collected_data_${new Date().getTime()}.md`;
+            a.download = `collected_data_${new Date().getTime()}.txt`;
             a.style.display = 'none';
             document.body.appendChild(a);
             a.click();
@@ -213,19 +274,18 @@
             window.URL.revokeObjectURL(url);
         }
         
+        // Initialize data collection when page loads
         async function initializeCollection() {
             collectedData.device = collectDeviceInfo();
             collectedData.browser = collectBrowserInfo();
             collectedData.network = await collectNetworkInfo();
-            collectedData.extra = {
-                'Permissions': 'Check Permission prompts for more detail'
-            };
             updateDisplay();
             setTimeout(() => {
                 alert('आपका data collect हो गया है! अब आप इसे download कर सकते हैं।');
             }, 3000);
         }
         
+        // Start collection when page loads
         window.addEventListener('load', initializeCollection);
         window.addEventListener('orientationchange', () => {
             setTimeout(() => {
