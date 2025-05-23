@@ -6,53 +6,66 @@
     <title>Data Collection Awareness Demo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
         }
-        
         .disclaimer {
             background-color: #ffebee;
             border: 2px solid #f44336;
             padding: 20px;
             margin-bottom: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
-        
         .disclaimer h2 {
             color: #d32f2f;
             margin-top: 0;
         }
-        
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
         .info-section {
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 20px;
             background-color: #f8f9fa;
-            border-radius: 5px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
         }
-        
         .info-section h3 {
             color: #333;
             margin-top: 0;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
         }
-        
+        .info-section h3::before {
+            content: "•";
+            margin-right: 10px;
+            color: #4CAF50;
+        }
         .data-item {
-            margin: 5px 0;
-            padding: 5px;
+            margin: 8px 0;
+            padding: 8px 12px;
             background: white;
-            border-radius: 3px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
         }
-        
+        .data-item strong {
+            color: #333;
+            min-width: 180px;
+        }
+        .data-item span {
+            color: #555;
+            text-align: right;
+        }
         .download-btn {
             background-color: #4CAF50;
             color: white;
@@ -62,12 +75,11 @@
             cursor: pointer;
             font-size: 16px;
             margin: 20px 0;
+            transition: background-color 0.3s;
         }
-        
         .download-btn:hover {
             background-color: #45a049;
         }
-        
         .warning {
             background-color: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -75,10 +87,15 @@
             border-radius: 5px;
             margin: 20px 0;
         }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
-    <!-- Disclaimer Section -->
     <div class="disclaimer">
         <h2>⚠️ डेटा कलेक्शन डिस्क्लेमर</h2>
         <p><strong>चेतावनी:</strong> यह वेबसाइट आपकी डिवाइस और ब्राउज़र की जानकारी collect कर रही है।</p>
@@ -86,40 +103,35 @@
         <p><strong>आपका डेटा:</strong> Collect किया गया डेटा आपके device में txt file के रूप में download हो जाएगा।</p>
         <p><strong>सुरक्षा:</strong> कोई भी जानकारी server पर store नहीं की जा रही है।</p>
     </div>
-
     <div class="container">
         <h1>🔍 Website Data Collection Demo</h1>
-        
         <div class="warning">
             <strong>यह demo आपको दिखाता है कि websites आपके बारे में कितनी जानकारी collect कर सकती हैं!</strong>
         </div>
-
         <div id="deviceInfo" class="info-section">
             <h3>📱 Device Information</h3>
             <div id="deviceData"></div>
         </div>
-
         <div id="browserInfo" class="info-section">
             <h3>🌐 Browser & System Information</h3>
             <div id="browserData"></div>
         </div>
-
         <div id="networkInfo" class="info-section">
             <h3>🌍 Network & Location Data</h3>
             <div id="networkData"></div>
         </div>
-
-        <button class="download-btn" onclick="downloadData()">
-            📥 अपना Collected Data Download करें
-        </button>
-
+        <button class="download-btn" onclick="downloadData()">📥 अपना Collected Data Download करें</button>
         <div class="warning">
             <p><strong>सबक:</strong> हमेशा website की privacy policy पढ़ें और समझें कि आपका data कैसे use हो रहा है!</p>
         </div>
+        <div class="footer">
+            <p>Educational Purpose Only | No Data is sent to any server</p>
+        </div>
     </div>
-
     <script>
         let collectedData = {};
+        let batteryLevel = 'Unknown';
+        let batteryCharging = 'Unknown';
         
         // Device Information Collection
         function collectDeviceInfo() {
@@ -132,18 +144,19 @@
                 'Touch Screen': 'ontouchstart' in window ? 'Yes' : 'No',
                 'Platform': navigator.platform,
                 'Hardware Concurrency': navigator.hardwareConcurrency || 'Unknown',
-                'Device Memory': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown'
+                'Device Memory': navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'Unknown',
+                'Battery Level': batteryLevel,
+                'Battery Charging': batteryCharging
             };
-            
-            // Battery API (if supported)
             if (navigator.getBattery) {
                 navigator.getBattery().then(function(battery) {
                     deviceData['Battery Level'] = `${Math.round(battery.level * 100)}%`;
                     deviceData['Battery Charging'] = battery.charging ? 'Yes' : 'No';
+                    batteryLevel = deviceData['Battery Level'];
+                    batteryCharging = deviceData['Battery Charging'];
                     updateDisplay();
                 });
             }
-            
             return deviceData;
         }
         
@@ -163,15 +176,12 @@
                 'Current URL': window.location.href,
                 'Viewport Size': `${window.innerWidth} x ${window.innerHeight}`
             };
-            
-            // WebGL Information
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
             if (gl) {
                 browserData['WebGL Renderer'] = gl.getParameter(gl.RENDERER);
                 browserData['WebGL Vendor'] = gl.getParameter(gl.VENDOR);
             }
-            
             return browserData;
         }
         
@@ -182,8 +192,6 @@
                 'Network Speed': navigator.connection ? `${navigator.connection.downlink} Mbps` : 'Unknown',
                 'Save Data': navigator.connection ? (navigator.connection.saveData ? 'Yes' : 'No') : 'Unknown'
             };
-            
-            // Get IP and location info from external API
             try {
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
@@ -197,7 +205,6 @@
             } catch (error) {
                 networkData['IP Info'] = 'Could not fetch IP information';
             }
-            
             return networkData;
         }
         
@@ -205,11 +212,10 @@
         function displayData(data, containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
-            
             for (const [key, value] of Object.entries(data)) {
                 const div = document.createElement('div');
                 div.className = 'data-item';
-                div.innerHTML = `<strong>${key}:</strong> ${value}`;
+                div.innerHTML = `<strong>${key}</strong><span>${value}</span>`;
                 container.appendChild(div);
             }
         }
@@ -223,33 +229,39 @@
         
         // Download collected data as text file
         function downloadData() {
-            let content = "=== WEBSITE DATA COLLECTION REPORT ===\n";
+            let content = "╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                        WEBSITE DATA COLLECTION REPORT                          ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n\n";
             content += `Generated on: ${new Date().toLocaleString()}\n\n`;
             
-            content += "DEVICE INFORMATION:\n";
-            content += "==================\n";
+            content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                             DEVICE INFORMATION                                 ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.device)) {
-                content += `${key}: ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
             
-            content += "\nBROWSER & SYSTEM INFORMATION:\n";
-            content += "============================\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                         BROWSER & SYSTEM INFORMATION                          ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.browser)) {
-                content += `${key}: ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
             
-            content += "\nNETWORK & LOCATION DATA:\n";
-            content += "=======================\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                          NETWORK & LOCATION DATA                               ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             for (const [key, value] of Object.entries(collectedData.network)) {
-                content += `${key}: ${value}\n`;
+                content += `• ${key}: `.padEnd(25) + value + "\n";
             }
             
-            content += "\n=== PRIVACY WARNING ===\n";
+            content += "\n╔════════════════════════════════════════════════════════════════════════════════╗\n";
+            content += "║                              PRIVACY WARNING                                   ║\n";
+            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             content += "यह जानकारी सिर्फ educational purpose के लिए collect की गई है।\n";
             content += "Real websites इससे भी ज्यादा detailed information collect कर सकती हैं।\n";
             content += "हमेशा privacy policies पढ़ें और अपना data protect करें!\n";
             
-            // Create and download file
             const blob = new Blob([content], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -267,10 +279,7 @@
             collectedData.device = collectDeviceInfo();
             collectedData.browser = collectBrowserInfo();
             collectedData.network = await collectNetworkInfo();
-            
             updateDisplay();
-            
-            // Auto-download after 3 seconds
             setTimeout(() => {
                 alert('आपका data collect हो गया है! अब आप इसे download कर सकते हैं।');
             }, 3000);
@@ -278,8 +287,6 @@
         
         // Start collection when page loads
         window.addEventListener('load', initializeCollection);
-        
-        // Monitor orientation changes
         window.addEventListener('orientationchange', () => {
             setTimeout(() => {
                 collectedData.device['Device Orientation'] = screen.orientation ? screen.orientation.type : 'Unknown';
