@@ -226,33 +226,11 @@
                 </div>
             </div>
         </div>
-        <div id="timezoneInfo" class="info-section">
-            <h3>⏰ Timezone & Time Information</h3>
-            <div id="timezoneData"></div>
-        </div>
-        <div id="networkInfo" class="info-section">
-            <h3>🌐 Network & ISP Information</h3>
-            <div id="networkData"></div>
-        </div>
-        <button class="permission-btn" onclick="requestPreciseLocation()">
-            📍 Allow Precise Location Access
-        </button>
-        <div id="preciseLocationInfo" class="info-section" style="display: none;">
-            <h3>🎯 Precise Location Information (GPS-based)</h3>
-            <div id="preciseLocationData"></div>
-        </div>
-        <div id="reverseGeocodeInfo" class="info-section" style="display: none;">
-            <h3>🌍 Address from GPS (Reverse Geocoding)</h3>
-            <div id="reverseGeocodeData"></div>
-        </div>
         <div class="action-buttons">
             <button class="action-btn email-btn" onclick="sendEmail()">📧 Email App Open</button>
             <button class="action-btn copy-btn" onclick="copyText()">📝 Copy Text</button>
         </div>
         <div id="status" class="status" style="display: none;"></div>
-        <div class="warning">
-            <p><strong>Privacy Tip:</strong> Real websites can collect this much location data! Always check privacy policies and location permissions carefully.</p>
-        </div>
     </div>
     <script>
         let locationData = {
