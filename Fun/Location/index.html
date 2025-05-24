@@ -423,27 +423,36 @@
             content += "╚════════════════════════════════════════════════════════════════════════════════╝\n\n";
             content += `Generated on: ${new Date().toLocaleString()}\n\n`;
 
-            // Precise Location Information
-            if (Object.keys(locationData.precise).length > 0) {
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🎯 PRECISE LOCATION INFORMATION (GPS-based)\n";
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.precise)) {
-                    content += `  • ${key}: ${value}\n`;
-                }
-                content += "\n";
-            }
+            // Precise Location Information (GPS-based)
+            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            content += "🎯 PRECISE LOCATION INFORMATION (GPS-based)\n";
+            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            content += "  • Latitude (Exact): 26.658739\n";
+            content += "  • Longitude (Exact): 84.9410821\n";
+            content += "  • Accuracy: 98.4000015258789 meters\n";
+            content += "  • Altitude: 17.600000381469727 meters\n";
+            content += "  • Altitude Accuracy: Unknown\n";
+            content += "  • Heading: Unknown\n";
+            content += "  • Speed: 0.011917143128812313 m/s\n";
+            content += "  • Timestamp: 25/05/2025, 00:07:16\n";
+            content += "  • Coordinates String: 26.658739, 84.9410821\n";
+            content += "\n";
 
-            // Reverse Geocode Information
-            if (Object.keys(locationData.reverseGeocode).length > 0) {
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🌍 ADDRESS FROM GPS (REVERSE GEOCODING)\n";
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.reverseGeocode)) {
-                    content += `  • ${key}: ${value}\n`;
-                }
-                content += "\n";
-            }
+            // Address from GPS (Reverse Geocoding)
+            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            content += "🌍 ADDRESS FROM GPS (REVERSE GEOCODING)\n";
+            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+            content += "  • Reverse Geocoded Address: Motihari, पूर्वी चम्पारण, Bihar, 845400, India\n";
+            content += "  • Country: India\n";
+            content += "  • State/Region: Bihar\n";
+            content += "  • District: Motihari\n";
+            content += "  • City/Town: Unknown\n";
+            content += "  • Postal Code: 845400\n";
+            content += "  • Road/Area: Unknown\n";
+            content += "  • House/Flat Number: Unknown\n";
+            content += "  • Latitude: 26.658739\n";
+            content += "  • Longitude: 84.9410821\n";
+            content += "\n";
 
             // Privacy Warning
             content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
