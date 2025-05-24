@@ -238,9 +238,14 @@
             <div id="preciseLocationData"></div>
         </div>
 
-        <div id="additionalInfo" class="info-section">
-            <h3>➕ Additional Location Data</h3>
-            <div id="additionalData"></div>
+        <div id="afterLocationInfo" class="info-section" style="display: none;">
+            <h3>🌍 Location Details After GPS Access</h3>
+            <div id="afterLocationData">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Refreshing location information after GPS access...</p>
+                </div>
+            </div>
         </div>
 
         <div id="status" class="status" style="display: none;"></div>
@@ -260,7 +265,7 @@
             timezone: {},
             network: {},
             precise: {},
-            additional: {}
+            afterLocation: {}
         };
 
         // Collect basic location info from IP
@@ -275,6 +280,7 @@
                     'Country Code': data.country_code || 'Unknown',
                     'Region/State': data.region || 'Unknown',
                     'Region Code': data.region_code || 'Unknown',
+                    'District': data.city || 'Unknown (City used as District)',
                     'City': data.city || 'Unknown',
                     'Postal Code': data.postal || 'Unknown',
                     'Latitude (Approximate)': data.latitude || 'Unknown',
@@ -319,24 +325,29 @@
             };
         }
 
-        // Collect additional location data
-        function collectAdditionalInfo() {
-            locationData.additional = {
-                'Browser Language': navigator.language,
-                'System Languages': navigator.languages.join(', '),
-                'Platform': navigator.platform,
-                'User Agent': navigator.userAgent,
-                'Screen Resolution': `${screen.width} x ${screen.height}`,
-                'Color Depth': screen.colorDepth + ' bits',
-                'Pixel Depth': screen.pixelDepth + ' bits',
-                'Available Screen Size': `${screen.availWidth} x ${screen.availHeight}`,
-                'Connection Type': navigator.connection ? navigator.connection.effectiveType : 'Unknown',
-                'Connection Speed': navigator.connection ? navigator.connection.downlink + ' Mbps' : 'Unknown',
-                'Online Status': navigator.onLine ? 'Online' : 'Offline',
-                'Cookies Enabled': navigator.cookieEnabled ? 'Yes' : 'No',
-                'Java Enabled': navigator.javaEnabled ? navigator.javaEnabled() : 'No',
-                'Touch Support': 'ontouchstart' in window ? 'Yes' : 'No'
-            };
+        // Collect location info after GPS access (with same API)
+        async function collectAfterLocationInfo() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                
+                locationData.afterLocation = {
+                    'IP Address (after GPS)': data.ip || 'Unknown',
+                    'Country (after GPS)': data.country_name || 'Unknown',
+                    'Region/State (after GPS)': data.region || 'Unknown',
+                    'District (after GPS)': data.city || 'Unknown (City used as District)',
+                    'City (after GPS)': data.city || 'Unknown',
+                    'Postal Code (after GPS)': data.postal || 'Unknown',
+                    'Latitude (after GPS)': data.latitude || 'Unknown',
+                    'Longitude (after GPS)': data.longitude || 'Unknown',
+                    'ISP (after GPS)': data.org || 'Unknown'
+                };
+                displayData(locationData.afterLocation, 'afterLocationData');
+            } catch (error) {
+                locationData.afterLocation = {
+                    'Error': 'Could not fetch location information after GPS access'
+                };
+            }
         }
 
         // Request precise location
@@ -349,7 +360,7 @@
             showStatus('Requesting location permission...', 'success');
 
             navigator.geolocation.getCurrentPosition(
-                function(position) {
+                async function(position) {
                     locationData.precise = {
                         'Latitude (Exact)': position.coords.latitude,
                         'Longitude (Exact)': position.coords.longitude,
@@ -364,6 +375,11 @@
 
                     document.getElementById('preciseLocationInfo').style.display = 'block';
                     displayData(locationData.precise, 'preciseLocationData');
+                    
+                    // Show after location info (IP-based, after GPS access)
+                    document.getElementById('afterLocationInfo').style.display = 'block';
+                    await collectAfterLocationInfo();
+                    
                     showStatus('Precise location obtained successfully!', 'success');
                 },
                 function(error) {
@@ -464,14 +480,16 @@
                 content += "\n";
             }
 
-            // Additional Information
-            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-            content += "➕ ADDITIONAL LOCATION DATA\n";
-            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-            for (const [key, value] of Object.entries(locationData.additional)) {
-                content += `  • ${key}: ${value}\n`;
+            // After Location Info (if available)
+            if (Object.keys(locationData.afterLocation).length > 0) {
+                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+                content += "🌍 LOCATION DETAILS AFTER GPS ACCESS (IP-based)\n";
+                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+                for (const [key, value] of Object.entries(locationData.afterLocation)) {
+                    content += `  • ${key}: ${value}\n`;
+                }
+                content += "\n";
             }
-            content += "\n";
 
             // Privacy Warning
             content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
@@ -503,12 +521,10 @@
         async function initializeLocationCollection() {
             await collectBasicLocationInfo();
             collectTimezoneInfo();
-            collectAdditionalInfo();
 
             displayData(locationData.basic, 'basicLocationData');
             displayData(locationData.timezone, 'timezoneData');
             displayData(locationData.network, 'networkData');
-            displayData(locationData.additional, 'additionalData');
         }
 
         // Start collection when page loads
