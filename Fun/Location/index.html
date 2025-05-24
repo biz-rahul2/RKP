@@ -203,7 +203,23 @@
     </style>
 </head>
 <body>
+    <div class="disclaimer">
+        <h2>🌍 GPS Location Data Collection Disclaimer</h2>
+        <p><strong>चेतावनी:</strong> यह website आपकी exact GPS location की detailed information collect करेगी।</p>
+        <p><strong>उद्देश्य:</strong> Educational purpose - आप जान सकेंगे कि websites आपकी exact location के बारे में कितनी जानकारी collect कर सकती हैं।</p>
+        <p><strong>Permission:</strong> Exact GPS location के लिए आपसे permission मांगी जाएगी।</p>
+        <p><strong>Privacy:</strong> कोई भी data server पर store नहीं होता - सब कुछ local है।</p>
+    </div>
     <div class="container">
+        <div class="header">
+            <h1>🎯 GPS Location Information Collector</h1>
+            <p>Discover your exact location data that websites can collect!</p>
+        </div>
+        
+        <div class="initial-message">
+            <h2>📍 Ready to Collect Your GPS Location Data</h2>
+            <p>Click the button below to allow GPS access and see what detailed information can be collected about your exact location.</p>
+        </div>
 
         <button class="permission-btn" onclick="requestPreciseLocation()">
             📍 Allow GPS Location Access
@@ -215,12 +231,26 @@
             <div id="loadingText" class="loading-text">Starting GPS location collection...</div>
         </div>
 
+        <div id="preciseLocationInfo" class="info-section" style="display: none;">
+            <h3>🎯 Precise Location Information (GPS-based)</h3>
+            <div id="preciseLocationData"></div>
+        </div>
+
+        <div id="reverseGeocodeInfo" class="info-section" style="display: none;">
+            <h3>🌍 Address from GPS (Reverse Geocoding)</h3>
+            <div id="reverseGeocodeData"></div>
+        </div>
+
         <div class="action-buttons" id="actionButtons" style="display: none;">
             <button class="action-btn email-btn" onclick="sendEmail()">📧 Email App Open</button>
             <button class="action-btn copy-btn" onclick="copyText()">📝 Copy Text</button>
         </div>
 
         <div id="status" class="status" style="display: none;"></div>
+
+        <div class="warning">
+            <p><strong>Privacy Tip:</strong> Real websites can collect this exact location data! Always check location permissions carefully and use VPN for privacy protection.</p>
+        </div>
     </div>
 
     <script>
