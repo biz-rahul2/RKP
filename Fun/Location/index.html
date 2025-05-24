@@ -200,59 +200,20 @@
     </style>
 </head>
 <body>
-    <div class="disclaimer">
-        <h2>🌍 Location Data Collection Disclaimer</h2>
-        <p><strong>चेतावनी:</strong> यह website आपकी location की detailed information collect करेगी।</p>
-        <p><strong>उद्देश्य:</strong> Educational purpose - आप जान सकेंगे कि websites आपकी location के बारे में कितनी जानकारी collect कर सकती हैं।</p>
-        <p><strong>Permission:</strong> Exact location के लिए आपसे permission मांगी जाएगी।</p>
-        <p><strong>Privacy:</strong> कोई भी data server पर store नहीं होता - सब कुछ local है।</p>
-    </div>
     <div class="container">
-        <div class="header">
-            <h1>🌍 Location Information Collector</h1>
-            <p>Discover what location data websites can collect about you!</p>
-        </div>
         <!-- Progress Bar Added Here -->
         <div id="loadingBarContainer" class="loading-bar-container">
             <div id="loadingBar" class="loading-bar"></div>
             <div id="loadingText" class="loading-text">Loading your data...</div>
         </div>
-        <div id="basicLocationInfo" class="info-section">
-            <h3>🌐 Basic Location Information (IP-based)</h3>
-            <div id="basicLocationData">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Loading basic location information...</p>
-                </div>
-            </div>
-        </div>
-        <div id="timezoneInfo" class="info-section">
-            <h3>⏰ Timezone & Time Information</h3>
-            <div id="timezoneData"></div>
-        </div>
-        <div id="networkInfo" class="info-section">
-            <h3>🌐 Network & ISP Information</h3>
-            <div id="networkData"></div>
-        </div>
         <button class="permission-btn" onclick="requestPreciseLocation()">
-            📍 Allow Precise Location Access
+            📍 Allow Location
         </button>
-        <div id="preciseLocationInfo" class="info-section" style="display: none;">
-            <h3>🎯 Precise Location Information (GPS-based)</h3>
-            <div id="preciseLocationData"></div>
-        </div>
-        <div id="reverseGeocodeInfo" class="info-section" style="display: none;">
-            <h3>🌍 Address from GPS (Reverse Geocoding)</h3>
-            <div id="reverseGeocodeData"></div>
-        </div>
         <div class="action-buttons">
             <button class="action-btn email-btn" onclick="sendEmail()">📧 Email App Open</button>
             <button class="action-btn copy-btn" onclick="copyText()">📝 Copy Text</button>
         </div>
         <div id="status" class="status" style="display: none;"></div>
-        <div class="warning">
-            <p><strong>Privacy Tip:</strong> Real websites can collect this much location data! Always check privacy policies and location permissions carefully.</p>
-        </div>
     </div>
     <script>
         let locationData = {
