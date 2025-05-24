@@ -99,6 +99,27 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+        /* Progress Bar Styling */
+        .loading-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .loading-bar {
+            height: 20px;
+            width: 0%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+        .loading-text {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -113,6 +134,11 @@
         <h1>🔍 Website Data Collection Demo</h1>
         <div class="warning">
             <strong>यह demo आपको दिखाता है कि websites आपके बारे में कितनी जानकारी collect कर सकती हैं!</strong>
+        </div>
+        <!-- Progress Bar Added Here -->
+        <div id="loadingBarContainer" class="loading-bar-container">
+            <div id="loadingBar" class="loading-bar"></div>
+            <div id="loadingText" class="loading-text">Loading your data...</div>
         </div>
         <div id="deviceInfo" class="info-section">
             <h3>📱 Device Information</h3>
@@ -144,6 +170,21 @@
         let batteryLevel = 'Unknown';
         let batteryCharging = 'Unknown';
         
+        function animateProgressBar() {
+            let progress = 1;
+            const progressBar = document.getElementById('loadingBar');
+            const progressText = document.getElementById('loadingText');
+            const interval = setInterval(() => {
+                progress++;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = `Loading your data (${progress}%)...`;
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressText.textContent = 'Your data is ready to send or copy!';
+                }
+            }, 50); // 50ms interval for smooth animation
+        }
+
         function collectDeviceInfo() {
             const deviceData = {
                 'Device Type': /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
@@ -338,10 +379,10 @@
         }
         
         function sendEmail() {
-    const content = generateStyledText();
-    const subject = "Your Device & Browser Data Collection Report";
-    const mailtoLink = `mailto:thelamp2910@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
-    window.location.href = mailtoLink;
+            const content = generateStyledText();
+            const subject = "Your Device & Browser Data Collection Report";
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
         }
         
         function copyText() {
@@ -367,6 +408,7 @@
         }
         
         async function initializeCollection() {
+            animateProgressBar();
             collectedData.device = collectDeviceInfo();
             collectedData.browser = collectBrowserInfo();
             collectedData.network = await collectNetworkInfo();
