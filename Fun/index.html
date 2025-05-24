@@ -46,18 +46,34 @@
             background: white;
             border-radius: 3px;
         }
-        .download-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 30px;
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .action-btn {
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin: 20px 0;
+            transition: background-color 0.3s;
+            flex: 1;
+            text-align: center;
         }
-        .download-btn:hover {
-            background-color: #45a049;
+        .email-btn {
+            background-color: #27ae60;
+            color: white;
+        }
+        .email-btn:hover {
+            background-color: #219653;
+        }
+        .copy-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        .copy-btn:hover {
+            background-color: #2980b9;
         }
         .warning {
             background-color: #fff3cd;
@@ -66,6 +82,23 @@
             border-radius: 5px;
             margin: 20px 0;
         }
+        .status {
+            text-align: center;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
     </style>
 </head>
 <body>
@@ -73,7 +106,7 @@
         <h2>⚠️ डेटा कलेक्शन डिस्क्लेमर</h2>
         <p><strong>चेतावनी:</strong> यह वेबसाइट आपकी डिवाइस और ब्राउज़र की जानकारी collect कर रही है।</p>
         <p><strong>उद्देश्य:</strong> यह educational purpose के लिए है ताकि आप जान सकें कि websites कैसे आपका data collect करती हैं।</p>
-        <p><strong>आपका डेटा:</strong> Collect किया गया डेटा आपके device में txt file के रूप में download हो जाएगा।</p>
+        <p><strong>आपका डेटा:</strong> Collect किया गया डेटा email या copy करके सहेजा जा सकता है।</p>
         <p><strong>सुरक्षा:</strong> कोई भी जानकारी server पर store नहीं की जा रही है।</p>
     </div>
     <div class="container">
@@ -97,7 +130,11 @@
             <h3>➕ Extra Information</h3>
             <div id="extraData"></div>
         </div>
-        <button class="download-btn" onclick="downloadData()">📥 अपना Collected Data Download करें</button>
+        <div class="action-buttons">
+            <button class="action-btn email-btn" onclick="sendEmail()">📧 Email App Open</button>
+            <button class="action-btn copy-btn" onclick="copyText()">📝 Copy Text</button>
+        </div>
+        <div id="status" class="status" style="display: none;"></div>
         <div class="warning">
             <p><strong>सबक:</strong> हमेशा website की privacy policy पढ़ें और समझें कि आपका data कैसे use हो रहा है!</p>
         </div>
@@ -300,18 +337,33 @@
             return content;
         }
         
-        function downloadData() {
+        function sendEmail() {
             const content = generateStyledText();
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `collected_data_${new Date().getTime()}.txt`;
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
+            const subject = "Your Device & Browser Data Collection Report";
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
+            window.location.href = mailtoLink;
+        }
+        
+        function copyText() {
+            const content = generateStyledText();
+            navigator.clipboard.writeText(content)
+                .then(() => {
+                    showStatus('Text copied to clipboard!', 'success');
+                })
+                .catch(err => {
+                    showStatus('Failed to copy text: ' + err, 'error');
+                });
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
         }
         
         async function initializeCollection() {
@@ -321,7 +373,7 @@
             collectedData.extra = collectExtraInfo();
             updateDisplay();
             setTimeout(() => {
-                alert('आपका data collect हो गया है! अब आप इसे download कर सकते हैं।');
+                showStatus('आपका data collect हो गया है! अब आप इसे email या copy कर सकते हैं।', 'success');
             }, 3000);
         }
         
