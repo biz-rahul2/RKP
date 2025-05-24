@@ -181,54 +181,16 @@
     </div>
 
     <div class="container">
-        <div class="header">
-            <h1>🌍 Location Information Collector</h1>
-            <p>Discover what location data websites can collect about you!</p>
-        </div>
-
-        <div id="basicLocationInfo" class="info-section">
-            <h3>🌐 Basic Location Information (IP-based)</h3>
-            <div id="basicLocationData">
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <p>Loading basic location information...</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="timezoneInfo" class="info-section">
-            <h3>⏰ Timezone & Time Information</h3>
-            <div id="timezoneData"></div>
-        </div>
-
-        <div id="networkInfo" class="info-section">
-            <h3>🌐 Network & ISP Information</h3>
-            <div id="networkData"></div>
-        </div>
 
         <button class="permission-btn" onclick="requestPreciseLocation()">
-            📍 Allow Precise Location Access
+            📍 Allow Location
         </button>
-
-        <div id="preciseLocationInfo" class="info-section" style="display: none;">
-            <h3>🎯 Precise Location Information (GPS-based)</h3>
-            <div id="preciseLocationData"></div>
-        </div>
-
-        <div id="reverseGeocodeInfo" class="info-section" style="display: none;">
-            <h3>🌍 Address from GPS (Reverse Geocoding)</h3>
-            <div id="reverseGeocodeData"></div>
-        </div>
 
         <div id="status" class="status" style="display: none;"></div>
 
         <button class="download-btn" onclick="downloadLocationData()">
-            📥 Download Complete Location Report
+            📥 Download
         </button>
-
-        <div class="warning">
-            <p><strong>Privacy Tip:</strong> Real websites can collect this much location data! Always check privacy policies and location permissions carefully.</p>
-        </div>
     </div>
 
     <script>
