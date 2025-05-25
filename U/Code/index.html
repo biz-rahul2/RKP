@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Smart Encoder/Decoder</title>
+  <title>Secure Encoder/Decoder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -15,6 +15,7 @@
       --primary: #007bff;
       --success: #28a745;
       --secondary: #6c757d;
+      --danger: #dc3545;
     }
 
     body {
@@ -33,6 +34,7 @@
 
     h2 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
     .container {
@@ -72,7 +74,7 @@
     .encode { background-color: var(--primary); }
     .decode { background-color: var(--secondary); }
     .copy   { background-color: var(--success); }
-    .clear  { background-color: #dc3545; }
+    .clear  { background-color: var(--danger); }
 
     button:hover {
       opacity: 0.9;
@@ -121,7 +123,7 @@
       <i class="fas fa-moon" id="darkIcon"></i>
     </div>
 
-    <h2><i class="fas fa-shield-alt"></i> Smart Encoder / Decoder</h2>
+    <h2><i class="fas fa-shield-alt"></i> Secure Encoder / Decoder</h2>
 
     <textarea id="inputText" placeholder="Enter your text..."></textarea>
     <div class="meta">
@@ -143,10 +145,20 @@
     const upperMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numMap   = '0123456789';
 
+    // Secure digit encoding
+    const digitEncodeMap = {
+      '0': 'z', '1': 'k', '2': 'q', '3': 'r', '4': 'm',
+      '5': 'y', '6': 'p', '7': 'x', '8': 'v', '9': 'n'
+    };
+    const digitDecodeMap = {};
+    for (let key in digitEncodeMap) {
+      digitDecodeMap[digitEncodeMap[key]] = key;
+    }
+
     const encodeChar = (ch) => {
       if (lowerMap.includes(ch)) return '@' + lowerMap.indexOf(ch).toString(36);
       if (upperMap.includes(ch)) return '#' + upperMap.indexOf(ch).toString(36);
-      if (numMap.includes(ch))   return '%' + numMap.indexOf(ch).toString(36);
+      if (numMap.includes(ch))   return '%' + digitEncodeMap[ch];
       return ch;
     };
 
@@ -157,7 +169,7 @@
 
       if (prefix === '@') return [lowerMap[parseInt(code, 36)], 2];
       if (prefix === '#') return [upperMap[parseInt(code, 36)], 2];
-      if (prefix === '%') return [numMap[parseInt(code, 36)], 2];
+      if (prefix === '%') return [digitDecodeMap[code], 2];
       return [prefix, 1];
     };
 
