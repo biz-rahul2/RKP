@@ -12,20 +12,6 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-        .disclaimer {
-            background-color: #ffebee;
-            border: 2px solid #f44336;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .disclaimer h2 {
-            color: #d32f2f;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-        }
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -39,12 +25,6 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        .header h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
         .info-section {
             margin-bottom: 25px;
             padding: 20px;
@@ -52,19 +32,6 @@
             border-radius: 10px;
             border-left: 5px solid #007bff;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .info-section h3 {
-            color: #333;
-            margin-top: 0;
-            font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .info-section h3::before {
-            content: "📍";
-            margin-right: 10px;
-            font-size: 1.2em;
         }
         .data-item {
             margin: 10px 0;
@@ -132,13 +99,6 @@
         .email-btn:hover {
             background: linear-gradient(45deg, #219653, #1e8449);
         }
-        .copy-btn {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-        }
-        .copy-btn:hover {
-            background: linear-gradient(45deg, #2980b9, #2c3e50);
-        }
         .whatsapp-btn {
             background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
@@ -146,13 +106,12 @@
         .whatsapp-btn:hover {
             background: linear-gradient(45deg, #128C7E, #075E54);
         }
-        .warning {
-            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
-            border: 1px solid #ffc107;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+        .copy-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #2c3e50);
         }
         .status {
             text-align: center;
@@ -171,82 +130,27 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        .loading-bar-container {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin: 20px 0;
-            overflow: hidden;
-            display: none;
-        }
-        .loading-bar {
-            height: 20px;
-            width: 0%;
-            background-color: #4CAF50;
-            border-radius: 5px;
-            transition: width 0.3s ease;
-        }
-        .loading-text {
-            text-align: center;
-            margin-top: 5px;
-            font-size: 14px;
-            color: #555;
-        }
-        .initial-message {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(145deg, #e8f5e8, #d4edda);
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .initial-message h2 {
-            color: #155724;
-            margin-bottom: 15px;
-        }
-        .initial-message p {
-            color: #155724;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
-    <div class="disclaimer">
-        <h2>📍 Latitude & Longitude Collector</h2>
-        <p><strong>चेतावनी:</strong> यह website आपकी location से Latitude और Longitude collect करेगी।</p>
-        <p><strong>उद्देश्य:</strong> Educational purpose - आप जान सकेंगे कि websites आपकी location के बारे में कितनी जानकारी collect कर सकती हैं।</p>
-        <p><strong>Permission:</strong> Exact GPS location के लिए आपसे permission मांगी जाएगी।</p>
-        <p><strong>Privacy:</strong> कोई भी data server पर store नहीं होता - सब कुछ local है।</p>
-    </div>
     <div class="container">
         <div class="header">
             <h1>📍 Latitude & Longitude Collector</h1>
-            <p>Compare IP-based and GPS-based Latitude & Longitude accuracy!</p>
-        </div>
-        
-        <div class="initial-message">
-            <h2>📍 Ready to Collect Your Location Data</h2>
-            <p>Click the button below to allow GPS access and compare your location accuracy.</p>
         </div>
 
         <button class="permission-btn" onclick="requestPreciseLocation()">
             📍 Allow GPS Location Access
         </button>
 
-        <!-- Progress Bar (Hidden Initially) -->
-        <div id="loadingBarContainer" class="loading-bar-container">
-            <div id="loadingBar" class="loading-bar"></div>
-            <div id="loadingText" class="loading-text">Starting location collection...</div>
-        </div>
-
         <!-- IP-based Latitude & Longitude -->
         <div id="ipLocationInfo" class="info-section" style="display: none;">
-            <h3>🌐 IP-based Latitude & Longitude</h3>
+            <h3>IP-based</h3>
             <div id="ipLocationData"></div>
         </div>
 
         <!-- GPS-based Latitude & Longitude -->
         <div id="gpsLocationInfo" class="info-section" style="display: none;">
-            <h3>🎯 GPS-based Latitude & Longitude</h3>
+            <h3>GPS-based</h3>
             <div id="gpsLocationData"></div>
         </div>
 
@@ -257,10 +161,6 @@
         </div>
 
         <div id="status" class="status" style="display: none;"></div>
-
-        <div class="warning">
-            <p><strong>Privacy Tip:</strong> Real websites can collect your location! Always check permissions carefully and use VPN for privacy protection.</p>
-        </div>
     </div>
 
     <script>
@@ -268,36 +168,6 @@
             ip: {},
             gps: {}
         };
-
-        // Real-time Progress Bar Animation
-        function animateProgressBar(steps) {
-            const progressBar = document.getElementById('loadingBar');
-            const progressText = document.getElementById('loadingText');
-            const progressContainer = document.getElementById('loadingBarContainer');
-            
-            progressContainer.style.display = 'block';
-            
-            let currentStep = 0;
-            const totalSteps = steps.length;
-            
-            function updateProgress() {
-                if (currentStep < totalSteps) {
-                    const percentage = Math.round(((currentStep + 1) / totalSteps) * 100);
-                    progressBar.style.width = percentage + '%';
-                    progressText.textContent = steps[currentStep] + ` (${percentage}%)`;
-                    currentStep++;
-                    
-                    // Different timing for different steps
-                    const delay = currentStep === 1 ? 1000 : (currentStep === 2 ? 2000 : 1500);
-                    setTimeout(updateProgress, delay);
-                } else {
-                    progressText.textContent = 'Your location data is ready to share or copy!';
-                    document.getElementById('actionButtons').style.display = 'flex';
-                }
-            }
-            
-            updateProgress();
-        }
 
         // Get IP-based Location (Latitude & Longitude)
         async function getIpLocation() {
@@ -325,21 +195,9 @@
                 showStatus('Geolocation is not supported by this browser.', 'error');
                 return;
             }
-
             showStatus('Requesting GPS location permission...', 'success');
-
-            // Start progress animation with real steps
-            const progressSteps = [
-                'Requesting GPS permission...',
-                'Getting GPS coordinates...',
-                'Processing location data...'
-            ];
-            
-            animateProgressBar(progressSteps);
-
             // First, get IP-based location
             getIpLocation();
-
             // Then, get GPS location
             navigator.geolocation.getCurrentPosition(
                 async function(position) {
@@ -350,10 +208,10 @@
                     };
                     displayData(locationData.gps, 'gpsLocationData');
                     document.getElementById('gpsLocationInfo').style.display = 'block';
+                    document.getElementById('actionButtons').style.display = 'flex';
                     showStatus('GPS location data collected successfully!', 'success');
                 },
                 function(error) {
-                    document.getElementById('loadingBarContainer').style.display = 'none';
                     let errorMessage = '';
                     switch(error.code) {
                         case error.PERMISSION_DENIED:
@@ -386,7 +244,7 @@
             for (const [key, value] of Object.entries(data)) {
                 const div = document.createElement('div');
                 div.className = 'data-item';
-                div.innerHTML = `<strong>${key}</strong><span>${value}</span>`;
+                div.innerHTML = `<strong>• ${key}:</strong><span>${value}</span>`;
                 container.appendChild(div);
             }
         }
@@ -402,75 +260,40 @@
             }, 5000);
         }
 
-        // Generate styled text for email, WhatsApp, and copy
-        function generateStyledText() {
+        // Generate plain text for email, WhatsApp, and copy
+        function generatePlainText() {
             let content = "";
-            content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
-            content += "║                    📍 LATITUDE & LONGITUDE COMPARISON REPORT                   ║\n";
-            content += "║                     (Educational Purpose Only - No Server Storage)            ║\n";
-            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n\n";
-            content += `Generated on: ${new Date().toLocaleString()}\n\n`;
-
-            // IP-based Location
             if (Object.keys(locationData.ip).length > 0) {
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🌐 IP-based Latitude & Longitude\n";
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.ip)) {
-                    content += `  • ${key}: ${value}\n`;
-                }
-                content += "\n";
+                content += "IP-based\n";
+                content += `  • Latitude: ${locationData.ip.Latitude}\n`;
+                content += `  • Longitude: ${locationData.ip.Longitude}\n\n`;
             }
-
-            // GPS-based Location
             if (Object.keys(locationData.gps).length > 0) {
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🎯 GPS-based Latitude & Longitude\n";
-                content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.gps)) {
-                    content += `  • ${key}: ${value}\n`;
-                }
-                content += "\n";
+                content += "GPS-based\n";
+                content += `  • Latitude: ${locationData.gps.Latitude}\n`;
+                content += `  • Longitude: ${locationData.gps.Longitude}\n`;
             }
-
-            // Privacy Warning
-            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-            content += "🛡️ PRIVACY WARNING\n";
-            content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-            content += "  यह जानकारी सिर्फ educational purpose के लिए collect की गई है।\n";
-            content += "  Real websites आपकी location की इतनी detailed information collect कर सकती हैं।\n";
-            content += "  हमेशा location permissions को carefully review करें!\n";
-            content += "  VPN का use करके अपनी location privacy protect करें।\n";
-            content += "\n";
-            content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
-            content += "║                🛡️  END OF REPORT - STAY PRIVATE!                             ║\n";
-            content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             return content;
         }
 
         // Send Email
         function sendEmail() {
-            const content = generateStyledText();
-            const subject = "Your Latitude & Longitude Comparison Report";
+            const content = generatePlainText();
+            const subject = "Latitude & Longitude Data";
             const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
             window.location.href = mailtoLink;
         }
 
-        // SHARE TO WHATSAPP 
+        // Share to WhatsApp
         function shareToWhatsApp() {
-    const content = generateStyledText();
-    let text = content;
-    if (text.length > 2000) {
-        text = text.substring(0, 2000) + "... [Report truncated due to WhatsApp limit]";
-    }
-    const phoneNumber = "919263056661"; // Your number without '+'
-    const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(text)}`;
-    window.open(whatsappLink, '_blank');
+            const content = generatePlainText();
+            const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(content)}`;
+            window.open(whatsappLink, '_blank');
         }
 
         // Copy Text
         function copyText() {
-            const content = generateStyledText();
+            const content = generatePlainText();
             navigator.clipboard.writeText(content)
                 .then(() => {
                     showStatus('Location data copied to clipboard!', 'success');
