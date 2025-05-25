@@ -1,0 +1,130 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Location URL Generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 160px;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+    .output {
+      margin-bottom: 30px;
+    }
+    .output h3 {
+      margin-top: 0;
+    }
+    .output p {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      position: relative;
+    }
+    .copy-btn, .open-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .open-btn {
+      right: 40px;
+    }
+    button.generate-btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button.generate-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Location URL Generator</h2>
+    <textarea id="inputText" placeholder="Paste your location data here..."></textarea>
+    <button class="generate-btn" onclick="generateUrls()">Generate URLs</button><div id="results"></div>
+
+  </div>  <script>
+    function generateUrls() {
+      const input = document.getElementById("inputText").value;
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+
+      const regex = /IP-based\s+\u2022 Latitude: ([\d.]+)\s+\u2022 Longitude: ([\d.]+)[\s\S]*?GPS-based\s+\u2022 Latitude: ([\d.]+)\s+\u2022 Longitude: ([\d.]+)/;
+      const match = input.match(regex);
+
+      if (!match) {
+        results.innerHTML = "<p style='color:red;'>Invalid format. Please use the exact format specified.</p>";
+        return;
+      }
+
+      const [_, ipLat, ipLong, gpsLat, gpsLong] = match;
+      const locations = [
+        { label: "IP-based", lat: ipLat, long: ipLong },
+        { label: "GPS-based", lat: gpsLat, long: gpsLong }
+      ];
+
+      locations.forEach(loc => {
+        const url = `https://www.google.com/maps?q=${loc.lat},${loc.long}`;
+        const searchText = `${loc.lat}, ${loc.long}`;
+
+        results.innerHTML += `
+          <div class="output">
+            <h3>${loc.label}</h3>
+            <p>
+              <strong>URL:</strong> <span id="url-${loc.label}">${url}</span>
+              <button class="open-btn" onclick="window.open('${url}', '_blank')" title="Open in browser">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </button>
+              <button class="copy-btn" onclick="copyText('url-${loc.label}')" title="Copy URL">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </p>
+            <p>
+              <strong>Search Text:</strong> <span id="search-${loc.label}">${searchText}</span>
+              <button class="copy-btn" onclick="copyText('search-${loc.label}')" title="Copy Search Text">
+                <i class="fa-solid fa-copy"></i>
+              </button>
+            </p>
+          </div>
+        `;
+      });
+    }
+
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied: " + text);
+      });
+    }
+  </script></body>
+</html>
