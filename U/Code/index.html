@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Encoder Decoder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+    textarea, input, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .output {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Custom Text Encoder / Decoder</h2>
+  <textarea id="inputText" placeholder="Enter text here..."></textarea>
+  <button onclick="encodeText()">Encode</button>
+  <button onclick="decodeText()">Decode</button>
+
+  <div class="output" id="outputText"></div>
+
+  <script>
+    const encodeMap = {
+      a: '7', b: 'w', c: '9', d: 'k', e: 'v', f: '2',
+      g: 'j', h: '1', i: 'n', j: '6', k: 'r', l: 's',
+      m: '5', n: 'e', o: '0', p: 'a', q: '4', r: 'c',
+      s: 'd', t: 'f', u: 'b', v: '3', w: 'u', x: 'i',
+      y: 't', z: 'q',
+      0: 'm', 1: 'x', 2: 'g', 3: 'y', 4: 'z',
+      5: 'h', 6: 'p', 7: 'l', 8: 'o', 9: 'n'
+    };
+
+    const decodeMap = Object.fromEntries(
+      Object.entries(encodeMap).map(([k, v]) => [v, k])
+    );
+
+    function encodeText() {
+      const text = document.getElementById("inputText").value;
+      const encoded = [...text].map(char => {
+        const lower = char.toLowerCase();
+        if (encodeMap[lower]) {
+          return encodeMap[lower];
+        }
+        return char;
+      }).join('');
+      document.getElementById("outputText").textContent = "Encoded Text:\n" + encoded;
+    }
+
+    function decodeText() {
+      const text = document.getElementById("inputText").value;
+      const decoded = [...text].map(char => {
+        const lower = char.toLowerCase();
+        if (decodeMap[lower]) {
+          return decodeMap[lower];
+        }
+        return char;
+      }).join('');
+      document.getElementById("outputText").textContent = "Decoded Text:\n" + decoded;
+    }
+  </script>
+
+</body>
+</html>
