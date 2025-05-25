@@ -2,84 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Custom Encoder Decoder</title>
+  <title>Advanced Encoder/Decoder</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       padding: 30px;
-      background: #f4f4f4;
+      background: #eef2f5;
     }
-    textarea, input, button {
-      display: block;
+    textarea {
       width: 100%;
-      margin: 10px 0;
+      height: 120px;
       padding: 10px;
       font-size: 16px;
+      resize: vertical;
     }
     button {
-      background: #007bff;
-      color: white;
-      border: none;
+      margin: 5px 5px 5px 0;
+      padding: 10px 20px;
+      font-size: 16px;
       cursor: pointer;
+      border: none;
+      border-radius: 5px;
     }
-    button:hover {
-      background: #0056b3;
-    }
-    .output {
+    #output {
       margin-top: 20px;
-      background: #fff;
       padding: 15px;
+      background: #fff;
       border: 1px solid #ccc;
       white-space: pre-wrap;
     }
+    .btn-primary { background: #007bff; color: #fff; }
+    .btn-secondary { background: #6c757d; color: #fff; }
+    .btn-success { background: #28a745; color: #fff; }
   </style>
 </head>
 <body>
 
-  <h2>Custom Text Encoder / Decoder</h2>
-  <textarea id="inputText" placeholder="Enter text here..."></textarea>
-  <button onclick="encodeText()">Encode</button>
-  <button onclick="decodeText()">Decode</button>
+  <h2>Advanced Text Encoder / Decoder</h2>
+  <textarea id="inputText" placeholder="Enter your text here..."></textarea><br>
+  <button class="btn-primary" onclick="encodeText()">Encode</button>
+  <button class="btn-secondary" onclick="decodeText()">Decode</button>
+  <button class="btn-success" onclick="copyOutput()">Copy Output</button>
+  <button onclick="clearAll()">Clear</button>
 
-  <div class="output" id="outputText"></div>
+  <div id="output" placeholder="Output will appear here..."></div>
 
   <script>
-    const encodeMap = {
-      a: '7', b: 'w', c: '9', d: 'k', e: 'v', f: '2',
-      g: 'j', h: '1', i: 'n', j: '6', k: 'r', l: 's',
-      m: '5', n: 'e', o: '0', p: 'a', q: '4', r: 'c',
-      s: 'd', t: 'f', u: 'b', v: '3', w: 'u', x: 'i',
-      y: 't', z: 'q',
-      0: 'm', 1: 'x', 2: 'g', 3: 'y', 4: 'z',
-      5: 'h', 6: 'p', 7: 'l', 8: 'o', 9: 'n'
+    // Create unique mappings using prefixes
+    const lowerMap = 'abcdefghijklmnopqrstuvwxyz';
+    const upperMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numMap = '0123456789';
+
+    const encodeChar = (ch) => {
+      if (lowerMap.includes(ch)) return '@' + lowerMap.indexOf(ch).toString(36);
+      if (upperMap.includes(ch)) return '#' + upperMap.indexOf(ch).toString(36);
+      if (numMap.includes(ch)) return '%' + numMap.indexOf(ch).toString(36);
+      return ch; // keep special chars as-is
     };
 
-    const decodeMap = Object.fromEntries(
-      Object.entries(encodeMap).map(([k, v]) => [v, k])
-    );
+    const decodeChar = (text, index) => {
+      const prefix = text[index];
+      const code = text[index + 1];
+      if (!code) return [prefix, 1]; // fallback
+
+      if (prefix === '@') return [lowerMap[parseInt(code, 36)], 2];
+      if (prefix === '#') return [upperMap[parseInt(code, 36)], 2];
+      if (prefix === '%') return [numMap[parseInt(code, 36)], 2];
+      return [prefix, 1];
+    };
 
     function encodeText() {
-      const text = document.getElementById("inputText").value;
-      const encoded = [...text].map(char => {
-        const lower = char.toLowerCase();
-        if (encodeMap[lower]) {
-          return encodeMap[lower];
-        }
-        return char;
-      }).join('');
-      document.getElementById("outputText").textContent = "Encoded Text:\n" + encoded;
+      const input = document.getElementById("inputText").value;
+      let output = '';
+      for (let ch of input) {
+        output += encodeChar(ch);
+      }
+      document.getElementById("output").textContent = "Encoded Text:\n" + output;
     }
 
     function decodeText() {
-      const text = document.getElementById("inputText").value;
-      const decoded = [...text].map(char => {
-        const lower = char.toLowerCase();
-        if (decodeMap[lower]) {
-          return decodeMap[lower];
-        }
-        return char;
-      }).join('');
-      document.getElementById("outputText").textContent = "Decoded Text:\n" + decoded;
+      const input = document.getElementById("inputText").value;
+      let output = '';
+      for (let i = 0; i < input.length;) {
+        const [decoded, skip] = decodeChar(input, i);
+        output += decoded;
+        i += skip;
+      }
+      document.getElementById("output").textContent = "Decoded Text:\n" + output;
+    }
+
+    function copyOutput() {
+      const text = document.getElementById("output").textContent.replace(/^(Encoded|Decoded) Text:\n/, '');
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Output copied to clipboard!");
+      });
+    }
+
+    function clearAll() {
+      document.getElementById("inputText").value = '';
+      document.getElementById("output").textContent = '';
     }
   </script>
 
