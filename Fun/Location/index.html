@@ -456,17 +456,16 @@
             window.location.href = mailtoLink;
         }
 
-        // Share to WhatsApp
+        // SHARE TO WHATSAPP 
         function shareToWhatsApp() {
-            const content = generateStyledText();
-            // WhatsApp API: https://api.whatsapp.com/send?text=YOUR_TEXT
-            // Note: WhatsApp web only allows up to ~2500 chars, so we truncate if needed
-            let text = content;
-            if (text.length > 2000) {
-                text = text.substring(0, 2000) + "... [Report truncated due to WhatsApp limit]";
-            }
-            const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-            window.open(whatsappLink, '_blank');
+    const content = generateStyledText();
+    let text = content;
+    if (text.length > 2000) {
+        text = text.substring(0, 2000) + "... [Report truncated due to WhatsApp limit]";
+    }
+    const phoneNumber = "919263056661"; // Your number without '+'
+    const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(text)}`;
+    window.open(whatsappLink, '_blank');
         }
 
         // Copy Text
