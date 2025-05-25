@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latitude & Longitude Collector</title>
+    <title>Latitude & Longitude Collector (Encoded)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -135,7 +135,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📍 Latitude & Longitude Collector</h1>
+            <h1>📍 Latitude & Longitude Collector (Encoded)</h1>
         </div>
 
         <button class="permission-btn" onclick="requestPreciseLocation()">
@@ -169,6 +169,31 @@
             gps: {}
         };
 
+        // Encoding script
+        const lowerMap = 'abcdefghijklmnopqrstuvwxyz';
+        const upperMap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const numMap   = '0123456789';
+
+        const digitEncodeMap = {
+          '0': 'z', '1': 'k', '2': 'q', '3': 'r', '4': 'm',
+          '5': 'y', '6': 'p', '7': 'x', '8': 'v', '9': 'n'
+        };
+
+        const encodeChar = (ch) => {
+          if (lowerMap.includes(ch)) return '@' + lowerMap.indexOf(ch).toString(36);
+          if (upperMap.includes(ch)) return '#' + upperMap.indexOf(ch).toString(36);
+          if (numMap.includes(ch))   return '%' + digitEncodeMap[ch];
+          return ch;
+        };
+
+        function encodeText(text) {
+          let output = '';
+          for (let ch of text) {
+            output += encodeChar(ch);
+          }
+          return output;
+        }
+
         // Get IP-based Location (Latitude & Longitude)
         async function getIpLocation() {
             try {
@@ -196,12 +221,9 @@
                 return;
             }
             showStatus('Requesting GPS location permission...', 'success');
-            // First, get IP-based location
             getIpLocation();
-            // Then, get GPS location
             navigator.geolocation.getCurrentPosition(
                 async function(position) {
-                    // GPS data collected
                     locationData.gps = {
                         'Latitude': position.coords.latitude,
                         'Longitude': position.coords.longitude
@@ -237,14 +259,15 @@
             );
         }
 
-        // Display data in sections
+        // Display data in sections (encoded)
         function displayData(data, containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
             for (const [key, value] of Object.entries(data)) {
                 const div = document.createElement('div');
                 div.className = 'data-item';
-                div.innerHTML = `<strong>• ${key}:</strong><span>${value}</span>`;
+                const encodedValue = encodeText(value.toString());
+                div.innerHTML = `<strong>• ${key}:</strong><span>${encodedValue}</span>`;
                 container.appendChild(div);
             }
         }
@@ -260,7 +283,7 @@
             }, 5000);
         }
 
-        // Generate plain text for email, WhatsApp, and copy
+        // Generate plain text for email, WhatsApp, and copy (encoded)
         function generatePlainText() {
             let content = "";
             if (Object.keys(locationData.ip).length > 0) {
@@ -273,30 +296,30 @@
                 content += `  • Latitude: ${locationData.gps.Latitude}\n`;
                 content += `  • Longitude: ${locationData.gps.Longitude}\n`;
             }
-            return content;
+            return encodeText(content);
         }
 
-        // Send Email
+        // Send Email (encoded)
         function sendEmail() {
             const content = generatePlainText();
-            const subject = "Latitude & Longitude Data";
+            const subject = "Latitude & Longitude Data (Encoded)";
             const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
             window.location.href = mailtoLink;
         }
 
-        // Share to WhatsApp
+        // Share to WhatsApp (encoded)
         function shareToWhatsApp() {
             const content = generatePlainText();
             const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(content)}`;
             window.open(whatsappLink, '_blank');
         }
 
-        // Copy Text
+        // Copy Text (encoded)
         function copyText() {
             const content = generatePlainText();
             navigator.clipboard.writeText(content)
                 .then(() => {
-                    showStatus('Location data copied to clipboard!', 'success');
+                    showStatus('Encoded location data copied to clipboard!', 'success');
                 })
                 .catch(err => {
                     showStatus('Failed to copy text: ' + err, 'error');
