@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPS Location Information Demo</title>
+    <title>Latitude & Longitude Collector</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -139,6 +139,13 @@
         .copy-btn:hover {
             background: linear-gradient(45deg, #2980b9, #2c3e50);
         }
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+        }
+        .whatsapp-btn:hover {
+            background: linear-gradient(45deg, #128C7E, #075E54);
+        }
         .warning {
             background: linear-gradient(145deg, #fff3cd, #ffeaa7);
             border: 1px solid #ffc107;
@@ -204,21 +211,21 @@
 </head>
 <body>
     <div class="disclaimer">
-        <h2>🌍 GPS Location Data Collection Disclaimer</h2>
-        <p><strong>चेतावनी:</strong> यह website आपकी exact GPS location की detailed information collect करेगी।</p>
-        <p><strong>उद्देश्य:</strong> Educational purpose - आप जान सकेंगे कि websites आपकी exact location के बारे में कितनी जानकारी collect कर सकती हैं।</p>
+        <h2>📍 Latitude & Longitude Collector</h2>
+        <p><strong>चेतावनी:</strong> यह website आपकी location से Latitude और Longitude collect करेगी।</p>
+        <p><strong>उद्देश्य:</strong> Educational purpose - आप जान सकेंगे कि websites आपकी location के बारे में कितनी जानकारी collect कर सकती हैं।</p>
         <p><strong>Permission:</strong> Exact GPS location के लिए आपसे permission मांगी जाएगी।</p>
         <p><strong>Privacy:</strong> कोई भी data server पर store नहीं होता - सब कुछ local है।</p>
     </div>
     <div class="container">
         <div class="header">
-            <h1>🎯 GPS Location Information Collector</h1>
-            <p>Discover your exact location data that websites can collect!</p>
+            <h1>📍 Latitude & Longitude Collector</h1>
+            <p>Compare IP-based and GPS-based Latitude & Longitude accuracy!</p>
         </div>
         
         <div class="initial-message">
-            <h2>📍 Ready to Collect Your GPS Location Data</h2>
-            <p>Click the button below to allow GPS access and see what detailed information can be collected about your exact location.</p>
+            <h2>📍 Ready to Collect Your Location Data</h2>
+            <p>Click the button below to allow GPS access and compare your location accuracy.</p>
         </div>
 
         <button class="permission-btn" onclick="requestPreciseLocation()">
@@ -228,35 +235,38 @@
         <!-- Progress Bar (Hidden Initially) -->
         <div id="loadingBarContainer" class="loading-bar-container">
             <div id="loadingBar" class="loading-bar"></div>
-            <div id="loadingText" class="loading-text">Starting GPS location collection...</div>
+            <div id="loadingText" class="loading-text">Starting location collection...</div>
         </div>
 
-        <div id="preciseLocationInfo" class="info-section" style="display: none;">
-            <h3>🎯 Precise Location Information (GPS-based)</h3>
-            <div id="preciseLocationData"></div>
+        <!-- IP-based Latitude & Longitude -->
+        <div id="ipLocationInfo" class="info-section" style="display: none;">
+            <h3>🌐 IP-based Latitude & Longitude</h3>
+            <div id="ipLocationData"></div>
         </div>
 
-        <div id="reverseGeocodeInfo" class="info-section" style="display: none;">
-            <h3>🌍 Address from GPS (Reverse Geocoding)</h3>
-            <div id="reverseGeocodeData"></div>
+        <!-- GPS-based Latitude & Longitude -->
+        <div id="gpsLocationInfo" class="info-section" style="display: none;">
+            <h3>🎯 GPS-based Latitude & Longitude</h3>
+            <div id="gpsLocationData"></div>
         </div>
 
         <div class="action-buttons" id="actionButtons" style="display: none;">
             <button class="action-btn email-btn" onclick="sendEmail()">📧 Email App Open</button>
+            <button class="action-btn whatsapp-btn" onclick="shareToWhatsApp()">💬 WhatsApp Share</button>
             <button class="action-btn copy-btn" onclick="copyText()">📝 Copy Text</button>
         </div>
 
         <div id="status" class="status" style="display: none;"></div>
 
         <div class="warning">
-            <p><strong>Privacy Tip:</strong> Real websites can collect this exact location data! Always check location permissions carefully and use VPN for privacy protection.</p>
+            <p><strong>Privacy Tip:</strong> Real websites can collect your location! Always check permissions carefully and use VPN for privacy protection.</p>
         </div>
     </div>
 
     <script>
         let locationData = {
-            precise: {},
-            reverseGeocode: {}
+            ip: {},
+            gps: {}
         };
 
         // Real-time Progress Bar Animation
@@ -281,7 +291,7 @@
                     const delay = currentStep === 1 ? 1000 : (currentStep === 2 ? 2000 : 1500);
                     setTimeout(updateProgress, delay);
                 } else {
-                    progressText.textContent = 'Your GPS data is ready to send or copy!';
+                    progressText.textContent = 'Your location data is ready to share or copy!';
                     document.getElementById('actionButtons').style.display = 'flex';
                 }
             }
@@ -289,38 +299,27 @@
             updateProgress();
         }
 
-        // Reverse Geocode using OpenStreetMap Nominatim
-        async function reverseGeocode(lat, lon) {
+        // Get IP-based Location (Latitude & Longitude)
+        async function getIpLocation() {
             try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1`);
+                const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
-                const addr = data.address || {};
-                
-                locationData.reverseGeocode = {
-                    'Reverse Geocoded Address': data.display_name || 'Unknown',
-                    'Country': addr.country || 'Unknown',
-                    'State/Region': addr.state || addr.region || 'Unknown',
-                    'District': addr.county || addr.district || addr.city || 'Unknown',
-                    'City/Town': addr.city || addr.town || addr.village || 'Unknown',
-                    'Postal Code': addr.postcode || 'Unknown',
-                    'Road/Area': addr.road || addr.suburb || 'Unknown',
-                    'House/Flat Number': addr.house_number || 'Unknown',
-                    'Latitude': lat,
-                    'Longitude': lon
+                locationData.ip = {
+                    'Latitude': data.latitude || 'Unknown',
+                    'Longitude': data.longitude || 'Unknown'
                 };
-                
-                displayData(locationData.reverseGeocode, 'reverseGeocodeData');
-                document.getElementById('reverseGeocodeInfo').style.display = 'block';
+                displayData(locationData.ip, 'ipLocationData');
+                document.getElementById('ipLocationInfo').style.display = 'block';
                 return true;
             } catch (error) {
-                locationData.reverseGeocode = { 'Error': 'Could not fetch reverse geocode information' };
-                displayData(locationData.reverseGeocode, 'reverseGeocodeData');
-                document.getElementById('reverseGeocodeInfo').style.display = 'block';
+                locationData.ip = { 'Error': 'Could not fetch IP-based location' };
+                displayData(locationData.ip, 'ipLocationData');
+                document.getElementById('ipLocationInfo').style.display = 'block';
                 return false;
             }
         }
 
-        // Request precise location
+        // Request precise GPS location
         function requestPreciseLocation() {
             if (!navigator.geolocation) {
                 showStatus('Geolocation is not supported by this browser.', 'error');
@@ -333,39 +332,28 @@
             const progressSteps = [
                 'Requesting GPS permission...',
                 'Getting GPS coordinates...',
-                'Fetching address details...',
                 'Processing location data...'
             ];
             
             animateProgressBar(progressSteps);
 
+            // First, get IP-based location
+            getIpLocation();
+
+            // Then, get GPS location
             navigator.geolocation.getCurrentPosition(
                 async function(position) {
                     // GPS data collected
-                    locationData.precise = {
-                        'Latitude (Exact)': position.coords.latitude,
-                        'Longitude (Exact)': position.coords.longitude,
-                        'Accuracy': position.coords.accuracy + ' meters',
-                        'Altitude': position.coords.altitude ? position.coords.altitude + ' meters' : 'Unknown',
-                        'Altitude Accuracy': position.coords.altitudeAccuracy ? position.coords.altitudeAccuracy + ' meters' : 'Unknown',
-                        'Heading': position.coords.heading ? position.coords.heading + ' degrees' : 'Unknown',
-                        'Speed': position.coords.speed ? position.coords.speed + ' m/s' : 'Unknown',
-                        'Timestamp': new Date(position.timestamp).toLocaleString(),
-                        'Coordinates String': `${position.coords.latitude}, ${position.coords.longitude}`
+                    locationData.gps = {
+                        'Latitude': position.coords.latitude,
+                        'Longitude': position.coords.longitude
                     };
-
-                    document.getElementById('preciseLocationInfo').style.display = 'block';
-                    displayData(locationData.precise, 'preciseLocationData');
-                    
-                    // Now reverse geocode the exact coordinates
-                    await reverseGeocode(position.coords.latitude, position.coords.longitude);
-                    
+                    displayData(locationData.gps, 'gpsLocationData');
+                    document.getElementById('gpsLocationInfo').style.display = 'block';
                     showStatus('GPS location data collected successfully!', 'success');
                 },
                 function(error) {
-                    // Hide progress bar on error
                     document.getElementById('loadingBarContainer').style.display = 'none';
-                    
                     let errorMessage = '';
                     switch(error.code) {
                         case error.PERMISSION_DENIED:
@@ -414,32 +402,32 @@
             }, 5000);
         }
 
-        // Generate styled text for email and copy (USING REAL COLLECTED DATA)
+        // Generate styled text for email, WhatsApp, and copy
         function generateStyledText() {
             let content = "";
             content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
-            content += "║                    🎯 GPS LOCATION INFORMATION REPORT                          ║\n";
+            content += "║                    📍 LATITUDE & LONGITUDE COMPARISON REPORT                   ║\n";
             content += "║                     (Educational Purpose Only - No Server Storage)            ║\n";
             content += "╚════════════════════════════════════════════════════════════════════════════════╝\n\n";
             content += `Generated on: ${new Date().toLocaleString()}\n\n`;
 
-            // Precise Location Information (GPS-based) - USING REAL DATA
-            if (Object.keys(locationData.precise).length > 0) {
+            // IP-based Location
+            if (Object.keys(locationData.ip).length > 0) {
                 content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🎯 PRECISE LOCATION INFORMATION (GPS-based)\n";
+                content += "🌐 IP-based Latitude & Longitude\n";
                 content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.precise)) {
+                for (const [key, value] of Object.entries(locationData.ip)) {
                     content += `  • ${key}: ${value}\n`;
                 }
                 content += "\n";
             }
 
-            // Address from GPS (Reverse Geocoding) - USING REAL DATA
-            if (Object.keys(locationData.reverseGeocode).length > 0) {
+            // GPS-based Location
+            if (Object.keys(locationData.gps).length > 0) {
                 content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                content += "🌍 ADDRESS FROM GPS (REVERSE GEOCODING)\n";
+                content += "🎯 GPS-based Latitude & Longitude\n";
                 content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-                for (const [key, value] of Object.entries(locationData.reverseGeocode)) {
+                for (const [key, value] of Object.entries(locationData.gps)) {
                     content += `  • ${key}: ${value}\n`;
                 }
                 content += "\n";
@@ -450,12 +438,12 @@
             content += "🛡️ PRIVACY WARNING\n";
             content += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
             content += "  यह जानकारी सिर्फ educational purpose के लिए collect की गई है।\n";
-            content += "  Real websites आपकी exact GPS location की इतनी detailed information collect कर सकती हैं।\n";
+            content += "  Real websites आपकी location की इतनी detailed information collect कर सकती हैं।\n";
             content += "  हमेशा location permissions को carefully review करें!\n";
             content += "  VPN का use करके अपनी location privacy protect करें।\n";
             content += "\n";
             content += "╔════════════════════════════════════════════════════════════════════════════════╗\n";
-            content += "║                🛡️  END OF GPS REPORT - STAY PRIVATE!                         ║\n";
+            content += "║                🛡️  END OF REPORT - STAY PRIVATE!                             ║\n";
             content += "╚════════════════════════════════════════════════════════════════════════════════╝\n";
             return content;
         }
@@ -463,9 +451,22 @@
         // Send Email
         function sendEmail() {
             const content = generateStyledText();
-            const subject = "Your GPS Location Data Collection Report";
+            const subject = "Your Latitude & Longitude Comparison Report";
             const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(content)}`;
             window.location.href = mailtoLink;
+        }
+
+        // Share to WhatsApp
+        function shareToWhatsApp() {
+            const content = generateStyledText();
+            // WhatsApp API: https://api.whatsapp.com/send?text=YOUR_TEXT
+            // Note: WhatsApp web only allows up to ~2500 chars, so we truncate if needed
+            let text = content;
+            if (text.length > 2000) {
+                text = text.substring(0, 2000) + "... [Report truncated due to WhatsApp limit]";
+            }
+            const whatsappLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+            window.open(whatsappLink, '_blank');
         }
 
         // Copy Text
@@ -473,7 +474,7 @@
             const content = generateStyledText();
             navigator.clipboard.writeText(content)
                 .then(() => {
-                    showStatus('GPS location data copied to clipboard!', 'success');
+                    showStatus('Location data copied to clipboard!', 'success');
                 })
                 .catch(err => {
                     showStatus('Failed to copy text: ' + err, 'error');
