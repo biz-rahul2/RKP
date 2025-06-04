@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Calculator with History</title>
-    <!-- Font Awesome -->
+    <title>Stylish Glow Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,31 +13,32 @@
             font-family: 'Inter', sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f0f0f;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
-            padding: 20px;
+            color: #fff;
+            padding: 20px 15px;
         }
         .display {
             width: 100%;
             max-width: 400px;
-            height: 100px;
-            font-size: 3rem;
+            height: 90px;
+            font-size: 2.5rem;
             font-weight: 300;
             text-align: right;
             padding: 0 20px;
-            border: none;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            margin-bottom: 20px;
             box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.3);
             outline: none;
             letter-spacing: 2px;
+            margin-top: 50px;
         }
         .display::placeholder {
             color: rgba(255, 255, 255, 0.5);
@@ -46,91 +46,138 @@
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 12px;
             width: 100%;
             max-width: 400px;
+            margin-bottom: 70px;
         }
         .btn {
-            height: 70px;
+            height: 65px;
             border: none;
-            border-radius: 18px;
+            border-radius: 15px;
             font-size: 1.4rem;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
         }
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(1px);
         }
         .btn-number {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-number:hover {
             background: rgba(255, 255, 255, 0.15);
         }
         .btn-operator {
-            background: rgba(255, 107, 107, 0.8);
+            background: rgba(255, 70, 70, 0.7);
+        }
+        .btn-operator:hover {
+            background: rgba(255, 70, 70, 0.85);
         }
         .btn-clear {
             background: rgba(255, 71, 87, 0.8);
+        }
+        .btn-clear:hover {
+            background: rgba(255, 71, 87, 1);
         }
         .btn-equals {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             grid-column: span 2;
             font-weight: 600;
         }
+        .btn-equals:hover {
+            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
+        }
         .btn-zero {
             grid-column: span 2;
         }
-        .btn::before {
+        .btn-decimal {
+            background: rgba(255, 70, 70, 0.7);
+            grid-column: 3;
+            grid-row: 5;
+        }
+        .btn-decimal:hover {
+            background: rgba(255, 70, 70, 0.85);
+        }
+        /* Click Glow Effect */
+        .btn:active::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-            transition: left 0.5s;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            animation: glowClick 0.5s ease-out forwards;
+            pointer-events: none;
         }
-        .btn:active::before {
-            left: 100%;
+        @keyframes glowClick {
+            0% { opacity: 0.8; transform: scale(0.5); }
+            100% { opacity: 0; transform: scale(2); }
         }
+        /* History & Copy Buttons */
         .history-btn {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
             z-index: 10;
         }
         .history-btn:hover {
             transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
         }
+        .copy-result {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        .copy-result:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        /* History Panel */
         .history-panel {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 350px;
+            right: -100%;
+            width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 70px 20px 30px;
             overflow-y: auto;
             transition: right 0.3s ease;
             z-index: 100;
@@ -177,123 +224,66 @@
         .clear-history:hover {
             background: rgba(255, 71, 87, 1);
         }
-        .theme-switcher {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-        .theme-switcher:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .copy-result {
-            position: fixed;
-            bottom: 110px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-        .copy-result:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
-        }
+        /* Responsive */
         @media (max-width: 480px) {
             .display {
                 height: 80px;
-                font-size: 2.5rem;
-                padding: 0 20px;
+                font-size: 2rem;
+                padding: 0 15px;
+                margin-top: 40px;
             }
             .btn {
-                height: 60px;
+                height: 55px;
                 font-size: 1.2rem;
             }
             .buttons {
-                gap: 12px;
-            }
-            .history-panel {
-                width: 100%;
-                right: -100%;
-            }
-            .history-panel.show {
-                right: 0;
+                gap: 10px;
+                margin-bottom: 60px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="history-btn" onclick="toggleHistory()">
+        <i class="fas fa-history"></i>
+    </div>
     <input type="text" class="display" id="display" placeholder="0" readonly>
     <div class="buttons">
-        <button class="btn btn-clear" onclick="clearDisplay()"><i class="fas fa-backspace" aria-hidden="true"></i></button>
-        <button class="btn btn-clear" onclick="deleteLast()"><i class="fas fa-eraser" aria-hidden="true"></i></button>
-        <button class="btn btn-operator" onclick="appendToDisplay('/')"><i class="fas fa-divide" aria-hidden="true"></i></button>
-        <button class="btn btn-operator" onclick="appendToDisplay('*')"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <button class="btn btn-clear" onclick="clearDisplay()"><i class="fas fa-backspace"></i></button>
+        <button class="btn btn-clear" onclick="deleteLast()"><i class="fas fa-eraser"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('/')"><i class="fas fa-divide"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('*')"><i class="fas fa-times"></i></button>
         
         <button class="btn btn-number" onclick="appendToDisplay('7')">7</button>
         <button class="btn btn-number" onclick="appendToDisplay('8')">8</button>
         <button class="btn btn-number" onclick="appendToDisplay('9')">9</button>
-        <button class="btn btn-operator" onclick="appendToDisplay('-')"><i class="fas fa-minus" aria-hidden="true"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('-')"><i class="fas fa-minus"></i></button>
         
         <button class="btn btn-number" onclick="appendToDisplay('4')">4</button>
         <button class="btn btn-number" onclick="appendToDisplay('5')">5</button>
         <button class="btn btn-number" onclick="appendToDisplay('6')">6</button>
-        <button class="btn btn-operator" onclick="appendToDisplay('+')"><i class="fas fa-plus" aria-hidden="true"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('+')"><i class="fas fa-plus"></i></button>
         
         <button class="btn btn-number" onclick="appendToDisplay('1')">1</button>
         <button class="btn btn-number" onclick="appendToDisplay('2')">2</button>
         <button class="btn btn-number" onclick="appendToDisplay('3')">3</button>
-        <button class="btn btn-equals" onclick="calculate()"><i class="fas fa-equals" aria-hidden="true"></i></button>
+        <button class="btn btn-equals" onclick="calculate()"><i class="fas fa-equals"></i></button>
         
         <button class="btn btn-number btn-zero" onclick="appendToDisplay('0')">0</button>
-        <button class="btn btn-number" onclick="appendToDisplay('.')">.</button>
+        <button class="btn btn-decimal" onclick="appendToDisplay('.')">.</button>
     </div>
-
-    <div class="history-btn" onclick="toggleHistory()">
-        <i class="fas fa-history" aria-hidden="true"></i>
-    </div>
-
-    <div class="theme-switcher" onclick="toggleTheme()">
-        <i class="fas fa-moon" aria-hidden="true"></i>
-    </div>
-
     <div class="copy-result" onclick="copyResult()">
-        <i class="fas fa-copy" aria-hidden="true"></i>
+        <i class="fas fa-copy"></i>
     </div>
-
     <div class="history-panel" id="historyPanel">
         <span class="history-close" onclick="toggleHistory()">&times;</span>
-        <h2><i class="fas fa-history" aria-hidden="true"></i> Calculation History</h2>
+        <h2><i class="fas fa-history"></i> Calculation History</h2>
         <div id="historyList"></div>
-        <button class="clear-history" onclick="clearHistory()"><i class="fas fa-trash" aria-hidden="true"></i> Clear History</button>
+        <button class="clear-history" onclick="clearHistory()"><i class="fas fa-trash"></i> Clear History</button>
     </div>
-
     <script>
         let display = document.getElementById('display');
         let shouldResetDisplay = false;
-        let isDarkTheme = false;
-
-        // Load or initialize history
         let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
         renderHistory();
 
@@ -325,14 +315,12 @@
             try {
                 let expression = display.value.replace(/×/g, '*');
                 let result = eval(expression);
-                
                 if (result === Infinity || result === -Infinity) {
                     display.value = 'Error';
                 } else if (isNaN(result)) {
                     display.value = 'Error';
                 } else {
                     display.value = result;
-                    // Save to history
                     saveToHistory(expression, result);
                 }
                 shouldResetDisplay = true;
@@ -345,13 +333,8 @@
         function saveToHistory(expression, result) {
             const now = new Date();
             const timestamp = now.toLocaleString();
-            const item = {
-                expression,
-                result,
-                timestamp
-            };
+            const item = { expression, result, timestamp };
             history.unshift(item);
-            // Keep last 100 items
             if (history.length > 100) history.pop();
             localStorage.setItem('calculatorHistory', JSON.stringify(history));
             renderHistory();
@@ -378,14 +361,6 @@
             renderHistory();
         }
 
-        function toggleTheme() {
-            isDarkTheme = !isDarkTheme;
-            document.querySelector('.theme-switcher i').className = isDarkTheme ? 'fas fa-sun' : 'fas fa-moon';
-            document.body.style.background = isDarkTheme 
-                ? 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)' 
-                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-        }
-
         function copyResult() {
             if (display.value && display.value !== 'Error') {
                 navigator.clipboard.writeText(display.value)
@@ -398,7 +373,6 @@
             }
         }
 
-        // Keyboard support
         document.addEventListener('keydown', function(event) {
             const key = event.key;
             if (key >= '0' && key <= '9' || key === '.') {
