@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi Calculator</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -18,43 +20,81 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
         }
         
-        .navbar {
+        .nav-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
+            cursor: pointer;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            z-index: 99;
+            padding: 20px;
+        }
+        
+        .navbar.active {
+            left: 0;
         }
         
         .nav-btn {
-            padding: 12px 25px;
+            padding: 15px 25px;
             border: none;
             border-radius: 25px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
         }
         
-        .nav-btn:hover, .nav-btn.active {
-            background: rgba(255, 255, 255, 0.3);
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #e84393 100%);
         }
         
         .history-btn {
-            background: rgba(255, 107, 107, 0.8);
-            margin-left: 20px;
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
         }
         
         .history-btn:hover {
-            background: rgba(255, 107, 107, 1);
+            background: linear-gradient(135deg, #e84393 0%, #d63031 100%);
         }
         
         .calculator {
@@ -65,8 +105,9 @@
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             max-width: 400px;
-            margin: 0 auto;
-            display: none;
+            margin: 70px auto 0;
+            transition: all 0.3s ease;
+            transform: translateY(0);
         }
         
         .calculator.active {
@@ -79,6 +120,7 @@
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 25px;
+            letter-spacing: 1px;
         }
         
         .display {
@@ -94,6 +136,8 @@
             color: white;
             margin-bottom: 20px;
             outline: none;
+            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.2);
+            letter-spacing: 2px;
         }
         
         .input-group {
@@ -105,6 +149,7 @@
             color: white;
             margin-bottom: 8px;
             font-weight: 500;
+            letter-spacing: 1px;
         }
         
         .input-group input, .input-group select {
@@ -183,11 +228,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .calc-btn:hover {
+            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .result {
@@ -248,6 +294,9 @@
             height: 35px;
             cursor: pointer;
             font-size: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .history-item {
@@ -265,13 +314,9 @@
         }
         
         @media (max-width: 480px) {
-            .navbar {
-                flex-direction: column;
-            }
-            
             .calculator {
                 padding: 25px;
-                margin: 10px;
+                margin: 70px 10px 0;
             }
             
             .display {
@@ -287,13 +332,28 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Toggle -->
+    <button class="nav-toggle" onclick="toggleNav()">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <!-- Navigation -->
-    <div class="navbar">
-        <button class="nav-btn active" onclick="showCalculator('basic')">Basic Calculator</button>
-        <button class="nav-btn" onclick="showCalculator('age')">Age Calculator</button>
-        <button class="nav-btn" onclick="showCalculator('period')">Period Calculator</button>
-        <button class="nav-btn" onclick="showCalculator('date')">Date Calculator</button>
-        <button class="nav-btn history-btn" onclick="showHistory()">History</button>
+    <div class="navbar" id="navbar">
+        <button class="nav-btn" onclick="showCalculator('basic')">
+            <i class="fas fa-calculator"></i> Basic Calculator
+        </button>
+        <button class="nav-btn" onclick="showCalculator('age')">
+            <i class="fas fa-birthday-cake"></i> Age Calculator
+        </button>
+        <button class="nav-btn" onclick="showCalculator('period')">
+            <i class="fas fa-calendar-alt"></i> Period Calculator
+        </button>
+        <button class="nav-btn" onclick="showCalculator('date')">
+            <i class="fas fa-calendar-day"></i> Date Calculator
+        </button>
+        <button class="nav-btn history-btn" onclick="showHistory()">
+            <i class="fas fa-history"></i> History
+        </button>
     </div>
 
     <!-- Basic Calculator -->
@@ -380,7 +440,9 @@
         <div class="history-content">
             <div class="history-header">
                 <h3 class="history-title">Calculation History</h3>
-                <button class="close-btn" onclick="closeHistory()">×</button>
+                <button class="close-btn" onclick="closeHistory()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <div id="historyList"></div>
         </div>
@@ -392,12 +454,17 @@
         let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
         
         // Navigation Functions
+        function toggleNav() {
+            document.getElementById('navbar').classList.toggle('active');
+        }
+        
         function showCalculator(type) {
             document.querySelectorAll('.calculator').forEach(calc => calc.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
             document.getElementById(type + '-calc').classList.add('active');
             event.target.classList.add('active');
+            document.getElementById('navbar').classList.remove('active');
         }
         
         // Basic Calculator Functions
@@ -579,6 +646,7 @@
             }
             
             document.getElementById('historyModal').style.display = 'flex';
+            document.getElementById('navbar').classList.remove('active');
         }
         
         function closeHistory() {
