@@ -3,488 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi Calculator</title>
+    <title>Stylish Calculator with History</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
-        
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            padding: 20px;
-            position: relative;
-        }
-        
-        .nav-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
-            z-index: 99;
+            color: white;
             padding: 20px;
         }
-        
-        .navbar.active {
-            left: 0;
-        }
-        
-        .nav-btn {
-            padding: 15px 25px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 10px 0;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            font-size: 1.1rem;
-        }
-        
-        .nav-btn:hover {
-            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
-            transform: translateY(-2px);
-        }
-        
-        .nav-btn.active {
-            background: linear-gradient(135deg, #ff6b6b 0%, #e84393 100%);
-        }
-        
-        .history-btn {
-            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
-        }
-        
-        .history-btn:hover {
-            background: linear-gradient(135deg, #e84393 0%, #d63031 100%);
-        }
-        
-        .calculator {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            padding: 35px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 400px;
-            margin: 70px auto 0;
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-        
-        .calculator.active {
-            display: block;
-        }
-        
-        .calculator-title {
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 25px;
-            letter-spacing: 1px;
-        }
-        
         .display {
             width: 100%;
-            height: 80px;
-            font-size: 2.5rem;
+            max-width: 400px;
+            height: 100px;
+            font-size: 3rem;
             font-weight: 300;
             text-align: right;
             padding: 0 20px;
             border: none;
-            border-radius: 15px;
+            border-radius: 20px;
             background: rgba(0, 0, 0, 0.3);
             color: white;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.3);
             outline: none;
-            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.2);
             letter-spacing: 2px;
         }
-        
-        .input-group {
-            margin-bottom: 20px;
+        .display::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
-        
-        .input-group label {
-            display: block;
-            color: white;
-            margin-bottom: 8px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-        
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
         }
-        
         .btn {
-            height: 60px;
+            height: 70px;
             border: none;
-            border-radius: 15px;
-            font-size: 1.2rem;
+            border-radius: 18px;
+            font-size: 1.4rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
         }
-        
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        
+        .btn:active {
+            transform: translateY(0);
+        }
         .btn-number {
             background: rgba(255, 255, 255, 0.15);
-            color: white;
         }
-        
         .btn-operator {
             background: rgba(255, 107, 107, 0.8);
-            color: white;
         }
-        
         .btn-clear {
             background: rgba(255, 71, 87, 0.8);
-            color: white;
         }
-        
         .btn-equals {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
             grid-column: span 2;
+            font-weight: 600;
         }
-        
         .btn-zero {
             grid-column: span 2;
         }
-        
-        .calc-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .calc-btn:hover {
-            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
-            transform: translateY(-2px);
-        }
-        
-        .result {
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            font-size: 1.1rem;
-            text-align: center;
-            display: none;
-        }
-        
-        .history-modal {
-            position: fixed;
+        .btn::before {
+            content: '';
+            position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transition: left 0.5s;
+        }
+        .btn:active::before {
+            left: 100%;
+        }
+        .history-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
-        
-        .history-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
+        .history-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .history-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 70vh;
             overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: right 0.3s ease;
+            z-index: 100;
         }
-        
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .history-panel.show {
+            right: 0;
+        }
+        .history-panel h2 {
+            color: white;
             margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
         }
-        
-        .history-title {
+        .history-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .history-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             color: white;
             font-size: 1.5rem;
-            font-weight: 600;
+            cursor: pointer;
         }
-        
-        .close-btn {
+        .clear-history {
             background: rgba(255, 71, 87, 0.8);
             color: white;
             border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
+            border-radius: 10px;
+            padding: 8px 15px;
+            margin-top: 15px;
             cursor: pointer;
-            font-size: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        .clear-history:hover {
+            background: rgba(255, 71, 87, 1);
+        }
+        .theme-switcher {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
-        
-        .history-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            color: white;
+        .theme-switcher:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
         }
-        
-        .history-empty {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.6);
-            padding: 40px;
+        .copy-result {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
-        
+        .copy-result:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
         @media (max-width: 480px) {
-            .calculator {
-                padding: 25px;
-                margin: 70px 10px 0;
-            }
-            
             .display {
-                height: 70px;
-                font-size: 2rem;
+                height: 80px;
+                font-size: 2.5rem;
+                padding: 0 20px;
             }
-            
             .btn {
-                height: 50px;
-                font-size: 1rem;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+            .buttons {
+                gap: 12px;
+            }
+            .history-panel {
+                width: 100%;
+                right: -100%;
+            }
+            .history-panel.show {
+                right: 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Toggle -->
-    <button class="nav-toggle" onclick="toggleNav()">
-        <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Navigation -->
-    <div class="navbar" id="navbar">
-        <button class="nav-btn" onclick="showCalculator('basic')">
-            <i class="fas fa-calculator"></i> Basic Calculator
-        </button>
-        <button class="nav-btn" onclick="showCalculator('age')">
-            <i class="fas fa-birthday-cake"></i> Age Calculator
-        </button>
-        <button class="nav-btn" onclick="showCalculator('period')">
-            <i class="fas fa-calendar-alt"></i> Period Calculator
-        </button>
-        <button class="nav-btn" onclick="showCalculator('date')">
-            <i class="fas fa-calendar-day"></i> Date Calculator
-        </button>
-        <button class="nav-btn history-btn" onclick="showHistory()">
-            <i class="fas fa-history"></i> History
-        </button>
+    <input type="text" class="display" id="display" placeholder="0" readonly>
+    <div class="buttons">
+        <button class="btn btn-clear" onclick="clearDisplay()"><i class="fas fa-backspace" aria-hidden="true"></i></button>
+        <button class="btn btn-clear" onclick="deleteLast()"><i class="fas fa-eraser" aria-hidden="true"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('/')"><i class="fas fa-divide" aria-hidden="true"></i></button>
+        <button class="btn btn-operator" onclick="appendToDisplay('*')"><i class="fas fa-times" aria-hidden="true"></i></button>
+        
+        <button class="btn btn-number" onclick="appendToDisplay('7')">7</button>
+        <button class="btn btn-number" onclick="appendToDisplay('8')">8</button>
+        <button class="btn btn-number" onclick="appendToDisplay('9')">9</button>
+        <button class="btn btn-operator" onclick="appendToDisplay('-')"><i class="fas fa-minus" aria-hidden="true"></i></button>
+        
+        <button class="btn btn-number" onclick="appendToDisplay('4')">4</button>
+        <button class="btn btn-number" onclick="appendToDisplay('5')">5</button>
+        <button class="btn btn-number" onclick="appendToDisplay('6')">6</button>
+        <button class="btn btn-operator" onclick="appendToDisplay('+')"><i class="fas fa-plus" aria-hidden="true"></i></button>
+        
+        <button class="btn btn-number" onclick="appendToDisplay('1')">1</button>
+        <button class="btn btn-number" onclick="appendToDisplay('2')">2</button>
+        <button class="btn btn-number" onclick="appendToDisplay('3')">3</button>
+        <button class="btn btn-equals" onclick="calculate()"><i class="fas fa-equals" aria-hidden="true"></i></button>
+        
+        <button class="btn btn-number btn-zero" onclick="appendToDisplay('0')">0</button>
+        <button class="btn btn-number" onclick="appendToDisplay('.')">.</button>
     </div>
 
-    <!-- Basic Calculator -->
-    <div class="calculator active" id="basic-calc">
-        <h2 class="calculator-title">Basic Calculator</h2>
-        <input type="text" class="display" id="display" placeholder="0" readonly>
-        <div class="buttons">
-            <button class="btn btn-clear" onclick="clearDisplay()">C</button>
-            <button class="btn btn-clear" onclick="deleteLast()">⌫</button>
-            <button class="btn btn-operator" onclick="appendToDisplay('/')">/</button>
-            <button class="btn btn-operator" onclick="appendToDisplay('*')">×</button>
-            
-            <button class="btn btn-number" onclick="appendToDisplay('7')">7</button>
-            <button class="btn btn-number" onclick="appendToDisplay('8')">8</button>
-            <button class="btn btn-number" onclick="appendToDisplay('9')">9</button>
-            <button class="btn btn-operator" onclick="appendToDisplay('-')">-</button>
-            
-            <button class="btn btn-number" onclick="appendToDisplay('4')">4</button>
-            <button class="btn btn-number" onclick="appendToDisplay('5')">5</button>
-            <button class="btn btn-number" onclick="appendToDisplay('6')">6</button>
-            <button class="btn btn-operator" onclick="appendToDisplay('+')">+</button>
-            
-            <button class="btn btn-number" onclick="appendToDisplay('1')">1</button>
-            <button class="btn btn-number" onclick="appendToDisplay('2')">2</button>
-            <button class="btn btn-number" onclick="appendToDisplay('3')">3</button>
-            <button class="btn btn-equals" onclick="calculate()">=</button>
-            
-            <button class="btn btn-number btn-zero" onclick="appendToDisplay('0')">0</button>
-            <button class="btn btn-number" onclick="appendToDisplay('.')">.</button>
-        </div>
+    <div class="history-btn" onclick="toggleHistory()">
+        <i class="fas fa-history" aria-hidden="true"></i>
     </div>
 
-    <!-- Age Calculator -->
-    <div class="calculator" id="age-calc">
-        <h2 class="calculator-title">Age Calculator</h2>
-        <div class="input-group">
-            <label>Birth Date:</label>
-            <input type="date" id="birthDate">
-        </div>
-        <div class="input-group">
-            <label>Calculate Age On:</label>
-            <input type="date" id="targetDate">
-        </div>
-        <button class="calc-btn" onclick="calculateAge()">Calculate Age</button>
-        <div class="result" id="ageResult"></div>
+    <div class="theme-switcher" onclick="toggleTheme()">
+        <i class="fas fa-moon" aria-hidden="true"></i>
     </div>
 
-    <!-- Period Calculator -->
-    <div class="calculator" id="period-calc">
-        <h2 class="calculator-title">Period Calculator</h2>
-        <div class="input-group">
-            <label>Last Period Start Date:</label>
-            <input type="date" id="lastPeriod">
-        </div>
-        <div class="input-group">
-            <label>Cycle Length (days):</label>
-            <input type="number" id="cycleLength" value="28" min="21" max="35">
-        </div>
-        <div class="input-group">
-            <label>Period Duration (days):</label>
-            <input type="number" id="periodDuration" value="5" min="3" max="7">
-        </div>
-        <button class="calc-btn" onclick="calculatePeriod()">Calculate Next Period</button>
-        <div class="result" id="periodResult"></div>
+    <div class="copy-result" onclick="copyResult()">
+        <i class="fas fa-copy" aria-hidden="true"></i>
     </div>
 
-    <!-- Date Calculator -->
-    <div class="calculator" id="date-calc">
-        <h2 class="calculator-title">Date Calculator</h2>
-        <div class="input-group">
-            <label>Start Date:</label>
-            <input type="date" id="startDate">
-        </div>
-        <div class="input-group">
-            <label>End Date:</label>
-            <input type="date" id="endDate">
-        </div>
-        <button class="calc-btn" onclick="calculateDateDifference()">Calculate Difference</button>
-        <div class="result" id="dateResult"></div>
-    </div>
-
-    <!-- History Modal -->
-    <div class="history-modal" id="historyModal">
-        <div class="history-content">
-            <div class="history-header">
-                <h3 class="history-title">Calculation History</h3>
-                <button class="close-btn" onclick="closeHistory()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="historyList"></div>
-        </div>
+    <div class="history-panel" id="historyPanel">
+        <span class="history-close" onclick="toggleHistory()">&times;</span>
+        <h2><i class="fas fa-history" aria-hidden="true"></i> Calculation History</h2>
+        <div id="historyList"></div>
+        <button class="clear-history" onclick="clearHistory()"><i class="fas fa-trash" aria-hidden="true"></i> Clear History</button>
     </div>
 
     <script>
         let display = document.getElementById('display');
         let shouldResetDisplay = false;
+        let isDarkTheme = false;
+
+        // Load or initialize history
         let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
-        
-        // Navigation Functions
-        function toggleNav() {
-            document.getElementById('navbar').classList.toggle('active');
-        }
-        
-        function showCalculator(type) {
-            document.querySelectorAll('.calculator').forEach(calc => calc.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(type + '-calc').classList.add('active');
-            event.target.classList.add('active');
-            document.getElementById('navbar').classList.remove('active');
-        }
-        
-        // Basic Calculator Functions
+        renderHistory();
+
         function appendToDisplay(value) {
             if (shouldResetDisplay) {
                 display.value = '';
                 shouldResetDisplay = false;
             }
-            
             if (display.value === '0' && value !== '.') {
                 display.value = value;
             } else {
                 display.value += value;
             }
         }
-        
+
         function clearDisplay() {
             display.value = '0';
         }
-        
+
         function deleteLast() {
             if (display.value.length > 1) {
                 display.value = display.value.slice(0, -1);
@@ -492,173 +320,87 @@
                 display.value = '0';
             }
         }
-        
+
         function calculate() {
             try {
                 let expression = display.value.replace(/×/g, '*');
                 let result = eval(expression);
                 
-                if (result === Infinity || result === -Infinity || isNaN(result)) {
+                if (result === Infinity || result === -Infinity) {
+                    display.value = 'Error';
+                } else if (isNaN(result)) {
                     display.value = 'Error';
                 } else {
-                    addToHistory('Basic', `${display.value} = ${result}`);
                     display.value = result;
+                    // Save to history
+                    saveToHistory(expression, result);
                 }
-                
                 shouldResetDisplay = true;
-                
             } catch (error) {
                 display.value = 'Error';
                 shouldResetDisplay = true;
             }
         }
-        
-        // Age Calculator
-        function calculateAge() {
-            const birthDate = new Date(document.getElementById('birthDate').value);
-            const targetDate = new Date(document.getElementById('targetDate').value || new Date());
-            
-            if (!document.getElementById('birthDate').value) {
-                alert('Please enter birth date');
-                return;
-            }
-            
-            let years = targetDate.getFullYear() - birthDate.getFullYear();
-            let months = targetDate.getMonth() - birthDate.getMonth();
-            let days = targetDate.getDate() - birthDate.getDate();
-            
-            if (days < 0) {
-                months--;
-                days += new Date(targetDate.getFullYear(), targetDate.getMonth(), 0).getDate();
-            }
-            
-            if (months < 0) {
-                years--;
-                months += 12;
-            }
-            
-            const totalDays = Math.floor((targetDate - birthDate) / (1000 * 60 * 60 * 24));
-            const totalMonths = years * 12 + months;
-            
-            const result = `
-                <strong>Age:</strong> ${years} years, ${months} months, ${days} days<br>
-                <strong>Total Days:</strong> ${totalDays} days<br>
-                <strong>Total Months:</strong> ${totalMonths} months
-            `;
-            
-            document.getElementById('ageResult').innerHTML = result;
-            document.getElementById('ageResult').style.display = 'block';
-            
-            addToHistory('Age', `Birth: ${birthDate.toDateString()}, Age: ${years}y ${months}m ${days}d`);
-        }
-        
-        // Period Calculator
-        function calculatePeriod() {
-            const lastPeriod = new Date(document.getElementById('lastPeriod').value);
-            const cycleLength = parseInt(document.getElementById('cycleLength').value);
-            const periodDuration = parseInt(document.getElementById('periodDuration').value);
-            
-            if (!document.getElementById('lastPeriod').value) {
-                alert('Please enter last period date');
-                return;
-            }
-            
-            const nextPeriod = new Date(lastPeriod);
-            nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
-            
-            const ovulation = new Date(lastPeriod);
-            ovulation.setDate(ovulation.getDate() + Math.floor(cycleLength / 2));
-            
-            const fertileStart = new Date(ovulation);
-            fertileStart.setDate(fertileStart.getDate() - 5);
-            
-            const fertileEnd = new Date(ovulation);
-            fertileEnd.setDate(fertileEnd.getDate() + 1);
-            
-            const result = `
-                <strong>Next Period:</strong> ${nextPeriod.toDateString()}<br>
-                <strong>Ovulation:</strong> ${ovulation.toDateString()}<br>
-                <strong>Fertile Window:</strong> ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}
-            `;
-            
-            document.getElementById('periodResult').innerHTML = result;
-            document.getElementById('periodResult').style.display = 'block';
-            
-            addToHistory('Period', `Next Period: ${nextPeriod.toDateString()}`);
-        }
-        
-        // Date Calculator
-        function calculateDateDifference() {
-            const startDate = new Date(document.getElementById('startDate').value);
-            const endDate = new Date(document.getElementById('endDate').value);
-            
-            if (!document.getElementById('startDate').value || !document.getElementById('endDate').value) {
-                alert('Please enter both dates');
-                return;
-            }
-            
-            const timeDiff = Math.abs(endDate - startDate);
-            const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-            const weeksDiff = Math.floor(daysDiff / 7);
-            const monthsDiff = Math.abs(endDate.getMonth() - startDate.getMonth() + (12 * (endDate.getFullYear() - startDate.getFullYear())));
-            const yearsDiff = Math.abs(endDate.getFullYear() - startDate.getFullYear());
-            
-            const result = `
-                <strong>Difference:</strong><br>
-                ${daysDiff} days<br>
-                ${weeksDiff} weeks<br>
-                ${monthsDiff} months<br>
-                ${yearsDiff} years
-            `;
-            
-            document.getElementById('dateResult').innerHTML = result;
-            document.getElementById('dateResult').style.display = 'block';
-            
-            addToHistory('Date', `${startDate.toDateString()} to ${endDate.toDateString()}: ${daysDiff} days`);
-        }
-        
-        // History Functions
-        function addToHistory(type, calculation) {
-            const historyItem = {
-                type: type,
-                calculation: calculation,
-                timestamp: new Date().toLocaleString()
+
+        function saveToHistory(expression, result) {
+            const now = new Date();
+            const timestamp = now.toLocaleString();
+            const item = {
+                expression,
+                result,
+                timestamp
             };
-            
-            history.unshift(historyItem);
-            if (history.length > 50) history.pop();
-            
+            history.unshift(item);
+            // Keep last 100 items
+            if (history.length > 100) history.pop();
             localStorage.setItem('calculatorHistory', JSON.stringify(history));
+            renderHistory();
         }
-        
-        function showHistory() {
+
+        function renderHistory() {
             const historyList = document.getElementById('historyList');
-            
-            if (history.length === 0) {
-                historyList.innerHTML = '<div class="history-empty">No calculations yet</div>';
-            } else {
-                historyList.innerHTML = history.map(item => `
-                    <div class="history-item">
-                        <strong>[${item.type}]</strong> ${item.calculation}<br>
-                        <small>${item.timestamp}</small>
-                    </div>
-                `).join('');
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `<strong>${item.expression}</strong> = ${item.result}<br><small>${item.timestamp}</small>`;
+                historyList.appendChild(div);
+            });
+        }
+
+        function toggleHistory() {
+            document.getElementById('historyPanel').classList.toggle('show');
+        }
+
+        function clearHistory() {
+            history = [];
+            localStorage.setItem('calculatorHistory', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            document.querySelector('.theme-switcher i').className = isDarkTheme ? 'fas fa-sun' : 'fas fa-moon';
+            document.body.style.background = isDarkTheme 
+                ? 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)' 
+                : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        }
+
+        function copyResult() {
+            if (display.value && display.value !== 'Error') {
+                navigator.clipboard.writeText(display.value)
+                    .then(() => {
+                        alert('Result copied to clipboard!');
+                    })
+                    .catch(err => {
+                        alert('Failed to copy: ' + err);
+                    });
             }
-            
-            document.getElementById('historyModal').style.display = 'flex';
-            document.getElementById('navbar').classList.remove('active');
         }
-        
-        function closeHistory() {
-            document.getElementById('historyModal').style.display = 'none';
-        }
-        
-        // Keyboard support for basic calculator
+
+        // Keyboard support
         document.addEventListener('keydown', function(event) {
-            if (!document.getElementById('basic-calc').classList.contains('active')) return;
-            
             const key = event.key;
-            
             if (key >= '0' && key <= '9' || key === '.') {
                 appendToDisplay(key);
             } else if (key === '+' || key === '-') {
@@ -677,9 +419,6 @@
                 deleteLast();
             }
         });
-        
-        // Set default dates
-        document.getElementById('targetDate').valueAsDate = new Date();
     </script>
 </body>
 </html>
