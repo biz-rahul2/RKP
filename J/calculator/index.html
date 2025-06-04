@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylish Calculator</title>
+    <title>Multi Calculator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -16,11 +16,45 @@
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .navbar {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .nav-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .history-btn {
+            background: rgba(255, 107, 107, 0.8);
+            margin-left: 20px;
+        }
+        
+        .history-btn:hover {
+            background: rgba(255, 107, 107, 1);
         }
         
         .calculator {
@@ -28,72 +62,88 @@
             backdrop-filter: blur(20px);
             border-radius: 25px;
             padding: 35px;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
             max-width: 400px;
-            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: none;
         }
         
-        .calculator:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 35px 70px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        .calculator.active {
+            display: block;
+        }
+        
+        .calculator-title {
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
         }
         
         .display {
             width: 100%;
-            height: 100px;
-            font-size: 3rem;
+            height: 80px;
+            font-size: 2.5rem;
             font-weight: 300;
             text-align: right;
-            padding: 0 25px;
+            padding: 0 20px;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             background: rgba(0, 0, 0, 0.3);
             color: white;
-            margin-bottom: 25px;
-            box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
             outline: none;
-            letter-spacing: 2px;
         }
         
-        .display::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            color: white;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
         }
         
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
         
         .btn {
-            height: 70px;
+            height: 60px;
             border: none;
-            border-radius: 18px;
-            font-size: 1.4rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-            transition: all 0.1s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         
         .btn-number {
@@ -101,17 +151,9 @@
             color: white;
         }
         
-        .btn-number:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
         .btn-operator {
             background: rgba(255, 107, 107, 0.8);
             color: white;
-        }
-        
-        .btn-operator:hover {
-            background: rgba(255, 107, 107, 1);
         }
         
         .btn-clear {
@@ -119,87 +161,144 @@
             color: white;
         }
         
-        .btn-clear:hover {
-            background: rgba(255, 71, 87, 1);
-        }
-        
         .btn-equals {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
             grid-column: span 2;
-            font-weight: 600;
-        }
-        
-        .btn-equals:hover {
-            background: linear-gradient(135deg, #43a3f5 0%, #00e5f2 100%);
         }
         
         .btn-zero {
             grid-column: span 2;
         }
         
-        .btn::before {
-            content: '';
-            position: absolute;
+        .calc-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .history-modal {
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
         
-        .btn:hover::before {
-            left: 100%;
+        .history-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 70vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Responsive Design */
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .history-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: rgba(255, 71, 87, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .history-empty {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 40px;
+        }
+        
         @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+            }
+            
             .calculator {
                 padding: 25px;
                 margin: 10px;
             }
             
             .display {
-                height: 80px;
-                font-size: 2.5rem;
-                padding: 0 20px;
+                height: 70px;
+                font-size: 2rem;
             }
             
             .btn {
-                height: 60px;
-                font-size: 1.2rem;
+                height: 50px;
+                font-size: 1rem;
             }
-            
-            .buttons {
-                gap: 12px;
-            }
-        }
-        
-        /* Glass effect enhancement */
-        .calculator::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-        }
-        
-        .calculator::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            right: 1px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
+    <!-- Navigation -->
+    <div class="navbar">
+        <button class="nav-btn active" onclick="showCalculator('basic')">Basic Calculator</button>
+        <button class="nav-btn" onclick="showCalculator('age')">Age Calculator</button>
+        <button class="nav-btn" onclick="showCalculator('period')">Period Calculator</button>
+        <button class="nav-btn" onclick="showCalculator('date')">Date Calculator</button>
+        <button class="nav-btn history-btn" onclick="showHistory()">History</button>
+    </div>
+
+    <!-- Basic Calculator -->
+    <div class="calculator active" id="basic-calc">
+        <h2 class="calculator-title">Basic Calculator</h2>
         <input type="text" class="display" id="display" placeholder="0" readonly>
         <div class="buttons">
             <button class="btn btn-clear" onclick="clearDisplay()">C</button>
@@ -227,10 +326,81 @@
         </div>
     </div>
 
+    <!-- Age Calculator -->
+    <div class="calculator" id="age-calc">
+        <h2 class="calculator-title">Age Calculator</h2>
+        <div class="input-group">
+            <label>Birth Date:</label>
+            <input type="date" id="birthDate">
+        </div>
+        <div class="input-group">
+            <label>Calculate Age On:</label>
+            <input type="date" id="targetDate">
+        </div>
+        <button class="calc-btn" onclick="calculateAge()">Calculate Age</button>
+        <div class="result" id="ageResult"></div>
+    </div>
+
+    <!-- Period Calculator -->
+    <div class="calculator" id="period-calc">
+        <h2 class="calculator-title">Period Calculator</h2>
+        <div class="input-group">
+            <label>Last Period Start Date:</label>
+            <input type="date" id="lastPeriod">
+        </div>
+        <div class="input-group">
+            <label>Cycle Length (days):</label>
+            <input type="number" id="cycleLength" value="28" min="21" max="35">
+        </div>
+        <div class="input-group">
+            <label>Period Duration (days):</label>
+            <input type="number" id="periodDuration" value="5" min="3" max="7">
+        </div>
+        <button class="calc-btn" onclick="calculatePeriod()">Calculate Next Period</button>
+        <div class="result" id="periodResult"></div>
+    </div>
+
+    <!-- Date Calculator -->
+    <div class="calculator" id="date-calc">
+        <h2 class="calculator-title">Date Calculator</h2>
+        <div class="input-group">
+            <label>Start Date:</label>
+            <input type="date" id="startDate">
+        </div>
+        <div class="input-group">
+            <label>End Date:</label>
+            <input type="date" id="endDate">
+        </div>
+        <button class="calc-btn" onclick="calculateDateDifference()">Calculate Difference</button>
+        <div class="result" id="dateResult"></div>
+    </div>
+
+    <!-- History Modal -->
+    <div class="history-modal" id="historyModal">
+        <div class="history-content">
+            <div class="history-header">
+                <h3 class="history-title">Calculation History</h3>
+                <button class="close-btn" onclick="closeHistory()">×</button>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
     <script>
         let display = document.getElementById('display');
         let shouldResetDisplay = false;
+        let history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
         
+        // Navigation Functions
+        function showCalculator(type) {
+            document.querySelectorAll('.calculator').forEach(calc => calc.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(type + '-calc').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Basic Calculator Functions
         function appendToDisplay(value) {
             if (shouldResetDisplay) {
                 display.value = '';
@@ -261,11 +431,10 @@
                 let expression = display.value.replace(/×/g, '*');
                 let result = eval(expression);
                 
-                if (result === Infinity || result === -Infinity) {
-                    display.value = 'Error';
-                } else if (isNaN(result)) {
+                if (result === Infinity || result === -Infinity || isNaN(result)) {
                     display.value = 'Error';
                 } else {
+                    addToHistory('Basic', `${display.value} = ${result}`);
                     display.value = result;
                 }
                 
@@ -277,8 +446,149 @@
             }
         }
         
-        // Keyboard support
+        // Age Calculator
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const targetDate = new Date(document.getElementById('targetDate').value || new Date());
+            
+            if (!document.getElementById('birthDate').value) {
+                alert('Please enter birth date');
+                return;
+            }
+            
+            let years = targetDate.getFullYear() - birthDate.getFullYear();
+            let months = targetDate.getMonth() - birthDate.getMonth();
+            let days = targetDate.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                days += new Date(targetDate.getFullYear(), targetDate.getMonth(), 0).getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            const totalDays = Math.floor((targetDate - birthDate) / (1000 * 60 * 60 * 24));
+            const totalMonths = years * 12 + months;
+            
+            const result = `
+                <strong>Age:</strong> ${years} years, ${months} months, ${days} days<br>
+                <strong>Total Days:</strong> ${totalDays} days<br>
+                <strong>Total Months:</strong> ${totalMonths} months
+            `;
+            
+            document.getElementById('ageResult').innerHTML = result;
+            document.getElementById('ageResult').style.display = 'block';
+            
+            addToHistory('Age', `Birth: ${birthDate.toDateString()}, Age: ${years}y ${months}m ${days}d`);
+        }
+        
+        // Period Calculator
+        function calculatePeriod() {
+            const lastPeriod = new Date(document.getElementById('lastPeriod').value);
+            const cycleLength = parseInt(document.getElementById('cycleLength').value);
+            const periodDuration = parseInt(document.getElementById('periodDuration').value);
+            
+            if (!document.getElementById('lastPeriod').value) {
+                alert('Please enter last period date');
+                return;
+            }
+            
+            const nextPeriod = new Date(lastPeriod);
+            nextPeriod.setDate(nextPeriod.getDate() + cycleLength);
+            
+            const ovulation = new Date(lastPeriod);
+            ovulation.setDate(ovulation.getDate() + Math.floor(cycleLength / 2));
+            
+            const fertileStart = new Date(ovulation);
+            fertileStart.setDate(fertileStart.getDate() - 5);
+            
+            const fertileEnd = new Date(ovulation);
+            fertileEnd.setDate(fertileEnd.getDate() + 1);
+            
+            const result = `
+                <strong>Next Period:</strong> ${nextPeriod.toDateString()}<br>
+                <strong>Ovulation:</strong> ${ovulation.toDateString()}<br>
+                <strong>Fertile Window:</strong> ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}
+            `;
+            
+            document.getElementById('periodResult').innerHTML = result;
+            document.getElementById('periodResult').style.display = 'block';
+            
+            addToHistory('Period', `Next Period: ${nextPeriod.toDateString()}`);
+        }
+        
+        // Date Calculator
+        function calculateDateDifference() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            
+            if (!document.getElementById('startDate').value || !document.getElementById('endDate').value) {
+                alert('Please enter both dates');
+                return;
+            }
+            
+            const timeDiff = Math.abs(endDate - startDate);
+            const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            const weeksDiff = Math.floor(daysDiff / 7);
+            const monthsDiff = Math.abs(endDate.getMonth() - startDate.getMonth() + (12 * (endDate.getFullYear() - startDate.getFullYear())));
+            const yearsDiff = Math.abs(endDate.getFullYear() - startDate.getFullYear());
+            
+            const result = `
+                <strong>Difference:</strong><br>
+                ${daysDiff} days<br>
+                ${weeksDiff} weeks<br>
+                ${monthsDiff} months<br>
+                ${yearsDiff} years
+            `;
+            
+            document.getElementById('dateResult').innerHTML = result;
+            document.getElementById('dateResult').style.display = 'block';
+            
+            addToHistory('Date', `${startDate.toDateString()} to ${endDate.toDateString()}: ${daysDiff} days`);
+        }
+        
+        // History Functions
+        function addToHistory(type, calculation) {
+            const historyItem = {
+                type: type,
+                calculation: calculation,
+                timestamp: new Date().toLocaleString()
+            };
+            
+            history.unshift(historyItem);
+            if (history.length > 50) history.pop();
+            
+            localStorage.setItem('calculatorHistory', JSON.stringify(history));
+        }
+        
+        function showHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (history.length === 0) {
+                historyList.innerHTML = '<div class="history-empty">No calculations yet</div>';
+            } else {
+                historyList.innerHTML = history.map(item => `
+                    <div class="history-item">
+                        <strong>[${item.type}]</strong> ${item.calculation}<br>
+                        <small>${item.timestamp}</small>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('historyModal').style.display = 'flex';
+        }
+        
+        function closeHistory() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+        
+        // Keyboard support for basic calculator
         document.addEventListener('keydown', function(event) {
+            if (!document.getElementById('basic-calc').classList.contains('active')) return;
+            
             const key = event.key;
             
             if (key >= '0' && key <= '9' || key === '.') {
@@ -299,6 +609,9 @@
                 deleteLast();
             }
         });
+        
+        // Set default dates
+        document.getElementById('targetDate').valueAsDate = new Date();
     </script>
 </body>
 </html>
