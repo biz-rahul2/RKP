@@ -45,21 +45,19 @@
       background-clip: text;
       font-weight: 800;
       text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      animation: titleGlow 3s ease-in-out infinite alternate;
-    }
-    @keyframes titleGlow {
-      0% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
-      100% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)); }
+      /* animation: titleGlow 3s ease-in-out infinite alternate; */
+      /* Animation हटा दें अगर लैग है */
     }
     .card {
       background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(25px);
+      /* backdrop-filter: blur(25px); */
+      /* Blur हटा दें अगर लैग है */
       border: 2px solid rgba(255, 255, 255, 0.18);
       border-radius: 25px;
       padding: 25px 20px;
       margin-bottom: 20px;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.2s ease;
       position: relative;
       overflow: hidden;
     }
@@ -83,8 +81,8 @@
       100% { transform: rotate(360deg); }
     }
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.3);
     }
     .card-icon {
       font-size: 3em;
@@ -92,11 +90,8 @@
       display: block;
       text-align: center;
       filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
-      animation: iconFloat 3s ease-in-out infinite;
-    }
-    @keyframes iconFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-5px); }
+      /* animation: iconFloat 3s ease-in-out infinite; */
+      /* Animation हटा दें अगर लैग है */
     }
     .label {
       font-weight: 600;
@@ -124,20 +119,8 @@
     }
     .earnings-card {
       background: linear-gradient(135deg, #00d2d3, #54a0ff, #00cec9);
-      animation: earningsPulse 2s ease-in-out infinite;
-    }
-    @keyframes earningsPulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
-      50% { transform: scale(1.03); box-shadow: 0 20px 60px rgba(0, 210, 211, 0.3); }
-    }
-    .breakdown-card {
-      background: linear-gradient(135deg, #a29bfe, #6c5ce7, #fd79a8);
-    }
-    .overtime-card {
-      background: linear-gradient(135deg, #fdcb6e, #e17055, #ff7675);
-    }
-    .projection-card {
-      background: linear-gradient(135deg, #00b894, #00cec9, #55a3ff);
+      /* animation: earningsPulse 2s ease-in-out infinite; */
+      /* Animation हटा दें अगर लैग है */
     }
     .milestone-card {
       background: linear-gradient(135deg, #e84393, #fd79a8, #fdcb6e);
@@ -148,11 +131,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 2s ease-in-out infinite alternate;
-    }
-    @keyframes shimmer {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.2); }
+      /* animation: shimmer 2s ease-in-out infinite alternate; */
+      /* Animation हटा दें अगर लैग है */
     }
     .progress-bar {
       width: 100%;
@@ -170,11 +150,8 @@
       transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       box-shadow: 0 0 20px rgba(0,255,213,0.6);
       position: relative;
-      animation: progressGlow 1.5s ease-in-out infinite alternate;
-    }
-    @keyframes progressGlow {
-      0% { box-shadow: 0 0 10px rgba(0,255,213,0.6); }
-      100% { box-shadow: 0 0 30px rgba(0,255,213,0.8); }
+      /* animation: progressGlow 1.5s ease-in-out infinite alternate; */
+      /* Animation हटा दें अगर लैग है */
     }
     .progress-fill::after {
       content: '';
@@ -189,28 +166,6 @@
     @keyframes progressShine {
       0% { left: -100%; }
       100% { left: 100%; }
-    }
-    .breakdown-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
-    .breakdown-item {
-      background: rgba(255,255,255,0.1);
-      padding: 12px;
-      border-radius: 12px;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .breakdown-label {
-      font-size: 0.7em;
-      opacity: 0.8;
-      margin-bottom: 5px;
-    }
-    .breakdown-value {
-      font-size: 1.1em;
-      font-weight: 700;
     }
     .milestone-list {
       margin-top: 15px;
@@ -237,7 +192,8 @@
       background: rgba(255,255,255,0.1);
       padding: 15px;
       border-radius: 15px;
-      backdrop-filter: blur(10px);
+      /* backdrop-filter: blur(10px); */
+      /* Blur हटा दें अगर लैग है */
     }
     /* Mobile optimizations */
     @media (max-width: 480px) {
@@ -246,7 +202,6 @@
       .card { padding: 20px 15px; margin-bottom: 15px; }
       .value { font-size: 1.4em; }
       .earnings-value { font-size: 2em; }
-      .breakdown-grid { grid-template-columns: 1fr; gap: 10px; }
     }
     .notification {
       position: fixed;
@@ -294,29 +249,6 @@
       <div class="value earnings-value" id="salaryEarned">₹0</div>
       <div class="progress-bar">
         <div class="progress-fill" id="earningsProgress"></div>
-      </div>
-    </div>
-
-    <div class="card breakdown-card">
-      <div class="card-icon">📊</div>
-      <div class="label">Detailed Earnings Breakdown</div>
-      <div class="breakdown-grid">
-        <div class="breakdown-item">
-          <div class="breakdown-label">Daily</div>
-          <div class="breakdown-value" id="dailyEarned">₹0</div>
-        </div>
-        <div class="breakdown-item">
-          <div class="breakdown-label">Hourly</div>
-          <div class="breakdown-value" id="hourlyEarned">₹0</div>
-        </div>
-        <div class="breakdown-item">
-          <div class="breakdown-label">Per Minute</div>
-          <div class="breakdown-value" id="minuteEarned">₹0</div>
-        </div>
-        <div class="breakdown-item">
-          <div class="breakdown-label">Per Second</div>
-          <div class="breakdown-value" id="secondEarned">₹0</div>
-        </div>
       </div>
     </div>
 
@@ -409,21 +341,11 @@
       const elapsed = Math.max(0, now - monthStart);
       const baseEarned = (elapsed / salaryDuration) * monthlySalary;
 
-      // Detailed breakdown calculations
+      // Detailed breakdown calculations (REMOVED)
       const dailySalary = monthlySalary / 30;
       const hourlySalary = dailySalary / 24;
       const minuteSalary = hourlySalary / 60;
       const secondSalary = minuteSalary / 60;
-
-      const daysElapsed = elapsed / (24 * 60 * 60 * 1000);
-      const hoursElapsed = elapsed / (60 * 60 * 1000);
-      const minutesElapsed = elapsed / (60 * 1000);
-      const secondsElapsed = elapsed / 1000;
-
-      document.getElementById("dailyEarned").innerText = "₹" + (daysElapsed * dailySalary).toFixed(2);
-      document.getElementById("hourlyEarned").innerText = "₹" + (hoursElapsed * hourlySalary).toFixed(2);
-      document.getElementById("minuteEarned").innerText = "₹" + (minutesElapsed * minuteSalary).toFixed(4);
-      document.getElementById("secondEarned").innerText = "₹" + (secondsElapsed * secondSalary).toFixed(6);
 
       // Total earned
       document.getElementById("salaryEarned").innerText = "₹" + baseEarned.toFixed(2);
