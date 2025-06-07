@@ -104,14 +104,23 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: moneyReveal 0.5s ease-out forwards;
-      opacity: 0;
-      transform: scale(0);
     }
-    @keyframes moneyReveal {
-      0% { opacity: 0; transform: scale(0); }
-      80% { opacity: 1; transform: scale(1.1); }
-      100% { opacity: 1; transform: scale(1); }
+    .check-btn {
+      font-size: 2em;
+      font-weight: 800;
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 25px;
+      padding: 10px 30px;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .check-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
     }
     .progress-bar {
       width: 100%;
@@ -178,6 +187,7 @@
       .card { padding: 20px 15px; margin-bottom: 15px; }
       .value { font-size: 1.4em; }
       .earnings-value { font-size: 2em; }
+      .check-btn { font-size: 1.5em; padding: 8px 20px; }
     }
     .notification {
       position: fixed;
@@ -194,13 +204,6 @@
     }
     .notification.show {
       transform: translateX(0);
-    }
-    .earnings-card .value {
-      font-size: 1.8em;
-      transition: all 0.3s ease;
-    }
-    .earnings-card:hover .value {
-      transform: scale(1.05);
     }
   </style>
 </head>
@@ -229,7 +232,8 @@
     <div class="card earnings-card" id="earningsCard">
       <div class="card-icon">💸</div>
       <div class="label">Live Earnings Counter</div>
-      <div class="earnings-value" id="salaryEarned">₹0.000</div>
+      <button class="check-btn" id="checkBtn">Check</button>
+      <div class="earnings-value" id="salaryEarned" style="display:none;"></div>
       <div class="progress-bar">
         <div class="progress-fill" id="earningsProgress"></div>
       </div>
@@ -275,24 +279,57 @@
     let alertedMilestones = new Set();
     const milestones = [1000, 2500, 5000, 7500];
     let currentEarned = 0;
-    let earningsVisible = false;
 
-    const earningsCard = document.getElementById('earningsCard');
+    const checkBtn = document.getElementById('checkBtn');
     const salaryEarned = document.getElementById('salaryEarned');
     const coinsSound = document.getElementById('coinsSound');
+    let isCounting = false;
 
-    // Sound play and reveal animation
-    earningsCard.addEventListener('click', function() {
-      if (!earningsVisible) {
-        coinsSound.play();
-        salaryEarned.style.opacity = 0;
-        salaryEarned.style.transform = 'scale(0)';
-        // Trigger animation by removing and re-adding the animation class
-        salaryEarned.classList.remove('earnings-value');
-        void salaryEarned.offsetWidth; // Trigger reflow
-        salaryEarned.classList.add('earnings-value');
-        earningsVisible = true;
+    // Money counting animation function
+    function animateMoneyCounter(amount, duration) {
+      if (isCounting) return;
+      isCounting = true;
+      checkBtn.style.display = 'none';
+      salaryEarned.style.display = '';
+      coinsSound.play();
+
+      // Split amount into integer and decimal parts
+      let parts = amount.toFixed(3).split('.');
+      let integer = parseInt(parts[0]);
+      let decimal = parseInt(parts[1]);
+
+      // Calculate steps for integer and decimal parts
+      let integerStep = integer / (duration * 1000 / 60); // 60 fps
+      let decimalStep = decimal / (duration * 1000 / 60);
+
+      let currentInteger = 0;
+      let currentDecimal = 0;
+      let startTime = Date.now();
+
+      function updateCounter() {
+        let elapsed = Date.now() - startTime;
+        if (elapsed >= duration * 1000) {
+          currentInteger = integer;
+          currentDecimal = decimal;
+          isCounting = false;
+        } else {
+          currentInteger = Math.min(integer, Math.floor(integerStep * (elapsed / 1000) * 60));
+          currentDecimal = Math.min(decimal, Math.floor(decimalStep * (elapsed / 1000) * 60));
+        }
+
+        // Pad decimal with zeroes
+        let decimalStr = currentDecimal.toString().padStart(3, '0');
+        salaryEarned.innerHTML = `₹${currentInteger}.<span style="color:#ffed4e">${decimalStr}</span>`;
+
+        if (elapsed < duration * 1000) {
+          requestAnimationFrame(updateCounter);
+        }
       }
+      updateCounter();
+    }
+
+    checkBtn.addEventListener('click', function() {
+      animateMoneyCounter(currentEarned, 3); // 3 seconds animation
     });
 
     function showNotification(message) {
@@ -346,12 +383,7 @@
       const elapsed = Math.max(0, now - monthStart);
       currentEarned = (elapsed / salaryDuration) * monthlySalary;
 
-      // Total earned (show only if revealed)
-      if (earningsVisible) {
-        salaryEarned.innerText = "₹" + currentEarned.toFixed(3);
-      } else {
-        salaryEarned.innerText = "₹0.000";
-      }
+      // Progress bar
       const earningsProgress = (currentEarned / monthlySalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
