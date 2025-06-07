@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💰 Salary Countdown Dashboard</title>
+  <title>💰 Advanced Salary Tracker</title>
   <style>
     * {
       margin: 0;
@@ -12,41 +12,67 @@
     }
 
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
       color: #fff;
       font-family: 'Poppins', 'Segoe UI', sans-serif;
       min-height: 100vh;
-      padding: 20px;
+      padding: 15px;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
     }
 
     .container {
-      max-width: 400px;
+      max-width: 420px;
       margin: 0 auto;
       padding: 0 10px;
     }
 
     h1 {
-      font-size: 1.8em;
-      margin-bottom: 30px;
+      font-size: 1.6em;
+      margin-bottom: 25px;
       text-align: center;
-      background: linear-gradient(45deg, #00ffd5, #fffb00);
+      background: linear-gradient(45deg, #00ffd5, #fffb00, #ff6b6b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 700;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      font-weight: 800;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      animation: textGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes textGlow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
       padding: 25px 20px;
       margin-bottom: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
     }
@@ -54,179 +80,354 @@
     .card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transition: left 0.5s;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: rotate 4s linear infinite;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .card:hover::before {
-      left: 100%;
+      opacity: 1;
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
     }
 
     .card:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
     }
 
     .card-icon {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      display: block;
-      text-align: center;
+      font-size: 2.2em;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .card-stats {
+      font-size: 0.7em;
+      opacity: 0.8;
+      text-align: right;
     }
 
     .label {
       font-weight: 600;
       color: #e0e7ff;
-      font-size: 0.9em;
+      font-size: 0.85em;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
       text-align: center;
     }
 
     .value {
       color: #fff;
-      font-size: 1.5em;
+      font-size: 1.4em;
       font-weight: 700;
       text-align: center;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
       line-height: 1.2;
+      position: relative;
+      z-index: 1;
     }
 
     .salary-card {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24, #ff9ff3);
     }
 
     .sunday-card {
-      background: linear-gradient(135deg, #4834d4, #686de0);
+      background: linear-gradient(135deg, #4834d4, #686de0, #74b9ff);
     }
 
     .earnings-card {
-      background: linear-gradient(135deg, #00d2d3, #54a0ff);
+      background: linear-gradient(135deg, #00d2d3, #54a0ff, #5f27cd);
+      animation: earnings-pulse 3s ease-in-out infinite;
     }
 
-    .pulse {
-      animation: pulse 2s infinite;
+    @keyframes earnings-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); }
+      50% { transform: scale(1.02); box-shadow: 0 20px 40px rgba(0, 210, 211, 0.3); }
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .advanced-card {
+      background: linear-gradient(135deg, #a55eea, #26de81, #fd79a8);
+    }
+
+    .analytics-card {
+      background: linear-gradient(135deg, #fd79a8, #fdcb6e, #6c5ce7);
     }
 
     .earnings-value {
-      font-size: 2em;
-      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      font-size: 1.8em;
+      background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: shimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+
+    .progress-container {
+      margin-top: 15px;
+      position: relative;
     }
 
     .progress-bar {
       width: 100%;
-      height: 8px;
+      height: 10px;
       background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      margin-top: 15px;
+      border-radius: 15px;
       overflow: hidden;
+      position: relative;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #00ffd5, #fffb00);
-      border-radius: 10px;
-      transition: width 1s ease;
-      box-shadow: 0 0 10px rgba(0,255,213,0.5);
+      background: linear-gradient(90deg, #00ffd5, #fffb00, #ff6b6b);
+      border-radius: 15px;
+      transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 0 15px rgba(0,255,213,0.6);
+      position: relative;
+      overflow: hidden;
     }
 
-    .footer {
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: progress-shine 2s ease-in-out infinite;
+    }
+
+    @keyframes progress-shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .progress-text {
+      font-size: 0.75em;
+      margin-top: 5px;
       text-align: center;
-      margin-top: 30px;
-      font-size: 0.8em;
-      opacity: 0.7;
+      opacity: 0.9;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .stat-item {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .stat-value {
+      font-size: 1.1em;
+      font-weight: 700;
+      color: #00ffd5;
+    }
+
+    .stat-label {
+      font-size: 0.7em;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .milestone-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(45deg, #ff6b6b, #ffd700);
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      animation: milestone-blink 2s ease-in-out infinite;
+    }
+
+    @keyframes milestone-blink {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .efficiency-meter {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .efficiency-bar {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      margin: 0 10px;
+      overflow: hidden;
+    }
+
+    .efficiency-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b6b, #ffd700, #00d2d3);
+      border-radius: 10px;
+      transition: width 1s ease;
     }
 
     /* Mobile optimizations */
     @media (max-width: 480px) {
-      body {
-        padding: 15px;
-      }
-      
-      h1 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-      }
-      
-      .card {
-        padding: 20px 15px;
-        margin-bottom: 15px;
-      }
-      
-      .value {
-        font-size: 1.3em;
-      }
-      
-      .earnings-value {
-        font-size: 1.8em;
-      }
-    }
-
-    /* Dark mode support */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      }
-    }
-
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Touch feedback */
-    .card:active {
-      background: rgba(255, 255, 255, 0.25);
+      body { padding: 12px; }
+      h1 { font-size: 1.4em; margin-bottom: 20px; }
+      .card { padding: 20px 15px; margin-bottom: 15px; }
+      .value { font-size: 1.2em; }
+      .earnings-value { font-size: 1.6em; }
+      .stats-grid { gap: 8px; }
+      .stat-item { padding: 10px; }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>💼 Work Start: 08 June 2025</h1>
+    <h1>💼 Advanced Salary Tracker</h1>
 
     <div class="card salary-card">
-      <div class="card-icon">💰</div>
-      <div class="label">Next Salary in</div>
+      <div class="milestone-indicator" id="salaryMilestone"></div>
+      <div class="card-header">
+        <div class="card-icon">💰</div>
+        <div class="card-stats">
+          <div>Cycle: <span id="salarycycle">1</span></div>
+          <div>Days Left: <span id="daysLeft">--</span></div>
+        </div>
+      </div>
+      <div class="label">Next Salary Payment</div>
       <div class="value" id="salaryCountdown">Loading...</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="salaryProgress"></div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="salaryProgress"></div>
+        </div>
+        <div class="progress-text" id="salaryProgressText">0% Complete</div>
+      </div>
+    </div>
+
+    <div class="card earnings-card">
+      <div class="card-header">
+        <div class="card-icon">💸</div>
+        <div class="card-stats">
+          <div>Rate: ₹<span id="hourlyRate">10.42</span>/hr</div>
+          <div>Today: ₹<span id="todayEarnings">0</span></div>
+        </div>
+      </div>
+      <div class="label">Real-Time Earnings</div>
+      <div class="value earnings-value" id="salaryEarned">₹0.00</div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="earningsProgress"></div>
+        </div>
+        <div class="progress-text" id="earningsProgressText">0% of Monthly Target</div>
+      </div>
+      <div class="efficiency-meter">
+        <span style="font-size: 0.7em;">Efficiency</span>
+        <div class="efficiency-bar">
+          <div class="efficiency-fill" id="efficiencyFill"></div>
+        </div>
+        <span style="font-size: 0.7em;" id="efficiencyPercent">0%</span>
       </div>
     </div>
 
     <div class="card sunday-card">
-      <div class="card-icon">🌞</div>
-      <div class="label">Next Sunday (Chhutti) in</div>
+      <div class="card-header">
+        <div class="card-icon">🌞</div>
+        <div class="card-stats">
+          <div>Week: <span id="weekNumber">--</span></div>
+          <div>Work Days: <span id="workDaysLeft">--</span></div>
+        </div>
+      </div>
+      <div class="label">Next Weekend Break</div>
       <div class="value" id="sundayCountdown">Loading...</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="sundayProgress"></div>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="sundayProgress"></div>
+        </div>
+        <div class="progress-text" id="sundayProgressText">0% Week Complete</div>
       </div>
     </div>
 
-    <div class="card earnings-card pulse">
-      <div class="card-icon">💸</div>
-      <div class="label">Real-Time Earned</div>
-      <div class="value earnings-value" id="salaryEarned">₹0</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="earningsProgress"></div>
+    <div class="card advanced-card">
+      <div class="card-header">
+        <div class="card-icon">📊</div>
+        <div class="card-stats">
+          <div>Streak: <span id="workStreak">0</span> days</div>
+        </div>
+      </div>
+      <div class="label">Performance Analytics</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="avgDaily">₹0</div>
+          <div class="stat-label">Avg Daily</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="projectedTotal">₹0</div>
+          <div class="stat-label">Projected</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="workingDays">0</div>
+          <div class="stat-label">Work Days</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="completionRate">0%</div>
+          <div class="stat-label">On Track</div>
+        </div>
       </div>
     </div>
 
-    <div class="footer">
-      <p>🚀 Stay motivated! Every second counts! 💪</p>
+    <div class="card analytics-card">
+      <div class="card-header">
+        <div class="card-icon">⚡</div>
+        <div class="card-stats">
+          <div>Peak: <span id="peakHour">--</span></div>
+        </div>
+      </div>
+      <div class="label">Earning Velocity</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-value" id="perSecond">₹0.00</div>
+          <div class="stat-label">Per Second</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="perMinute">₹0.00</div>
+          <div class="stat-label">Per Minute</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="thisWeek">₹0</div>
+          <div class="stat-label">This Week</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="milestone">25%</div>
+          <div class="stat-label">Milestone</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -234,51 +435,149 @@
     const salaryStartDate = new Date("2025-06-08T00:00:00");
     const monthlySalary = 7500;
     const salaryDuration = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
+    const workingHoursPerDay = 8;
+    const workingDaysPerMonth = 26;
+
+    let workStreak = parseInt(localStorage.getItem('workStreak') || '0');
+    let lastWorkDate = localStorage.getItem('lastWorkDate');
 
     function updateCountdowns() {
       const now = new Date();
 
-      // Next salary countdown
+      // Calculate current salary cycle
       let monthStart = new Date(salaryStartDate);
+      let cycleNumber = 1;
       while (monthStart.getTime() + salaryDuration < now.getTime()) {
         monthStart = new Date(monthStart.getTime() + salaryDuration);
+        cycleNumber++;
       }
       const nextSalaryDate = new Date(monthStart.getTime() + salaryDuration);
       const timeToSalary = nextSalaryDate - now;
 
+      // Update salary countdown
       document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
-      
+      document.getElementById("salaryycle").innerText = cycleNumber;
+      document.getElementById("daysLeft").innerText = Math.ceil(timeToSalary / (24 * 60 * 60 * 1000));
+
       // Salary progress
       const salaryProgress = ((salaryDuration - timeToSalary) / salaryDuration) * 100;
       document.getElementById("salaryProgress").style.width = Math.max(0, salaryProgress) + "%";
+      document.getElementById("salaryProgressText").innerText = Math.round(salaryProgress) + "% Complete";
 
-      // Next Sunday countdown
+      // Real-time earnings calculation
+      const elapsed = now - monthStart;
+      const earned = Math.max(0, (elapsed / salaryDuration) * monthlySalary);
+      document.getElementById("salaryEarned").innerText = "₹" + earned.toFixed(2);
+
+      // Earnings progress
+      const earningsProgress = (earned / monthlySalary) * 100;
+      document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
+      document.getElementById("earningsProgressText").innerText = Math.round(earningsProgress) + "% of Monthly Target";
+
+      // Advanced calculations
+      const hourlyRate = monthlySalary / (workingDaysPerMonth * workingHoursPerDay);
+      const perSecond = hourlyRate / 3600;
+      const perMinute = hourlyRate / 60;
+
+      document.getElementById("hourlyRate").innerText = hourlyRate.toFixed(2);
+      document.getElementById("perSecond").innerText = "₹" + perSecond.toFixed(4);
+      document.getElementById("perMinute").innerText = "₹" + perMinute.toFixed(2);
+
+      // Today's earnings
+      const todayStart = new Date(now);
+      todayStart.setHours(0, 0, 0, 0);
+      const todayElapsed = now - Math.max(todayStart, monthStart);
+      const todayEarnings = (todayElapsed / salaryDuration) * monthlySalary;
+      document.getElementById("todayEarnings").innerText = Math.max(0, todayEarnings).toFixed(0);
+
+      // Week calculations
+      const weekStart = new Date(now);
+      weekStart.setDate(now.getDate() - now.getDay());
+      weekStart.setHours(0, 0, 0, 0);
+      const weekElapsed = now - Math.max(weekStart, monthStart);
+      const weekEarnings = (weekElapsed / salaryDuration) * monthlySalary;
+      document.getElementById("thisWeek").innerText = "₹" + Math.max(0, weekEarnings).toFixed(0);
+
+      // Sunday countdown
       const nextSunday = new Date(now);
       nextSunday.setDate(now.getDate() + ((7 - now.getDay()) % 7 || 7));
       nextSunday.setHours(0, 0, 0, 0);
       const timeToSunday = nextSunday - now;
       document.getElementById("sundayCountdown").innerText = formatDuration(timeToSunday);
-      
-      // Sunday progress
-      const weekStart = new Date(now);
-      weekStart.setDate(now.getDate() - now.getDay());
-      weekStart.setHours(0, 0, 0, 0);
+
+      // Week progress
       const weekDuration = 7 * 24 * 60 * 60 * 1000;
       const sundayProgress = ((now - weekStart) / weekDuration) * 100;
       document.getElementById("sundayProgress").style.width = Math.min(100, sundayProgress) + "%";
+      document.getElementById("sundayProgressText").innerText = Math.round(sundayProgress) + "% Week Complete";
 
-      // Real-time salary calculation
-      const elapsed = now - monthStart;
-      const earned = Math.max(0, (elapsed / salaryDuration) * monthlySalary);
-      document.getElementById("salaryEarned").innerText = "₹" + earned.toFixed(2);
-      
-      // Earnings progress
-      const earningsProgress = (earned / monthlySalary) * 100;
-      document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
+      // Work days calculations
+      const daysInCycle = Math.ceil(salaryDuration / (24 * 60 * 60 * 1000));
+      const daysElapsed = Math.floor((now - monthStart) / (24 * 60 * 60 * 1000));
+      const workingDaysElapsed = Math.min(daysElapsed, workingDaysPerMonth);
+      const workingDaysLeft = Math.max(0, workingDaysPerMonth - workingDaysElapsed);
+
+      document.getElementById("workingDays").innerText = workingDaysElapsed;
+      document.getElementById("workDaysLeft").innerText = workingDaysLeft;
+
+      // Performance analytics
+      const avgDaily = earned / Math.max(1, workingDaysElapsed);
+      const projectedTotal = avgDaily * workingDaysPerMonth;
+      const completionRate = (projectedTotal / monthlySalary) * 100;
+
+      document.getElementById("avgDaily").innerText = "₹" + avgDaily.toFixed(0);
+      document.getElementById("projectedTotal").innerText = "₹" + projectedTotal.toFixed(0);
+      document.getElementById("completionRate").innerText = Math.round(completionRate) + "%";
+
+      // Efficiency calculation
+      const expectedProgress = (workingDaysElapsed / workingDaysPerMonth) * 100;
+      const actualProgress = earningsProgress;
+      const efficiency = expectedProgress > 0 ? (actualProgress / expectedProgress) * 100 : 0;
+      document.getElementById("efficiencyFill").style.width = Math.min(100, efficiency) + "%";
+      document.getElementById("efficiencyPercent").innerText = Math.round(efficiency) + "%";
+
+      // Milestone calculation
+      const milestones = [25, 50, 75, 90, 100];
+      let currentMilestone = 0;
+      for (let milestone of milestones) {
+        if (earningsProgress >= milestone) {
+          currentMilestone = milestone;
+        }
+      }
+      document.getElementById("milestone").innerText = currentMilestone + "%";
+
+      // Week number
+      const weekNumber = Math.ceil((now - salaryStartDate) / (7 * 24 * 60 * 60 * 1000));
+      document.getElementById("weekNumber").innerText = Math.max(1, weekNumber);
+
+      // Work streak
+      const today = now.toDateString();
+      if (lastWorkDate !== today && now.getDay() !== 0) { // Not Sunday
+        if (lastWorkDate === new Date(now.getTime() - 24 * 60 * 60 * 1000).toDateString()) {
+          workStreak++;
+        } else {
+          workStreak = 1;
+        }
+        localStorage.setItem('workStreak', workStreak.toString());
+        localStorage.setItem('lastWorkDate', today);
+      }
+      document.getElementById("workStreak").innerText = workStreak;
+
+      // Peak hour (simulated)
+      const peakHours = ['9-10 AM', '2-3 PM', '11-12 PM'];
+      document.getElementById("peakHour").innerText = peakHours[Math.floor(Math.random() * peakHours.length)];
+
+      // Milestone indicator
+      const milestoneEl = document.getElementById("salaryMilestone");
+      if (earningsProgress >= 90) {
+        milestoneEl.style.display = 'block';
+      } else {
+        milestoneEl.style.display = 'none';
+      }
     }
 
     function formatDuration(ms) {
-      if (ms < 0) return "🎉 Time's up!";
+      if (ms < 0) return "🎉 Payment Time!";
       const totalSeconds = Math.floor(ms / 1000);
       const days = Math.floor(totalSeconds / (3600 * 24));
       const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
@@ -294,14 +593,13 @@
       }
     }
 
-    // Add vibration feedback on mobile
+    // Haptic feedback
     function addHapticFeedback() {
       if (navigator.vibrate) {
-        navigator.vibrate(50);
+        navigator.vibrate(30);
       }
     }
 
-    // Add touch events for cards
     document.querySelectorAll('.card').forEach(card => {
       card.addEventListener('touchstart', addHapticFeedback);
     });
