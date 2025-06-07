@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Salary Countdown</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .countdown {
+      margin: 30px 0;
+      font-size: 1.8em;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
+
+    .label {
+      font-weight: bold;
+      color: #00ffd5;
+    }
+
+    .value {
+      color: #fffb00;
+      font-size: 2.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💸 Monthly Salary Countdown</h1>
+
+  <div class="countdown">
+    <div class="label">Next Salary in:</div>
+    <div class="value" id="salaryCountdown">Loading...</div>
+  </div>
+
+  <div class="countdown">
+    <div class="label">Next Sunday (Chhutti) in:</div>
+    <div class="value" id="sundayCountdown">Loading...</div>
+  </div>
+
+  <div class="countdown">
+    <div class="label">Real-Time Earned ₹:</div>
+    <div class="value" id="salaryEarned">₹0</div>
+  </div>
+
+  <script>
+    const salaryStartDate = new Date("2025-06-08T00:00:00");
+    const monthlySalary = 7500;
+    const salaryDuration = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
+
+    function updateCountdowns() {
+      const now = new Date();
+
+      // Next salary countdown
+      let monthStart = new Date(salaryStartDate);
+      while (monthStart.getTime() + salaryDuration < now.getTime()) {
+        monthStart = new Date(monthStart.getTime() + salaryDuration);
+      }
+      const nextSalaryDate = new Date(monthStart.getTime() + salaryDuration);
+      const timeToSalary = nextSalaryDate - now;
+
+      document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
+
+      // Next Sunday countdown
+      const nextSunday = new Date(now);
+      nextSunday.setDate(now.getDate() + ((7 - now.getDay()) % 7 || 7));
+      nextSunday.setHours(0, 0, 0, 0);
+      const timeToSunday = nextSunday - now;
+      document.getElementById("sundayCountdown").innerText = formatDuration(timeToSunday);
+
+      // Real-time salary calculation
+      const elapsed = now - monthStart;
+      const earned = (elapsed / salaryDuration) * monthlySalary;
+      document.getElementById("salaryEarned").innerText = "₹" + earned.toFixed(2);
+    }
+
+    function formatDuration(ms) {
+      if (ms < 0) return "Time's up!";
+      const totalSeconds = Math.floor(ms / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdowns, 1000);
+    updateCountdowns();
+  </script>
+
+</body>
+</html>
