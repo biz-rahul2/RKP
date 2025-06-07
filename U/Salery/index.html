@@ -45,40 +45,16 @@
       background-clip: text;
       font-weight: 800;
       text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      /* animation: titleGlow 3s ease-in-out infinite alternate; */
-      /* Animation हटा दें अगर लैग है */
     }
     .card {
       background: rgba(255, 255, 255, 0.12);
-      /* backdrop-filter: blur(25px); */
-      /* Blur हटा दें अगर लैग है */
       border: 2px solid rgba(255, 255, 255, 0.18);
       border-radius: 25px;
       padding: 25px 20px;
       margin-bottom: 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.2);
       transition: all 0.2s ease;
       position: relative;
       overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: rotate 4s linear infinite;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .card:hover::before {
-      opacity: 1;
-    }
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
     .card:hover {
       transform: translateY(-5px);
@@ -90,8 +66,6 @@
       display: block;
       text-align: center;
       filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
-      /* animation: iconFloat 3s ease-in-out infinite; */
-      /* Animation हटा दें अगर लैग है */
     }
     .label {
       font-weight: 600;
@@ -119,8 +93,7 @@
     }
     .earnings-card {
       background: linear-gradient(135deg, #00d2d3, #54a0ff, #00cec9);
-      /* animation: earningsPulse 2s ease-in-out infinite; */
-      /* Animation हटा दें अगर लैग है */
+      cursor: pointer;
     }
     .milestone-card {
       background: linear-gradient(135deg, #e84393, #fd79a8, #fdcb6e);
@@ -131,27 +104,32 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      /* animation: shimmer 2s ease-in-out infinite alternate; */
-      /* Animation हटा दें अगर लैग है */
+      animation: moneyReveal 0.5s ease-out forwards;
+      opacity: 0;
+      transform: scale(0);
+    }
+    @keyframes moneyReveal {
+      0% { opacity: 0; transform: scale(0); }
+      80% { opacity: 1; transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
     }
     .progress-bar {
       width: 100%;
       height: 14px;
-      background: rgba(255,255,255,0.15);
+      background: white;
       border-radius: 15px;
       margin-top: 15px;
       overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2), 0 0 10px rgba(0,255,213,0.4);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #00ffd5, #fffb00, #ff6b6b);
+      background: linear-gradient(to right, #4a8ef9, #4a8ef9);
       border-radius: 15px;
       transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 20px rgba(0,255,213,0.6);
+      box-shadow: 0 0 10px rgba(74, 142, 249, 0.3);
       position: relative;
-      /* animation: progressGlow 1.5s ease-in-out infinite alternate; */
-      /* Animation हटा दें अगर लैग है */
+      width: 0%;
     }
     .progress-fill::after {
       content: '';
@@ -192,8 +170,6 @@
       background: rgba(255,255,255,0.1);
       padding: 15px;
       border-radius: 15px;
-      /* backdrop-filter: blur(10px); */
-      /* Blur हटा दें अगर लैग है */
     }
     /* Mobile optimizations */
     @media (max-width: 480px) {
@@ -219,6 +195,13 @@
     .notification.show {
       transform: translateX(0);
     }
+    .earnings-card .value {
+      font-size: 1.8em;
+      transition: all 0.3s ease;
+    }
+    .earnings-card:hover .value {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -243,10 +226,10 @@
       </div>
     </div>
 
-    <div class="card earnings-card">
+    <div class="card earnings-card" id="earningsCard">
       <div class="card-icon">💸</div>
       <div class="label">Live Earnings Counter</div>
-      <div class="value earnings-value" id="salaryEarned">₹0</div>
+      <div class="earnings-value" id="salaryEarned">₹0.000</div>
       <div class="progress-bar">
         <div class="progress-fill" id="earningsProgress"></div>
       </div>
@@ -277,11 +260,13 @@
 
     <div class="footer">
       <p>🚀 Advanced Salary Tracking System</p>
-      <p>💪 Every second = ₹<span id="perSecondRate">0</span></p>
+      <p>💪 Every second = ₹<span id="perSecondRate">0.000</span></p>
     </div>
   </div>
 
   <div class="notification" id="notification"></div>
+
+  <audio id="coinsSound" src="coins-sound.mp3"></audio>
 
   <script>
     const salaryStartDate = new Date("2025-06-08T00:00:00");
@@ -289,6 +274,26 @@
     const salaryDuration = 30 * 24 * 60 * 60 * 1000;
     let alertedMilestones = new Set();
     const milestones = [1000, 2500, 5000, 7500];
+    let currentEarned = 0;
+    let earningsVisible = false;
+
+    const earningsCard = document.getElementById('earningsCard');
+    const salaryEarned = document.getElementById('salaryEarned');
+    const coinsSound = document.getElementById('coinsSound');
+
+    // Sound play and reveal animation
+    earningsCard.addEventListener('click', function() {
+      if (!earningsVisible) {
+        coinsSound.play();
+        salaryEarned.style.opacity = 0;
+        salaryEarned.style.transform = 'scale(0)';
+        // Trigger animation by removing and re-adding the animation class
+        salaryEarned.classList.remove('earnings-value');
+        void salaryEarned.offsetWidth; // Trigger reflow
+        salaryEarned.classList.add('earnings-value');
+        earningsVisible = true;
+      }
+    });
 
     function showNotification(message) {
       const notification = document.getElementById('notification');
@@ -339,20 +344,19 @@
 
       // Earnings calculation
       const elapsed = Math.max(0, now - monthStart);
-      const baseEarned = (elapsed / salaryDuration) * monthlySalary;
+      currentEarned = (elapsed / salaryDuration) * monthlySalary;
 
-      // Detailed breakdown calculations (REMOVED)
-      const dailySalary = monthlySalary / 30;
-      const hourlySalary = dailySalary / 24;
-      const minuteSalary = hourlySalary / 60;
-      const secondSalary = minuteSalary / 60;
-
-      // Total earned
-      document.getElementById("salaryEarned").innerText = "₹" + baseEarned.toFixed(2);
-      const earningsProgress = (baseEarned / monthlySalary) * 100;
+      // Total earned (show only if revealed)
+      if (earningsVisible) {
+        salaryEarned.innerText = "₹" + currentEarned.toFixed(3);
+      } else {
+        salaryEarned.innerText = "₹0.000";
+      }
+      const earningsProgress = (currentEarned / monthlySalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
       // Per second rate
+      const secondSalary = (monthlySalary / 30 / 24 / 60 / 60);
       document.getElementById("perSecondRate").innerText = secondSalary.toFixed(6);
 
       // Milestone tracking
@@ -360,7 +364,7 @@
         const milestoneElement = document.getElementById(`milestone-${milestone}`);
         const milestoneItem = document.querySelector(`[data-milestone="${milestone}"]`);
         if (milestoneItem && milestoneElement) {
-          if (baseEarned >= milestone) {
+          if (currentEarned >= milestone) {
             milestoneElement.innerText = "✅ Achieved";
             milestoneItem.classList.add('milestone-achieved');
             if (!alertedMilestones.has(milestone)) {
@@ -368,7 +372,7 @@
               showNotification(`🎉 Milestone Achieved! You've earned ₹${milestone}!`);
             }
           } else {
-            const remaining = milestone - baseEarned;
+            const remaining = milestone - currentEarned;
             milestoneElement.innerText = `₹${remaining.toFixed(2)} left`;
           }
         }
