@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,6 +144,10 @@
       position: relative;
       width: 0%;
     }
+    .progress-fill.red {
+      background: linear-gradient(to right, #ff4757, #ff3838);
+      box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+    }
     .progress-fill::after {
       content: '';
       position: absolute;
@@ -169,10 +174,25 @@
       background: rgba(255,255,255,0.1);
       border-radius: 10px;
       border-left: 4px solid #00ffd5;
+      position: relative;
     }
     .milestone-achieved {
       border-left-color: #00d2d3;
       background: rgba(0,210,211,0.2);
+    }
+    .milestone-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(to right, #4a8ef9, #4a8ef9);
+      border-radius: 0 0 10px 10px;
+      transition: width 1s ease;
+      width: 0%;
+    }
+    .milestone-achieved .milestone-progress {
+      background: linear-gradient(to right, #00d2d3, #00cec9);
+      width: 100%;
     }
     .footer {
       text-align: center;
@@ -258,18 +278,22 @@
         <div class="milestone-item" data-milestone="1000">
           <span>₹1,000</span>
           <span id="milestone-1000">Pending</span>
+          <div class="milestone-progress" id="milestone-progress-1000"></div>
         </div>
         <div class="milestone-item" data-milestone="2000">
           <span>₹2,000</span>
           <span id="milestone-2000">Pending</span>
+          <div class="milestone-progress" id="milestone-progress-2000"></div>
         </div>
         <div class="milestone-item" data-milestone="3000">
           <span>₹3,000</span>
           <span id="milestone-3000">Pending</span>
+          <div class="milestone-progress" id="milestone-progress-3000"></div>
         </div>
         <div class="milestone-item" data-milestone="3750">
           <span>₹3,750</span>
           <span id="milestone-3750">Pending</span>
+          <div class="milestone-progress" id="milestone-progress-3750"></div>
         </div>
       </div>
     </div>
@@ -389,37 +413,39 @@
       const dutyProgress = document.getElementById("dutyProgress");
 
       if (currentHour < 10) {
-        // Before 10 AM - show countdown to duty start
+        // Before 10 AM - show countdown to duty start (RED progress)
         dutyLabel.innerText = "Duty Starts at 10 AM";
         const dutyStart = new Date(now);
         dutyStart.setHours(10, 0, 0, 0);
         const timeToDutyStart = dutyStart - now;
         dutyCountdown.innerText = formatDuration(timeToDutyStart);
         
-        // Progress from midnight to 10 AM
+        // Progress from midnight to 10 AM (RED)
         const midnightToNow = (currentHour * 60 + currentMinute) * 60 + currentSecond;
         const midnightTo10AM = 10 * 60 * 60; // 10 hours in seconds
         const progressPercent = (midnightToNow / midnightTo10AM) * 100;
         dutyProgress.style.width = Math.min(100, progressPercent) + "%";
+        dutyProgress.classList.add('red');
         
       } else if (currentHour < 21) {
-        // Between 10 AM and 9 PM - show countdown to duty end
+        // Between 10 AM and 9 PM - show countdown to duty end (BLUE progress)
         dutyLabel.innerText = "Duty Ends at 9 PM";
         const dutyEnd = new Date(now);
         dutyEnd.setHours(21, 0, 0, 0);
         const timeToDutyEnd = dutyEnd - now;
         dutyCountdown.innerText = formatDuration(timeToDutyEnd);
         
-        // Progress from 10 AM to 9 PM (11 hours)
+        // Progress from 10 AM to 9 PM (11 hours) (BLUE)
         const dutyStartSeconds = 10 * 60 * 60; // 10 AM in seconds
         const currentDaySeconds = (currentHour * 60 + currentMinute) * 60 + currentSecond;
         const dutyDuration = 11 * 60 * 60; // 11 hours in seconds
         const dutyElapsed = currentDaySeconds - dutyStartSeconds;
         const progressPercent = (dutyElapsed / dutyDuration) * 100;
         dutyProgress.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
+        dutyProgress.classList.remove('red');
         
       } else {
-        // After 9 PM - show countdown to next day duty start
+        // After 9 PM - show countdown to next day duty start (RED progress)
         dutyLabel.innerText = "Next Duty Starts at 10 AM";
         const nextDutyStart = new Date(now);
         nextDutyStart.setDate(now.getDate() + 1);
@@ -427,13 +453,14 @@
         const timeToNextDuty = nextDutyStart - now;
         dutyCountdown.innerText = formatDuration(timeToNextDuty);
         
-        // Progress from 9 PM to midnight
+        // Progress from 9 PM to midnight (RED)
         const ninePMSeconds = 21 * 60 * 60; // 9 PM in seconds
         const currentDaySeconds = (currentHour * 60 + currentMinute) * 60 + currentSecond;
         const nightDuration = 3 * 60 * 60; // 3 hours from 9 PM to midnight
         const nightElapsed = currentDaySeconds - ninePMSeconds;
         const progressPercent = (nightElapsed / nightDuration) * 100;
         dutyProgress.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
+        dutyProgress.classList.add('red');
       }
 
       // Earnings calculation
@@ -444,14 +471,17 @@
       const earningsProgress = (currentEarned / monthlySalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
-      // Milestone tracking - Fixed
+      // Milestone tracking with progress bars
       milestones.forEach(milestone => {
         const milestoneElement = document.getElementById(`milestone-${milestone}`);
         const milestoneItem = document.querySelector(`[data-milestone="${milestone}"]`);
-        if (milestoneItem && milestoneElement) {
+        const milestoneProgressBar = document.getElementById(`milestone-progress-${milestone}`);
+        
+        if (milestoneItem && milestoneElement && milestoneProgressBar) {
           if (currentEarned >= milestone) {
             milestoneElement.innerText = "✅ Achieved";
             milestoneItem.classList.add('milestone-achieved');
+            milestoneProgressBar.style.width = "100%";
             if (!alertedMilestones.has(milestone)) {
               alertedMilestones.add(milestone);
               showNotification(`🎉 Milestone Achieved! You've earned ₹${milestone}!`);
@@ -459,6 +489,18 @@
           } else {
             const remaining = milestone - currentEarned;
             milestoneElement.innerText = `₹${Math.floor(remaining)} left`;
+            
+            // Calculate progress towards this milestone
+            let previousMilestone = 0;
+            const sortedMilestones = milestones.filter(m => m < milestone).sort((a, b) => a - b);
+            if (sortedMilestones.length > 0) {
+              previousMilestone = sortedMilestones[sortedMilestones.length - 1];
+            }
+            
+            const milestoneRange = milestone - previousMilestone;
+            const earnedInRange = Math.max(0, currentEarned - previousMilestone);
+            const progressPercent = (earnedInRange / milestoneRange) * 100;
+            milestoneProgressBar.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
           }
         }
       });
