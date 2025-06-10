@@ -303,9 +303,11 @@
   <audio id="coinsSound" src="Cash_Money.mp3"></audio>
 
   <script>
-    const salaryStartDate = new Date("2025-06-21T00:00:00");
+    // Salary period: June 8, 2025 to June 21, 2025 (14 days)
+    const salaryStartDate = new Date("2025-06-08T00:00:00");
+    const salaryEndDate = new Date("2025-06-21T23:59:59");
     const monthlySalary = 7500;
-    const salaryDuration = 14 * 24 * 60 * 60 * 1000; // Changed to 14 days
+    const salaryDuration = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
     let alertedMilestones = new Set();
     const milestones = [1000, 2000, 3000, 3750];
     let currentEarned = 0;
@@ -377,17 +379,15 @@
     function updateCountdowns() {
       const now = new Date();
 
-      // Find the current salary period
-      let monthStart = new Date(salaryStartDate);
-      while (monthStart.getTime() + salaryDuration < now.getTime()) {
-        monthStart = new Date(monthStart.getTime() + salaryDuration);
-      }
-      const nextSalaryDate = new Date(monthStart.getTime() + salaryDuration);
-      const timeToSalary = nextSalaryDate - now;
-
+      // Salary countdown - Time remaining until June 21, 2025
+      const timeToSalary = salaryEndDate - now;
       document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
-      const salaryProgress = ((salaryDuration - timeToSalary) / salaryDuration) * 100;
-      document.getElementById("salaryProgress").style.width = Math.max(0, salaryProgress) + "%";
+      
+      // Calculate progress from June 8 to June 21
+      const totalSalaryPeriod = salaryEndDate - salaryStartDate;
+      const elapsedSalaryTime = now - salaryStartDate;
+      const salaryProgress = Math.max(0, Math.min(100, (elapsedSalaryTime / totalSalaryPeriod) * 100));
+      document.getElementById("salaryProgress").style.width = salaryProgress + "%";
 
       // Next Sunday calculation
       const nextSunday = new Date(now);
@@ -462,11 +462,15 @@
         dutyProgress.classList.add('red');
       }
 
-      // Earnings calculation
-      const elapsed = Math.max(0, now - monthStart);
-      currentEarned = (elapsed / salaryDuration) * monthlySalary;
+      // Earnings calculation - based on time elapsed from June 8
+      const elapsed = Math.max(0, now - salaryStartDate);
+      if (now <= salaryEndDate) {
+        currentEarned = (elapsed / salaryDuration) * monthlySalary;
+      } else {
+        currentEarned = monthlySalary; // Full salary if period is over
+      }
 
-      // Progress bar
+      // Progress bar for earnings
       const earningsProgress = (currentEarned / monthlySalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
