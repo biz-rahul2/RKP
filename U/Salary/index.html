@@ -303,11 +303,12 @@
   <audio id="coinsSound" src="Cash_Money.mp3"></audio>
 
   <script>
-    // Salary period: June 8, 2025 to June 21, 2025 (14 days)
+    // Salary period: June 8, 2025 to June 21, 2025 (14 days countdown)
     const salaryStartDate = new Date("2025-06-08T00:00:00");
     const salaryEndDate = new Date("2025-06-21T23:59:59");
-    const monthlySalary = 7500;
-    const salaryDuration = 14 * 24 * 60 * 60 * 1000; // 14 days in milliseconds
+    const monthlySalary = 7500; // Monthly salary
+    const dailySalary = 250; // Per day salary (7500/30 = 250)
+    const countdownDuration = 14 * 24 * 60 * 60 * 1000; // 14 days countdown
     let alertedMilestones = new Set();
     const milestones = [1000, 2000, 3000, 3750];
     let currentEarned = 0;
@@ -383,10 +384,10 @@
       const timeToSalary = salaryEndDate - now;
       document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
       
-      // Calculate progress from June 8 to June 21
-      const totalSalaryPeriod = salaryEndDate - salaryStartDate;
-      const elapsedSalaryTime = now - salaryStartDate;
-      const salaryProgress = Math.max(0, Math.min(100, (elapsedSalaryTime / totalSalaryPeriod) * 100));
+      // Calculate progress from June 8 to June 21 (14 days countdown)
+      const totalCountdownPeriod = salaryEndDate - salaryStartDate;
+      const elapsedCountdownTime = now - salaryStartDate;
+      const salaryProgress = Math.max(0, Math.min(100, (elapsedCountdownTime / totalCountdownPeriod) * 100));
       document.getElementById("salaryProgress").style.width = salaryProgress + "%";
 
       // Next Sunday calculation
@@ -462,15 +463,20 @@
         dutyProgress.classList.add('red');
       }
 
-      // Earnings calculation - based on time elapsed from June 8
+      // Earnings calculation - based on daily salary (₹250 per day)
+      // Calculate how many milliseconds have passed since June 8
       const elapsed = Math.max(0, now - salaryStartDate);
-      if (now <= salaryEndDate) {
-        currentEarned = (elapsed / salaryDuration) * monthlySalary;
-      } else {
-        currentEarned = monthlySalary; // Full salary if period is over
+      const daysElapsed = elapsed / (24 * 60 * 60 * 1000); // Convert to days
+      
+      // Calculate earnings based on daily rate
+      currentEarned = daysElapsed * dailySalary;
+      
+      // Cap at monthly salary if needed
+      if (currentEarned > monthlySalary) {
+        currentEarned = monthlySalary;
       }
 
-      // Progress bar for earnings
+      // Progress bar for earnings - show progress towards monthly salary
       const earningsProgress = (currentEarned / monthlySalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
