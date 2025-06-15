@@ -570,14 +570,54 @@
       animateMoneyCounter(currentEarned, 3); // 3 seconds animation
     });
 
-    function showNotification(message) {
-      const notification = document.getElementById('notification');
-      notification.textContent = message;
-      notification.classList.add('show');
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 4000);
-    }
+    function showNotification(message, type = 'success') {
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  
+  notification.innerHTML = `
+    <div class="notification-content">
+      <div class="notification-icon">🎉</div>
+      <div class="notification-text">
+        <div class="notification-title">Milestone Achieved!</div>
+        <div class="notification-message">${message}</div>
+      </div>
+      <button class="notification-close">×</button>
+    </div>
+    <div class="notification-particles">
+      <div class="particle" style="left: 20%; animation-delay: 0s;"></div>
+      <div class="particle" style="left: 40%; animation-delay: 0.5s;"></div>
+      <div class="particle" style="left: 60%; animation-delay: 1s;"></div>
+      <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+    </div>
+    <div class="notification-progress"></div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 100);
+  
+  // Auto remove after 4 seconds
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 600);
+  }, 4000);
+  
+  // Close button functionality
+  notification.querySelector('.notification-close').addEventListener('click', () => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 600);
+  });
+}
 
     function formatDuration(ms) {
       if (ms < 0) return "🎉 Time's Up!";
