@@ -208,22 +208,264 @@
       .earnings-value { font-size: 2em; }
       .check-btn { font-size: 1.5em; padding: 8px 20px; }
     }
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #00d2d3, #54a0ff);
-      color: white;
-      padding: 15px 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transform: translateX(400px);
-      transition: transform 0.5s ease;
-      z-index: 1000;
-    }
-    .notification.show {
-      transform: translateX(0);
-    }
+    /* Enhanced Notification Styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.4),
+    0 0 30px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transform: translateX(400px) scale(0.8);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1000;
+  border: 2px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  min-width: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: notificationShine 2s infinite;
+}
+
+.notification::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
+  border-radius: 22px;
+  z-index: -1;
+  animation: borderGlow 3s linear infinite;
+}
+
+@keyframes notificationShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes borderGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.notification.show {
+  transform: translateX(0) scale(1);
+  animation: notificationBounce 0.8s ease-out;
+}
+
+@keyframes notificationBounce {
+  0% { transform: translateX(400px) scale(0.8); }
+  60% { transform: translateX(-10px) scale(1.05); }
+  80% { transform: translateX(5px) scale(0.98); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.notification-icon {
+  font-size: 2.5em;
+  animation: iconPulse 1.5s infinite;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 1.2em;
+  font-weight: 800;
+  margin-bottom: 5px;
+  background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.notification-message {
+  font-size: 0.9em;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.notification-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-close:hover {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Success Notification Variant */
+.notification.success {
+  background: linear-gradient(135deg, #00b894 0%, #00cec9 50%, #55efc4 100%);
+}
+
+.notification.success::after {
+  background: linear-gradient(45deg, #00b894, #00cec9, #55efc4, #00d2d3);
+}
+
+/* Achievement Notification Variant */
+.notification.achievement {
+  background: linear-gradient(135deg, #e84393 0%, #fd79a8 50%, #fdcb6e 100%);
+}
+
+.notification.achievement::after {
+  background: linear-gradient(45deg, #e84393, #fd79a8, #fdcb6e, #f39c12);
+}
+
+/* Money Notification Variant */
+.notification.money {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 50%, #d35400 100%);
+}
+
+.notification.money::after {
+  background: linear-gradient(45deg, #f39c12, #e67e22, #d35400, #ffd700);
+}
+
+/* Floating particles effect */
+.notification-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: floatParticle 3s infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    padding: 15px 20px;
+  }
+  
+  .notification-icon {
+    font-size: 2em;
+  }
+  
+  .notification-title {
+    font-size: 1em;
+  }
+  
+  .notification-message {
+    font-size: 0.8em;
+  }
+}
+
+/* Notification sound wave effect */
+.notification.show::before {
+  animation: notificationShine 2s infinite, soundWave 1s ease-out;
+}
+
+@keyframes soundWave {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Multiple notifications stack */
+.notification:nth-child(2) {
+  top: 100px;
+  animation-delay: 0.2s;
+}
+
+.notification:nth-child(3) {
+  top: 180px;
+  animation-delay: 0.4s;
+}
+
+/* Notification progress bar */
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, #ffd700, #ffed4e);
+  border-radius: 0 0 20px 20px;
+  animation: progressCountdown 4s linear;
+}
+
+@keyframes progressCountdown {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
   </style>
 </head>
 <body>
