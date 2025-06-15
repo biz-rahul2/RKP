@@ -88,9 +88,6 @@
     .salary-card {
       background: linear-gradient(135deg, #ff6b6b, #ee5a24, #ff9ff3);
     }
-    .sunday-card {
-      background: linear-gradient(135deg, #4834d4, #686de0, #74b9ff);
-    }
     .duty-card {
       background: linear-gradient(135deg, #00b894, #00cec9, #55efc4);
     }
@@ -231,7 +228,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Anmol Traders: get 14 Days salary on 21 June</h1>
+    <h1>Anmol Traders: Get 15 Days salary on 22 June</h1>
 
     <div class="card salary-card">
       <div class="card-icon">💰</div>
@@ -239,15 +236,6 @@
       <div class="value" id="salaryCountdown">Loading...</div>
       <div class="progress-bar">
         <div class="progress-fill" id="salaryProgress"></div>
-      </div>
-    </div>
-
-    <div class="card sunday-card">
-      <div class="card-icon">🌞</div>
-      <div class="label">Raja Bhai Chiken Party</div>
-      <div class="value" id="sundayCountdown">Loading...</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="sundayProgress"></div>
       </div>
     </div>
 
@@ -274,25 +262,10 @@
       <div class="card-icon">🏆</div>
       <div class="label">Salary Milestones</div>
       <div class="milestone-list" id="milestoneList">
-        <div class="milestone-item" data-milestone="1000">
-          <span>₹1,000</span>
-          <span id="milestone-1000">Pending</span>
-          <div class="milestone-progress" id="milestone-progress-1000"></div>
-        </div>
-        <div class="milestone-item" data-milestone="2000">
-          <span>₹2,000</span>
-          <span id="milestone-2000">Pending</span>
-          <div class="milestone-progress" id="milestone-progress-2000"></div>
-        </div>
-        <div class="milestone-item" data-milestone="3000">
-          <span>₹3,000</span>
-          <span id="milestone-3000">Pending</span>
-          <div class="milestone-progress" id="milestone-progress-3000"></div>
-        </div>
-        <div class="milestone-item" data-milestone="3750">
-          <span>₹3,750</span>
-          <span id="milestone-3750">Pending</span>
-          <div class="milestone-progress" id="milestone-progress-3750"></div>
+        <div class="milestone-item" data-milestone="4000">
+          <span>₹4,000</span>
+          <span id="milestone-4000">Pending</span>
+          <div class="milestone-progress" id="milestone-progress-4000"></div>
         </div>
       </div>
     </div>
@@ -303,14 +276,14 @@
   <audio id="coinsSound" src="Cash_Money.mp3"></audio>
 
   <script>
-    // Salary period: June 8, 2025 to June 21, 2025 (14 days countdown)
+    // Salary period: June 8, 2025 to June 22, 2025 (15 days countdown)
     const salaryStartDate = new Date("2025-06-08T00:00:00");
-    const salaryEndDate = new Date("2025-06-21T23:59:59");
-    const monthlySalary = 7500; // Monthly salary
-    const dailySalary = 250; // Per day salary (7500/30 = 250)
-    const countdownDuration = 14 * 24 * 60 * 60 * 1000; // 14 days countdown
+    const salaryEndDate = new Date("2025-06-22T23:59:59");
+    const totalSalary = 4000; // 15 days salary
+    const dailySalary = 4000 / 15; // Per day salary (4000/15 = 266.67)
+    const countdownDuration = 15 * 24 * 60 * 60 * 1000; // 15 days countdown
     let alertedMilestones = new Set();
-    const milestones = [1000, 2000, 3000, 3750];
+    const milestones = [4000];
     let currentEarned = 0;
 
     const checkBtn = document.getElementById('checkBtn');
@@ -380,28 +353,15 @@
     function updateCountdowns() {
       const now = new Date();
 
-      // Salary countdown - Time remaining until June 21, 2025
+      // Salary countdown - Time remaining until June 22, 2025
       const timeToSalary = salaryEndDate - now;
       document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
       
-      // Calculate progress from June 8 to June 21 (14 days countdown)
+      // Calculate progress from June 8 to June 22 (15 days countdown)
       const totalCountdownPeriod = salaryEndDate - salaryStartDate;
       const elapsedCountdownTime = now - salaryStartDate;
       const salaryProgress = Math.max(0, Math.min(100, (elapsedCountdownTime / totalCountdownPeriod) * 100));
       document.getElementById("salaryProgress").style.width = salaryProgress + "%";
-
-      // Next Sunday calculation
-      const nextSunday = new Date(now);
-      nextSunday.setDate(now.getDate() + ((7 - now.getDay()) % 7 || 7));
-      nextSunday.setHours(0, 0, 0, 0);
-      const timeToSunday = nextSunday - now;
-      document.getElementById("sundayCountdown").innerText = formatDuration(timeToSunday);
-      const weekStart = new Date(now);
-      weekStart.setDate(now.getDate() - now.getDay());
-      weekStart.setHours(0, 0, 0, 0);
-      const weekDuration = 7 * 24 * 60 * 60 * 1000;
-      const sundayProgress = ((now - weekStart) / weekDuration) * 100;
-      document.getElementById("sundayProgress").style.width = Math.min(100, sundayProgress) + "%";
 
       // Duty timing calculation
       const currentHour = now.getHours();
@@ -463,7 +423,7 @@
         dutyProgress.classList.add('red');
       }
 
-      // Earnings calculation - based on daily salary (₹250 per day)
+      // Earnings calculation - based on daily salary (₹266.67 per day for 15 days = ₹4000)
       // Calculate how many milliseconds have passed since June 8
       const elapsed = Math.max(0, now - salaryStartDate);
       const daysElapsed = elapsed / (24 * 60 * 60 * 1000); // Convert to days
@@ -471,13 +431,13 @@
       // Calculate earnings based on daily rate
       currentEarned = daysElapsed * dailySalary;
       
-      // Cap at monthly salary if needed
-      if (currentEarned > monthlySalary) {
-        currentEarned = monthlySalary;
+      // Cap at total salary if needed
+      if (currentEarned > totalSalary) {
+        currentEarned = totalSalary;
       }
 
-      // Progress bar for earnings - show progress towards monthly salary
-      const earningsProgress = (currentEarned / monthlySalary) * 100;
+      // Progress bar for earnings - show progress towards total salary
+      const earningsProgress = (currentEarned / totalSalary) * 100;
       document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
 
       // Milestone tracking with progress bars
@@ -500,15 +460,7 @@
             milestoneElement.innerText = `₹${Math.floor(remaining)} left`;
             
             // Calculate progress towards this milestone
-            let previousMilestone = 0;
-            const sortedMilestones = milestones.filter(m => m < milestone).sort((a, b) => a - b);
-            if (sortedMilestones.length > 0) {
-              previousMilestone = sortedMilestones[sortedMilestones.length - 1];
-            }
-            
-            const milestoneRange = milestone - previousMilestone;
-            const earnedInRange = Math.max(0, currentEarned - previousMilestone);
-            const progressPercent = (earnedInRange / milestoneRange) * 100;
+            const progressPercent = (currentEarned / milestone) * 100;
             milestoneProgressBar.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
           }
         }
