@@ -91,37 +91,6 @@
     .duty-card {
       background: linear-gradient(135deg, #00b894, #00cec9, #55efc4);
     }
-    .earnings-card {
-      background: linear-gradient(135deg, #00d2d3, #54a0ff, #00cec9);
-      cursor: pointer;
-    }
-    .milestone-card {
-      background: linear-gradient(135deg, #e84393, #fd79a8, #fdcb6e);
-    }
-    .earnings-value {
-      font-size: 2.2em;
-      background: linear-gradient(45deg, #ffd700, #ffed4e, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .check-btn {
-      font-size: 2em;
-      font-weight: 800;
-      color: #fff;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      border-radius: 25px;
-      padding: 10px 30px;
-      display: block;
-      margin: 0 auto;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .check-btn:hover {
-      background: rgba(255,255,255,0.3);
-      transform: scale(1.05);
-    }
     .progress-bar {
       width: 100%;
       height: 14px;
@@ -158,38 +127,6 @@
       0% { left: -100%; }
       100% { left: 100%; }
     }
-    .milestone-list {
-      margin-top: 15px;
-    }
-    .milestone-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 12px;
-      margin-bottom: 8px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
-      border-left: 4px solid #00ffd5;
-      position: relative;
-    }
-    .milestone-achieved {
-      border-left-color: #00d2d3;
-      background: rgba(0,210,211,0.2);
-    }
-    .milestone-progress {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(to right, #4a8ef9, #4a8ef9);
-      border-radius: 0 0 10px 10px;
-      transition: width 1s ease;
-      width: 0%;
-    }
-    .milestone-achieved .milestone-progress {
-      background: linear-gradient(to right, #00d2d3, #00cec9);
-      width: 100%;
-    }
     .footer {
       text-align: center;
       margin-top: 40px;
@@ -205,24 +142,6 @@
       h1 { font-size: 1.6em; margin-bottom: 20px; }
       .card { padding: 20px 15px; margin-bottom: 15px; }
       .value { font-size: 1.4em; }
-      .earnings-value { font-size: 2em; }
-      .check-btn { font-size: 1.5em; padding: 8px 20px; }
-    }
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #00d2d3, #54a0ff);
-      color: white;
-      padding: 15px 20px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      transform: translateX(400px);
-      transition: transform 0.5s ease;
-      z-index: 1000;
-    }
-    .notification.show {
-      transform: translateX(0);
     }
   </style>
 </head>
@@ -247,108 +166,12 @@
         <div class="progress-fill" id="dutyProgress"></div>
       </div>
     </div>
-
-    <div class="card earnings-card" id="earningsCard">
-      <div class="card-icon">💸</div>
-      <div class="label">Live Earnings Counter</div>
-      <button class="check-btn" id="checkBtn">Check</button>
-      <div class="earnings-value" id="salaryEarned" style="display:none;"></div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="earningsProgress"></div>
-      </div>
-    </div>
-
-    <div class="card milestone-card">
-      <div class="card-icon">🏆</div>
-      <div class="label">Salary Milestones</div>
-      <div class="milestone-list" id="milestoneList">
-  <div class="milestone-item" data-milestone="1000">
-    <span>₹1,000</span>
-    <span id="milestone-1000">Pending</span>
-    <div class="milestone-progress" id="milestone-progress-1000"></div>
   </div>
-  <div class="milestone-item" data-milestone="2000">
-    <span>₹2,000</span>
-    <span id="milestone-2000">Pending</span>
-    <div class="milestone-progress" id="milestone-progress-2000"></div>
-  </div>
-  <div class="milestone-item" data-milestone="3000">
-    <span>₹3,000</span>
-    <span id="milestone-3000">Pending</span>
-    <div class="milestone-progress" id="milestone-progress-3000"></div>
-  </div>
-  <div class="milestone-item" data-milestone="4000">
-    <span>₹4,000</span>
-    <span id="milestone-4000">Pending</span>
-    <div class="milestone-progress" id="milestone-progress-4000"></div>
-  </div>
-</div>
-    </div>
-  </div>
-
-  <div class="notification" id="notification"></div>
-
-  <audio id="coinsSound" src="Cash_Money.mp3"></audio>
 
   <script>
     // Salary period: June 8, 2025 to June 22, 2025 (15 days countdown)
     const salaryStartDate = new Date("2025-06-08T00:00:00");
     const salaryEndDate = new Date("2025-06-22T23:59:59");
-    const totalSalary = 4000; // 15 days salary
-    const dailySalary = 4000 / 15; // Per day salary (4000/15 = 266.67)
-    const countdownDuration = 15 * 24 * 60 * 60 * 1000; // 15 days countdown
-    let alertedMilestones = new Set();
-    const milestones = [1000, 2000, 3000, 4000];
-    let currentEarned = 0;
-
-    const checkBtn = document.getElementById('checkBtn');
-    const salaryEarned = document.getElementById('salaryEarned');
-    const coinsSound = document.getElementById('coinsSound');
-    let isCounting = false;
-
-    // Money counting animation function (without decimals)
-    function animateMoneyCounter(amount, duration) {
-      if (isCounting) return;
-      isCounting = true;
-      checkBtn.style.display = 'none';
-      salaryEarned.style.display = '';
-      coinsSound.play();
-
-      let targetAmount = Math.floor(amount); // Remove decimals
-      let currentAmount = 0;
-      let step = targetAmount / (duration * 1000 / 60); // 60 fps
-      let startTime = Date.now();
-
-      function updateCounter() {
-        let elapsed = Date.now() - startTime;
-        if (elapsed >= duration * 1000) {
-          currentAmount = targetAmount;
-          isCounting = false;
-        } else {
-          currentAmount = Math.min(targetAmount, Math.floor(step * (elapsed / 1000) * 60));
-        }
-
-        salaryEarned.innerHTML = `₹${currentAmount}`;
-
-        if (elapsed < duration * 1000) {
-          requestAnimationFrame(updateCounter);
-        }
-      }
-      updateCounter();
-    }
-
-    checkBtn.addEventListener('click', function() {
-      animateMoneyCounter(currentEarned, 3); // 3 seconds animation
-    });
-
-    function showNotification(message) {
-      const notification = document.getElementById('notification');
-      notification.textContent = message;
-      notification.classList.add('show');
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 4000);
-    }
 
     function formatDuration(ms) {
       if (ms < 0) return "🎉 Time's Up!";
@@ -437,49 +260,6 @@
         dutyProgress.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
         dutyProgress.classList.add('red');
       }
-
-      // Earnings calculation - based on daily salary (₹266.67 per day for 15 days = ₹4000)
-      // Calculate how many milliseconds have passed since June 8
-      const elapsed = Math.max(0, now - salaryStartDate);
-      const daysElapsed = elapsed / (24 * 60 * 60 * 1000); // Convert to days
-      
-      // Calculate earnings based on daily rate
-      currentEarned = daysElapsed * dailySalary;
-      
-      // Cap at total salary if needed
-      if (currentEarned > totalSalary) {
-        currentEarned = totalSalary;
-      }
-
-      // Progress bar for earnings - show progress towards total salary
-      const earningsProgress = (currentEarned / totalSalary) * 100;
-      document.getElementById("earningsProgress").style.width = Math.min(100, earningsProgress) + "%";
-
-      // Milestone tracking with progress bars
-      milestones.forEach(milestone => {
-        const milestoneElement = document.getElementById(`milestone-${milestone}`);
-        const milestoneItem = document.querySelector(`[data-milestone="${milestone}"]`);
-        const milestoneProgressBar = document.getElementById(`milestone-progress-${milestone}`);
-        
-        if (milestoneItem && milestoneElement && milestoneProgressBar) {
-          if (currentEarned >= milestone) {
-            milestoneElement.innerText = "✅ Achieved";
-            milestoneItem.classList.add('milestone-achieved');
-            milestoneProgressBar.style.width = "100%";
-            if (!alertedMilestones.has(milestone)) {
-              alertedMilestones.add(milestone);
-              showNotification(`🎉 Milestone Achieved! You've earned ₹${milestone}!`);
-            }
-          } else {
-            const remaining = milestone - currentEarned;
-            milestoneElement.innerText = `₹${Math.floor(remaining)} left`;
-            
-            // Calculate progress towards this milestone
-            const progressPercent = (currentEarned / milestone) * 100;
-            milestoneProgressBar.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
-          }
-        }
-      });
     }
 
     setInterval(updateCountdowns, 1000);
