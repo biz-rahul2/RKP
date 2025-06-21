@@ -3,22 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Salary</title>
+  <title>Countdown Timer</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(45deg, #0f0f23, #1a1a2e, #16213e, #0f3460);
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
       color: #fff;
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      font-family: 'Courier New', monospace;
       min-height: 100vh;
-      padding: 20px;
-      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
       position: relative;
     }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
     body::before {
       content: '';
       position: fixed;
@@ -26,260 +38,231 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="a"><stop offset="0" stop-color="%23fff" stop-opacity=".1"/><stop offset="1" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><circle cx="50" cy="50" r="50" fill="url(%23a)"/></svg>') repeat;
-      opacity: 0.1;
+      background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
       z-index: -1;
     }
-    .container {
-      max-width: 420px;
-      margin: 0 auto;
-      padding: 0 10px;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 30px;
+    
+    .countdown-container {
       text-align: center;
-      background: linear-gradient(45deg, #00ffd5, #fffb00, #ff6b6b);
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .countdown-container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+      background-size: 300% 300%;
+      border-radius: 30px;
+      z-index: -1;
+      animation: borderGlow 3s ease infinite;
+    }
+    
+    @keyframes borderGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .title {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #feca57);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+      animation: titlePulse 2s ease-in-out infinite alternate;
     }
-    .card {
-      background: rgba(255, 255, 255, 0.12);
-      border: 2px solid rgba(255, 255, 255, 0.18);
-      border-radius: 25px;
+    
+    @keyframes titlePulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+    
+    .countdown-display {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .time-unit {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
       padding: 25px 20px;
-      margin-bottom: 20px;
-      transition: all 0.2s ease;
+      min-width: 120px;
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    
+    .time-unit:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
-    .card-icon {
-      font-size: 3em;
-      margin-bottom: 15px;
-      display: block;
-      text-align: center;
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
-    }
-    .label {
-      font-weight: 600;
-      color: #e0e7ff;
-      font-size: 0.85em;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      text-align: center;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-    .value {
-      color: #fff;
-      font-size: 1.6em;
-      font-weight: 800;
-      text-align: center;
-      text-shadow: 0 3px 15px rgba(0,0,0,0.4);
-      line-height: 1.2;
-    }
-    .salary-card {
-      background: linear-gradient(135deg, #ff6b6b, #ee5a24, #ff9ff3);
-    }
-    .duty-card {
-      background: linear-gradient(135deg, #00b894, #00cec9, #55efc4);
-    }
-    .progress-bar {
-      width: 100%;
-      height: 14px;
-      background: white;
-      border-radius: 15px;
-      margin-top: 15px;
-      overflow: hidden;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(to right, #4a8ef9, #4a8ef9);
-      border-radius: 15px;
-      transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 10px rgba(74, 142, 249, 0.3);
-      position: relative;
-      width: 0%;
-    }
-    .progress-fill.red {
-      background: linear-gradient(to right, #ff4757, #ff3838);
-      box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
-    }
-    .progress-fill::after {
+    
+    .time-unit::before {
       content: '';
       position: absolute;
       top: 0;
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      animation: progressShine 2s infinite;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 3s infinite;
     }
-    @keyframes progressShine {
+    
+    @keyframes shimmer {
       0% { left: -100%; }
       100% { left: 100%; }
     }
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 0.9em;
-      opacity: 0.8;
-      background: rgba(255,255,255,0.1);
-      padding: 15px;
-      border-radius: 15px;
+    
+    .time-value {
+      font-size: 3em;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      margin-bottom: 10px;
+      font-family: 'Courier New', monospace;
+      animation: numberGlow 2s ease-in-out infinite alternate;
     }
-    /* Mobile optimizations */
+    
+    @keyframes numberGlow {
+      0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+      100% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.3); }
+    }
+    
+    .time-label {
+      font-size: 0.9em;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+    
+    .finished {
+      font-size: 4em;
+      background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: celebration 1s ease-in-out infinite alternate;
+    }
+    
+    @keyframes celebration {
+      0% { transform: scale(1) rotate(-2deg); }
+      100% { transform: scale(1.1) rotate(2deg); }
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .countdown-container {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+      
+      .title {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      
+      .countdown-display {
+        gap: 15px;
+      }
+      
+      .time-unit {
+        min-width: 100px;
+        padding: 20px 15px;
+      }
+      
+      .time-value {
+        font-size: 2.5em;
+      }
+      
+      .time-label {
+        font-size: 0.8em;
+      }
+    }
+    
     @media (max-width: 480px) {
-      body { padding: 15px; }
-      h1 { font-size: 1.6em; margin-bottom: 20px; }
-      .card { padding: 20px 15px; margin-bottom: 15px; }
-      .value { font-size: 1.4em; }
+      .time-unit {
+        min-width: 80px;
+        padding: 15px 10px;
+      }
+      
+      .time-value {
+        font-size: 2em;
+      }
+      
+      .countdown-display {
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Anmol Traders: Get 15 Days salary on 22 June</h1>
-
-    <div class="card salary-card">
-      <div class="card-icon">💰</div>
-      <div class="label">Next Salary Payment</div>
-      <div class="value" id="salaryCountdown">Loading...</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="salaryProgress"></div>
+  <div class="countdown-container">
+    <div class="title">Salary Countdown</div>
+    <div class="countdown-display" id="countdown">
+      <div class="time-unit">
+        <div class="time-value" id="hours">00</div>
+        <div class="time-label">Hours</div>
       </div>
-    </div>
-
-    <div class="card duty-card">
-      <div class="card-icon">⏰</div>
-      <div class="label" id="dutyLabel">Duty Status</div>
-      <div class="value" id="dutyCountdown">Loading...</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="dutyProgress"></div>
+      <div class="time-unit">
+        <div class="time-value" id="minutes">00</div>
+        <div class="time-label">Minutes</div>
+      </div>
+      <div class="time-unit">
+        <div class="time-value" id="seconds">00</div>
+        <div class="time-label">Seconds</div>
+      </div>
+      <div class="time-unit">
+        <div class="time-value" id="milliseconds">000</div>
+        <div class="time-label">Milliseconds</div>
       </div>
     </div>
   </div>
 
   <script>
-    // Salary period: June 8, 2025 to June 22, 2025 at 9:30 PM (2.5 hours earlier)
-    const salaryStartDate = new Date("2025-06-08T00:00:00");
-    const salaryEndDate = new Date("2025-06-22T21:30:00"); // Changed to 9:30 PM
+    // Target date: June 22, 2025 at 9:30 PM
+    const targetDate = new Date("2025-06-22T21:30:00").getTime();
 
-    function formatDuration(ms) {
-      if (ms < 0) return "🎉 Time's Up!";
-      const totalSeconds = Math.floor(ms / 1000);
-      const days = Math.floor(totalSeconds / (3600 * 24));
-      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-      
-      if (days > 0) {
-        return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft > 0) {
+        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        const milliseconds = Math.floor((timeLeft % 1000));
+
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        document.getElementById('milliseconds').textContent = String(milliseconds).padStart(3, '0');
       } else {
-        return `${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('countdown').innerHTML = '<div class="finished">🎉 Time\'s Up! 🎉</div>';
       }
     }
 
-    function updateCountdowns() {
-      const now = new Date();
-
-      // Salary countdown - Time remaining until June 22, 2025 at 9:30 PM
-      const timeToSalary = salaryEndDate - now;
-      document.getElementById("salaryCountdown").innerText = formatDuration(timeToSalary);
-      
-      // Calculate progress from June 8 to June 22 at 9:30 PM
-      const totalCountdownPeriod = salaryEndDate - salaryStartDate;
-      const elapsedCountdownTime = now - salaryStartDate;
-      const salaryProgress = Math.max(0, Math.min(100, (elapsedCountdownTime / totalCountdownPeriod) * 100));
-      document.getElementById("salaryProgress").style.width = salaryProgress + "%";
-
-      // Duty timing calculation
-      const currentHour = now.getHours();
-      const currentMinute = now.getMinutes();
-      const currentSecond = now.getSeconds();
-      
-      const dutyLabel = document.getElementById("dutyLabel");
-      const dutyCountdown = document.getElementById("dutyCountdown");
-      const dutyProgress = document.getElementById("dutyProgress");
-
-      if (currentHour < 10) {
-        // Before 10 AM - show countdown to duty start (RED progress)
-        dutyLabel.innerText = "Duty Starts at 10 AM";
-        const dutyStart = new Date(now);
-        dutyStart.setHours(10, 0, 0, 0);
-        const timeToDutyStart = dutyStart - now;
-        dutyCountdown.innerText = formatDuration(timeToDutyStart);
-        
-        // Progress from midnight to 10 AM (RED)
-        const midnightToNow = (currentHour * 60 + currentMinute) * 60 + currentSecond;
-        const midnightTo10AM = 10 * 60 * 60; // 10 hours in seconds
-        const progressPercent = (midnightToNow / midnightTo10AM) * 100;
-        dutyProgress.style.width = Math.min(100, progressPercent) + "%";
-        dutyProgress.classList.add('red');
-        
-      } else if (currentHour < 21) {
-        // Between 10 AM and 9 PM - show countdown to duty end (BLUE progress)
-        dutyLabel.innerText = "Duty Ends at 9 PM";
-        const dutyEnd = new Date(now);
-        dutyEnd.setHours(21, 0, 0, 0);
-        const timeToDutyEnd = dutyEnd - now;
-        dutyCountdown.innerText = formatDuration(timeToDutyEnd);
-        
-        // Progress from 10 AM to 9 PM (11 hours) (BLUE)
-        const dutyStartSeconds = 10 * 60 * 60; // 10 AM in seconds
-        const currentDaySeconds = (currentHour * 60 + currentMinute) * 60 + currentSecond;
-        const dutyDuration = 11 * 60 * 60; // 11 hours in seconds
-        const dutyElapsed = currentDaySeconds - dutyStartSeconds;
-        const progressPercent = (dutyElapsed / dutyDuration) * 100;
-        dutyProgress.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
-        dutyProgress.classList.remove('red');
-        
-      } else {
-        // After 9 PM - show countdown to next day duty start (RED progress)
-        dutyLabel.innerText = "Next Duty Starts at 10 AM";
-        const nextDutyStart = new Date(now);
-        nextDutyStart.setDate(now.getDate() + 1);
-        nextDutyStart.setHours(10, 0, 0, 0);
-        const timeToNextDuty = nextDutyStart - now;
-        dutyCountdown.innerText = formatDuration(timeToNextDuty);
-        
-        // Progress from 9 PM to midnight (RED)
-        const ninePMSeconds = 21 * 60 * 60; // 9 PM in seconds
-        const currentDaySeconds = (currentHour * 60 + currentMinute) * 60 + currentSecond;
-        const nightDuration = 3 * 60 * 60; // 3 hours from 9 PM to midnight
-        const nightElapsed = currentDaySeconds - ninePMSeconds;
-        const progressPercent = (nightElapsed / nightDuration) * 100;
-        dutyProgress.style.width = Math.min(100, Math.max(0, progressPercent)) + "%";
-        dutyProgress.classList.add('red');
-      }
-    }
-
-    setInterval(updateCountdowns, 1000);
-    updateCountdowns();
-
-    // Optional: Touch feedback for mobile
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('touchstart', () => {
-        if (navigator.vibrate) navigator.vibrate(30);
-      });
-    });
-
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
-      const now = (new Date()).getTime();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, false);
+    // Update every 10 milliseconds for smooth millisecond display
+    setInterval(updateCountdown, 10);
+    updateCountdown();
   </script>
 </body>
 </html>
