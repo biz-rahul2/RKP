@@ -3,118 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rahul Kumar Puri - Discover Home</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <title>Rahul Kumar Puri - Hacking Discover</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
     body {
-      background: #181818;
-      color: #fff;
-      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background: #11161a;
+      color: #00ff90;
+      font-family: 'Share Tech Mono', monospace;
       margin: 0;
-      padding: 0;
+      min-height: 100vh;
+    }
+    .matrix-bg {
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      opacity: 0.13;
     }
     .container {
-      max-width: 500px;
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
       margin: 0 auto;
-      padding: 0 10px 30px 10px;
+      padding: 0 8px 32px 8px;
     }
     .header {
-      padding: 25px 0 10px 0;
-      text-align: left;
-      font-size: 1.6rem;
+      padding-top: 32px;
+      padding-bottom: 10px;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: #fff;
-      letter-spacing: 1px;
+      color: #00ff90;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px #00ff90cc;
+      text-align: left;
+      user-select: none;
     }
     .websites {
       display: flex;
       gap: 18px;
       flex-wrap: wrap;
       margin-bottom: 18px;
-      padding-left: 3px;
+      padding-left: 2px;
+      justify-content: flex-start;
     }
     .website {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 58px;
+      width: 54px;
       text-align: center;
-      color: #e0e0e0;
+      color: #b0ffcb;
       text-decoration: none;
       font-size: 0.85rem;
       margin-bottom: 8px;
-      transition: color 0.2s;
-    }
-    .website:hover {
-      color: #00c853;
+      transition: color 0.18s, box-shadow 0.2s;
+      filter: drop-shadow(0 2px 6px #003f2d55);
+      position: relative;
     }
     .website i, .website img {
       font-size: 2rem;
       margin-bottom: 4px;
-      width: 36px; height: 36px;
+      width: 38px; height: 38px;
       border-radius: 50%;
-      background: #232323;
+      background: linear-gradient(135deg, #1a2a1d 60%, #00ff90 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 2px #00ff90, 0 0 10px #00ff9055;
+      border: 2px solid #222;
+      transition: box-shadow 0.2s;
+    }
+    .website:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #00ff90;
+    }
+    .website:hover i, .website:hover img {
+      box-shadow: 0 0 0 3px #00ff90, 0 0 18px #00ff90;
+      background: linear-gradient(135deg, #00ff90 60%, #1a2a1d 100%);
+    }
+    .discover-title-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 18px 0 10px 0;
+    }
+    .discover-title {
+      color: #00ff90;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 0 7px #00ff90aa;
+      flex: 1;
+    }
+    .discover-settings {
+      color: #00ff90;
+      font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .discover-settings:hover { opacity: 1; }
+    .discover-card {
+      background: rgba(20,32,24,0.97);
+      border-radius: 15px;
+      margin-bottom: 15px;
+      padding: 15px 14px 15px 14px;
+      box-shadow: 0 2px 12px #00ff9033, 0 0 0 1.5px #00ff90cc;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+    .discover-card:hover {
+      box-shadow: 0 4px 24px #00ff90bb, 0 0 0 2.5px #00ff90;
+      background: rgba(20,32,24,1);
+    }
+    .discover-card img, .discover-card .logo-square {
+      width: 52px;
+      height: 52px;
+      border-radius: 11px;
+      object-fit: cover;
+      margin-top: 2px;
+      background: #1a2a1d;
+      box-shadow: 0 0 0 2px #00ff90, 0 0 8px #00ff9055;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .discover-title {
-      color: #bdbdbd;
-      font-size: 1.1rem;
-      margin: 18px 0 10px 0;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-    .discover-card {
-      background: #232323;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      padding: 15px 14px 15px 14px;
-      box-shadow: 0 2px 8px #0002;
+    .logo-square {
+      font-size: 2.1rem;
+      color: #fff;
+      background: #c62828;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .discover-card img {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      object-fit: cover;
-      margin-top: 2px;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
     }
     .discover-content {
       flex: 1;
+      min-width: 0;
     }
     .discover-source {
-      color: #81d4fa;
+      color: #00e0ff;
       font-size: 0.98rem;
       margin-bottom: 4px;
       font-weight: 500;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
     .discover-title-text {
       color: #fff;
       font-size: 1.07rem;
       margin-bottom: 4px;
       font-weight: 500;
+      text-shadow: 0 0 4px #00ff90cc;
+      white-space: pre-line;
+      line-height: 1.25;
     }
     .discover-desc {
-      color: #bdbdbd;
+      color: #b0ffcb;
       font-size: 0.97rem;
       margin-bottom: 2px;
+      line-height: 1.3;
+      opacity: 0.9;
     }
     .discover-meta {
-      color: #757575;
+      color: #00ff90cc;
       font-size: 0.85rem;
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #00ff9030;
+      margin: 15px 0 10px 0;
     }
     @media (max-width: 600px) {
       .container { padding: 0 2vw 30px 2vw; }
-      .websites { gap: 12px; }
-      .website { width: 50px; }
-      .header { font-size: 1.25rem; }
+      .websites { gap: 10px; }
+      .website { width: 48px; }
+      .header { font-size: 1.15rem; }
+      .discover-card img, .discover-card .logo-square { width: 40px; height: 40px; }
     }
   </style>
 </head>
 <body>
+  <!-- Matrix BG -->
+  <canvas class="matrix-bg" id="matrix-bg"></canvas>
+
   <div class="container">
     <!-- User Name Header -->
     <div class="header">Rahul Kumar Puri</div>
@@ -131,38 +213,80 @@
       <a href="https://yahoo.com" class="website" target="_blank"><i class="fab fa-yahoo"></i>Yahoo</a>
     </div>
 
-    <!-- Discover Section -->
-    <div class="discover-title">Discover</div>
+    <!-- Discover Section Title -->
+    <div class="discover-title-row">
+      <span class="discover-title">Discover</span>
+      <span class="discover-settings"><i class="fas fa-cog"></i></span>
+    </div>
 
+    <!-- Discover Cards -->
     <div class="discover-card">
-      <img src="https://img.icons8.com/color/48/000000/ms-edge-new.png" alt="Edge">
       <div class="discover-content">
-        <div class="discover-source">Microsoft Edge</div>
         <div class="discover-title-text">Kiwi’s legacy lives on—let Edge be the new home for your extensions.</div>
-        <div class="discover-desc">Get more from your browser with powerful extensions and privacy controls.</div>
+        <div class="discover-source">
+          <img src="https://img.icons8.com/color/32/000000/ms-edge-new.png" alt="Edge" style="width:20px;height:20px;border-radius:5px;box-shadow:none;margin-right:4px;">
+          Microsoft Edge
+        </div>
         <div class="discover-meta">Just now</div>
       </div>
+      <img src="https://img.icons8.com/color/48/000000/ms-edge-new.png" alt="Edge">
     </div>
 
     <div class="discover-card">
-      <img src="https://img.icons8.com/ios-filled/50/ff5252/news.png" alt="News">
       <div class="discover-content">
-        <div class="discover-source">The Hindu</div>
         <div class="discover-title-text">Radhika Yadav death: Murdered tennis player cremated, father says he wa...</div>
-        <div class="discover-desc">Tragic news from the sports world as the investigation continues.</div>
+        <div class="discover-source">
+          <img src="https://img.icons8.com/ios-filled/50/81d4fa/news.png" alt="News" style="width:18px;height:18px;border-radius:4px;box-shadow:none;margin-right:4px;">
+          The Hindu
+        </div>
         <div class="discover-meta">7 hours ago</div>
       </div>
+      <img src="https://img.icons8.com/ios-filled/50/ff5252/news.png" alt="News">
     </div>
 
     <div class="discover-card">
-      <img src="https://img.icons8.com/color/48/000000/motorcycle.png" alt="NDTV">
       <div class="discover-content">
-        <div class="discover-source">NDTV</div>
         <div class="discover-title-text">Royal Enfield Himalayan Electric To Be RE’s Most Powerful Bike: Report</div>
-        <div class="discover-desc">The latest update in the world of electric bikes from Royal Enfield.</div>
+        <div class="discover-source">
+          <span class="logo-square" style="background:#c62828;"><b>NDTV</b></span>
+          NDTV
+        </div>
         <div class="discover-meta">2 hours ago</div>
       </div>
+      <span class="logo-square" style="background:#c62828;"><b>NDTV</b></span>
     </div>
   </div>
+
+  <script>
+    // Matrix BG Animation
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+    const cols = Math.floor(w / 18) + 1;
+    const ypos = Array(cols).fill(0);
+
+    function matrix() {
+      ctx.fillStyle = '#11161a22';
+      ctx.fillRect(0, 0, w, h);
+      ctx.font = '14pt monospace';
+      ctx.fillStyle = '#00ff90';
+      ypos.forEach((y, ind) => {
+        const text = String.fromCharCode(0x30A0 + Math.random() * 96);
+        ctx.fillText(text, ind * 18, y);
+        if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
+        else ypos[ind] = y + 18;
+      });
+    }
+    setInterval(matrix, 55);
+    window.addEventListener('resize', () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    });
+  </script>
 </body>
 </html>
