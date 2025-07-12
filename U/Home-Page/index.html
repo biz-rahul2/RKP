@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rahul Kumar Puri - Hacking Discover</title>
+  <title>Rahul Kumar Puri - Discover</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
@@ -40,55 +40,6 @@
       text-align: left;
       user-select: none;
     }
-    .websites {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-      padding-left: 2px;
-      justify-content: flex-start;
-    }
-    .website {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 54px;
-      text-align: center;
-      color: #b0ffcb;
-      text-decoration: none;
-      font-size: 0.85rem;
-      margin-bottom: 8px;
-      transition: color 0.18s, box-shadow 0.2s;
-      filter: drop-shadow(0 2px 6px #003f2d55);
-      position: relative;
-    }
-    .website i, .website img {
-      font-size: 2rem;
-      margin-bottom: 4px;
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a2a1d 60%, #00ff90 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 2px #00ff90, 0 0 10px #00ff9055;
-      border: 2px solid #222;
-      transition: box-shadow 0.2s;
-    }
-    .website:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #00ff90;
-    }
-    .website:hover i, .website:hover img {
-      box-shadow: 0 0 0 3px #00ff90, 0 0 18px #00ff90;
-      background: linear-gradient(135deg, #00ff90 60%, #1a2a1d 100%);
-    }
-    .discover-title-row {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin: 18px 0 10px 0;
-    }
     .discover-title {
       color: #00ff90;
       font-size: 1.08rem;
@@ -96,15 +47,8 @@
       letter-spacing: 1px;
       text-shadow: 0 0 7px #00ff90aa;
       flex: 1;
+      margin-top: 20px;
     }
-    .discover-settings {
-      color: #00ff90;
-      font-size: 1.1rem;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-    }
-    .discover-settings:hover { opacity: 1; }
     .discover-card {
       background: rgba(20,32,24,0.97);
       border-radius: 15px;
@@ -118,45 +62,6 @@
       overflow: hidden;
       transition: box-shadow 0.2s, background 0.2s;
     }
-    .discover-card:hover {
-      box-shadow: 0 4px 24px #00ff90bb, 0 0 0 2.5px #00ff90;
-      background: rgba(20,32,24,1);
-    }
-    .discover-card img, .discover-card .logo-square {
-      width: 52px;
-      height: 52px;
-      border-radius: 11px;
-      object-fit: cover;
-      margin-top: 2px;
-      background: #1a2a1d;
-      box-shadow: 0 0 0 2px #00ff90, 0 0 8px #00ff9055;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .logo-square {
-      font-size: 2.1rem;
-      color: #fff;
-      background: #c62828;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    .discover-content {
-      flex: 1;
-      min-width: 0;
-    }
-    .discover-source {
-      color: #00e0ff;
-      font-size: 0.98rem;
-      margin-bottom: 4px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
     .discover-title-text {
       color: #fff;
       font-size: 1.07rem;
@@ -166,99 +71,67 @@
       white-space: pre-line;
       line-height: 1.25;
     }
-    .discover-desc {
-      color: #b0ffcb;
-      font-size: 0.97rem;
-      margin-bottom: 2px;
-      line-height: 1.3;
-      opacity: 0.9;
-    }
     .discover-meta {
       color: #00ff90cc;
       font-size: 0.85rem;
       margin-top: 2px;
       letter-spacing: 0.3px;
     }
-    hr {
-      border: none;
-      border-top: 1px solid #00ff9030;
-      margin: 15px 0 10px 0;
-    }
-    @media (max-width: 600px) {
-      .container { padding: 0 2vw 30px 2vw; }
-      .websites { gap: 10px; }
-      .website { width: 48px; }
-      .header { font-size: 1.15rem; }
-      .discover-card img, .discover-card .logo-square { width: 40px; height: 40px; }
-    }
   </style>
 </head>
 <body>
-  <!-- Matrix BG -->
   <canvas class="matrix-bg" id="matrix-bg"></canvas>
 
   <div class="container">
-    <!-- User Name Header -->
     <div class="header">Rahul Kumar Puri</div>
 
-    <!-- Websites List -->
-    <div class="websites">
-      <a href="https://github.com" class="website" target="_blank"><i class="fab fa-github"></i>GitHub</a>
-      <a href="https://google.com" class="website" target="_blank"><i class="fab fa-google"></i>Google</a>
-      <a href="https://facebook.com" class="website" target="_blank"><i class="fab fa-facebook"></i>Facebook</a>
-      <a href="https://youtube.com" class="website" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
-      <a href="https://amazon.in" class="website" target="_blank"><i class="fab fa-amazon"></i>Amazon</a>
-      <a href="https://wikipedia.org" class="website" target="_blank"><i class="fab fa-wikipedia-w"></i>Wiki</a>
-      <a href="https://espn.com" class="website" target="_blank"><i class="fas fa-basketball-ball"></i>ESPN</a>
-      <a href="https://yahoo.com" class="website" target="_blank"><i class="fab fa-yahoo"></i>Yahoo</a>
-    </div>
-
-    <!-- Discover Section Title -->
-    <div class="discover-title-row">
-      <span class="discover-title">Discover</span>
-      <span class="discover-settings"><i class="fas fa-cog"></i></span>
-    </div>
-
-    <!-- Discover Cards -->
-    <div class="discover-card">
-      <div class="discover-content">
-        <div class="discover-title-text">Kiwi’s legacy lives on—let Edge be the new home for your extensions.</div>
-        <div class="discover-source">
-          <img src="https://img.icons8.com/color/32/000000/ms-edge-new.png" alt="Edge" style="width:20px;height:20px;border-radius:5px;box-shadow:none;margin-right:4px;">
-          Microsoft Edge
-        </div>
-        <div class="discover-meta">Just now</div>
-      </div>
-      <img src="https://img.icons8.com/color/48/000000/ms-edge-new.png" alt="Edge">
-    </div>
+    <div class="discover-title">Discover</div>
 
     <div class="discover-card">
       <div class="discover-content">
-        <div class="discover-title-text">Radhika Yadav death: Murdered tennis player cremated, father says he wa...</div>
-        <div class="discover-source">
-          <img src="https://img.icons8.com/ios-filled/50/81d4fa/news.png" alt="News" style="width:18px;height:18px;border-radius:4px;box-shadow:none;margin-right:4px;">
-          The Hindu
-        </div>
-        <div class="discover-meta">7 hours ago</div>
-      </div>
-      <img src="https://img.icons8.com/ios-filled/50/ff5252/news.png" alt="News">
-    </div>
+        <div class="discover-title-text">
+          Preferred Name: Rahul Bhai
+          Role: Business, Founder of CleanZerom
+          Birthday: 25 July 2007
+          Hometown: Motihari, Bihar
+          Nationality: Indian 🇮🇳 + Loves China 🇨🇳
 
-    <div class="discover-card">
-      <div class="discover-content">
-        <div class="discover-title-text">Royal Enfield Himalayan Electric To Be RE’s Most Powerful Bike: Report</div>
-        <div class="discover-source">
-          <span class="logo-square" style="background:#c62828;"><b>NDTV</b></span>
-          NDTV
+          🎯 GOALS:
+          - Become a billionaire
+          - Build a large-scale company
+          - Master the dark side of human behavior
+          - Think like a criminal mastermind, operate like a CEO
+
+          🧠 MINDSET:
+          - High-risk, high-reward hustler
+          - Seeks loopholes, borderline legal exploits
+          - Loves strategies that exploit systems
+
+          💼 SKILLS:
+          - Writer ✍️
+          - Web Developer 👨‍💻
+          - Techie ⚙️
+          - B.Com Student 📚
+
+          💖 FAVORITES:
+          - Colors: Pink 💖
+          - Actor: Shahid Kapoor 🎥
+          - Songs: "Tum Hi Ho", "Broken Angel" 🎶
+          - Places: China & India 🌏
+
+          🎬 INTERESTS:
+          - Movies 🎞️
+          - Music 🎧
+          - Travel ✈️
+
+          🚫 Not Interested in: Government Jobs
         </div>
-        <div class="discover-meta">2 hours ago</div>
+        <div class="discover-meta">Last updated: Just now</div>
       </div>
-      <span class="logo-square" style="background:#c62828;"><b>NDTV</b></span>
     </div>
   </div>
 
   <script>
-    // Matrix BG Animation
     const canvas = document.getElementById('matrix-bg');
     const ctx = canvas.getContext('2d');
     let w = window.innerWidth;
